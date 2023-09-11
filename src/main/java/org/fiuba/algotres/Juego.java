@@ -1,6 +1,9 @@
 package org.fiuba.algotres;
 
 import java.util.Optional;
+import java.util.Scanner;
+
+import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
 public class Juego {
     private int ganador;
@@ -15,8 +18,11 @@ public class Juego {
 
     public void jugar(){
         System.out.println("Acá iría nuestro juego... Si tuvieramos uno");
+        Scanner in = new Scanner(System.in);
 
         while(ganador == 0){
+            limpiarConsola();
+            imprimirCampo(this);
             /*
             lógica de juego
                 1) Imprimir campo (jugador, nombre del pokemon, vida)
@@ -27,7 +33,7 @@ public class Juego {
             ganador = juegoTerminado();
         }
 
-        System.out.println("EL JUGADOR " + ganador + "ES EL GANADOR!!!");
+        System.out.println("EL JUGADOR " + ganador + " ES EL GANADOR!!!");
     }
 
     /**
