@@ -24,6 +24,7 @@ public class Juego {
         int opcionElegida;
         boolean accionCompletada = true;
 
+        label:
         while(ganador == 0){
             // Imprimir información
             limpiarConsola();
@@ -35,15 +36,22 @@ public class Juego {
 
             // Obtener opción de usuario y accionar
             opcionElegida = obtenerOpcionUsuario(opciones.length);
-            if(opcionElegida == 1){
-                accionCompletada = (turnoActual==1?jugador1:jugador2).elegirHabilidad();
-            }else if(opcionElegida == 2){
-                accionCompletada = (turnoActual==1?jugador1:jugador2).elegirItem();
-            }else if(opcionElegida == 3){
-                accionCompletada = (turnoActual==1?jugador1:jugador2).cambiarPokemonActual();
-            }else{
-                ganador = turnoActual==1?2:1;
-                break;
+            switch (opcionElegida) {
+                case 1:
+                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).elegirHabilidad();
+                    break;
+                case 2:
+                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).elegirItem();
+                    break;
+                case 3:
+                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).cambiarPokemonActual();
+                    break;
+                case 4:
+                    ganador = turnoActual == 1 ? 2 : 1;
+                    break label;
+                default:
+                    System.out.println("Esa opción todavía no fue implementada");
+                    continue;
             }
 
             // Si se salió, se repite el bucle con el turno del mismo jugador, sino se pasa al siguiente
