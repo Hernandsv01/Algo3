@@ -1,5 +1,6 @@
 package org.fiuba.algotres;
 
+import lombok.NoArgsConstructor;
 import org.fiuba.algotres.estado.Estado;
 import org.fiuba.algotres.habilidad.Habilidad;
 

@@ -11,10 +11,10 @@ import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
 @Getter @Setter
 public class Jugador {
-    private final ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>(Arrays.asList(
+    private ArrayList<Pokemon> pokemons/* = new ArrayList<Pokemon>(Arrays.asList(
             new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon()
-    ));
-    private Pokemon pokemonActual = new Pokemon();
+    ))*/;
+    private Pokemon pokemonActual/* = new Pokemon()*/;
     private String nombre;
 
     /**
