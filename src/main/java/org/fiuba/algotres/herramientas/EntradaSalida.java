@@ -6,8 +6,17 @@ import java.util.Scanner;
 
 public class EntradaSalida {
     public static void limpiarConsola(){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        String os = System.getProperty("os.name").toLowerCase();
+        if(os.contains("windows")){
+            try {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }else if(os.contains("linux")){
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        }
     }
 
     public static int obtenerOpcionUsuario(int limite){
@@ -24,7 +33,7 @@ public class EntradaSalida {
                     throw new RuntimeException();
                 }
             } catch (Exception e) {
-                System.out.println("Eso no es un número válido, no intentes romper nuestro juego :(");
+                System.out.println("Eso no es un numero valido, no intentes romper nuestro juego :(");
             }
         }while(result == 0);
 
@@ -33,15 +42,29 @@ public class EntradaSalida {
 
     public static void imprimirCampo(Juego juego){
         System.out.println(
-                """
-                        Nombre jugador1\s
-                        Nombre pokemon jugador 1 (estado si es que tiene)\s
-                        Vida pokemon 1\s
+                "Jugador 1 \n" +
+                juego.getJugador1().getPokemonActual().getNombre() + " \n" +
+                juego.getJugador1().getPokemonActual().getHealthString() + " \n" +
+                "\n" +
+                "Jugador 2 \n" +
+                juego.getJugador2().getPokemonActual().getNombre() + " \n" +
+                juego.getJugador2().getPokemonActual().getHealthString() + " \n" +
+                "\n" +
+                "Turno: jugador " + juego.getTurnoActual());
+//        System.out.println(
+//                "Nombre jugador1 \n" +
+//                "Nombre pokemon jugador 1 (estado si es que tiene) \n" +
+//                "Vida pokemon 1 \n" +
+//                "\n" +
+//                "Nombre jugador2 \n" +
+//                "Nombre pokemon jugador 2 (estado si es que tiene) \n" +
+//                "Vida pokemon 2 \n" +
+//                "\n" +
+//                "Turno: jugador " + juego.getTurnoActual() + "\n"
+//        );
+    }
 
-                        Nombre jugador2\s
-                        Nombre pokemon jugador 2 (estado si es que tiene)\s
-                        Vida pokemon 2\s
-                        """
-        );
+    public static void imprimirDivisor(){
+        System.out.println("------------------------------");
     }
 }

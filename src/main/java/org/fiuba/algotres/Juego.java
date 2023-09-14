@@ -1,14 +1,17 @@
 package org.fiuba.algotres;
 
-import java.util.Arrays;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Optional;
 
 import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
+@Getter @Setter
 public class Juego {
     private int ganador;
-    private Jugador jugador1;
-    private Jugador jugador2;
+    private final Jugador jugador1;
+    private final Jugador jugador2;
     private int turnoActual;
 
     private final String[] opciones = {"", "Usar habilidad", "Usar item", "Cambiar pokemon", "Rendirse"};
@@ -22,29 +25,31 @@ public class Juego {
 
     public void jugar(){
         int opcionElegida;
-        boolean accionCompletada = true;
+        boolean accionCompletada;
+
+        /* FALTA ELEGIR POKEMON INICIAL Y APLICAR ESTADOS */
 
         label:
         while(ganador == 0){
             // Imprimir información
             limpiarConsola();
             imprimirCampo(this);
-            System.out.println("Turno: jugador " + turnoActual);
+            System.out.println("Opciones:");
             for(int i = 1; i < opciones.length; i++){
                 System.out.println("\t" + i + ") " + opciones[i]);
             }
 
             // Obtener opción de usuario y accionar
-            opcionElegida = obtenerOpcionUsuario(opciones.length);
+            opcionElegida = obtenerOpcionUsuario(opciones.length-1);
             switch (opcionElegida) {
                 case 1:
-                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).elegirHabilidad();
+                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).elegirHabilidad(this);
                     break;
                 case 2:
-                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).elegirItem();
+                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).elegirItem(this);
                     break;
                 case 3:
-                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).cambiarPokemonActual();
+                    accionCompletada = (turnoActual == 1 ? jugador1 : jugador2).cambiarPokemonActual(this);
                     break;
                 case 4:
                     ganador = turnoActual == 1 ? 2 : 1;
@@ -60,6 +65,7 @@ public class Juego {
             }
 
             ganador = juegoTerminado();
+            imprimirDivisor();
         }
 
         System.out.println("EL JUGADOR " + ganador + " ES EL GANADOR!!!");
@@ -67,7 +73,7 @@ public class Juego {
 
     /**
      * Verifica la vida de cada uno de los pokemons de los jugadores para ver si alguno tiene vida
-     * @return El número del jugador que ganó o 0 en caso de que ninguno haya perdido
+     * @return El número del jugador que ganó o 0 en caso de que ambos tengan pokemons con vida.
      */
     public int juegoTerminado(){
         Optional<Pokemon> res1 = jugador1.getPokemons().stream()
