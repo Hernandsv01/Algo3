@@ -3,6 +3,7 @@ package org.fiuba.algotres;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.habilidad.Habilidad;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +28,21 @@ public class Jugador {
      * @return True si la acción se pudo completar, false en caso contrario
      */
     public boolean elegirHabilidad(Juego juego) {
-        return true;
+        // Imprimir información
+        imprimirCampo(juego);
+        System.out.println("Opciones:");
+        for(int i = 0; i < pokemonActual.getHabilidades().size(); i++){
+            System.out.println("\t" + (i+1) + ") " + pokemonActual.getHabilidades().get(i).getNombre());
+        }
+
+        // Obtener opción y accionar
+        int opcionElegida = obtenerOpcionUsuario(pokemonActual.getHabilidades().size()+1);
+        if(opcionElegida != pokemonActual.getHabilidades().size()+1){
+            pokemonActual.getHabilidades().get(opcionElegida-1).accionarHabilidad(pokemonActual, juego.getTurnoActual() == 1 ? juego.getJugador2().getPokemonActual() : juego.getJugador1().getPokemonActual());
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -51,7 +66,7 @@ public class Jugador {
         }
 
         // Obtener opcion elegida
-        int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size());
+        int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
 
         // Verificar si la opción elegida fue volver
         if(opcionElegida == pokemonsActivos.size()+1){
