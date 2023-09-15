@@ -1,5 +1,6 @@
 package org.fiuba.algotres;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,11 +12,15 @@ import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
 @Getter @Setter
 public class Jugador {
-    private ArrayList<Pokemon> pokemons/* = new ArrayList<Pokemon>(Arrays.asList(
-            new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon()
-    ))*/;
-    private Pokemon pokemonActual/* = new Pokemon()*/;
+    private List<Pokemon> pokemonsActivos;
+    private List<Pokemon> pokemonsMuertos;
+    private Pokemon pokemonActual;
     private String nombre;
+
+    public Jugador(List<Pokemon> pokemonsActivos) {
+        this.pokemonsActivos = pokemonsActivos;
+        this.pokemonsMuertos = new ArrayList<>();
+    }
 
     /**
      *
@@ -39,26 +44,24 @@ public class Jugador {
      */
     public boolean cambiarPokemonActual(Juego juego) {
         // Imprimir info
-        limpiarConsola();
         imprimirCampo(juego);
         System.out.println("Pokemones disponibles:");
-        /* FALTA MOSTRAR SOLO LOS POKEMONS QUE TIENEN VIDA */
-        for(int i = 0; i <= pokemons.size(); i++){
-            System.out.println("\t" + (i+1) + ") " + (i < pokemons.size() ? pokemons.get(i).toString() : "Volver"));
+        for(int i = 0; i <= pokemonsActivos.size(); i++){
+            System.out.println("\t" + (i+1) + ") " + (i < pokemonsActivos.size() ? pokemonsActivos.get(i).toString() : "Volver"));
         }
 
         // Obtener opcion elegida
-        int opcionElegida = obtenerOpcionUsuario(pokemons.size()+1);
+        int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size());
 
         // Verificar si la opción elegida fue volver
-        if(opcionElegida == pokemons.size()+1){
+        if(opcionElegida == pokemonsActivos.size()+1){
             return false;
         }
 
         // Intercambiar
         Pokemon aux = pokemonActual;
-        pokemonActual = pokemons.get(opcionElegida-1);
-        pokemons.set(opcionElegida-1, aux);
+        pokemonActual = pokemonsActivos.get(opcionElegida-1);
+        pokemonsActivos.set(opcionElegida-1, aux);
 
         return true;
     }
