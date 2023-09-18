@@ -24,36 +24,20 @@ public class Jugador {
      * @return True si la acción se pudo completar, false en caso contrario
      */
     public boolean elegirHabilidad(Juego juego) {
-        limpiarConsola();
-        System.out.println("Habilidades disponibles:");
-        for(int i = 0; i < pokemonActual.habilidades.size(); i++){
-            System.out.println("\t" + (i+1) + ") " + pokemonActual.habilidades.get(i));
+        // Imprimir información
+        imprimirCampo(juego);
+        System.out.println("Opciones:");
+        for(int i = 0; i < pokemonActual.getHabilidades().size(); i++){
+            System.out.println("\t" + (i+1) + ") " + pokemonActual.getHabilidades().get(i).getNombre());
         }
 
-        // Obtener opcion elegida
-        int opcionElegida = obtenerOpcionUsuario(pokemons.size()+1);
-
-        // Verificar si la opción elegida fue volver
-        if(opcionElegida == pokemonActual.habilidades.size()+1){
+        // Obtener opción y accionar
+        int opcionElegida = obtenerOpcionUsuario(pokemonActual.getHabilidades().size()+1);
+        if(opcionElegida != pokemonActual.getHabilidades().size()+1){
+            pokemonActual.getHabilidades().get(opcionElegida-1).accionarHabilidad(pokemonActual, juego.getTurnoActual() == 1 ? juego.getJugador2().getPokemonActual() : juego.getJugador1().getPokemonActual());
+            return true;
+        }else{
             return false;
-        }
-        // Verificar si la opción elegida fue la habilidad 1
-        else if (opcionElegida == 1) {
-            pokemonActual.habilidades[opcionElegid-1
-                    g].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
-        }
-        // Verificar si la opción elegida fue la habilidad 2
-        else if (opcionElegida == 2) {
-            pokemonActual.habilidades[opcionElegid-1].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
-
-        }
-        // Verificar si la opción elegida fue la habilidad 3
-        else if (opcionElegida == 3) {
-            pokemonActual.habilidades[opcionElegid-1].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
-        }
-        // Verificar si la opción elegida fue la habilidad 4
-        else if (opcionElegida == 4) {
-            pokemonActual.habilidades[opcionElegid-1].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
         }
     }
 
@@ -62,7 +46,8 @@ public class Jugador {
      * @return True si la acción se pudo completar, false en caso contrario
      */
     public boolean elegirItem(Juego juego) {
-        return false;
+
+        int opcionElegida = obtenerOpcionUsuario(pokemonActual.getHabilidades().size()+1);
     }
 
     /**
