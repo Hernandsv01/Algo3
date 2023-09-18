@@ -11,9 +11,11 @@ import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
 @Getter @Setter
 public class Jugador {
-    private ArrayList<Pokemon> pokemons/* = new ArrayList<Pokemon>(Arrays.asList(
+    private ArrayList<Pokemon> pokemonsActivos/* = new ArrayList<Pokemon>(Arrays.asList(
             new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon()
     ))*/;
+    private ArrayList<Pokemon> pokemonsMuertos;
+    private ArrayList<Item> items;
     private Pokemon pokemonActual/* = new Pokemon()*/;
     private String nombre;
 
@@ -22,7 +24,37 @@ public class Jugador {
      * @return True si la acción se pudo completar, false en caso contrario
      */
     public boolean elegirHabilidad(Juego juego) {
-        return true;
+        limpiarConsola();
+        System.out.println("Habilidades disponibles:");
+        for(int i = 0; i < pokemonActual.habilidades.size(); i++){
+            System.out.println("\t" + (i+1) + ") " + pokemonActual.habilidades.get(i));
+        }
+
+        // Obtener opcion elegida
+        int opcionElegida = obtenerOpcionUsuario(pokemons.size()+1);
+
+        // Verificar si la opción elegida fue volver
+        if(opcionElegida == pokemonActual.habilidades.size()+1){
+            return false;
+        }
+        // Verificar si la opción elegida fue la habilidad 1
+        else if (opcionElegida == 1) {
+            pokemonActual.habilidades[opcionElegid-1
+                    g].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
+        }
+        // Verificar si la opción elegida fue la habilidad 2
+        else if (opcionElegida == 2) {
+            pokemonActual.habilidades[opcionElegid-1].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
+
+        }
+        // Verificar si la opción elegida fue la habilidad 3
+        else if (opcionElegida == 3) {
+            pokemonActual.habilidades[opcionElegid-1].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
+        }
+        // Verificar si la opción elegida fue la habilidad 4
+        else if (opcionElegida == 4) {
+            pokemonActual.habilidades[opcionElegid-1].accionarHabilidad((turnoActual == 1 ? jugador1 : jugador2).pokemonActual,(turnoActual == 1 ? jugador2 : jugador1).pokemonActual)
+        }
     }
 
     /**
@@ -40,11 +72,10 @@ public class Jugador {
     public boolean cambiarPokemonActual(Juego juego) {
         // Imprimir info
         limpiarConsola();
-        imprimirCampo(juego);
+        //imprimirCampo(juego);
         System.out.println("Pokemones disponibles:");
-        /* FALTA MOSTRAR SOLO LOS POKEMONS QUE TIENEN VIDA */
-        for(int i = 0; i <= pokemons.size(); i++){
-            System.out.println("\t" + (i+1) + ") " + (i < pokemons.size() ? pokemons.get(i).toString() : "Volver"));
+        for(int i = 0; i < pokemonsActivos.size(); i++){
+            System.out.println("\t" + (i+1) + ") " + pokemonsActivos.get(i));
         }
 
         // Obtener opcion elegida
