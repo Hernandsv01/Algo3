@@ -4,6 +4,5 @@ import org.fiuba.algotres.Pokemon;
 
 public abstract class Item {
     protected int cantidad;
-
-    public Pokemon Usar(Pokemon pokemon) { return pokemon; }
+    public void usar(Pokemon pokemon) { }
 }

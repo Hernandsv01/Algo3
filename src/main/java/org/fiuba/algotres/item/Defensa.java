@@ -9,10 +9,9 @@ public class Defensa extends Estadistica{
         this.porcentaje = porcentaje;
     }
     @Override
-    public Pokemon Usar(Pokemon pokemon) {
+    public void usar(Pokemon pokemon) {
         int defensaAnterior = pokemon.getDefensa();
         pokemon.setAtaque((porcentaje/100) * defensaAnterior + defensaAnterior);
         cantidad--;
-        return pokemon;
     }
 }

@@ -9,7 +9,7 @@ public class Pocion extends Vida{
         this.cantidadDeVida = cantidadDeVida;
     }
     @Override
-    public Pokemon Usar(Pokemon pokemon) {
+    public void usar(Pokemon pokemon) {
         if ((pokemon.getVidaActual() + cantidadDeVida) > pokemon.getVidaMaxima()) {
             pokemon.setVidaActual(pokemon.getVidaMaxima());
         } else {
@@ -17,6 +17,5 @@ public class Pocion extends Vida{
             pokemon.setVidaActual(vidaAnterior + cantidadDeVida);
         }
         cantidad--;
-        return pokemon;
     }
 }

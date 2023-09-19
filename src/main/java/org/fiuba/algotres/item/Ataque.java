@@ -11,10 +11,9 @@ public class Ataque extends Estadistica{
     }
 
     @Override
-    public Pokemon Usar(Pokemon pokemon) {
+    public void usar(Pokemon pokemon) {
         int ataqueAnterior = pokemon.getAtaque();
         pokemon.setAtaque((porcentaje/100) * ataqueAnterior + ataqueAnterior);
         cantidad--;
-        return pokemon;
     }
 }

@@ -8,11 +8,10 @@ public class Revivir extends Vida{
         this.cantidad = cantidad;
     }
     @Override
-    public Pokemon Usar(Pokemon pokemon) {
+    public void usar(Pokemon pokemon) {
         if (pokemon.getVidaActual() == 0) {
             pokemon.setVidaActual(pokemon.getVidaMaxima());
             cantidad--;
         }
-        return pokemon;
     }
 }
