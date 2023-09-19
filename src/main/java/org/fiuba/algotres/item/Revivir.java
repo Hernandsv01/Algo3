@@ -4,7 +4,7 @@ import org.fiuba.algotres.Pokemon;
 
 public class Revivir extends Vida{
     // solo puede ser usado en el pokemon que se encuentre muerto
-    public Revivir(Integer cantidad) {
+    public Revivir(int cantidad) {
         this.cantidad = cantidad;
     }
     @Override
