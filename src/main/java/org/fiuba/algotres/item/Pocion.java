@@ -4,12 +4,16 @@ import org.fiuba.algotres.Pokemon;
 
 public class Pocion extends Vida{
     //Pocion (cura 20), Mega Pocion (cura 50) e Hiper Pocion (cura 100)
-    public Pocion(int cantidad, int cantidadDeVida) {
-        this.cantidad = cantidad;
-        this.cantidadDeVida = cantidadDeVida;
+
+    public Pocion(int cantidad, String nombre, int cantidadDeVida) {
+        super(cantidad, nombre, cantidadDeVida);
     }
+
     @Override
-    public void usar(Pokemon pokemon) {
+    public boolean usar(Pokemon pokemon) {
+        if (cantidad <= 0) {
+            return false;
+        }
         if ((pokemon.getVidaActual() + cantidadDeVida) > pokemon.getVidaMaxima()) {
             pokemon.setVidaActual(pokemon.getVidaMaxima());
         } else {
@@ -17,5 +21,6 @@ public class Pocion extends Vida{
             pokemon.setVidaActual(vidaAnterior + cantidadDeVida);
         }
         cantidad--;
+        return true;
     }
 }
