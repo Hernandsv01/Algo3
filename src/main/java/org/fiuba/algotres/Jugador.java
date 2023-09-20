@@ -11,13 +11,19 @@ import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
 @Getter @Setter
 public class Jugador {
-    private ArrayList<Pokemon> pokemonsActivos/* = new ArrayList<Pokemon>(Arrays.asList(
-            new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon(), new Pokemon()
-    ))*/;
-    private ArrayList<Pokemon> pokemonsMuertos;
-    private ArrayList<Item> items;
-    private Pokemon pokemonActual/* = new Pokemon()*/;
+    private List<Pokemon> pokemonsActivos;
+    private List<Pokemon> pokemonsMuertos;
+    private List<Item> items;
+    private Pokemon pokemonActual;
     private String nombre;
+
+    public Jugador(List<Pokemon> pokemonsActivos, List<Pokemon> pokemonsMuertos, List<Item> items, Pokemon pokemonActual, String nombre) {
+        this.pokemonsActivos = pokemonsActivos;
+        this.pokemonsMuertos = pokemonsMuertos;
+        this.items = items;
+        this.pokemonActual = pokemonActual;
+        this.nombre = nombre;
+    }
 
     /**
      *
@@ -46,8 +52,35 @@ public class Jugador {
      * @return True si la acción se pudo completar, false en caso contrario
      */
     public boolean elegirItem(Juego juego) {
-
-        int opcionElegida = obtenerOpcionUsuario(pokemonActual.getHabilidades().size()+1);
+        imprimirCampo(juego);
+        System.out.println("Que item queres usar: ");
+        for(int i = 0; i < items.size(); i++){
+            System.out.println("\t" + (i+1) + ") " + jugador.getItems().get(i).getNombre());
+        }
+        int opcionElegida = obtenerOpcionUsuario(items.size()+1);
+        if(opcionElegida == items.size()+1)
+        {return false}
+        // Obtener opción y accionar
+        if(this.items.get(opcionElegida-1).getNombre() == "Pocion" || this.items.getNombre()== "Mega Pocion" || this.items.getNombre()== "Hiper Pocion" || this.items.getNombre()== "Cura Todo"){
+            System.out.println("En que pokemon queres utilizar este item: ");
+            for(int i = 0; 0 <= pokemonsActivos.size(); i++){
+                System.out.println("\t" + (i+1) + ") " + pokemonsActivos.get(i));
+            }
+            int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
+            this.items.get(opcionElegida).usar(pokemonsActivos.get(opcionElegida-1));
+        }
+        if(this.items.get(opcionElegida-1).getNombre() == "Revivir"){
+            if(pokemonsMuertos.isEmpty()){
+                System.out.println("No tenes pokemons disponibles para revivir");
+            }
+            System.out.println("En que pokemon queres utilizar este item: ");
+            for(int i = 0; 0 <= pokemonsMuertos.size(); i++){
+                System.out.println("\t" + (i+1) + ") " + pokemonsMuertos.get(i));
+            }
+            int opcionElegida = obtenerOpcionUsuario(pokemonsMuertos.size()+1);
+            this.items.get(opcionElegida).usar(pokemonsMuertos.get(opcionElegida-1));
+            pokemonsActivos.add(pokemonsMuertos.get(opcionElegida-1));
+            pokemonsMuertos.remove(pokemonsMuertos.get(opcionElegida-1));}
     }
 
     /**
@@ -67,7 +100,7 @@ public class Jugador {
         int opcionElegida = obtenerOpcionUsuario(pokemons.size()+1);
 
         // Verificar si la opción elegida fue volver
-        if(opcionElegida == pokemons.size()+1){
+        if(opcionElegida == pokemonsActivos.size()+1){
             return false;
         }
 
