@@ -1,34 +1,32 @@
 package org.fiuba.algotres.herramientas;
 
+import org.fiuba.algotres.Juego;
 import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
-
-import javax.print.attribute.standard.PrinterMakeAndModel;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class Inicializador {
 
-    /***********************************************/
-    /*************POKEMONS DE RED******************/
-    /***********************************************/
-    Pokemon Squirtle = new Pokemon(
-            "Squirtle",
+    /*************************************************************/
+    /**********************POKEMONS JUGADOR 1*********************/
+    /*************************************************************/
+    Pokemon bulbasaur = new Pokemon(
+            "Bulbasaur",
             5,
-            Tipos.AGUA,
-            "Cuando retrae su largo cuello en el caparazón, dispara agua a una presión increíble.",
+            Tipos.PLANTA,
+            "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.",
+            45,
             44,
-            44,
-            43,
-            65,
-            48,
+            45,
+            49,
+            49,
             null
     );
 
-    Pokemon Pikachu = new Pokemon(
+    Pokemon pikachu = new Pokemon(
             "Pikachu",
             4,
             Tipos.ELECTRICO,
@@ -37,11 +35,11 @@ public class Inicializador {
             35,
             90,
             40,
-            45,
+            55,
             null
     );
 
-    Pokemon Abra = new Pokemon(
+    Pokemon abra = new Pokemon(
             "Abra",
             6,
             Tipos.PSIQUICO,
@@ -54,22 +52,22 @@ public class Inicializador {
             null
     );
 
-    Pokemon Ekans = new Pokemon(
-            "Ekans",
-            4,
-            Tipos.VENENO,
-            "La longitud de este Pokémon aumenta con el tiempo. Por la noche, se enrosca en las ramas de los árboles para descansar.",
-            35,
-            35,
-            55,
-            44,
-            60,
+    Pokemon pidgey = new Pokemon(
+            "Pidgey",
+            3,
+            Tipos.NORMAL,
+            "Su docilidad es tal que suelen defenderse levantando arena en lugar de contraatacar.",
+            40,
+            40,
+            56,
+            40,
+            45,
             null
     );
 
-    Pokemon Pinsir = new Pokemon(
+    Pokemon pinsir = new Pokemon(
             "Pinsir",
-            7,
+            3,
             Tipos.BICHO,
             "Los Pinsir se juzgan entre ellos por la robustez de la cornamenta. Cuanto más imponente sea, más agradará a sus congéneres del sexo opuesto.",
             65,
@@ -80,36 +78,32 @@ public class Inicializador {
             null
     );
 
-    Pokemon Eevee = new Pokemon(
-            "Eevee",
-            4,
-            Tipos.NORMAL,
-            "Es capaz de evolucionar de muchas maneras para adaptarse sin problemas a cualquier medio.",
+    Pokemon staryu = new Pokemon(
+            "Staryu",
+            5,
+            Tipos.AGUA,
+            "A finales de verano, se pueden ver grupos de Staryu en la orilla de la playa sincronizando el brillo de sus núcleos a ritmo regular.",
+            30,
+            30,
+            85,
             55,
-            55,
-            55,
-            50,
-            55,
+            45,
             null
     );
 
-    ArrayList<Pokemon> PokemonsRed = new ArrayList<Pokemon>(Arrays.asList(
-            Squirtle,
-            Pikachu,
-            Abra,
-            Ekans,
-            Eevee,
-            Pinsir
+    ArrayList<Pokemon> pokemonsJugador1 = new ArrayList<Pokemon>(Arrays.asList(
+            bulbasaur,
+            pikachu,
+            abra,
+            pidgey,
+            staryu,
+            pinsir
     ));
 
-    /**************JUGADOR RED*********************/
-
-
-    /***********************************************/
-    /*************POKEMONS DE BLUE******************/
-    /***********************************************/
-
-    Pokemon Charmander = new Pokemon(
+    /*************************************************************/
+    /**********************POKEMONS JUGADOR 2*********************/
+    /*************************************************************/
+    Pokemon charmander = new Pokemon(
             "Charmander",
             5,
             Tipos.FUEGO,
@@ -122,22 +116,22 @@ public class Inicializador {
             null
     );
 
-    Pokemon Mankey = new Pokemon(
-            "Mankey",
+    Pokemon machop = new Pokemon(
+            "Machop",
             6,
             Tipos.LUCHA,
-            "Vive en grupos en las copas de los árboles. Si pierde de vista a su manada, se siente solo y se enfada.",
-            40,
-            40,
+            "Es una masa de músculos y, pese a su pequeño tamaño, tiene fuerza de sobra para levantar en brazos a 100 personas.",
+            70,
             70,
             35,
+            50,
             80,
             null
     );
 
-    Pokemon Tauros = new Pokemon(
+    Pokemon tauros = new Pokemon(
             "Tauros",
-            7,
+            3,
             Tipos.NORMAL,
             "Cuando elige una presa, embiste sin pensárselo. Este Pokémon es famoso por su carácter violento.",
             75,
@@ -148,54 +142,70 @@ public class Inicializador {
             null
     );
 
-    Pokemon Chikorita = new Pokemon(
-            "Chikorita",
+    Pokemon paras = new Pokemon(
+            "Paras",
             4,
             Tipos.PLANTA,
-            "Al luchar, Chikorita agita la hoja que tiene para mantener a raya al rival. Pero, al mismo tiempo, libera una suave fragancia que apacigua el encuentro y crea un ambiente agradable y de amistad.",
-            45,
-            45,
-            45,
-            65,
-            49,
-            null
-    );
-
-    Pokemon Dratini = new Pokemon(
-            "Dratini",
-            3,
-            Tipos.DRAGON,
-            "Durante la etapa de crecimiento, muda muchas veces de piel y se protege mediante una cascada.",
-            41,
-            41,
-            50,
-            45,
-            64,
-            null
-    );
-
-    Pokemon Diglett = new Pokemon(
-            "Diglett",
-            3,
-            Tipos.TIERRA,
-            "Vive 1 m por debajo del suelo, donde se alimenta de raíces. A veces también aparece en la superficie.",
-            10,
-            10,
-            95,
+            "Escarba en el suelo para extraer nutrientes de las raíces de los árboles, que las setas del lomo absorben después casi por completo.",
+            35,
+            35,
             25,
             55,
+            70,
             null
     );
 
-    ArrayList<Pokemon> PokemonsBlue = new ArrayList<Pokemon>(Arrays.asList(
-            Charmander,
-            Mankey,
-            Tauros,
-            Chikorita,
-            Dratini,
-            Diglett
+    Pokemon geodude = new Pokemon(
+            "Geodude",
+            4,
+            Tipos.ROCA,
+            "Se suele encontrar en senderos de montaña y sitios parecidos. Conviene andar con cuidado para no pisarlo sin querer y provocar su enfado.",
+            40,
+            40,
+            20,
+            100,
+            80,
+            null
+    );
+
+    Pokemon tentacool = new Pokemon(
+            "Tentacool",
+            3,
+            Tipos.VENENO,
+            "Sus facultades natatorias son más bien escasas, por lo que se limita a flotar a la deriva en aguas poco profundas en busca de alimento.",
+            40,
+            40,
+            70,
+            35,
+            40,
+            null
+    );
+
+    ArrayList<Pokemon> pokemonsJugador2 = new ArrayList<Pokemon>(Arrays.asList(
+            charmander,
+            machop,
+            tauros,
+            paras,
+            tentacool,
+            geodude
     ));
 
-    /**************JUGADOR BLUE*********************/
+    public Juego inicializarJuego() {
+
+        /*************************************************/
+        /****************JUGADOR 1************************/
+        /*************************************************/
+        Jugador jugador1 = new Jugador();
+        jugador1.setPokemonsActivos(pokemonsJugador1);
+
+        /*************************************************/
+        /****************JUGADOR 2************************/
+        /*************************************************/
+        Jugador jugador2 = new Jugador();
+        jugador2.setPokemonsActivos(pokemonsJugador2);
+
+        return new Juego(jugador1, jugador2);
+    }
 
 }
+
