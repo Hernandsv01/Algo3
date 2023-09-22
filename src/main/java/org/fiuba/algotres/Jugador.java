@@ -24,6 +24,10 @@ public class Jugador {
         this.pokemonActual = pokemonActual;
         this.nombre = nombre;
     }
+    public Jugador(List<Pokemon> pokemonsActivos, List<Item> items){
+        this.pokemonsActivos = pokemonsActivos;
+        this.items = items;
+    }
 
     /**
      *
@@ -51,37 +55,41 @@ public class Jugador {
      *
      * @return True si la acción se pudo completar, false en caso contrario
      */
-    public boolean elegirItem(Juego juego) {
-        imprimirCampo(juego);
-        System.out.println("Que item queres usar: ");
-        for(int i = 0; i < items.size(); i++){
-            System.out.println("\t" + (i+1) + ") " + jugador.getItems().get(i).getNombre());
-        }
-        int opcionElegida = obtenerOpcionUsuario(items.size()+1);
-        if(opcionElegida == items.size()+1)
-        {return false}
-        // Obtener opción y accionar
-        if(this.items.get(opcionElegida-1).getNombre() == "Pocion" || this.items.getNombre()== "Mega Pocion" || this.items.getNombre()== "Hiper Pocion" || this.items.getNombre()== "Cura Todo"){
-            System.out.println("En que pokemon queres utilizar este item: ");
-            for(int i = 0; 0 <= pokemonsActivos.size(); i++){
-                System.out.println("\t" + (i+1) + ") " + pokemonsActivos.get(i));
+     public boolean elegirItem(Juego juego) {
+        boolean seguir = false;
+        do{
+            System.out.println("Que item queres usar: ");
+            for(int i = 0; i < items.size(); i++){
+                System.out.println("\t" + (i+1) + ") " + jugador.getItems().get(i).getNombre());
             }
-            int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
-            this.items.get(opcionElegida).usar(pokemonsActivos.get(opcionElegida-1));
-        }
-        if(this.items.get(opcionElegida-1).getNombre() == "Revivir"){
-            if(pokemonsMuertos.isEmpty()){
-                System.out.println("No tenes pokemons disponibles para revivir");
-            }
-            System.out.println("En que pokemon queres utilizar este item: ");
-            for(int i = 0; 0 <= pokemonsMuertos.size(); i++){
-                System.out.println("\t" + (i+1) + ") " + pokemonsMuertos.get(i));
-            }
-            int opcionElegida = obtenerOpcionUsuario(pokemonsMuertos.size()+1);
-            this.items.get(opcionElegida).usar(pokemonsMuertos.get(opcionElegida-1));
-            pokemonsActivos.add(pokemonsMuertos.get(opcionElegida-1));
-            pokemonsMuertos.remove(pokemonsMuertos.get(opcionElegida-1));}
-    }
+            int opcionElegida = obtenerOpcionUsuario(items.size()+1);
+            if(opcionElegida != jugador.getItems().size()+1){
+                if(this.items.getItems(opcionElegida-1).getNombre() == "Pocion" || this.items.getItems(opcionElegida-1).getNombre(opcionElegida-1)== "Mega Pocion" || this.items.getItems(opcionElegida-1).getNombre(opcionElegida-1)== "Hiper Pocion" || this.items.getItems(opcionElegida-1).getNombre()== "Cura Todo"){
+                System.out.println("En que pokemon queres utilizar este item: ");
+                for(int i = 0; 0 <= pokemonsActivos.size(); i++){
+                    System.out.println("\t" + (i+1) + ") " + pokemonsActivos.get(i));
+                }
+                int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
+                this.items.getItems(opcionElegida).usar(pokemonsActivos.get(opcionElegida-1));
+                seguir = true;
+                }
+                if(this.items.getItems(opcionElegida-1).getNombre() == "Revivir" && !pokemonsMuertos.isEmpty()){
+                    System.out.println("En que pokemon queres utilizar este item: ");
+                    for(int i = 0; 0 <= pokemonsMuertos.size(); i++){
+                        System.out.println("\t" + (i+1) + ") " + pokemonsMuertos.get(i));
+                    }
+                    int opcionElegida = obtenerOpcionUsuario(pokemonsMuertos.size()+1);
+                    this.items.getItems(opcionElegida).usar(pokemonsMuertos.get(opcionElegida-1));
+                    pokemonsActivos.add(pokemonsMuertos.get(opcionElegida-1));
+                    pokemonsMuertos.remove(pokemonsMuertos.get(opcionElegida-1));
+                    seguir = true;}
+                if(this.items.getItems(opcionElegida-1).getNombre() == "Revivir" && pokemonsMuertos.isEmpty()){
+                    System.out.println("No hay pokemons muertos");
+                }}
+            else{ return false;}
+            }while(!seguir);
+        return true;
+        }        
 
     /**
      *
