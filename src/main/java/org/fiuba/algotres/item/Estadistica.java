@@ -26,7 +26,7 @@ public class Estadistica extends Item{
                 return true;
             case DEFENSA:
                 int defensaAnterior = pokemon.getDefensa();
-                pokemon.setAtaque((porcentaje/100) * defensaAnterior + defensaAnterior);
+                pokemon.setDefensa((porcentaje/100) * defensaAnterior + defensaAnterior);
                 cantidad--;
                 return true;
         }
