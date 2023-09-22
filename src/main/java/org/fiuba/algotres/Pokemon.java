@@ -18,8 +18,8 @@ public class Pokemon {
     private Integer vidaActual;
     private final Integer vidaMaxima;
     private final Integer velocidad;
-    private final Integer defensa;
-    private final Integer ataque;
+    private Integer defensa;
+    private Integer ataque;
     private Estado estado;
     private final List<Habilidad> habilidades;
 

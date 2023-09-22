@@ -1,7 +1,9 @@
 package org.fiuba.algotres;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.habilidad.Habilidad;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,23 +11,17 @@ import java.util.List;
 
 import static org.fiuba.algotres.herramientas.EntradaSalida.*;
 
-@Getter @Setter
+@Getter @Setter @AllArgsConstructor
 public class Jugador {
     private List<Pokemon> pokemonsActivos;
     private List<Pokemon> pokemonsMuertos;
     private List<Item> items;
     private Pokemon pokemonActual;
     private String nombre;
-
-    public Jugador(List<Pokemon> pokemonsActivos, List<Pokemon> pokemonsMuertos, List<Item> items, Pokemon pokemonActual, String nombre) {
-        this.pokemonsActivos = pokemonsActivos;
-        this.pokemonsMuertos = pokemonsMuertos;
-        this.items = items;
-        this.pokemonActual = pokemonActual;
-        this.nombre = nombre;
-    }
+  
     public Jugador(List<Pokemon> pokemonsActivos, List<Item> items){
         this.pokemonsActivos = pokemonsActivos;
+        this.pokemonsMuertos = new ArrayList<>();
         this.items = items;
     }
 
@@ -97,15 +93,14 @@ public class Jugador {
      */
     public boolean cambiarPokemonActual(Juego juego) {
         // Imprimir info
-        limpiarConsola();
-        //imprimirCampo(juego);
+        imprimirCampo(juego);
         System.out.println("Pokemones disponibles:");
-        for(int i = 0; i < pokemonsActivos.size(); i++){
-            System.out.println("\t" + (i+1) + ") " + pokemonsActivos.get(i));
+        for(int i = 0; i <= pokemonsActivos.size(); i++){
+            System.out.println("\t" + (i+1) + ") " + (i < pokemonsActivos.size() ? pokemonsActivos.get(i).toString() : "Volver"));
         }
 
         // Obtener opcion elegida
-        int opcionElegida = obtenerOpcionUsuario(pokemons.size()+1);
+        int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
 
         // Verificar si la opción elegida fue volver
         if(opcionElegida == pokemonsActivos.size()+1){
@@ -114,8 +109,8 @@ public class Jugador {
 
         // Intercambiar
         Pokemon aux = pokemonActual;
-        pokemonActual = pokemons.get(opcionElegida-1);
-        pokemons.set(opcionElegida-1, aux);
+        pokemonActual = pokemonsActivos.get(opcionElegida-1);
+        pokemonsActivos.set(opcionElegida-1, aux);
 
         return true;
     }
