@@ -6,5 +6,6 @@ import org.fiuba.algotres.Pokemon;
 @Data
 public abstract class Habilidad {
     private final String nombre;
+    private final int usos;
     public abstract void accionarHabilidad(Pokemon atacante, Pokemon victima);
 }
