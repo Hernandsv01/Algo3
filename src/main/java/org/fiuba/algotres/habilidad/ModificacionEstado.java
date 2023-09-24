@@ -11,6 +11,9 @@ public class ModificacionEstado extends Habilidad {
     }
     @Override
     public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
+        if (usos <= 0) {
+            return;
+        }
         if (victima.getEstado() == null) {
             switch (tipo) {
                 case Estado.DORMIDO:

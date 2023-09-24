@@ -16,6 +16,9 @@ public class ModificacionEstadistica extends Habilidad{
 
     @Override
     public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
+        if (usos <= 0) {
+            return;
+        }
         if (propio) {
             switch (tipo) {
                 case ATAQUE:
