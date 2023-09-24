@@ -20,6 +20,7 @@ public class ModificacionEstado extends Habilidad {
                 case Estado.ENVENENADO:
                     victima.setEstado(new Estado("envenenado"));
             }
+            usos--;
         }
     }
 }

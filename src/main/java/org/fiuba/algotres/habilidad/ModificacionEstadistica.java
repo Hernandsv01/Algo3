@@ -42,5 +42,6 @@ public class ModificacionEstadistica extends Habilidad{
                     victima.setDefensa(Math.round((float) 0.15 * defAntOponente + defAntOponente));
             }
         }
+        usos--;
     }
 }
