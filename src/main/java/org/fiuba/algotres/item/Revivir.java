@@ -1,12 +1,17 @@
 package org.fiuba.algotres.item;
 
+import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 
-public class Revivir extends Vida{
-    // solo puede ser usado en el pokemon que se encuentre muerto
+import java.util.List;
 
-    public Revivir(int cantidad, String nombre, int cantidadDeVida) {
-        super(cantidad, nombre, cantidadDeVida);
+public class Revivir extends Item {
+    // solo puede ser usado en el pokemon que se encuentre muerto
+    private final Jugador jugador;
+
+    public Revivir(int cantidad, String nombre, Jugador jugador) {
+        super(cantidad, nombre);
+        this.jugador = jugador;
     }
 
     @Override
@@ -16,6 +21,10 @@ public class Revivir extends Vida{
         }
         if (pokemon.getVidaActual() == 0) {
             pokemon.setVidaActual(pokemon.getVidaMaxima());
+
+            jugador.getPokemonsMuertos().remove(pokemon);
+            jugador.getPokemonsActivos().add(pokemon);
+
             cantidad--;
             return true;
         }
