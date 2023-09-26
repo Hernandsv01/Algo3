@@ -16,12 +16,7 @@ public class Pocion extends Item{
         if (cantidad <= 0) {
             return false;
         }
-        if ((pokemon.getVidaActual() + cantidadDeVida) > pokemon.getVidaMaxima()) {
-            pokemon.setVidaActual(pokemon.getVidaMaxima());
-        } else {
-            int vidaAnterior = pokemon.getVidaActual();
-            pokemon.setVidaActual(vidaAnterior + cantidadDeVida);
-        }
+        pokemon.setVidaActual(pokemon.getVidaActual() + cantidadDeVida);
         cantidad--;
         return true;
     }
