@@ -4,6 +4,11 @@ import org.fiuba.algotres.Juego;
 import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
+import org.fiuba.algotres.estado.Estado;
+import org.fiuba.algotres.habilidad.Ataque;
+import org.fiuba.algotres.habilidad.Habilidad;
+import org.fiuba.algotres.habilidad.ModificacionEstadistica;
+import org.fiuba.algotres.habilidad.ModificacionEstado;
 import org.fiuba.algotres.item.*;
 
 import java.util.ArrayList;
@@ -15,9 +20,286 @@ public class Inicializador {
 
     public static Juego inicializarJuego() {
 
+        /*************************************************/
+        /***************HABILIDADES***********************/
+        /*************************************************/
+
+        /*******************TIPO ATAQUE ******************/
+        Ataque llamarada = new Ataque(
+                "Llamarada"
+        );
+        Ataque ascuas = new Ataque(
+                "Ascuas"
+        );
+        Ataque giroFuego = new Ataque(
+                "Giro fuego"
+        );
+        Ataque lanzallamas = new Ataque(
+                "Lanzallamas"
+        );;
+
+        Ataque arañazo = new Ataque(
+                "Arañazo"
+        );;
+        Ataque placaje = new Ataque(
+                "Placaje"
+        );
+
+        Ataque burbuja = new Ataque(
+                "Burbuja"
+        );
+        Ataque hidrobomba = new Ataque(
+                "Hidrobomba"
+        );
+        Ataque rayoBurbuja = new Ataque(
+                "Rayo burbuja"
+        );
+        Ataque pistolaAgua = new Ataque(
+                "Pistola agua"
+        );
+
+        Ataque rayo = new Ataque(
+                "Rayo"
+        );
+
+        Ataque confusion = new Ataque(
+                "Confusion"
+        );
+        Ataque psiquico = new Ataque(
+                "Psiquico"
+        );
+
+        Ataque megaCuerno = new Ataque(
+                "Mega cuerno"
+        );
+        Ataque pinMisil = new Ataque(
+                "Pin misil"
+        );
+
+        Ataque golpeKarate = new Ataque(
+                "Golpe karate"
+        );
+        Ataque sismico = new Ataque(
+                "Sismico"
+        );
+        Ataque doblePatada = new Ataque(
+                "Doble patada"
+        );
+
+        Ataque lanzarrocas = new Ataque(
+                "Lanzarrocas"
+        );
+        Ataque avalancha = new Ataque(
+                "Avalancha"
+        );
+
+        Ataque ataqueArena = new Ataque(
+                "Ataque arena"
+        );
+        Ataque terremoto = new Ataque(
+                "Terremoto"
+        );
+
+        Ataque picotazoVeneno = new Ataque(
+                "Picotazo veneno"
+        );
+
+        Ataque latigoCepa = new Ataque(
+                "Latigo cepa"
+        );
+        Ataque hojaAfilada = new Ataque(
+                "Hoja afilada"
+        );
+
+        Ataque ataqueAla = new Ataque(
+                "Ataque ala"
+        );
+        Ataque ataqueAereo = new Ataque(
+                "Ataque áereo"
+        );
+        Ataque picotazo = new Ataque(
+                "Picotazo"
+        );
+
+        /***********TIPO MODIFICACION DE ESTADISTICA***********/
+        ModificacionEstadistica danzaEspada = new ModificacionEstadistica(
+                "Danza espada",
+                15,
+                ModificacionEstadistica.ATAQUE,
+                true
+        );
+        ModificacionEstadistica fortaleza = new ModificacionEstadistica(
+                "fortaleza",
+                25,
+                ModificacionEstadistica.DEFENSA,
+                true
+        );
+        ModificacionEstadistica rizoDefensa = new ModificacionEstadistica(
+                "Rizo defensa",
+                25,
+                ModificacionEstadistica.DEFENSA,
+                true
+        );
+        ModificacionEstadistica recuperacion = new ModificacionEstadistica(
+                "Recuperacion",
+                25,
+                ModificacionEstadistica.VIDA,
+                true
+        );
+        ModificacionEstadistica chirrido = new ModificacionEstadistica(
+                "Chirrido",
+                15,
+                ModificacionEstadistica.DEFENSA,
+                false
+        );
+        ModificacionEstadistica pantalladDeLuz = new ModificacionEstadistica(
+                "Pantalla de luz",
+                30,
+                ModificacionEstadistica.ATAQUE,
+                false
+        );
+        ModificacionEstadistica descanso = new ModificacionEstadistica(
+                "Descanso",
+                5,
+                ModificacionEstadistica.VIDA,
+                true
+        );
+        ModificacionEstadistica acido = new ModificacionEstadistica(
+                "Ácido",
+                30,
+                ModificacionEstadistica.DEFENSA,
+                false
+        );
+        ModificacionEstadistica armaduraAcida = new ModificacionEstadistica(
+                "Armadura ácida",
+                15,
+                ModificacionEstadistica.DEFENSA,
+                true
+        );
+        ModificacionEstadistica absorber = new ModificacionEstadistica(
+                "Absorber",
+                20,
+                ModificacionEstadistica.VIDA,
+                true
+        );
+
+        /**************TIPO DE MODIFICACION DE ESTADO**************/
+        ModificacionEstado impactrueno = new ModificacionEstado(
+                "Impactrueno",
+                20,
+                Estado.PARALIZADO
+        );
+        ModificacionEstado trueno = new ModificacionEstado(
+                "Trueno",
+                10,
+                Estado.PARALIZADO
+        );
+        ModificacionEstado polvoVeneno = new ModificacionEstado(
+                "Polvo veneno",
+                35,
+                Estado.ENVENENADO
+        );
+        ModificacionEstado somnifero = new ModificacionEstado(
+                "Somnífero",
+                10,
+                Estado.DORMIDO
+        );
+        ModificacionEstado paralizador = new ModificacionEstado(
+                "Paralizador",
+                15,
+                Estado.PARALIZADO
+        );
+
+
+        /*************************************************************/
+        /******************ASIGNACION DE HABILIDADES******************/
+        /*************************************************************/
+
+        ArrayList<Habilidad> habilidadesBulbasaur = new ArrayList<Habilidad>(Arrays.asList(
+                absorber,
+                somnifero,
+                latigoCepa,
+                hojaAfilada
+        ));
+
+        ArrayList<Habilidad> habilidadesPikachu = new ArrayList<Habilidad>(Arrays.asList(
+                impactrueno,
+                trueno,
+                rayo,
+                arañazo
+        ));
+
+        ArrayList<Habilidad> habilidadesAbra = new ArrayList<Habilidad>(Arrays.asList(
+                pantalladDeLuz,
+                descanso,
+                confusion,
+                psiquico
+        ));
+
+        ArrayList<Habilidad> habilidadesPidgey = new ArrayList<Habilidad>(Arrays.asList(
+                danzaEspada,
+                ataqueAereo,
+                ataqueAla,
+                picotazo
+        ));
+
+        ArrayList<Habilidad> habilidadesPinsir = new ArrayList<Habilidad>(Arrays.asList(
+                chirrido,
+                pinMisil,
+                megaCuerno
+        ));
+
+        ArrayList<Habilidad> habilidadesStaryu = new ArrayList<Habilidad>(Arrays.asList(
+                burbuja,
+                hidrobomba,
+                pistolaAgua,
+                rayoBurbuja
+        ));
+
+        ArrayList<Habilidad> habilidadesCharmander = new ArrayList<Habilidad>(Arrays.asList(
+                llamarada,
+                ascuas,
+                giroFuego,
+                lanzallamas
+        ));
+
+        ArrayList<Habilidad> habilidadesMachop = new ArrayList<Habilidad>(Arrays.asList(
+                golpeKarate,
+                sismico,
+                doblePatada
+        ));
+
+        ArrayList<Habilidad> habilidadesTauros = new ArrayList<Habilidad>(Arrays.asList(
+                placaje,
+                rizoDefensa,
+                recuperacion,
+                fortaleza
+        ));
+
+        ArrayList<Habilidad> habilidadesParas = new ArrayList<Habilidad>(Arrays.asList(
+                paralizador,
+                hojaAfilada,
+                polvoVeneno,
+                picotazoVeneno
+        ));
+
+        ArrayList<Habilidad> habilidadesGeodude = new ArrayList<Habilidad>(Arrays.asList(
+                lanzarrocas,
+                avalancha,
+                ataqueArena,
+                terremoto
+        ));
+
+        ArrayList<Habilidad> habilidadesTentacool = new ArrayList<Habilidad>(Arrays.asList(
+                acido,
+                armaduraAcida,
+                picotazoVeneno
+        ));
+
         /*************************************************************/
         /**********************POKEMONS JUGADOR 1*********************/
         /*************************************************************/
+
         Pokemon bulbasaur = new Pokemon(
                 "Bulbasaur",
                 5,
@@ -28,7 +310,7 @@ public class Inicializador {
                 45,
                 49,
                 49,
-                null
+                habilidadesBulbasaur
         );
         Pokemon pikachu = new Pokemon(
                 "Pikachu",
@@ -40,7 +322,7 @@ public class Inicializador {
                 90,
                 40,
                 55,
-                null
+                habilidadesPikachu
         );
         Pokemon abra = new Pokemon(
                 "Abra",
@@ -52,7 +334,7 @@ public class Inicializador {
                 90,
                 15,
                 20,
-                null
+                habilidadesAbra
         );
         Pokemon pidgey = new Pokemon(
                 "Pidgey",
@@ -64,7 +346,7 @@ public class Inicializador {
                 56,
                 40,
                 45,
-                null
+                habilidadesPidgey
         );
         Pokemon pinsir = new Pokemon(
                 "Pinsir",
@@ -76,7 +358,7 @@ public class Inicializador {
                 85,
                 100,
                 125,
-                null
+                habilidadesPinsir
         );
         Pokemon staryu = new Pokemon(
                 "Staryu",
@@ -88,7 +370,7 @@ public class Inicializador {
                 85,
                 55,
                 45,
-                null
+                habilidadesStaryu
         );
         ArrayList<Pokemon> pokemonsJugador1 = new ArrayList<Pokemon>(Arrays.asList(
                 bulbasaur,
@@ -112,7 +394,7 @@ public class Inicializador {
                 65,
                 43,
                 52,
-                null
+                habilidadesCharmander
         );
         Pokemon machop = new Pokemon(
                 "Machop",
@@ -124,7 +406,7 @@ public class Inicializador {
                 35,
                 50,
                 80,
-                null
+                habilidadesMachop
         );
         Pokemon tauros = new Pokemon(
                 "Tauros",
@@ -136,7 +418,7 @@ public class Inicializador {
                 110,
                 95,
                 100,
-                null
+                habilidadesTauros
         );
         Pokemon paras = new Pokemon(
                 "Paras",
@@ -148,7 +430,7 @@ public class Inicializador {
                 25,
                 55,
                 70,
-                null
+                habilidadesParas
         );
         Pokemon geodude = new Pokemon(
                 "Geodude",
@@ -160,7 +442,7 @@ public class Inicializador {
                 20,
                 100,
                 80,
-                null
+                habilidadesGeodude
         );
         Pokemon tentacool = new Pokemon(
                 "Tentacool",
@@ -172,7 +454,7 @@ public class Inicializador {
                 70,
                 35,
                 40,
-                null
+                habilidadesTentacool
         );
         ArrayList<Pokemon> pokemonsJugador2 = new ArrayList<Pokemon>(Arrays.asList(
                 charmander,
@@ -188,14 +470,14 @@ public class Inicializador {
         /*************************************************/
 
         Estadistica ataqueX = new Estadistica(
-                1,
+                3,
                 "Ataque X",
                 10,
                 Estadistica.ATAQUE
         );
 
         Estadistica defensaX = new Estadistica(
-                1,
+                3,
                 "Defensa X",
                 10,
                 Estadistica.DEFENSA
@@ -220,7 +502,7 @@ public class Inicializador {
         );
 
         CuraTodo curaTodo = new CuraTodo(
-                1,
+                3,
                 "Cura Todo"
         );
 
@@ -258,6 +540,7 @@ public class Inicializador {
                 curaTodo,
                 revivirJugador2
         ));
+
         /*************************************************/
         /****************JUGADOR 1************************/
         /*************************************************/
