@@ -44,7 +44,7 @@ public class InputTerminal implements InputUsuario {
         String res;
         do{
             res = scanner.nextLine();
-        }while(!puedeEstarVacio && "".trim().equals(res));
+        }while(!puedeEstarVacio && "".equals(res.trim()));
 
         return res;
     }
