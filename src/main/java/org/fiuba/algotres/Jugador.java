@@ -4,114 +4,110 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.habilidad.Habilidad;
+import org.fiuba.algotres.item.Item;
+import org.fiuba.algotres.io.InputUsuario;
+import org.fiuba.algotres.io.Output;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.fiuba.algotres.herramientas.EntradaSalida.*;
-
-@Getter @Setter @AllArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
 public class Jugador {
     private List<Pokemon> pokemonsActivos;
     private List<Pokemon> pokemonsMuertos;
     private List<Item> items;
     private Pokemon pokemonActual;
     private String nombre;
-  
-    public Jugador(List<Pokemon> pokemonsActivos, List<Item> items){
+
+    private final Output jugadorView;
+    private final InputUsuario inputUsuario;
+
+    public Jugador(List<Pokemon> pokemonsActivos, List<Item> items, Output jugadorView, InputUsuario inputUsuario) {
         this.pokemonsActivos = pokemonsActivos;
         this.pokemonsMuertos = new ArrayList<>();
         this.items = items;
+        this.jugadorView = jugadorView;
+        this.inputUsuario = inputUsuario;
+    }
+
+    private <T> int elegirElemento(List<T> elementos, String mensaje) {
+        if (elementos.isEmpty()) return -1;
+
+        List<String> opciones = elementos.stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+        opciones.add("Volver");
+
+        jugadorView.mostrar(mensaje);
+        jugadorView.mostrarListado(opciones);
+
+        int opcionElegida = inputUsuario.obtenerOpcionNumerica(elementos.size() + 1);
+        if (opcionElegida == elementos.size() + 1) return 0;
+
+        return opcionElegida;
     }
 
     /**
-     *
-     * @return True si la acción se pudo completar, false en caso contrario
+     * Le permite al usuario elegir una habilidad de su pokemon
+     * @return la posicion de la habilidad elegida + 1, 0 si se volvió y -1 si no hay habilidades disponibles
      */
-    public boolean elegirHabilidad(Juego juego) {
-        // Imprimir información
-        imprimirCampo(juego);
-        System.out.println("Opciones:");
-        for(int i = 0; i < pokemonActual.getHabilidades().size(); i++){
-            System.out.println("\t" + (i+1) + ") " + pokemonActual.getHabilidades().get(i).getNombre());
-        }
-
-        // Obtener opción y accionar
-        int opcionElegida = obtenerOpcionUsuario(pokemonActual.getHabilidades().size()+1);
-        if(opcionElegida != pokemonActual.getHabilidades().size()+1){
-            pokemonActual.getHabilidades().get(opcionElegida-1).accionarHabilidad(pokemonActual, juego.getTurnoActual() == 1 ? juego.getJugador2().getPokemonActual() : juego.getJugador1().getPokemonActual());
-            return true;
-        }else{
-            return false;
-        }
+    public int elegirHabilidad() {
+        return elegirElemento(pokemonActual.getHabilidades(), "Habilidades disponibles: ");
     }
 
     /**
-     *
-     * @return True si la acción se pudo completar, false en caso contrario
+     * Le permite al usuario elegir un item entre los que tiene
+     * @return la posición del item elegido + 1, 0 si se volvió y -1 si no hay items disponibles
      */
-     public boolean elegirItem(Juego juego) {
-        boolean seguir = false;
-        do{
-            System.out.println("Que item queres usar: ");
-            for(int i = 0; i < items.size(); i++){
-                System.out.println("\t" + (i+1) + ") " + jugador.getItems().get(i).getNombre());
+    public int elegirItem() {
+        return elegirElemento(items, "Items:");
+    }
+
+    /**
+     * Le permite al usuario elegir el pokemon sobre el que quiere aplicar su item y lo aplica
+     * @param item Posición del item que se va a usar
+     * @return 1 si el item se usó correctamente, 0 si se volvió, -1 si hubo algún error
+     */
+    public int usarItem(int item) {
+        Item itemElegido = items.get(item);
+        boolean esRevivir = "Revivir".equals(itemElegido.getClass().getName());
+        List<Pokemon> lista = esRevivir ? pokemonsMuertos : pokemonsActivos;
+
+        int opcionElegida = elegirElemento(lista, "Elija un pokemon al que aplicarle el item: ");
+        if(opcionElegida <= 0){
+            if(opcionElegida == -1) {
+                jugadorView.mostrar("No hay pokemons sobre los que aplicar este item");
             }
-            int opcionElegida = obtenerOpcionUsuario(items.size()+1);
-            if(opcionElegida != jugador.getItems().size()+1){
-                if(this.items.getItems(opcionElegida-1).getNombre() == "Pocion" || this.items.getItems(opcionElegida-1).getNombre(opcionElegida-1)== "Mega Pocion" || this.items.getItems(opcionElegida-1).getNombre(opcionElegida-1)== "Hiper Pocion" || this.items.getItems(opcionElegida-1).getNombre()== "Cura Todo"){
-                System.out.println("En que pokemon queres utilizar este item: ");
-                for(int i = 0; 0 <= pokemonsActivos.size(); i++){
-                    System.out.println("\t" + (i+1) + ") " + pokemonsActivos.get(i));
-                }
-                int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
-                this.items.getItems(opcionElegida).usar(pokemonsActivos.get(opcionElegida-1));
-                seguir = true;
-                }
-                if(this.items.getItems(opcionElegida-1).getNombre() == "Revivir" && !pokemonsMuertos.isEmpty()){
-                    System.out.println("En que pokemon queres utilizar este item: ");
-                    for(int i = 0; 0 <= pokemonsMuertos.size(); i++){
-                        System.out.println("\t" + (i+1) + ") " + pokemonsMuertos.get(i));
-                    }
-                    int opcionElegida = obtenerOpcionUsuario(pokemonsMuertos.size()+1);
-                    this.items.getItems(opcionElegida).usar(pokemonsMuertos.get(opcionElegida-1));
-                    pokemonsActivos.add(pokemonsMuertos.get(opcionElegida-1));
-                    pokemonsMuertos.remove(pokemonsMuertos.get(opcionElegida-1));
-                    seguir = true;}
-                if(this.items.getItems(opcionElegida-1).getNombre() == "Revivir" && pokemonsMuertos.isEmpty()){
-                    System.out.println("No hay pokemons muertos");
-                }}
-            else{ return false;}
-            }while(!seguir);
-        return true;
-        }        
+            return opcionElegida;
+        }
+
+        boolean res = itemElegido.usar(lista.get(opcionElegida - 1));
+
+        if(res && esRevivir){
+            Pokemon pokemon = lista.get(opcionElegida - 1);
+            pokemonsMuertos.remove(pokemon);
+            pokemonsActivos.add(pokemon);
+        }
+
+        return res? 1 : -1;
+    }
 
     /**
-     *
-     * @return True si la acción se pudo completar, false en caso contrario
+     * Le permite al usuario elegir el pokemon que quiere tener como actual y lo reemplaza
+     * @return 1 si se cambió de pokemón, 0 si se volvió y -1 si no hay pokemons disponibles
      */
-    public boolean cambiarPokemonActual(Juego juego) {
-        // Imprimir info
-        imprimirCampo(juego);
-        System.out.println("Pokemones disponibles:");
-        for(int i = 0; i <= pokemonsActivos.size(); i++){
-            System.out.println("\t" + (i+1) + ") " + (i < pokemonsActivos.size() ? pokemonsActivos.get(i).toString() : "Volver"));
-        }
+    public int cambiarPokemonActual() {
+        int opcionElegida = elegirElemento(pokemonsActivos, "Pokemones disponibles:");
 
-        // Obtener opcion elegida
-        int opcionElegida = obtenerOpcionUsuario(pokemonsActivos.size()+1);
+        if(opcionElegida == 0 || opcionElegida == -1) return opcionElegida;
 
-        // Verificar si la opción elegida fue volver
-        if(opcionElegida == pokemonsActivos.size()+1){
-            return false;
-        }
-
-        // Intercambiar
         Pokemon aux = pokemonActual;
-        pokemonActual = pokemonsActivos.get(opcionElegida-1);
-        pokemonsActivos.set(opcionElegida-1, aux);
+        pokemonActual = pokemonsActivos.get(opcionElegida - 1);
+        pokemonsActivos.set(opcionElegida - 1, aux);
 
-        return true;
+        return 1;
     }
 }

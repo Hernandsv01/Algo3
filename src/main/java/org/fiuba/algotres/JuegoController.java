@@ -1,19 +1,17 @@
 package org.fiuba.algotres;
 
+import java.util.Comparator;
+
 import static org.fiuba.algotres.io.terminal.Herramientas.imprimirDivisor;
 import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
 
 public class JuegoController {
-    public static void jugar(CampoDeBatalla cdb){
+    public static void jugarDefault(CampoDeBatalla cdb){
         cdb.comenzarBatalla();
-
-        int opcionElegida;
-        boolean accionCompletada;
-
-        /* FALTA APLICAR ESTADOS */
+        cdb.setJugadorInicial(Comparator.comparingInt(jugador -> jugador.getPokemonActual().getVelocidad()));
 
         while(cdb.getGanador() == -1){
-            accionCompletada = cdb.turnoJugador();
+            boolean accionCompletada = cdb.turnoJugador();
 
             if(accionCompletada){
                 cdb.setTurnoActual(cdb.siguienteTurno());
@@ -21,11 +19,11 @@ public class JuegoController {
             }
         }
 
-        System.out.println("EL JUGADOR " + cdb.getGanador() + " ES EL GANADOR!!!");
+        System.out.println(cdb.getJugadores()[cdb.getGanador()].getNombre().toUpperCase() + " ES EL GANADOR!!!");
     }
 
     public static void main(String[] args) {
         CampoDeBatalla juego = inicializarJuego();
-        jugar(juego);
+        jugarDefault(juego);
     }
 }
