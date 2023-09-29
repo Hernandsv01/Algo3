@@ -2,20 +2,29 @@ package org.fiuba.algotres;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.comandos.*;
 
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter @Setter
 public class CampoDeBatalla {
     private Jugador[] jugadores;
     private int turnoActual;
 
-    private final String[] opciones = {"Usar habilidad", "Usar item", "Cambiar pokemon", "Rendirse"};
+    private Map<Integer, Comando> comandoMap = new HashMap<>();
 
     public CampoDeBatalla(Jugador[] jugadores){
         this.jugadores = jugadores;
+        inicializarComandos();
+    }
+
+    private void inicializarComandos(){
+        comandoMap.put(1, new ComandoHabilidad());
+        comandoMap.put(2, new ComandoItem());
+        comandoMap.put(3, new ComandoCambiarPokemon());
+        comandoMap.put(4, new ComandoRendirse());
     }
 
     /**
