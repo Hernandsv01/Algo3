@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.item.Item;
-import org.fiuba.algotres.io.InputUsuario;
-import org.fiuba.algotres.io.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +20,10 @@ public class Jugador {
     private Pokemon pokemonActual;
     private String nombre;
 
-    private final Output jugadorView;
-    private final InputUsuario inputUsuario;
-
-    public Jugador(List<Pokemon> pokemonsActivos, List<Item> items, Output jugadorView, InputUsuario inputUsuario) {
+    public Jugador(List<Pokemon> pokemonsActivos, List<Item> items) {
         this.pokemonsActivos = pokemonsActivos;
         this.pokemonsMuertos = new ArrayList<>();
         this.items = items;
-        this.jugadorView = jugadorView;
-        this.inputUsuario = inputUsuario;
     }
 
     private <T> int elegirElemento(List<T> elementos, String mensaje) {
@@ -41,10 +34,7 @@ public class Jugador {
                 .collect(Collectors.toList());
         opciones.add("Volver");
 
-        jugadorView.mostrar(mensaje);
-        jugadorView.mostrarListado(opciones);
-
-        int opcionElegida = inputUsuario.obtenerOpcionNumerica(elementos.size() + 1);
+        int opcionElegida = 1 /*Acá iría función de inputUsuario*/;
         if (opcionElegida == elementos.size() + 1) return 0;
 
         return opcionElegida;
@@ -77,12 +67,7 @@ public class Jugador {
         List<Pokemon> lista = esRevivir ? pokemonsMuertos : pokemonsActivos;
 
         int opcionElegida = elegirElemento(lista, "Elija un pokemon al que aplicarle el item: ");
-        if(opcionElegida <= 0){
-            if(opcionElegida == -1) {
-                jugadorView.mostrar("No hay pokemons sobre los que aplicar este item");
-            }
-            return opcionElegida;
-        }
+        if(opcionElegida <= 0) return opcionElegida;
 
         boolean res = itemElegido.usar(lista.get(opcionElegida - 1));
 

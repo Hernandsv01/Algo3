@@ -7,7 +7,6 @@ import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
 
 public class JuegoController {
     public static void jugarDefault(CampoDeBatalla cdb){
-        cdb.comenzarBatalla();
         cdb.setJugadorInicial(Comparator.comparingInt(jugador -> jugador.getPokemonActual().getVelocidad()));
 
         while(cdb.getGanador() == -1){

@@ -2,8 +2,6 @@ package org.fiuba.algotres;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.io.InputUsuario;
-import org.fiuba.algotres.io.Output;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -14,15 +12,10 @@ public class CampoDeBatalla {
     private Jugador[] jugadores;
     private int turnoActual;
 
-    private final Output campoDeBatallaView;
-    private final InputUsuario inputUsuario;
-
     private final String[] opciones = {"Usar habilidad", "Usar item", "Cambiar pokemon", "Rendirse"};
 
-    public CampoDeBatalla(Jugador[] jugadores, Output campoDeBatallaView, InputUsuario inputUsuario){
+    public CampoDeBatalla(Jugador[] jugadores){
         this.jugadores = jugadores;
-        this.campoDeBatallaView = campoDeBatallaView;
-        this.inputUsuario = inputUsuario;
     }
 
     /**
@@ -30,33 +23,29 @@ public class CampoDeBatalla {
      * @return True si se pudo completar, false en caso contrario
      */
     public boolean turnoJugador(){
-        mostrarCampo();
-        campoDeBatallaView.mostrar("Opciones:");
-        campoDeBatallaView.mostrarListado(Arrays.stream(opciones).toList());
 
-        int opcionElegida = inputUsuario.obtenerOpcionNumerica(opciones.length);
+        int opcionElegida = 1;/*Acá iría inputUsuario*/
 
-        mostrarCampo();
         int res;
         switch (opcionElegida) {
             case 1:
                 res = jugadores[turnoActual].elegirHabilidad();
-                if(!operacionExitosa(res, "No hay habilidades disponibles")) return false;
+                if(res<=0) return false;
 
                 jugadores[turnoActual].getPokemonActual().getHabilidades().get(res).accionarHabilidad(null, null);
                 break;
 
             case 2:
                 res = jugadores[turnoActual].elegirItem();
-                if(!operacionExitosa(res, "No tenes items para utilizar")) return false;
+                if(res<=0) return false;
 
                 res = jugadores[turnoActual].usarItem(res);
-                if(!operacionExitosa(res, "No podes usar ese item en ese pokemon")) return false;
+                if(res<=0) return false;
                 break;
 
             case 3:
                 res = jugadores[turnoActual].cambiarPokemonActual();
-                if(!operacionExitosa(res, "No te quedan más pokemons")) return false;
+                if(res<=0) return false;
                 break;
 
             case 4:
@@ -75,23 +64,6 @@ public class CampoDeBatalla {
         /* Es muy raro esto, hablarlo con el grupo */
         jugadores[turnoActual].getPokemonActual().getEstado().aplicar(jugadores[turnoActual].getPokemonActual());
         return true;
-    }
-
-    /**
-     * Le pide a cada jugador elegir un nombre y su pokemon inicial usando InputUsuario
-     */
-    public void comenzarBatalla(){
-        campoDeBatallaView.mostrar("Bienvenidos a nuestro simulador de batallas pokemon!\n\n");
-
-        for(int i = 0; i < jugadores.length; i++) {
-            campoDeBatallaView.mostrar("Jugador " + (i+1) + ", elija un nombre: ");
-            jugadores[i].setNombre(inputUsuario.obtenerCualquierDato(false));
-
-            campoDeBatallaView.mostrar("Esta es su lista de pokemons, elija uno para iniciar:");
-            campoDeBatallaView.mostrarListado(jugadores[i].getPokemonsActivos().stream().map(Pokemon::getNombre).collect(Collectors.toList()));
-            jugadores[i].setPokemonActual(jugadores[i].getPokemonsActivos().remove(inputUsuario.obtenerOpcionNumerica(jugadores[i].getPokemonsActivos().size())-1));
-            campoDeBatallaView.mostrar("Pokemon elegido: " + jugadores[i].getPokemonActual().getNombre());
-        }
     }
 
     /**
@@ -120,43 +92,8 @@ public class CampoDeBatalla {
         return turnoActual==0 ? 1 : 0;
     }
 
-    /**
-     * Llama a la función mostrar del Output con el string de la información del campo
-     */
-    public void mostrarCampo(){
-        campoDeBatallaView.mostrar(
-                "Entrenador " + jugadores[0].getNombre() + " \n" +
-                        jugadores[0].getPokemonActual().getNombre() + " (" + /*jugadores[0].getPokemonActual().getEstado().getTipo() + */")\n" +
-                        jugadores[0].getPokemonActual().getHealthString() + " \n" +
-                        "\n" +
-                        "Entrenador " + jugadores[1].getNombre() + " \n" +
-                        jugadores[1].getPokemonActual().getNombre() + " (" + /*jugadores[1].getPokemonActual().getEstado().getTipo() + */")\n" +
-                        jugadores[1].getPokemonActual().getHealthString() + " \n" +
-                        "\n" +
-                        "Turno: " + jugadores[turnoActual].getNombre()
-                );
-
-        /* LAYOUT CAMPO
-         Entrenador {nombreJugador1}
-         {nombrePokemon1} ({estadoPokemon/nada})
-         {vidaPokemon1}
-
-         Entrenador {nombreJugador2}
-         {nombrePokemon2} ({estadoPokemon/nada})
-         {vidaPokemon2}
-
-         Turno: {nombreJugador}
-        */
-    }
-
     private boolean operacionExitosa(int res, String mensaje){
-        if(res <= 0){
-            if(res == -1) {
-                campoDeBatallaView.mostrar(mensaje);
-            }
-            return false;
-        }
-        return true;
+        return res > 0;
     }
 
 }
