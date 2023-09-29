@@ -1,36 +1,31 @@
 package org.fiuba.algotres.estado;
 
+import lombok.Getter;
+import org.fiuba.algotres.Accionable;
 import org.fiuba.algotres.Pokemon;
 
-public class Estado {
-    public static final String DORMIDO = "dormido";
-    public static final String PARALIZADO = "paralizado";
-    public static final String ENVENENADO = "envenenado";
-    private int turnosAplicados;
-    private final String tipo;
+@Getter
+public abstract class Estado implements Accionable {
+    protected int turnosAplicados;
+    private final String nombre;
 
-    public Estado(String tipo) {
+    public Estado(String nombre) {
         this.turnosAplicados = 0;
-        this.tipo = tipo;
+        this.nombre = nombre;
     }
 
-    public boolean aplicar(Pokemon pokemon) {
-        // true es que se le fue el estado, false es que sigue con el estado
-        // Asumimos que cada pokemon puede tener un solo estado.
-        switch(tipo) {
-            case DORMIDO:
-                double proba = 0.25 + turnosAplicados * 0.25;
-                if (Math.random() <= proba) {
-                    return true;
-                }
-                turnosAplicados++;
-                return false;
-            case PARALIZADO:
-                return Math.random() >= 0.5;
-            case ENVENENADO:
-                pokemon.setVidaActual((int) (pokemon.getVidaActual() - pokemon.getVidaMaxima() * 0.05));
-                return false;
-        }
-        return true; // No deberia llegar nunca.
+    /**
+     * @param pokemon que puede o no tener un estado aplicado.
+     * @param ignorado debe ser null.
+     * @return false en caso de que el estado persista en el pokemon;
+     * true en caso de que el pokemon no tenga un estado o se termino el efecto del mismo.
+     */
+    public boolean accionar(Pokemon pokemon, Pokemon ignorado) {
+        return pokemon.getEstado() == null;
+    }
+
+    @Override
+    public String toString() {
+        return getNombre();
     }
 }
