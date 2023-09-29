@@ -8,7 +8,7 @@ public class Dormido extends Estado {
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon) {
+    public boolean accionar(Pokemon pokemon, Pokemon ignorado) {
         double proba = 0.25 + this.turnosAplicados * 0.25;
         if (Math.random() <= proba) {
             return true;

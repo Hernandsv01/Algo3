@@ -8,7 +8,7 @@ public class Envenenado extends Estado{
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon) {
+    public boolean accionar(Pokemon pokemon, Pokemon ignorado) {
         pokemon.setVidaActual((int) (pokemon.getVidaActual() - pokemon.getVidaMaxima() * 0.05));
         return false;
     }
