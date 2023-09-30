@@ -26,73 +26,52 @@ public class Jugador {
         this.items = items;
     }
 
-    private <T> int elegirElemento(List<T> elementos, String mensaje) {
-        if (elementos.isEmpty()) return -1;
-
-        List<String> opciones = elementos.stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
-        opciones.add("Volver");
-
-        int opcionElegida = 1 /*Acá iría función de inputUsuario*/;
-        if (opcionElegida == elementos.size() + 1) return 0;
-
-        return opcionElegida;
-    }
-
     /**
-     * Le permite al usuario elegir una habilidad de su pokemon
-     * @return la posicion de la habilidad elegida + 1, 0 si se volvió y -1 si no hay habilidades disponibles
+     * Intercambia el pokemon actual con uno de la lista de pokemons vivos
+     * @param posPokemon la posición del pokemon en la lista de pokemons activos que se quiere reemplazar como el actual
+     * @return true si se cambió de pokemón y false si no hay más pokemons vivos
      */
-    public int elegirHabilidad() {
-        return elegirElemento(pokemonActual.getHabilidades(), "Habilidades disponibles: ");
-    }
-
-    /**
-     * Le permite al usuario elegir un item entre los que tiene
-     * @return la posición del item elegido + 1, 0 si se volvió y -1 si no hay items disponibles
-     */
-    public int elegirItem() {
-        return elegirElemento(items, "Items:");
-    }
-
-    /**
-     * Le permite al usuario elegir el pokemon sobre el que quiere aplicar su item y lo aplica
-     * @param item Posición del item que se va a usar
-     * @return 1 si el item se usó correctamente, 0 si se volvió, -1 si hubo algún error
-     */
-    public int usarItem(int item) {
-        Item itemElegido = items.get(item);
-        boolean esRevivir = "Revivir".equals(itemElegido.getClass().getName());
-        List<Pokemon> lista = esRevivir ? pokemonsMuertos : pokemonsActivos;
-
-        int opcionElegida = elegirElemento(lista, "Elija un pokemon al que aplicarle el item: ");
-        if(opcionElegida <= 0) return opcionElegida;
-
-        boolean res = itemElegido.usar(lista.get(opcionElegida - 1));
-
-        if(res && esRevivir){
-            Pokemon pokemon = lista.get(opcionElegida - 1);
-            pokemonsMuertos.remove(pokemon);
-            pokemonsActivos.add(pokemon);
+    public boolean cambiarPokemonActual(int posPokemon) {
+        Pokemon pokemonNuevo;
+        try {
+            pokemonNuevo = pokemonsActivos.remove(posPokemon);
+        }catch (IndexOutOfBoundsException e){
+            return false;
         }
+        pokemonsActivos.add(pokemonActual);
+        pokemonActual = pokemonNuevo;
 
-        return res? 1 : -1;
+        return true;
     }
 
     /**
-     * Le permite al usuario elegir el pokemon que quiere tener como actual y lo reemplaza
-     * @return 1 si se cambió de pokemón, 0 si se volvió y -1 si no hay pokemons disponibles
+     * Llena la vida del pokemon y lo pone en la lista de pokemons activos
+     * @param posPokemon la posición del pokemon a revivir en el array de pokemons muertos
+     * @return true si la operación fue exitosa, false si no hay un pokemon en la posición enviada
      */
-    public int cambiarPokemonActual() {
-        int opcionElegida = elegirElemento(pokemonsActivos, "Pokemones disponibles:");
+    public boolean revivirPokemon(int posPokemon) {
+        Pokemon pokemon;
+        try {
+            pokemon = pokemonsMuertos.remove(posPokemon);
+        }catch (IndexOutOfBoundsException e){
+            return false;
+        }
+        pokemonsActivos.add(pokemon);
+        pokemon.curar();
+        return true;
+    }
 
-        if(opcionElegida == 0 || opcionElegida == -1) return opcionElegida;
-
-        Pokemon aux = pokemonActual;
-        pokemonActual = pokemonsActivos.get(opcionElegida - 1);
-        pokemonsActivos.set(opcionElegida - 1, aux);
-
-        return 1;
+    /**
+     * Pone la vida del pokemonActual en cero, lo mueve a la lista de pokemons muertos y pone al siguiente en la lista de vivos en su lugar.
+     * Si no hay mas pokemons vivos, se deja nulo.
+     */
+    public void matarPokemonActual(){
+        pokemonActual.matar();
+        pokemonsMuertos.add(pokemonActual);
+        if(pokemonsActivos.isEmpty()){
+            pokemonActual = null;
+        }else{
+            pokemonActual = pokemonsActivos.remove(0);
+        }
     }
 }
