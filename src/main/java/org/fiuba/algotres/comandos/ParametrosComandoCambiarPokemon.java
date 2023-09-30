@@ -6,6 +6,11 @@ public class ParametrosComandoCambiarPokemon implements ParametrosComando{
     private Jugador jugador;
     private int posPokemon;
 
+    public ParametrosComandoCambiarPokemon(Jugador jugador, int posPokemon) {
+        this.jugador = jugador;
+        this.posPokemon = posPokemon;
+    }
+
     public Jugador getJugador() {
         return jugador;
     }

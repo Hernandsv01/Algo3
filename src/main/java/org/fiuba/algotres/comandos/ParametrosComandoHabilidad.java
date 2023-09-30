@@ -8,6 +8,12 @@ public class ParametrosComandoHabilidad implements ParametrosComando{
     private Habilidad habilidad;
     private Pokemon victima;
 
+    public ParametrosComandoHabilidad(Pokemon atacante, Habilidad habilidad, Pokemon victima) {
+        this.atacante = atacante;
+        this.habilidad = habilidad;
+        this.victima = victima;
+    }
+
     public Pokemon getAtacante() {
         return atacante;
     }

@@ -7,6 +7,11 @@ public class ParametrosComandoItem implements ParametrosComando {
     private Item item;
     private Pokemon pokemon;
 
+    public ParametrosComandoItem(Item item, Pokemon pokemon) {
+        this.item = item;
+        this.pokemon = pokemon;
+    }
+
     public Item getItem() {
         return item;
     }
