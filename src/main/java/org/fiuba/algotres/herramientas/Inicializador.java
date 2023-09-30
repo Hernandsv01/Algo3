@@ -17,6 +17,10 @@ import java.util.Arrays;
 
 public class Inicializador {
 
+    /**
+     * Crea el campo de batalla con los jugadores y sus respectivos pokemons y items
+     * @return El campo de batalla
+     */
     public static CampoDeBatalla inicializarJuego() {
 
         /*************************************************/
