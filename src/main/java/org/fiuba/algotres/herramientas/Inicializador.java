@@ -1,6 +1,6 @@
 package org.fiuba.algotres.herramientas;
 
-import org.fiuba.algotres.Juego;
+import org.fiuba.algotres.CampoDeBatalla;
 import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
@@ -11,14 +11,13 @@ import org.fiuba.algotres.habilidad.ModificacionEstadistica;
 import org.fiuba.algotres.habilidad.ModificacionEstado;
 import org.fiuba.algotres.item.*;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 
 public class Inicializador {
 
-    public static Juego inicializarJuego() {
+    public static CampoDeBatalla inicializarJuego() {
 
         /*************************************************/
         /***************HABILIDADES***********************/
@@ -26,99 +25,183 @@ public class Inicializador {
 
         /*******************TIPO ATAQUE ******************/
         Ataque llamarada = new Ataque(
-                "Llamarada"
+                "Llamarada",
+                10,
+                120,
+                Tipos.FUEGO
         );
         Ataque ascuas = new Ataque(
-                "Ascuas"
+                "Ascuas",
+                25,
+                40,
+                Tipos.FUEGO
         );
         Ataque giroFuego = new Ataque(
-                "Giro fuego"
+                "Giro fuego",
+                15,
+                60,
+                Tipos.FUEGO
         );
         Ataque lanzallamas = new Ataque(
-                "Lanzallamas"
-        );;
+                "Lanzallamas",
+                5,
+                95,
+                Tipos.FUEGO
+        );
 
         Ataque arañazo = new Ataque(
-                "Arañazo"
-        );;
+                "Arañazo",
+                30,
+                40,
+                Tipos.NORMAL
+        );
         Ataque placaje = new Ataque(
-                "Placaje"
+                "Placaje",
+                30,
+                50,
+                Tipos.NORMAL
         );
 
         Ataque burbuja = new Ataque(
-                "Burbuja"
+                "Burbuja",
+                30,
+                40,
+                Tipos.AGUA
         );
         Ataque hidrobomba = new Ataque(
-                "Hidrobomba"
+                "Hidrobomba",
+                5,
+                110,
+                Tipos.AGUA
         );
         Ataque rayoBurbuja = new Ataque(
-                "Rayo burbuja"
+                "Rayo burbuja",
+                30,
+                65,
+                Tipos.AGUA
         );
         Ataque pistolaAgua = new Ataque(
-                "Pistola agua"
+                "Pistola agua",
+                25,
+                40,
+                Tipos.AGUA
         );
 
         Ataque rayo = new Ataque(
-                "Rayo"
+                "Rayo",
+                15,
+                95,
+                Tipos.ELECTRICO
         );
 
         Ataque confusion = new Ataque(
-                "Confusion"
+                "Confusion",
+                25,
+                50,
+                Tipos.PSIQUICO
         );
         Ataque psiquico = new Ataque(
-                "Psiquico"
+                "Psiquico",
+                10,
+                90,
+                Tipos.PSIQUICO
         );
 
         Ataque megaCuerno = new Ataque(
-                "Mega cuerno"
+                "Mega cuerno",
+                5,
+                120,
+                Tipos.BICHO
         );
         Ataque pinMisil = new Ataque(
-                "Pin misil"
+                "Pin misil",
+                20,
+                30,
+                Tipos.BICHO
         );
 
         Ataque golpeKarate = new Ataque(
-                "Golpe karate"
+                "Golpe karate",
+                25,
+                50,
+                Tipos.LUCHA
         );
         Ataque sismico = new Ataque(
-                "Sismico"
+                "Sismico",
+                10,
+                80,
+                Tipos.LUCHA
         );
         Ataque doblePatada = new Ataque(
-                "Doble patada"
+                "Doble patada",
+                30,
+                30,
+                Tipos.LUCHA
         );
 
         Ataque lanzarrocas = new Ataque(
-                "Lanzarrocas"
+                "Lanzarrocas",
+                15,
+                50,
+                Tipos.ROCA
         );
         Ataque avalancha = new Ataque(
-                "Avalancha"
+                "Avalancha",
+                10,
+                60,
+                Tipos.ROCA
         );
 
         Ataque ataqueArena = new Ataque(
-                "Ataque arena"
+                "Ataque arena",
+                15,
+                85,
+                Tipos.TIERRA
         );
         Ataque terremoto = new Ataque(
-                "Terremoto"
+                "Terremoto",
+                10,
+                100,
+                Tipos.TIERRA
         );
 
         Ataque picotazoVeneno = new Ataque(
-                "Picotazo veneno"
+                "Picotazo veneno",
+                35,
+                35,
+                Tipos.VENENO
         );
 
         Ataque latigoCepa = new Ataque(
-                "Latigo cepa"
+                "Latigo cepa",
+                25,
+                45,
+                Tipos.PLANTA
         );
         Ataque hojaAfilada = new Ataque(
-                "Hoja afilada"
+                "Hoja afilada",
+                15,
+                70,
+                Tipos.PLANTA
         );
 
         Ataque ataqueAla = new Ataque(
-                "Ataque ala"
+                "Ataque ala",
+                35,
+                60,
+                Tipos.VOLADOR
         );
         Ataque ataqueAereo = new Ataque(
-                "Ataque áereo"
+                "Ataque aéreo",
+                20,
+                75,
+                Tipos.VOLADOR
         );
         Ataque picotazo = new Ataque(
-                "Picotazo"
+                "Picotazo",
+                35,
+                35,
+                Tipos.VOLADOR
         );
 
         /***********TIPO MODIFICACION DE ESTADISTICA***********/
@@ -316,7 +399,7 @@ public class Inicializador {
                 "Pikachu",
                 4,
                 Tipos.ELECTRICO,
-                "Cuando se enfada, este Pokémon descarga la energía que almacena en el interior de las bolsas de las mejillas.",
+                "Las bolsas de las mejillas están llenas de electricidad, que libera cuando se siente amenazado.",
                 35,
                 35,
                 90,
@@ -328,7 +411,7 @@ public class Inicializador {
                 "Abra",
                 6,
                 Tipos.PSIQUICO,
-                "Es capaz de usar sus poderes psíquicos aun estando dormido. Al parecer, el contenido del sueño influye en sus facultades.",
+                "Duerme 18 horas al día y mientras lo hace es capaz de usar una serie de poderes extrasensoriales.",
                 25,
                 25,
                 90,
@@ -340,7 +423,7 @@ public class Inicializador {
                 "Pidgey",
                 3,
                 Tipos.NORMAL,
-                "Su docilidad es tal que suelen defenderse levantando arena en lugar de contraatacar.",
+                "Muy común en bosques y selvas. Aletea al nivel del suelo para levantar la gravilla.",
                 40,
                 40,
                 56,
@@ -352,7 +435,7 @@ public class Inicializador {
                 "Pinsir",
                 3,
                 Tipos.BICHO,
-                "Los Pinsir se juzgan entre ellos por la robustez de la cornamenta. Cuanto más imponente sea, más agradará a sus congéneres del sexo opuesto.",
+                "Los pinsir se juzgan entre ellos por la robustez de la cornamenta. Cuanto mas imponente sea, mas agradará a sus congéneres del sexo opuesto.",
                 65,
                 65,
                 85,
@@ -364,7 +447,7 @@ public class Inicializador {
                 "Staryu",
                 5,
                 Tipos.AGUA,
-                "A finales de verano, se pueden ver grupos de Staryu en la orilla de la playa sincronizando el brillo de sus núcleos a ritmo regular.",
+                "Aunque sus brazos se rompan podrán regenerarse, siempre y cuando su núcleo siga intacto.",
                 30,
                 30,
                 85,
@@ -388,7 +471,7 @@ public class Inicializador {
                 "Charmander",
                 5,
                 Tipos.FUEGO,
-                "Prefiere las cosas calientes. Dicen que cuando llueve le sale vapor de la punta de la cola.",
+                "Este Pokémon nace con una llama en la punta de la cola. Si la llama se apagara, el Pokémon se debilitaría.",
                 39,
                 39,
                 65,
@@ -400,7 +483,7 @@ public class Inicializador {
                 "Machop",
                 6,
                 Tipos.LUCHA,
-                "Es una masa de músculos y, pese a su pequeño tamaño, tiene fuerza de sobra para levantar en brazos a 100 personas.",
+                "Es una masa de músculos y, aunque es pequeño, tiene fuerza de sobra para tomar en brazos a 100 personas.",
                 70,
                 70,
                 35,
@@ -412,7 +495,7 @@ public class Inicializador {
                 "Tauros",
                 3,
                 Tipos.NORMAL,
-                "Cuando elige una presa, embiste sin pensárselo. Este Pokémon es famoso por su carácter violento.",
+                "Después de animarse a luchar fustigándose con sus tres colas, carga a toda velocidad.",
                 75,
                 75,
                 110,
@@ -424,7 +507,7 @@ public class Inicializador {
                 "Paras",
                 4,
                 Tipos.PLANTA,
-                "Escarba en el suelo para extraer nutrientes de las raíces de los árboles, que las setas del lomo absorben después casi por completo.",
+                "Escarba bajo el suelo para roer las raíces de los árboles. Sus setas absorben los nutrientes.",
                 35,
                 35,
                 25,
@@ -436,7 +519,7 @@ public class Inicializador {
                 "Geodude",
                 4,
                 Tipos.ROCA,
-                "Se suele encontrar en senderos de montaña y sitios parecidos. Conviene andar con cuidado para no pisarlo sin querer y provocar su enfado.",
+                "Aparecen en llanos y montañas. Como parecen rocas, la gente se tropieza con ellos o los pisa.",
                 40,
                 40,
                 20,
@@ -448,7 +531,7 @@ public class Inicializador {
                 "Tentacool",
                 3,
                 Tipos.VENENO,
-                "Sus facultades natatorias son más bien escasas, por lo que se limita a flotar a la deriva en aguas poco profundas en busca de alimento.",
+                "Va a la deriva a poca profundidad. Si es pescado por accidente, el castigo será su punzante ácido.",
                 40,
                 40,
                 70,
@@ -506,52 +589,37 @@ public class Inicializador {
                 "Cura Todo"
         );
 
-        Jugador jugador1 = new Jugador(pokemonsJugador1, null);
-        Jugador jugador2 = new Jugador(pokemonsJugador2, null);
-
-        Revivir revivirJugador1 = new Revivir(
+        Revivir revivir = new Revivir(
                 2,
-                "Revivir",
-                jugador1
+                "Revivir"
         );
 
-        Revivir revivirJugador2 = new Revivir(
-                2,
-                "Revivir",
-                jugador2
-        );
-
-        ArrayList<Item> itemsJugador1 = new ArrayList<Item>(Arrays.asList(
+        ArrayList<Item> itemsJugadores = new ArrayList<Item>(Arrays.asList(
                 ataqueX,
                 defensaX,
                 pocion,
                 megaPocion,
                 hiperPocion,
                 curaTodo,
-                revivirJugador1
+                revivir
         ));
 
-        ArrayList<Item> itemsJugador2 = new ArrayList<Item>(Arrays.asList(
-                ataqueX,
-                defensaX,
-                pocion,
-                megaPocion,
-                hiperPocion,
-                curaTodo,
-                revivirJugador2
-        ));
 
         /*************************************************/
         /****************JUGADOR 1************************/
         /*************************************************/
-        jugador1.setItems(itemsJugador1);
+        Jugador jugador1 = new Jugador(pokemonsJugador1, itemsJugadores);
 
         /*************************************************/
         /****************JUGADOR 2************************/
         /*************************************************/
-        jugador2.setItems(itemsJugador2);
+        Jugador jugador2 = new Jugador(pokemonsJugador2, itemsJugadores);
 
-        return new Juego(jugador1, jugador2);
+        return new CampoDeBatalla(
+                new Jugador[]{
+                        jugador1,
+                        jugador2
+                }
+        );
     }
-
 }
