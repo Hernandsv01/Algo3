@@ -1,4 +1,16 @@
 package org.fiuba.algotres.comandos;
 
-public class ParametrosComandoCambiarPokemon extends ParametrosComando{
+import org.fiuba.algotres.Jugador;
+
+public class ParametrosComandoCambiarPokemon implements ParametrosComando{
+    private Jugador jugador;
+    private int posPokemon;
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public int getPosPokemon() {
+        return posPokemon;
+    }
 }

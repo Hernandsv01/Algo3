@@ -1,4 +1,7 @@
 package org.fiuba.algotres.comandos;
 
-public class ParametrosComandoRendirse extends ParametrosComando{
+import org.fiuba.algotres.Jugador;
+
+public class ParametrosComandoRendirse implements ParametrosComando{
+    private Jugador jugador;
 }

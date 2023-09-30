@@ -1,4 +1,9 @@
 package org.fiuba.algotres.comandos;
 
-public class ParametrosComandoItem extends ParametrosComando {
+import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.item.Item;
+
+public class ParametrosComandoItem implements ParametrosComando {
+    private Item item;
+    private Pokemon pokemon;
 }
