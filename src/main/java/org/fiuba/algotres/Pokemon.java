@@ -55,4 +55,12 @@ public class Pokemon {
     public String getHealthString() {
         return "(" + vidaActual + "❤\uFE0F/" + vidaMaxima + "❤\uFE0F)";
     }
+
+    public void setVidaActual(int vidaActual) {
+        if (vidaActual > this.vidaMaxima) {
+            this.vidaActual = this.vidaMaxima;
+        } else {
+            this.vidaActual = vidaActual;
+        }
+    }
 }

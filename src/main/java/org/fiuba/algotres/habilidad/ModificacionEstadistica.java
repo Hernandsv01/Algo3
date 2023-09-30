@@ -28,12 +28,7 @@ public class ModificacionEstadistica extends Habilidad{
                     int defAntPropio = atacante.getDefensa();
                     atacante.setDefensa(Math.round((float) 0.1 * defAntPropio + defAntPropio));
                 case VIDA:
-                    int vidaActual = atacante.getVidaActual();
-                    if (vidaActual + 20 > atacante.getVidaMaxima()) {
-                        atacante.setVidaActual(vidaActual + 20);
-                    } else {
-                        atacante.setVidaActual(atacante.getVidaMaxima());
-                    }
+                    atacante.setVidaActual(atacante.getVidaActual() + 20);
             }
         } else {
             switch (tipo) {
