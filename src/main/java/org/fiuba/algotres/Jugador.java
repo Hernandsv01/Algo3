@@ -3,12 +3,10 @@ package org.fiuba.algotres;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -72,6 +70,15 @@ public class Jugador {
             pokemonActual = null;
         }else{
             pokemonActual = pokemonsActivos.remove(0);
+        }
+    }
+
+    /**
+     * Mata a todos los pokemons del jugador
+     */
+    public void rendirse(){
+        while(pokemonActual != null){
+            matarPokemonActual();
         }
     }
 }
