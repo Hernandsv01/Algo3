@@ -1,11 +1,10 @@
 package org.fiuba.algotres.estado;
 
 import lombok.Getter;
-import org.fiuba.algotres.Accionable;
 import org.fiuba.algotres.Pokemon;
 
 @Getter
-public abstract class Estado implements Accionable {
+public abstract class Estado {
     protected int turnosAplicados;
     private final String nombre;
 
