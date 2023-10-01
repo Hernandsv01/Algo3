@@ -567,7 +567,6 @@ public class Inicializador {
         pokemons[1] = pokemonsJugador2;
         return pokemons;
     }
-    git commit -m "Creacion de funciones auxiliares para pokemons y items. Correcion de items y estadgi"
 
     /**
      * Crea los items que tendra cada jugador
