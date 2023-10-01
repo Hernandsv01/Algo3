@@ -4,26 +4,19 @@ import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.estado.Estado;
 
 public class ModificacionEstado extends Habilidad {
-    private final String tipo;
-    public ModificacionEstado(String nombre, int usos, String tipo) {
+    private final Estado estado;
+    public ModificacionEstado(String nombre, int usos, Estado estado) {
         super(nombre, usos);
-        this.tipo = tipo;
+        this.estado = estado;
     }
     @Override
-    public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
+    public void accionarHabilidad(Pokemon ignorado, Pokemon victima) {
         if (usos <= 0) {
             return;
         }
         if (victima.getEstado() == null) {
-            switch (tipo) {
-                case Estado.DORMIDO:
-                    victima.setEstado(new Estado("dormido"));
-                case Estado.PARALIZADO:
-                    victima.setEstado(new Estado("paralizado"));
-                case Estado.ENVENENADO:
-                    victima.setEstado(new Estado("envenenado"));
+            victima.setEstado(this.estado);
             }
             usos--;
         }
-    }
 }
