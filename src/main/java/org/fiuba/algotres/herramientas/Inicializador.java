@@ -4,204 +4,211 @@ import org.fiuba.algotres.CampoDeBatalla;
 import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
-import org.fiuba.algotres.estado.Estado;
+import org.fiuba.algotres.estado.Paralizado;
+import org.fiuba.algotres.estado.Dormido;
+import org.fiuba.algotres.estado.Envenenado;
 import org.fiuba.algotres.habilidad.Ataque;
 import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.habilidad.ModificacionEstadistica;
 import org.fiuba.algotres.habilidad.ModificacionEstado;
-import org.fiuba.algotres.item.*;
-
+import org.fiuba.algotres.item.Item;
+import org.fiuba.algotres.item.Ataque;
+import org.fiuba.algotres.item.CuraTodo;
+import org.fiuba.algotres.item.Defensa;
+import org.fiuba.algotres.item.Estadistica;
+import org.fiuba.algotres.item.Pocion;
+import org.fiuba.algotres.item.Revivir;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Inicializador {
 
     /**
-     * Crea el campo de batalla con los jugadores y sus respectivos pokemons y items
-     * @return El campo de batalla
+     * Crea los pokemons con sus respectivas habilidades
+     * @return Un arreglo de listas de los pokemons de cada jugador
      */
-    public static CampoDeBatalla inicializarJuego() {
-
+    private static ArrayList<Pokemon>[] creacionPokemons() {
         /*************************************************/
         /***************HABILIDADES***********************/
         /*************************************************/
 
         /*******************TIPO ATAQUE ******************/
-        Ataque llamarada = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque llamarada = new org.fiuba.algotres.habilidad.Ataque(
                 "Llamarada",
                 10,
                 120,
                 Tipos.FUEGO
         );
-        Ataque ascuas = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque ascuas = new org.fiuba.algotres.habilidad.Ataque(
                 "Ascuas",
                 25,
                 40,
                 Tipos.FUEGO
         );
-        Ataque giroFuego = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque giroFuego = new org.fiuba.algotres.habilidad.Ataque(
                 "Giro fuego",
                 15,
                 60,
                 Tipos.FUEGO
         );
-        Ataque lanzallamas = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque lanzallamas = new org.fiuba.algotres.habilidad.Ataque(
                 "Lanzallamas",
                 5,
                 95,
                 Tipos.FUEGO
         );
 
-        Ataque arañazo = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque arañazo = new org.fiuba.algotres.habilidad.Ataque(
                 "Arañazo",
                 30,
                 40,
                 Tipos.NORMAL
         );
-        Ataque placaje = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque placaje = new org.fiuba.algotres.habilidad.Ataque(
                 "Placaje",
                 30,
                 50,
                 Tipos.NORMAL
         );
 
-        Ataque burbuja = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque burbuja = new org.fiuba.algotres.habilidad.Ataque(
                 "Burbuja",
                 30,
                 40,
                 Tipos.AGUA
         );
-        Ataque hidrobomba = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque hidrobomba = new org.fiuba.algotres.habilidad.Ataque(
                 "Hidrobomba",
                 5,
                 110,
                 Tipos.AGUA
         );
-        Ataque rayoBurbuja = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque rayoBurbuja = new org.fiuba.algotres.habilidad.Ataque(
                 "Rayo burbuja",
                 30,
                 65,
                 Tipos.AGUA
         );
-        Ataque pistolaAgua = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque pistolaAgua = new org.fiuba.algotres.habilidad.Ataque(
                 "Pistola agua",
                 25,
                 40,
                 Tipos.AGUA
         );
 
-        Ataque rayo = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque rayo = new org.fiuba.algotres.habilidad.Ataque(
                 "Rayo",
                 15,
                 95,
                 Tipos.ELECTRICO
         );
 
-        Ataque confusion = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque confusion = new org.fiuba.algotres.habilidad.Ataque(
                 "Confusion",
                 25,
                 50,
                 Tipos.PSIQUICO
         );
-        Ataque psiquico = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque psiquico = new org.fiuba.algotres.habilidad.Ataque(
                 "Psiquico",
                 10,
                 90,
                 Tipos.PSIQUICO
         );
 
-        Ataque megaCuerno = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque megaCuerno = new org.fiuba.algotres.habilidad.Ataque(
                 "Mega cuerno",
                 5,
                 120,
                 Tipos.BICHO
         );
-        Ataque pinMisil = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque pinMisil = new org.fiuba.algotres.habilidad.Ataque(
                 "Pin misil",
                 20,
                 30,
                 Tipos.BICHO
         );
 
-        Ataque golpeKarate = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque golpeKarate = new org.fiuba.algotres.habilidad.Ataque(
                 "Golpe karate",
                 25,
                 50,
                 Tipos.LUCHA
         );
-        Ataque sismico = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque sismico = new org.fiuba.algotres.habilidad.Ataque(
                 "Sismico",
                 10,
                 80,
                 Tipos.LUCHA
         );
-        Ataque doblePatada = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque doblePatada = new org.fiuba.algotres.habilidad.Ataque(
                 "Doble patada",
                 30,
                 30,
                 Tipos.LUCHA
         );
 
-        Ataque lanzarrocas = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque lanzarrocas = new org.fiuba.algotres.habilidad.Ataque(
                 "Lanzarrocas",
                 15,
                 50,
                 Tipos.ROCA
         );
-        Ataque avalancha = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque avalancha = new org.fiuba.algotres.habilidad.Ataque(
                 "Avalancha",
                 10,
                 60,
                 Tipos.ROCA
         );
 
-        Ataque ataqueArena = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque ataqueArena = new org.fiuba.algotres.habilidad.Ataque(
                 "Ataque arena",
                 15,
                 85,
                 Tipos.TIERRA
         );
-        Ataque terremoto = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque terremoto = new org.fiuba.algotres.habilidad.Ataque(
                 "Terremoto",
                 10,
                 100,
                 Tipos.TIERRA
         );
 
-        Ataque picotazoVeneno = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque picotazoVeneno = new org.fiuba.algotres.habilidad.Ataque(
                 "Picotazo veneno",
                 35,
                 35,
                 Tipos.VENENO
         );
 
-        Ataque latigoCepa = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque latigoCepa = new org.fiuba.algotres.habilidad.Ataque(
                 "Latigo cepa",
                 25,
                 45,
                 Tipos.PLANTA
         );
-        Ataque hojaAfilada = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque hojaAfilada = new org.fiuba.algotres.habilidad.Ataque(
                 "Hoja afilada",
                 15,
                 70,
                 Tipos.PLANTA
         );
 
-        Ataque ataqueAla = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque ataqueAla = new org.fiuba.algotres.habilidad.Ataque(
                 "Ataque ala",
                 35,
                 60,
                 Tipos.VOLADOR
         );
-        Ataque ataqueAereo = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque ataqueAereo = new org.fiuba.algotres.habilidad.Ataque(
                 "Ataque aéreo",
                 20,
                 75,
                 Tipos.VOLADOR
         );
-        Ataque picotazo = new Ataque(
+        org.fiuba.algotres.habilidad.Ataque picotazo = new org.fiuba.algotres.habilidad.Ataque(
                 "Picotazo",
                 35,
                 35,
@@ -274,27 +281,27 @@ public class Inicializador {
         ModificacionEstado impactrueno = new ModificacionEstado(
                 "Impactrueno",
                 20,
-                Estado.PARALIZADO
+                new Paralizado("PARALIZADO")
         );
         ModificacionEstado trueno = new ModificacionEstado(
                 "Trueno",
                 10,
-                Estado.PARALIZADO
+                new Paralizado("PARALIZADO")
         );
         ModificacionEstado polvoVeneno = new ModificacionEstado(
                 "Polvo veneno",
                 35,
-                Estado.ENVENENADO
+                new Envenenado("ENVENENADO")
         );
         ModificacionEstado somnifero = new ModificacionEstado(
                 "Somnífero",
                 10,
-                Estado.DORMIDO
+                new Dormido("DORMIDO")
         );
         ModificacionEstado paralizador = new ModificacionEstado(
                 "Paralizador",
                 15,
-                Estado.PARALIZADO
+                new Paralizado("PARALIZADO")
         );
 
 
@@ -552,22 +559,31 @@ public class Inicializador {
                 geodude
         ));
 
-        /*************************************************/
-        /******************ITEMS**************************/
-        /*************************************************/
+        int numeroJugadores = 2;
+        ArrayList<Pokemon>[] pokemons = new ArrayList[numeroJugadores];
+        pokemons[0] = new ArrayList<Pokemon>();
+        pokemons[0] = pokemonsJugador1;
+        pokemons[1] = new ArrayList<Pokemon>();
+        pokemons[1] = pokemonsJugador2;
+        return pokemons;
+    }
+    git commit -m "Creacion de funciones auxiliares para pokemons y items. Correcion de items y estadgi"
 
-        Estadistica ataqueX = new Estadistica(
+    /**
+     * Crea los items que tendra cada jugador
+     * @return Lista de items
+     */
+    private static List<Item> creacionItems(){
+        org.fiuba.algotres.item.Ataque ataqueX = new org.fiuba.algotres.item.Ataque(
                 3,
                 "Ataque X",
-                10,
-                Estadistica.ATAQUE
+                10
         );
 
-        Estadistica defensaX = new Estadistica(
+        org.fiuba.algotres.item.Defensa defensaX = new org.fiuba.algotres.item.Defensa(
                 3,
                 "Defensa X",
-                10,
-                Estadistica.DEFENSA
+                10
         );
 
         Pocion pocion = new Pocion(
@@ -608,10 +624,30 @@ public class Inicializador {
                 revivir
         ));
 
+        return itemsJugadores;
+    }
 
-        /*************************************************/
-        /****************JUGADOR 1************************/
-        /*************************************************/
+    /**
+     * Crea el campo de batalla con los jugadores y asigna sus respectivos pokemons y items
+     * @return El campo de batalla
+     */
+    public static CampoDeBatalla inicializarJuego() {
+        /*************************************************************/
+        /********************ASIGNACION DE POKEMONS*******************/
+        /*************************************************************/
+        ArrayList<Pokemon>[] pokemons = creacionPokemons();
+
+        ArrayList<Pokemon> pokemonsJugador1 = pokemons[0];
+        ArrayList<Pokemon> pokemonsJugador2 = pokemons[1];
+
+        /*************************************************************/
+        /********************ASIGNACION DE ITEMS**********************/
+        /*************************************************************/
+        List<Item> itemsJugadores = creacionItems();
+
+        /*************************************************************/
+        /**********************JUGADOR 1******************************/
+        /*************************************************************/
         Jugador jugador1 = new Jugador(pokemonsJugador1, itemsJugadores);
 
         /*************************************************/
