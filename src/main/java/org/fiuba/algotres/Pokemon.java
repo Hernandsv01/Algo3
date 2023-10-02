@@ -49,10 +49,34 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return nombre + " (" + vidaActual + "❤\uFE0F/" + vidaMaxima + "❤\uFE0F)";
+        return nombre + " (" + vidaActual + "❤️/" + vidaMaxima + "❤\uFE0F)";
     }
-    public String getHealthString() {
-        return "(" + vidaActual + "❤\uFE0F/" + vidaMaxima + "❤\uFE0F)";
+
+    /**
+     * Cura al máximo al pokemon
+     */
+    public void curar(){
+        vidaActual = vidaMaxima;
+    }
+    /**
+     * Cura al pokemon por la cantidad de puntos del parámetro
+     * @param puntos puntos de vida que agregarle al pokemon
+     */
+    public void curar(int puntos){
+        vidaActual += puntos;
+    }
+    /**
+     * Le saca vida al pokemon
+     * @param puntos puntos de vida que quitarle al pokemon
+     */
+    public void danar(int puntos){
+        vidaActual -= puntos;
+    }
+    /**
+     * Pone la vida del pokemon en cero
+     */
+    public void matar(){
+        vidaActual = 0;
     }
 
     public void setVidaActual(int vidaActual) {

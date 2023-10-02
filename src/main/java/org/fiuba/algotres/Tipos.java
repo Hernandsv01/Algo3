@@ -330,7 +330,7 @@ enum Efectividad {
         this.multiplicador = multiplicador;
     }
 
-    public float getEfectividadMap() {
+    public float getMultiplicador() {
         return multiplicador;
     }
 }
