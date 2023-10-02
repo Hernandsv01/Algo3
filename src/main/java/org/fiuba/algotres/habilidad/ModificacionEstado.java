@@ -17,6 +17,6 @@ public class ModificacionEstado extends Habilidad {
         if (victima.getEstado() == null) {
             victima.setEstado(this.estado);
             }
-            usos--;
-        }
+        usos--;
+    }
 }
