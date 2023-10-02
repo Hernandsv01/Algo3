@@ -1,5 +1,6 @@
 package org.fiuba.algotres;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,17 +9,13 @@ import org.fiuba.algotres.comandos.*;
 
 import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
 import static org.fiuba.algotres.views.terminal.Tools.imprimirComandos;
+import static org.fiuba.algotres.views.terminal.Tools.inicializarComandos;
 
 import org.fiuba.algotres.views.terminal.InputUsuario;
 
 public class JuegoController {
     
-    private static final Map<Integer, Comando> comandos = new HashMap<>(){{
-        put(1, new ComandoHabilidad());
-        put(2, new ComandoItem());
-        put(3, new ComandoCambiarPokemon());
-        put(4, new ComandoRendirse());
-    }};
+    private static final Map<Integer, Comando> comandos = new HashMap<>();
     
     public static void jugar(CampoDeBatalla cdb){
         setupInicial(cdb);
@@ -49,6 +46,7 @@ public class JuegoController {
     }
 
     public static void main(String[] args) {
+        inicializarComandos(comandos);
         CampoDeBatalla juego = inicializarJuego();
         jugar(juego);
     }
