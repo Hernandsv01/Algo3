@@ -5,30 +5,14 @@ import lombok.Setter;
 import org.fiuba.algotres.comandos.*;
 
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 @Getter @Setter
 public class CampoDeBatalla {
     private Jugador[] jugadores;
     private int turnoActual;
 
-    private Map<Integer, Comando> comandoMap;
-
     public CampoDeBatalla(Jugador[] jugadores){
         this.jugadores = jugadores;
-        this.comandoMap = new HashMap<>();
-        inicializarComandosDefault();
-    }
-
-    /**
-     * Inicializa el map de comandos con los predeterminados para el juego
-     */
-    private void inicializarComandosDefault(){
-        comandoMap.put(1, new ComandoHabilidad());
-        comandoMap.put(2, new ComandoItem());
-        comandoMap.put(3, new ComandoCambiarPokemon());
-        comandoMap.put(4, new ComandoRendirse());
     }
 
     /**
@@ -53,25 +37,16 @@ public class CampoDeBatalla {
      * Verifica el turno actual y devuelve el id del otro jugador
      * @return El id del otro jugador
      */
-    public int siguienteTurno(){
+    public int getSiguienteTurno(){
         return turnoActual==0 ? 1 : 0;
     }
-
-    /**
-     * Agrega un nuevo comando al map de comandos, si ya existe un comando con esa clave, lo reemplaza
-     * @param clave la clave que querés que tenga el comando que vas a agregar
-     * @param valor el comando a agregar
-     */
-    public void agregarComando(Integer clave, Comando valor){
-        comandoMap.put(clave, valor);
+    
+    public void setSiguienteTurno(){
+        turnoActual = turnoActual==0 ? 1 : 0;
     }
-
-    /**
-     * Elimina el comando que tengo esa clave, no hace nada en caso de no existir
-     * @param clave la clave del comando que se quiere remover
-     */
-    public void eliminarComando(Integer clave){
-        comandoMap.remove(clave);
+    
+    public Jugador getJugadorActual(){
+        return jugadores[turnoActual];
     }
 
 }

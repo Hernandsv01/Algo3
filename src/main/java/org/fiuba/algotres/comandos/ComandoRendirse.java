@@ -1,9 +1,19 @@
 package org.fiuba.algotres.comandos;
 
-public class ComandoRendirse implements Comando<ParametrosComandoRendirse> {
+import org.fiuba.algotres.CampoDeBatalla;
+
+public class ComandoRendirse implements Comando {
+    
+    private final String NOMBRE = "Rendirse";
+    
     @Override
-    public boolean ejecutar(ParametrosComandoRendirse parametros) {
-        parametros.getJugador().rendirse();
+    public boolean ejecutar(CampoDeBatalla cdb) {
+        cdb.getJugadorActual().rendirse();
         return true;
+    }
+
+    @Override
+    public String getNombre() {
+        return NOMBRE;
     }
 }

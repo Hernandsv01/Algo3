@@ -1,5 +1,8 @@
 package org.fiuba.algotres.comandos;
 
-public interface Comando<T extends ParametrosComando> {
-    boolean ejecutar(T parametros);
+import org.fiuba.algotres.CampoDeBatalla;
+
+public interface Comando {
+    boolean ejecutar(CampoDeBatalla cdb);
+    String getNombre();
 }
