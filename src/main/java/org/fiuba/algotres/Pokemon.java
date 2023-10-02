@@ -28,7 +28,6 @@ public class Pokemon {
             Integer nivel,
             Tipos tipos,
             String historia,
-            Integer vidaActual,
             Integer vidaMaxima,
             Integer velocidad,
             Integer defensa,
@@ -39,8 +38,8 @@ public class Pokemon {
         this.nivel = nivel;
         this.tipos = tipos;
         this.historia = historia;
-        this.vidaActual = vidaActual;
         this.vidaMaxima = vidaMaxima;
+        this.vidaActual = vidaMaxima;
         this.velocidad = velocidad;
         this.defensa = defensa;
         this.ataque = ataque;
