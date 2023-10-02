@@ -2,16 +2,16 @@ package org.fiuba.algotres.item;
 
 import org.fiuba.algotres.Pokemon;
 
-public class Defensa extends Estadistica {
-    public Defensa(int cantidad, String nombre, int porcentaje) {
+public class EstadisticaAtaque extends Estadistica {
+    public EstadisticaAtaque(int cantidad, String nombre, int porcentaje) {
         super(cantidad, nombre, porcentaje);
     }
 
     @Override
     public boolean usar(Pokemon pokemon) {
         if (super.usar(pokemon)) {
-            int defensaAnterior = pokemon.getDefensa();
-            pokemon.setDefensa((Math.round( (float) (porcentaje / 100) * defensaAnterior)) + defensaAnterior);
+            int ataqueAnterior = pokemon.getAtaque();
+            pokemon.setAtaque((Math.round( (float) (porcentaje / 100) * ataqueAnterior)) + ataqueAnterior);
             cantidad--;
             return true;
         }

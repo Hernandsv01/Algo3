@@ -1,9 +1,10 @@
 package org.fiuba.algotres.habilidad;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.fiuba.algotres.Pokemon;
 
-@Data
+@Setter @Getter
 public abstract class Habilidad {
     private final String nombre;
     protected int usos;
@@ -14,4 +15,9 @@ public abstract class Habilidad {
     }
 
     public abstract void accionarHabilidad(Pokemon atacante, Pokemon victima);
+
+    @Override
+    public String toString() {
+        return getNombre() + "(" + getUsos() + "usos)";
+    }
 }

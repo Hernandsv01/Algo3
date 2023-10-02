@@ -3,43 +3,21 @@ package org.fiuba.algotres.habilidad;
 import org.fiuba.algotres.Pokemon;
 
 public class ModificacionEstadistica extends Habilidad{
-    public static final String ATAQUE = "ataque";
-    public static final String DEFENSA = "defensa";
-    public static final String VIDA = "vida";
-    private final boolean propio;
-    private final String tipo;
-    public ModificacionEstadistica(String nombre, int usos, String tipo, boolean propio) {
+    protected final Integer porcentaje;
+
+    public ModificacionEstadistica(String nombre, int usos, Integer porcentaje) {
         super(nombre, usos);
-        this.propio = propio;
-        this.tipo = tipo;
+        this.porcentaje = porcentaje;
     }
 
+    /**
+     * @param atacante pokemon propio.
+     * @param victima pokemon contrario.
+     */
     @Override
     public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
         if (usos <= 0) {
             return;
         }
-        if (propio) {
-            switch (tipo) {
-                case ATAQUE:
-                    int atqAntPropio = atacante.getAtaque();
-                    atacante.setAtaque(Math.round((float) 0.15 * atqAntPropio + atqAntPropio));
-                case DEFENSA:
-                    int defAntPropio = atacante.getDefensa();
-                    atacante.setDefensa(Math.round((float) 0.1 * defAntPropio + defAntPropio));
-                case VIDA:
-                    atacante.setVidaActual(atacante.getVidaActual() + 20);
-            }
-        } else {
-            switch (tipo) {
-                case ATAQUE:
-                    int atqAntOponente = victima.getAtaque();
-                    victima.setAtaque(Math.round((float) 0.1 * atqAntOponente + atqAntOponente));
-                case DEFENSA:
-                    int defAntOponente = victima.getDefensa();
-                    victima.setDefensa(Math.round((float) 0.15 * defAntOponente + defAntOponente));
-            }
-        }
-        usos--;
     }
 }
