@@ -10,13 +10,13 @@ public class ComandoCambiarPokemon implements Comando {
     
     @Override
     public boolean ejecutar(CampoDeBatalla cdb) {
-        int opciones;
-        int opcionElegida;
-        opciones = JugadorView.imprimirPokemonsActivos(cdb.getJugadores()[cdb.getTurnoActual()]);
+        int opciones = JugadorView.imprimirPokemons(cdb.getJugadorActual().getPokemonsActivos());
         if(opciones == 0) return false;
-        opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
+
+        int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
         if(opcionElegida == opciones) return false;
-        return cdb.getJugadores()[cdb.getTurnoActual()].cambiarPokemonActual(opcionElegida);
+
+        return cdb.getJugadorActual().cambiarPokemonActual(opcionElegida);
     }
 
     @Override

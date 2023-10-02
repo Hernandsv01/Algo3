@@ -3,6 +3,8 @@ package org.fiuba.algotres.views.terminal;
 import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 
+import java.util.List;
+
 public class JugadorView {
     public static int imprimirItems(Jugador jugador){
         int res;
@@ -12,18 +14,10 @@ public class JugadorView {
         System.out.println("\t" + res + ") Volver");
         return res;
     }
-    public static int imprimirPokemonsActivos(Jugador jugador){
+    public static int imprimirPokemons(List<Pokemon> pokemons){
         int res;
-        for(res = 1; res <= jugador.getPokemonsActivos().size(); res++){
-            System.out.println("\t" + res + ") " + jugador.getPokemonsActivos().get(res-1));
-        }
-        System.out.println("\t" + res + ") Volver");
-        return res;
-    }
-    public static int imprimirMuertos(Jugador jugador){
-        int res;
-        for(res = 1; res <= jugador.getPokemonsMuertos().size(); res++){
-            System.out.println("\t" + res + ") " + jugador.getPokemonsMuertos().get(res-1));
+        for(res = 1; res <= pokemons.size(); res++){
+            System.out.println("\t" + res + ") " + pokemons.get(res-1));
         }
         System.out.println("\t" + res + ") Volver");
         return res;
