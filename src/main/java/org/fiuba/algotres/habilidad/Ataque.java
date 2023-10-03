@@ -1,81 +1,58 @@
 package org.fiuba.algotres.habilidad;
-package org.fiuba.algotres.Tipos;
 
-import org.fiuba.algotres.Pokemon;
-import org.fiuba.algotres.Tipos;
+import org.fiuba.algotres.*;
+
 import java.lang.Math;
-import java.util.HashMap;
 import java.util.Random;
 
 import lombok.Getter;
-import lombot.Setter;
+import lombok.Setter;
+import org.fiuba.algotres.Tipos;
 
 @Getter @Setter
 public class Ataque extends Habilidad{
-    private String nombre;
-    private int usos;
     private int poder;
     private Tipos tipo;
 
-    public Ataque() {}
+    private final double PROBABILIDAD_CRITICO = 0.9;
+    private final int MULTIPLICADOR_CRITICO = 2;
+    private final double MULTIPLICADOR_MISMO_TIPO = 1.5;
+    private final int DEFAULT = 1;
+
+    private static final int MINIMO_RANDOM = 217;
+    private static final int MAXIMO_RANDOM = 255;
 
     public Ataque(String nombre, int usos, int poder, Tipos tipo) {
-    this.nombre = nombre;
-    this.usos = usos;
-    this.poder = poder;
-    this.tipo = tipo;
-
+        super(nombre, usos);
+        this.poder = poder;
+        this.tipo = tipo;
     }
-
-
 
     @Override
-    public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        int daño = ((2 + ( 2 *  atacante.getNivel() *  establecerCritico() * this.poder * (atacante.getAtaque()/victima.getDefensa()) ) /50) * establecerMismoTipo() * establecerEfectividad(victima) * establecerRandom();
-        if((victima.getVidaActual() - daño) <= 0){
-            this.usos--;
-            return true;
-        }
-        else {
-            victima.setVidaActual(victima.getVidaActual - daño);
-            this.usos--;
-            return false;
-        }
+    public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
+        int numeradorInterno = 2 * atacante.getNivel() *  esCritico() * this.poder * (atacante.getAtaque()/victima.getDefensa());
+        int fraccionCompleta = (2 + (numeradorInterno/5) )/50;
+        int dano = (int)(fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(atacante, victima) * getRandom());
 
-
+        victima.setVidaActual(victima.getVidaActual() - dano);
+        this.usos--;
     }
 
-    public int establecerCritico(){
-        float probabilidad = 0.9F;
-        double chance = Math.random();
-        return chance<= probabilidad ? 2:1;
+    public int esCritico(){
+        double resultado = Math.random()*100;
+        return resultado <= PROBABILIDAD_CRITICO ? MULTIPLICADOR_CRITICO : DEFAULT;
     }
 
-    public float establecerMismoTipo(Pokemon atacante){
-
-        return atacante.getTipo().equalsIgnoreCase(this.tipo.name()) ? 1.5F : 1.0F;
+    public double esMismoTipo(Pokemon atacante){
+        return (atacante.getTipos() == tipo) ? MULTIPLICADOR_MISMO_TIPO : DEFAULT;
     }
-
-    public float establecerEfectividad(Pokemon victima){
-        HashMap<TiposBasicos, Efectividad> efectividadHashMap = this.tipo.getEfectividadMap();
-        if(efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "INUTIL"){
-            return 0.0F;
-        }
-        else if(efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "DEBIL"){
-            return 0.5F;
-        }
-        else if(efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "NORMAL"){
-            return 1.0F;
-        }
-        else if (efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "FUERTE"){
-            return 2.0F;
-        }
-    }
-    public float establecerRandom(){
+    public double getRandom(){
         Random util = new Random();
-        int numeroAleatorio = util.nextInt(38) + 217;
-        return (float) numeroAleatorio / 255.0F;
-
+        int numeroAleatorio = util.nextInt(MAXIMO_RANDOM-MINIMO_RANDOM) + MINIMO_RANDOM;
+        return (double) numeroAleatorio / MAXIMO_RANDOM;
     }
 
+    public double getMultiplicadorEfectividad(Pokemon atacante, Pokemon victima){
+        return atacante.getTipos().getEfectividadMap().get(victima.getTipos().toBasico()).getMultiplicador();
+    }
 }
