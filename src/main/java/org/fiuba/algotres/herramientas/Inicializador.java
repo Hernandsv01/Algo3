@@ -17,7 +17,6 @@ import org.fiuba.algotres.item.Item;
 import org.fiuba.algotres.item.EstadisticaAtaque;
 import org.fiuba.algotres.item.CuraTodo;
 import org.fiuba.algotres.item.EstadisticaDefensa;
-import org.fiuba.algotres.item.Estadistica;
 import org.fiuba.algotres.item.Pocion;
 import org.fiuba.algotres.item.Revivir;
 
@@ -392,7 +391,6 @@ public class Inicializador {
                 Tipos.PLANTA,
                 "Este Pokémon nace con una semilla en el lomo, que brota con el paso del tiempo.",
                 45,
-                44,
                 45,
                 49,
                 49,
@@ -403,7 +401,6 @@ public class Inicializador {
                 4,
                 Tipos.ELECTRICO,
                 "Las bolsas de las mejillas están llenas de electricidad, que libera cuando se siente amenazado.",
-                35,
                 35,
                 90,
                 40,
@@ -416,7 +413,6 @@ public class Inicializador {
                 Tipos.PSIQUICO,
                 "Duerme 18 horas al día y mientras lo hace es capaz de usar una serie de poderes extrasensoriales.",
                 25,
-                25,
                 90,
                 15,
                 20,
@@ -427,7 +423,6 @@ public class Inicializador {
                 3,
                 Tipos.NORMAL,
                 "Muy común en bosques y selvas. Aletea al nivel del suelo para levantar la gravilla.",
-                40,
                 40,
                 56,
                 40,
@@ -440,7 +435,6 @@ public class Inicializador {
                 Tipos.BICHO,
                 "Los pinsir se juzgan entre ellos por la robustez de la cornamenta. Cuanto mas imponente sea, mas agradará a sus congéneres del sexo opuesto.",
                 65,
-                65,
                 85,
                 100,
                 125,
@@ -451,7 +445,6 @@ public class Inicializador {
                 5,
                 Tipos.AGUA,
                 "Aunque sus brazos se rompan podrán regenerarse, siempre y cuando su núcleo siga intacto.",
-                30,
                 30,
                 85,
                 55,
@@ -476,7 +469,6 @@ public class Inicializador {
                 Tipos.FUEGO,
                 "Este Pokémon nace con una llama en la punta de la cola. Si la llama se apagara, el Pokémon se debilitaría.",
                 39,
-                39,
                 65,
                 43,
                 52,
@@ -487,7 +479,6 @@ public class Inicializador {
                 6,
                 Tipos.LUCHA,
                 "Es una masa de músculos y, aunque es pequeño, tiene fuerza de sobra para tomar en brazos a 100 personas.",
-                70,
                 70,
                 35,
                 50,
@@ -500,7 +491,6 @@ public class Inicializador {
                 Tipos.NORMAL,
                 "Después de animarse a luchar fustigándose con sus tres colas, carga a toda velocidad.",
                 75,
-                75,
                 110,
                 95,
                 100,
@@ -511,7 +501,6 @@ public class Inicializador {
                 4,
                 Tipos.PLANTA,
                 "Escarba bajo el suelo para roer las raíces de los árboles. Sus setas absorben los nutrientes.",
-                35,
                 35,
                 25,
                 55,
@@ -524,7 +513,6 @@ public class Inicializador {
                 Tipos.ROCA,
                 "Aparecen en llanos y montañas. Como parecen rocas, la gente se tropieza con ellos o los pisa.",
                 40,
-                40,
                 20,
                 100,
                 80,
@@ -535,7 +523,6 @@ public class Inicializador {
                 3,
                 Tipos.VENENO,
                 "Va a la deriva a poca profundidad. Si es pescado por accidente, el castigo será su punzante ácido.",
-                40,
                 40,
                 70,
                 35,
@@ -565,13 +552,13 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        EstadisticaAtaque ataqueX = new org.fiuba.algotres.item.Ataque(
+        EstadisticaAtaque ataqueX = new org.fiuba.algotres.item.EstadisticaAtaque(
                 3,
                 "Ataque X",
                 10
         );
 
-        EstadisticaDefensa defensaX = new org.fiuba.algotres.item.Defensa(
+        EstadisticaDefensa defensaX = new org.fiuba.algotres.item.EstadisticaDefensa(
                 3,
                 "Defensa X",
                 10
