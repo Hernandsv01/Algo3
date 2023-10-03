@@ -58,20 +58,46 @@ public class Pokemon {
     public void curar(){
         vidaActual = vidaMaxima;
     }
+
     /**
      * Cura al pokemon por la cantidad de puntos del parámetro
      * @param puntos puntos de vida que agregarle al pokemon
      */
-    public void curar(int puntos){
-        vidaActual += puntos;
+    public void curarPorPuntos(int puntos){
+        if (vidaActual + puntos > this.vidaMaxima) {
+            vidaActual = this.vidaMaxima;
+        } else {
+            this.vidaActual += puntos;
+        }
     }
+
     /**
-     * Le saca vida al pokemon
+     * Cura al pokemon por un valor porcentual de la vida actual.
+     * @param porcentaje porcentaje de la vida que se quiere recuperar en el pokemon.
+     */
+    public void curarPorPorcentaje(int porcentaje) {
+        vidaActual += Math.round((float) (porcentaje/100) * vidaActual);
+    }
+
+    /**
+     * Le quita vida al pokemon por la cantidad de puntos del parametro.
      * @param puntos puntos de vida que quitarle al pokemon
      */
-    public void danar(int puntos){
+    public void danarPorPuntos(int puntos){
         vidaActual -= puntos;
+        if (vidaActual < 0) {
+            matar();
+        }
     }
+
+    /**
+     * La quita vida al pokemon por un valor porcentual de la vida actual.
+     * @param porcentaje porcentaje de la vida que se quiere reducir en el pokemon.
+     */
+    public void danarPorPorcentaje(int porcentaje) {
+        vidaActual -= Math.round((float) (porcentaje / 100) * vidaActual);
+    }
+
     /**
      * Pone la vida del pokemon en cero
      */
@@ -79,11 +105,21 @@ public class Pokemon {
         vidaActual = 0;
     }
 
-    public void setVidaActual(int vidaActual) {
-        if (vidaActual > this.vidaMaxima) {
-            this.vidaActual = this.vidaMaxima;
-        } else {
-            this.vidaActual = vidaActual;
-        }
+    /**
+     * Suma (valor positivo) o resta (valor negativo) el porcentaje pasado por parametro
+     * que cambiara el ataque en el pokemon actual.
+     * @param porcentaje porcentaje del valor actual de ataque que se quiere modificar.
+     */
+    public void modificarAtaque(int porcentaje) {
+        ataque += Math.round((float) (porcentaje / 100) * ataque);
+    }
+
+    /**
+     * Suma (valor positivo) o resta (valor negativo) el porcentaje pasado por parametro
+     * que cambiara la defensa en el pokemon actual.
+     * @param porcentaje porcentaje del valor actual de defensa que se quiere modificar.
+     */
+    public void modificarDefensa(int porcentaje) {
+        defensa += Math.round((float) (porcentaje / 100) * defensa);
     }
 }

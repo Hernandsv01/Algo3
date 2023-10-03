@@ -34,7 +34,7 @@ public class Ataque extends Habilidad{
         int fraccionCompleta = (2 + (numeradorInterno/5) )/50;
         int dano = (int)(fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(atacante, victima) * getRandom());
 
-        victima.setVidaActual(victima.getVidaActual() - dano);
+        victima.danarPorPuntos(dano);
         this.usos--;
     }
 

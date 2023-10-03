@@ -11,11 +11,9 @@ public class ModificacionEstadisticaAtaque extends ModificacionEstadistica {
     public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
         super.accionarHabilidad(atacante, victima);
         if (atacante == victima) {
-            int ataquePropio = atacante.getAtaque();
-            atacante.setAtaque(Math.round((float) (porcentaje/100) * ataquePropio) + ataquePropio);
+            atacante.modificarAtaque(porcentaje);
         } else {
-            int ataqueContrincante = victima.getAtaque();
-            victima.setAtaque(ataqueContrincante - Math.round((float) (porcentaje/100) * ataqueContrincante));
+            victima.modificarAtaque(-porcentaje);
         }
         usos--;
     }

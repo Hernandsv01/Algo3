@@ -13,7 +13,7 @@ public class Pocion extends Item{
     @Override
     public boolean usar(Pokemon pokemon) {
         if (super.usar(pokemon)) {
-            pokemon.setVidaActual(pokemon.getVidaActual() + cantidadDeVida);
+            pokemon.curarPorPuntos(cantidadDeVida);
             cantidad--;
             return true;
         }
