@@ -9,12 +9,14 @@ import org.fiuba.algotres.estado.Dormido;
 import org.fiuba.algotres.estado.Envenenado;
 import org.fiuba.algotres.habilidad.Ataque;
 import org.fiuba.algotres.habilidad.Habilidad;
-import org.fiuba.algotres.habilidad.ModificacionEstadistica;
+import org.fiuba.algotres.habilidad.ModificacionEstadisticaAtaque;
+import org.fiuba.algotres.habilidad.ModificacionEstadisticaDefensa;
+import org.fiuba.algotres.habilidad.ModificacionEstadisticaVida;
 import org.fiuba.algotres.habilidad.ModificacionEstado;
 import org.fiuba.algotres.item.Item;
-import org.fiuba.algotres.item.Ataque;
+import org.fiuba.algotres.item.EstadisticaAtaque;
 import org.fiuba.algotres.item.CuraTodo;
-import org.fiuba.algotres.item.Defensa;
+import org.fiuba.algotres.item.EstadisticaDefensa;
 import org.fiuba.algotres.item.Estadistica;
 import org.fiuba.algotres.item.Pocion;
 import org.fiuba.algotres.item.Revivir;
@@ -35,180 +37,180 @@ public class Inicializador {
         /*************************************************/
 
         /*******************TIPO ATAQUE ******************/
-        org.fiuba.algotres.habilidad.Ataque llamarada = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque llamarada = new Ataque(
                 "Llamarada",
                 10,
                 120,
                 Tipos.FUEGO
         );
-        org.fiuba.algotres.habilidad.Ataque ascuas = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque ascuas = new Ataque(
                 "Ascuas",
                 25,
                 40,
                 Tipos.FUEGO
         );
-        org.fiuba.algotres.habilidad.Ataque giroFuego = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque giroFuego = new Ataque(
                 "Giro fuego",
                 15,
                 60,
                 Tipos.FUEGO
         );
-        org.fiuba.algotres.habilidad.Ataque lanzallamas = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque lanzallamas = new Ataque(
                 "Lanzallamas",
                 5,
                 95,
                 Tipos.FUEGO
         );
 
-        org.fiuba.algotres.habilidad.Ataque arañazo = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque arañazo = new Ataque(
                 "Arañazo",
                 30,
                 40,
                 Tipos.NORMAL
         );
-        org.fiuba.algotres.habilidad.Ataque placaje = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque placaje = new Ataque(
                 "Placaje",
                 30,
                 50,
                 Tipos.NORMAL
         );
 
-        org.fiuba.algotres.habilidad.Ataque burbuja = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque burbuja = new Ataque(
                 "Burbuja",
                 30,
                 40,
                 Tipos.AGUA
         );
-        org.fiuba.algotres.habilidad.Ataque hidrobomba = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque hidrobomba = new Ataque(
                 "Hidrobomba",
                 5,
                 110,
                 Tipos.AGUA
         );
-        org.fiuba.algotres.habilidad.Ataque rayoBurbuja = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque rayoBurbuja = new Ataque(
                 "Rayo burbuja",
                 30,
                 65,
                 Tipos.AGUA
         );
-        org.fiuba.algotres.habilidad.Ataque pistolaAgua = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque pistolaAgua = new Ataque(
                 "Pistola agua",
                 25,
                 40,
                 Tipos.AGUA
         );
 
-        org.fiuba.algotres.habilidad.Ataque rayo = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque rayo = new Ataque(
                 "Rayo",
                 15,
                 95,
                 Tipos.ELECTRICO
         );
 
-        org.fiuba.algotres.habilidad.Ataque confusion = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque confusion = new Ataque(
                 "Confusion",
                 25,
                 50,
                 Tipos.PSIQUICO
         );
-        org.fiuba.algotres.habilidad.Ataque psiquico = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque psiquico = new Ataque(
                 "Psiquico",
                 10,
                 90,
                 Tipos.PSIQUICO
         );
 
-        org.fiuba.algotres.habilidad.Ataque megaCuerno = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque megaCuerno = new Ataque(
                 "Mega cuerno",
                 5,
                 120,
                 Tipos.BICHO
         );
-        org.fiuba.algotres.habilidad.Ataque pinMisil = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque pinMisil = new Ataque(
                 "Pin misil",
                 20,
                 30,
                 Tipos.BICHO
         );
 
-        org.fiuba.algotres.habilidad.Ataque golpeKarate = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque golpeKarate = new Ataque(
                 "Golpe karate",
                 25,
                 50,
                 Tipos.LUCHA
         );
-        org.fiuba.algotres.habilidad.Ataque sismico = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque sismico = new Ataque(
                 "Sismico",
                 10,
                 80,
                 Tipos.LUCHA
         );
-        org.fiuba.algotres.habilidad.Ataque doblePatada = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque doblePatada = new Ataque(
                 "Doble patada",
                 30,
                 30,
                 Tipos.LUCHA
         );
 
-        org.fiuba.algotres.habilidad.Ataque lanzarrocas = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque lanzarrocas = new Ataque(
                 "Lanzarrocas",
                 15,
                 50,
                 Tipos.ROCA
         );
-        org.fiuba.algotres.habilidad.Ataque avalancha = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque avalancha = new Ataque(
                 "Avalancha",
                 10,
                 60,
                 Tipos.ROCA
         );
 
-        org.fiuba.algotres.habilidad.Ataque ataqueArena = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque ataqueArena = new Ataque(
                 "Ataque arena",
                 15,
                 85,
                 Tipos.TIERRA
         );
-        org.fiuba.algotres.habilidad.Ataque terremoto = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque terremoto = new Ataque(
                 "Terremoto",
                 10,
                 100,
                 Tipos.TIERRA
         );
 
-        org.fiuba.algotres.habilidad.Ataque picotazoVeneno = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque picotazoVeneno = new Ataque(
                 "Picotazo veneno",
                 35,
                 35,
                 Tipos.VENENO
         );
 
-        org.fiuba.algotres.habilidad.Ataque latigoCepa = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque latigoCepa = new Ataque(
                 "Latigo cepa",
                 25,
                 45,
                 Tipos.PLANTA
         );
-        org.fiuba.algotres.habilidad.Ataque hojaAfilada = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque hojaAfilada = new Ataque(
                 "Hoja afilada",
                 15,
                 70,
                 Tipos.PLANTA
         );
 
-        org.fiuba.algotres.habilidad.Ataque ataqueAla = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque ataqueAla = new Ataque(
                 "Ataque ala",
                 35,
                 60,
                 Tipos.VOLADOR
         );
-        org.fiuba.algotres.habilidad.Ataque ataqueAereo = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque ataqueAereo = new Ataque(
                 "Ataque aéreo",
                 20,
                 75,
                 Tipos.VOLADOR
         );
-        org.fiuba.algotres.habilidad.Ataque picotazo = new org.fiuba.algotres.habilidad.Ataque(
+        Ataque picotazo = new Ataque(
                 "Picotazo",
                 35,
                 35,
@@ -216,65 +218,55 @@ public class Inicializador {
         );
 
         /***********TIPO MODIFICACION DE ESTADISTICA***********/
-        ModificacionEstadistica danzaEspada = new ModificacionEstadistica(
+        ModificacionEstadisticaAtaque danzaEspada = new ModificacionEstadisticaAtaque(
                 "Danza espada",
                 15,
-                ModificacionEstadistica.ATAQUE,
-                true
+                10
         );
-        ModificacionEstadistica fortaleza = new ModificacionEstadistica(
+        ModificacionEstadisticaDefensa fortaleza = new ModificacionEstadisticaDefensa(
                 "fortaleza",
                 25,
-                ModificacionEstadistica.DEFENSA,
-                true
+                10
         );
-        ModificacionEstadistica rizoDefensa = new ModificacionEstadistica(
+        ModificacionEstadisticaDefensa rizoDefensa = new ModificacionEstadisticaDefensa(
                 "Rizo defensa",
                 25,
-                ModificacionEstadistica.DEFENSA,
-                true
+                15
         );
-        ModificacionEstadistica recuperacion = new ModificacionEstadistica(
+        ModificacionEstadisticaVida recuperacion = new ModificacionEstadisticaVida(
                 "Recuperacion",
                 25,
-                ModificacionEstadistica.VIDA,
-                true
+                25
         );
-        ModificacionEstadistica chirrido = new ModificacionEstadistica(
+        ModificacionEstadisticaAtaque chirrido = new ModificacionEstadisticaAtaque(
                 "Chirrido",
                 15,
-                ModificacionEstadistica.DEFENSA,
-                false
+                10
         );
-        ModificacionEstadistica pantalladDeLuz = new ModificacionEstadistica(
+        ModificacionEstadisticaAtaque pantalladDeLuz = new ModificacionEstadisticaAtaque(
                 "Pantalla de luz",
                 30,
-                ModificacionEstadistica.ATAQUE,
-                false
+                15
         );
-        ModificacionEstadistica descanso = new ModificacionEstadistica(
+        ModificacionEstadisticaVida descanso = new ModificacionEstadisticaVida(
                 "Descanso",
                 5,
-                ModificacionEstadistica.VIDA,
-                true
+                75
         );
-        ModificacionEstadistica acido = new ModificacionEstadistica(
+        ModificacionEstadisticaDefensa acido = new ModificacionEstadisticaDefensa(
                 "Ácido",
                 30,
-                ModificacionEstadistica.DEFENSA,
-                false
+                10
         );
-        ModificacionEstadistica armaduraAcida = new ModificacionEstadistica(
+        ModificacionEstadisticaDefensa armaduraAcida = new ModificacionEstadisticaDefensa(
                 "Armadura ácida",
                 15,
-                ModificacionEstadistica.DEFENSA,
-                true
+                20
         );
-        ModificacionEstadistica absorber = new ModificacionEstadistica(
+        ModificacionEstadisticaVida absorber = new ModificacionEstadisticaVida(
                 "Absorber",
                 20,
-                ModificacionEstadistica.VIDA,
-                true
+                30
         );
 
         /**************TIPO DE MODIFICACION DE ESTADO**************/
@@ -573,13 +565,13 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        org.fiuba.algotres.item.Ataque ataqueX = new org.fiuba.algotres.item.Ataque(
+        EstadisticaAtaque ataqueX = new org.fiuba.algotres.item.Ataque(
                 3,
                 "Ataque X",
                 10
         );
 
-        org.fiuba.algotres.item.Defensa defensaX = new org.fiuba.algotres.item.Defensa(
+        EstadisticaDefensa defensaX = new org.fiuba.algotres.item.Defensa(
                 3,
                 "Defensa X",
                 10
