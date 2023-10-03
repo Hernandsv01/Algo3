@@ -31,11 +31,11 @@ public class Inicializador {
      * @return Un arreglo de listas de los pokemons de cada jugador
      */
     private static ArrayList<Pokemon>[] creacionPokemons() {
-        /*************************************************/
-        /***************HABILIDADES***********************/
-        /*************************************************/
+        /* *********************************************** */
+        /* **************HABILIDADES********************** */
+        /* *********************************************** */
 
-        /*******************TIPO ATAQUE ******************/
+        /* ******************TIPO ATAQUE ***************** */
         Ataque llamarada = new Ataque(
                 "Llamarada",
                 10,
@@ -61,7 +61,7 @@ public class Inicializador {
                 Tipos.FUEGO
         );
 
-        Ataque arañazo = new Ataque(
+        Ataque aranazo = new Ataque(
                 "Arañazo",
                 30,
                 40,
@@ -216,7 +216,7 @@ public class Inicializador {
                 Tipos.VOLADOR
         );
 
-        /***********TIPO MODIFICACION DE ESTADISTICA***********/
+        /* **********TIPO MODIFICACION DE ESTADISTICA********** */
         ModificacionEstadisticaAtaque danzaEspada = new ModificacionEstadisticaAtaque(
                 "Danza espada",
                 15,
@@ -268,7 +268,7 @@ public class Inicializador {
                 30
         );
 
-        /**************TIPO DE MODIFICACION DE ESTADO**************/
+        /* *************TIPO DE MODIFICACION DE ESTADO************* */
         ModificacionEstado impactrueno = new ModificacionEstado(
                 "Impactrueno",
                 20,
@@ -296,9 +296,9 @@ public class Inicializador {
         );
 
 
-        /*************************************************************/
-        /******************ASIGNACION DE HABILIDADES******************/
-        /*************************************************************/
+        /* *********************************************************** */
+        /* *****************ASIGNACION DE HABILIDADES***************** */
+        /* *********************************************************** */
 
         ArrayList<Habilidad> habilidadesBulbasaur = new ArrayList<Habilidad>(Arrays.asList(
                 absorber,
@@ -311,7 +311,7 @@ public class Inicializador {
                 impactrueno,
                 trueno,
                 rayo,
-                arañazo
+                aranazo
         ));
 
         ArrayList<Habilidad> habilidadesAbra = new ArrayList<Habilidad>(Arrays.asList(
@@ -381,9 +381,9 @@ public class Inicializador {
                 picotazoVeneno
         ));
 
-        /*************************************************************/
-        /**********************POKEMONS JUGADOR 1*********************/
-        /*************************************************************/
+        /* *********************************************************** */
+        /* *********************POKEMONS JUGADOR 1******************** */
+        /* *********************************************************** */
 
         Pokemon bulbasaur = new Pokemon(
                 "Bulbasaur",
@@ -460,9 +460,9 @@ public class Inicializador {
                 pinsir
         ));
 
-        /*************************************************************/
-        /**********************POKEMONS JUGADOR 2*********************/
-        /*************************************************************/
+        /* *********************************************************** */
+        /* *********************POKEMONS JUGADOR 2******************** */
+        /* *********************************************************** */
         Pokemon charmander = new Pokemon(
                 "Charmander",
                 5,
@@ -540,9 +540,7 @@ public class Inicializador {
 
         int numeroJugadores = 2;
         ArrayList<Pokemon>[] pokemons = new ArrayList[numeroJugadores];
-        pokemons[0] = new ArrayList<Pokemon>();
         pokemons[0] = pokemonsJugador1;
-        pokemons[1] = new ArrayList<Pokemon>();
         pokemons[1] = pokemonsJugador2;
         return pokemons;
     }
@@ -592,7 +590,7 @@ public class Inicializador {
                 "Revivir"
         );
 
-        ArrayList<Item> itemsJugadores = new ArrayList<Item>(Arrays.asList(
+        return new ArrayList<>(Arrays.asList(
                 ataqueX,
                 defensaX,
                 pocion,
@@ -601,8 +599,6 @@ public class Inicializador {
                 curaTodo,
                 revivir
         ));
-
-        return itemsJugadores;
     }
 
     /**
@@ -610,28 +606,25 @@ public class Inicializador {
      * @return El campo de batalla
      */
     public static CampoDeBatalla inicializarJuego() {
-        /*************************************************************/
-        /********************ASIGNACION DE POKEMONS*******************/
-        /*************************************************************/
+        /* *********************************************************** */
+        /* *******************ASIGNACION DE POKEMONS****************** */
+        /* *********************************************************** */
         ArrayList<Pokemon>[] pokemons = creacionPokemons();
 
-        ArrayList<Pokemon> pokemonsJugador1 = pokemons[0];
-        ArrayList<Pokemon> pokemonsJugador2 = pokemons[1];
-
-        /*************************************************************/
-        /********************ASIGNACION DE ITEMS**********************/
-        /*************************************************************/
+        /* *********************************************************** */
+        /* *******************ASIGNACION DE ITEMS********************* */
+        /* *********************************************************** */
         List<Item> itemsJugadores = creacionItems();
 
-        /*************************************************************/
-        /**********************JUGADOR 1******************************/
-        /*************************************************************/
-        Jugador jugador1 = new Jugador(pokemonsJugador1, itemsJugadores);
+        /* *********************************************************** */
+        /* *********************JUGADOR 1***************************** */
+        /* *********************************************************** */
+        Jugador jugador1 = new Jugador(pokemons[0], itemsJugadores);
 
-        /*************************************************/
-        /****************JUGADOR 2************************/
-        /*************************************************/
-        Jugador jugador2 = new Jugador(pokemonsJugador2, itemsJugadores);
+        /* *********************************************** */
+        /* ***************JUGADOR 2*********************** */
+        /* *********************************************** */
+        Jugador jugador2 = new Jugador(pokemons[1], itemsJugadores);
 
         return new CampoDeBatalla(
                 new Jugador[]{
