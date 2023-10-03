@@ -4,6 +4,7 @@ package org.fiuba.algotres.Tipos;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
 import java.lang.Math;
+import java.util.HashMap;
 import java.util.Random;
 
 import lombok.Getter;
@@ -16,8 +17,7 @@ public class Ataque extends Habilidad{
     private int poder;
     private Tipos tipo;
 
-    public Ataque() {
-    }
+    public Ataque() {}
 
     public Ataque(String nombre, int usos, int poder, Tipos tipo) {
     this.nombre = nombre;
@@ -31,50 +31,50 @@ public class Ataque extends Habilidad{
 
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        int daño = ((2 + ( 2 *  atacante.getNivel() *  critico * this.poder * (atacante.getAtaque()/victima.getDefensa()) ) /50) * establecerMismoTipo() * establecerEfectividad(victima) * establecerRandom();
+        int daño = ((2 + ( 2 *  atacante.getNivel() *  establecerCritico() * this.poder * (atacante.getAtaque()/victima.getDefensa()) ) /50) * establecerMismoTipo() * establecerEfectividad(victima) * establecerRandom();
         if((victima.getVidaActual() - daño) <= 0){
             this.usos--;
-            return true
+            return true;
         }
         else {
-            victima.setVidaActual() = victima.getVidaActual - daño
+            victima.setVidaActual(victima.getVidaActual - daño);
             this.usos--;
-            return false
+            return false;
         }
 
 
     }
 
     public int establecerCritico(){
-        float probabilidad = 0.9;
+        float probabilidad = 0.9F;
         double chance = Math.random();
         return chance<= probabilidad ? 2:1;
     }
 
-    public int establecerMismoTipo(Pokemon atacante){
+    public float establecerMismoTipo(Pokemon atacante){
 
-        return atacante.getTipo().equalsIgnoreCase(this.mismoTipo.name()) ? 1.5 : 1;
+        return atacante.getTipo().equalsIgnoreCase(this.tipo.name()) ? 1.5F : 1.0F;
     }
 
     public float establecerEfectividad(Pokemon victima){
         HashMap<TiposBasicos, Efectividad> efectividadHashMap = this.tipo.getEfectividadMap();
         if(efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "INUTIL"){
-            return 0.0
+            return 0.0F;
         }
         else if(efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "DEBIL"){
-            return 0.5
+            return 0.5F;
         }
         else if(efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "NORMAL"){
-            return 1.0
+            return 1.0F;
         }
-        else (efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "FUERTE"){
-            return 2.0
+        else if (efectividadHashMap.get(TiposBasicos.victima.getTipo().name()) == "FUERTE"){
+            return 2.0F;
         }
     }
     public float establecerRandom(){
         Random util = new Random();
-        int numeroAleatorio = a.nextInt(38) + 217;
-        return (float) numeroAleatorio / 255;
+        int numeroAleatorio = util.nextInt(38) + 217;
+        return (float) numeroAleatorio / 255.0F;
 
     }
 
