@@ -64,10 +64,9 @@ public class Pokemon {
      * @param puntos puntos de vida que agregarle al pokemon
      */
     public void curarPorPuntos(int puntos){
-        if (vidaActual + puntos > this.vidaMaxima) {
-            vidaActual = this.vidaMaxima;
-        } else {
-            this.vidaActual += puntos;
+        vidaActual += puntos;
+        if (vidaActual + puntos > vidaMaxima) {
+            curar();
         }
     }
 
@@ -76,7 +75,12 @@ public class Pokemon {
      * @param porcentaje porcentaje de la vida que se quiere recuperar en el pokemon.
      */
     public void curarPorPorcentaje(int porcentaje) {
-        vidaActual += Math.round((float) (porcentaje/100) * vidaActual);
+        if (porcentaje > 0 && porcentaje < 100) {
+            vidaActual += Math.round((float) (porcentaje / 100) * vidaActual);
+        }
+        if (vidaActual > vidaMaxima) {
+            curar();
+        }
     }
 
     /**
@@ -95,7 +99,9 @@ public class Pokemon {
      * @param porcentaje porcentaje de la vida que se quiere reducir en el pokemon.
      */
     public void danarPorPorcentaje(int porcentaje) {
-        vidaActual -= Math.round((float) (porcentaje / 100) * vidaActual);
+        if (porcentaje > 0 && porcentaje < 100) {
+            vidaActual -= Math.round((float) (porcentaje / 100) * vidaActual);
+        }
     }
 
     /**
@@ -111,7 +117,9 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de ataque que se quiere modificar.
      */
     public void modificarAtaque(int porcentaje) {
-        ataque += Math.round((float) (porcentaje / 100) * ataque);
+        if (porcentaje > 0 && porcentaje < 100) {
+            ataque += Math.round((float) (porcentaje / 100) * ataque);
+        }
     }
 
     /**
@@ -120,6 +128,8 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de defensa que se quiere modificar.
      */
     public void modificarDefensa(int porcentaje) {
-        defensa += Math.round((float) (porcentaje / 100) * defensa);
+        if (porcentaje > 0 && porcentaje < 100) {
+            defensa += Math.round((float) (porcentaje / 100) * defensa);
+        }
     }
 }
