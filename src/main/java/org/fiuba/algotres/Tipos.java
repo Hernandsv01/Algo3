@@ -1,6 +1,8 @@
 package org.fiuba.algotres;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public enum Tipos {
 
@@ -290,47 +292,24 @@ public enum Tipos {
             }}
     );
     
-    private final HashMap<TiposBasicos, Efectividad> efectividadMap;
-    Tipos(HashMap<TiposBasicos, Efectividad> efectividadMap) {
-        this.efectividadMap = efectividadMap;
+    private final Map<TiposBasicos, Efectividad> efectividadMap;
+    private static final Map<Tipos, TiposBasicos> tiposToTiposBasicosMap;
+
+    static {
+        tiposToTiposBasicosMap = new HashMap<>();
+        for (Tipos tipo : values()) {
+            tiposToTiposBasicosMap.put(tipo, tipo.toBasico());
+        }
     }
 
-    public HashMap<TiposBasicos, Efectividad> getEfectividadMap() {
+    Tipos(Map<TiposBasicos, Efectividad> efectividadMap) {
+        this.efectividadMap = Collections.unmodifiableMap(efectividadMap);
+    }
+
+    public Map<TiposBasicos, Efectividad> getEfectividadMap() {
         return efectividadMap;
     }
-}
-
-enum TiposBasicos {
-    AGUA,
-    BICHO,
-    DRAGON,
-    ELECTRICO,
-    FANTASMA,
-    FUEGO,
-    HIELO,
-    LUCHA,
-    NORMAL,
-    PLANTA,
-    PSIQUICO,
-    ROCA,
-    TIERRA,
-    VENENO,
-    VOLADOR
-}
-
-enum Efectividad {
-    FUERTE(2.0f),
-    NORMAL(1.0f),
-    DEBIL(0.5f),
-    INUTIL(0.0f);
-
-    private final float multiplicador;
-
-    Efectividad(float multiplicador){
-        this.multiplicador = multiplicador;
-    }
-
-    public float getMultiplicador() {
-        return multiplicador;
+    public TiposBasicos toBasico() {
+        return tiposToTiposBasicosMap.get(this);
     }
 }
