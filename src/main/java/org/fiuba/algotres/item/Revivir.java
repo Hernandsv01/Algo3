@@ -11,7 +11,7 @@ public class Revivir extends Item {
     public boolean usar(Pokemon pokemon) {
         if (super.usar(pokemon)) {
             if (pokemon.getVidaActual() == 0) {
-                pokemon.setVidaActual(pokemon.getVidaMaxima());
+                pokemon.curar();
                 cantidad--;
                 return true;
             }

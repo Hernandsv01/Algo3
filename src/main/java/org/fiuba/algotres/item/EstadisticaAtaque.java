@@ -10,8 +10,7 @@ public class EstadisticaAtaque extends Estadistica {
     @Override
     public boolean usar(Pokemon pokemon) {
         if (super.usar(pokemon)) {
-            int ataqueAnterior = pokemon.getAtaque();
-            pokemon.setAtaque((Math.round( (float) (porcentaje / 100) * ataqueAnterior)) + ataqueAnterior);
+            pokemon.modificarAtaque(porcentaje);
             cantidad--;
             return true;
         }

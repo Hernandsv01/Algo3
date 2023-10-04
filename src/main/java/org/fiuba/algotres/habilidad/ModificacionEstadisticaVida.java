@@ -15,9 +15,7 @@ public class ModificacionEstadisticaVida extends ModificacionEstadistica {
     @Override
     public void accionarHabilidad(Pokemon atacante, Pokemon ignorado) {
         super.accionarHabilidad(atacante, ignorado);
-
-        int vidaPropio = atacante.getVidaActual();
-        atacante.setVidaActual(Math.round((float) (porcentaje/100) * vidaPropio) + vidaPropio);
+        atacante.curarPorPorcentaje(porcentaje);
         usos--;
     }
 }
