@@ -1,6 +1,5 @@
 package org.fiuba.algotres;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Map;
 import org.fiuba.algotres.comandos.*;
 
 import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
-import static org.fiuba.algotres.views.terminal.Tools.*;
 
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.fiuba.algotres.views.terminal.InputUsuario;
@@ -27,7 +25,7 @@ public class JuegoController {
         Tools.imprimirMensaje("Comienza " + cdb.getJugadorActual().getNombre() + " por tener el pokemon mas rápido!");
 
         while(cdb.getGanador() == -1){
-            imprimirDivisor(true);
+            Tools.imprimirDivisor(true);
             boolean turnoCompletado = turno(cdb);
             if(turnoCompletado){
                 cdb.setSiguienteTurno();
@@ -45,7 +43,7 @@ public class JuegoController {
         int pokemonElegido;
 
         for(int i = 0; i < cdb.getJugadores().length; i++) {
-            imprimirDivisor(false);
+            Tools.imprimirDivisor(false);
             System.out.println("Jugador " + (i+1) + ", ingrese su nombre");
             nombreUsuario = InputUsuario.obtenerCualquierDato(false);
             cdb.getJugadores()[i].setNombre(nombreUsuario);
@@ -63,7 +61,7 @@ public class JuegoController {
         CampoDeBatallaView.imprimirCampo(cdb);
 
         System.out.println("Elija una opción");
-        int opciones = imprimirComandos(comandos);
+        int opciones = Tools.imprimirComandos(comandos);
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
 
         Tools.imprimirDivisor(false);
@@ -71,7 +69,7 @@ public class JuegoController {
     }
 
     public static void main(String[] args) {
-        inicializarComandos(comandos);
+        Tools.inicializarComandos(comandos);
         CampoDeBatalla juego = inicializarJuego();
         jugar(juego);
     }
