@@ -7,24 +7,25 @@ import java.util.Map;
 import org.fiuba.algotres.comandos.*;
 
 import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
-import static org.fiuba.algotres.views.terminal.Tools.imprimirComandos;
 
+import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.fiuba.algotres.views.terminal.InputUsuario;
+import org.fiuba.algotres.views.terminal.PokemonView;
+import org.fiuba.algotres.views.terminal.Tools;
 
 public class JuegoController {
     
-    private static final Map<Integer, Comando> comandos = new HashMap<>(){{
-        put(1, new ComandoHabilidad());
-        put(2, new ComandoItem());
-        put(3, new ComandoCambiarPokemon());
-        put(4, new ComandoRendirse());
-    }};
+    private static final Map<Integer, Comando> comandos = new HashMap<>();
     
     public static void jugar(CampoDeBatalla cdb){
         setupInicial(cdb);
+
         cdb.setJugadorInicialPorAtributo(Comparator.comparingInt(jugador -> jugador.getPokemonActual().getVelocidad()));
+        Tools.imprimirDivisor(false);
+        Tools.imprimirMensaje("Comienza " + cdb.getJugadorActual().getNombre() + " por tener el pokemon mas rápido!");
 
         while(cdb.getGanador() == -1){
+            Tools.imprimirDivisor(true);
             boolean turnoCompletado = turno(cdb);
             if(turnoCompletado){
                 cdb.setSiguienteTurno();
@@ -35,20 +36,40 @@ public class JuegoController {
     }
     
     public static void setupInicial(CampoDeBatalla cdb){
-        cdb.getJugadores()[0].setNombre("Juan");
-        cdb.getJugadores()[1].setNombre("Diego");
-        cdb.getJugadores()[0].setPokemonActual(cdb.getJugadores()[0].getPokemonsActivos().remove(0));
-        cdb.getJugadores()[1].setPokemonActual(cdb.getJugadores()[1].getPokemonsActivos().remove(0));
-        /* HACER BIEN */
+        System.out.println("Bienvenido a nuestro simulador de batallas pokemon!");
+
+        String nombreUsuario;
+        int opciones;
+        int pokemonElegido;
+
+        for(int i = 0; i < cdb.getJugadores().length; i++) {
+            Tools.imprimirDivisor(false);
+            System.out.println("Jugador " + (i+1) + ", ingrese su nombre");
+            nombreUsuario = InputUsuario.obtenerCualquierDato(false);
+            cdb.getJugadores()[i].setNombre(nombreUsuario);
+
+            System.out.println("Elija su pokemon inicial");
+            opciones = PokemonView.imprimirPokemons(cdb.getJugadores()[i].getPokemonsActivos(), false);
+            pokemonElegido = InputUsuario.obtenerOpcionUsuario(opciones);
+            cdb.getJugadores()[i].setPokemonActual(cdb.getJugadores()[i].getPokemonsActivos().remove(pokemonElegido-1));
+
+            Tools.imprimirMensaje("Eligió el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
+        }
     }
 
     public static boolean turno(CampoDeBatalla cdb){
-        int opciones = imprimirComandos(comandos);
+        CampoDeBatallaView.imprimirCampo(cdb);
+
+        System.out.println("Elija una opción");
+        int opciones = Tools.imprimirComandos(comandos);
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
+
+        Tools.imprimirDivisor(false);
         return comandos.get(opcionElegida).ejecutar(cdb);
     }
 
     public static void main(String[] args) {
+        Tools.inicializarComandos(comandos);
         CampoDeBatalla juego = inicializarJuego();
         jugar(juego);
     }

@@ -4,6 +4,21 @@ import org.fiuba.algotres.CampoDeBatalla;
 
 public class CampoDeBatallaView {
     public static void imprimirCampo(CampoDeBatalla cdb){
-        System.out.println("Acá va la info del campo completo");
+        for(int i = 0; i < cdb.getJugadores().length; i++) {
+            System.out.println(cdb.getJugadores()[i].getNombre());
+
+            System.out.print(cdb.getJugadores()[i].getPokemonActual().getNombre());
+            if (cdb.getJugadores()[i].getPokemonActual().getEstado() != null) {
+                System.out.println(" (" + cdb.getJugadores()[i].getPokemonActual().getEstado().getNombre() + ")");
+            } else {
+                System.out.println();
+            }
+
+            System.out.println(cdb.getJugadores()[i].getPokemonActual().getVidaActual() + "❤️/"
+                             + cdb.getJugadores()[i].getPokemonActual().getVidaMaxima() + "❤\uFE0F");
+            System.out.println();
+        }
+        System.out.println("Turno actual: " + cdb.getJugadorActual().getNombre());
+        System.out.println();
     }
 }

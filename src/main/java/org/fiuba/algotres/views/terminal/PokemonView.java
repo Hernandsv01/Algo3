@@ -12,12 +12,16 @@ public class PokemonView {
         System.out.println("\t" + res + ") Volver");
         return res;
     }
-    public static int imprimirPokemons(List<Pokemon> pokemons){
+    public static int imprimirPokemons(List<Pokemon> pokemons, boolean opcionVolver){
         int res;
-        for(res = 0; res < pokemons.size(); res++){
-            System.out.println("\t" + res + ") " + pokemons.get(res).getNombre());
+        for(res = 1; res <= pokemons.size(); res++){
+            System.out.println("\t" + res + ") " + pokemons.get(res-1).getNombre());
         }
-        System.out.println("\t" + res + ") Volver");
-        return res;
+        if(opcionVolver) {
+            System.out.println("\t" + res + ") Volver");
+            return res;
+        }else{
+            return res-1;
+        }
     }
 }
