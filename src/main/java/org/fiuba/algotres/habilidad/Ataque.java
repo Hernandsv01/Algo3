@@ -30,8 +30,8 @@ public class Ataque extends Habilidad{
 
     @Override
     public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        int numeradorInterno = 2 * atacante.getNivel() *  esCritico() * this.poder * (atacante.getAtaque()/victima.getDefensa());
-        int fraccionCompleta = (2 + (numeradorInterno/5) )/50;
+        double numeradorInterno = 2 * atacante.getNivel() *  esCritico() * this.poder * ((double) atacante.getAtaque() / (double)victima.getDefensa());
+        double fraccionCompleta = (2 + (numeradorInterno/5) )/50;
         int dano = (int)(fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(atacante, victima) * getRandom());
 
         victima.setVidaActual(victima.getVidaActual() - dano);

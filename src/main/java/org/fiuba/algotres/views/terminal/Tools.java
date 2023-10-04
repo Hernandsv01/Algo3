@@ -20,8 +20,12 @@ public class Tools {
         }
     }
 
-    public static void imprimirDivisor(){
-        System.out.println("------------------------------");
+    public static void imprimirDivisor(boolean lineasDobles){
+        if(lineasDobles){
+            System.out.println("==============================");
+        }else{
+            System.out.println("------------------------------");
+        }
     }
     
     public static int imprimirComandos(Map<Integer, Comando> map){
@@ -31,6 +35,7 @@ public class Tools {
     
     public static void imprimirMensaje(String mensaje){
         System.out.println(mensaje);
+        System.out.println("Presione enter para continuar");
         InputUsuario.obtenerCualquierDato(true);
     }
 
