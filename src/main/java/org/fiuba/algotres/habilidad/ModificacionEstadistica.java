@@ -2,7 +2,7 @@ package org.fiuba.algotres.habilidad;
 
 import org.fiuba.algotres.Pokemon;
 
-public class ModificacionEstadistica extends Habilidad{
+public abstract class ModificacionEstadistica extends Habilidad{
     protected final Integer porcentaje;
 
     public ModificacionEstadistica(String nombre, int usos, Integer porcentaje) {
@@ -15,9 +15,5 @@ public class ModificacionEstadistica extends Habilidad{
      * @param victima pokemon contrario.
      */
     @Override
-    public void accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        if (usos <= 0) {
-            return;
-        }
-    }
+    public abstract boolean accionarHabilidad(Pokemon atacante, Pokemon victima);
 }

@@ -15,11 +15,10 @@ public abstract class Estado {
 
     /**
      * @param pokemon que puede o no tener un estado aplicado.
-     * @param ignorado debe ser null.
      * @return false en caso de que el estado persista en el pokemon;
      * true en caso de que el pokemon no tenga un estado o se termino el efecto del mismo.
      */
-    public boolean accionar(Pokemon pokemon, Pokemon ignorado) {
+    public boolean accionar(Pokemon pokemon) {
         return pokemon.getEstado() == null;
     }
 

@@ -23,11 +23,16 @@ public class ComandoHabilidad implements Comando {
         if(opcionElegida == opciones) return false;
         
         Habilidad habilidad = cdb.getJugadorActual().getPokemonActual().getHabilidades().get(opcionElegida-1);
-        habilidad.accionarHabilidad(
+        boolean verificador = habilidad.accionarHabilidad(
                 cdb.getJugadorActual().getPokemonActual(),
                 cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual()
         );
-        Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
+        if (verificador) {
+            Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
+        } else {
+            Tools.imprimirMensaje("Ya no te quedan usos de " + habilidad.getNombre() + ", elije otra habilidad!");
+            return false;
+        }
         return true;
     }
 
