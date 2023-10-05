@@ -18,6 +18,6 @@ public abstract class Habilidad {
 
     @Override
     public String toString() {
-        return getNombre() + "(" + getUsos() + "usos)";
+        return getNombre() + "(usos: " + getUsos() + ")";
     }
 }

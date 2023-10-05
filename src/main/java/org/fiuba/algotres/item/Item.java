@@ -25,6 +25,6 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return getNombre() + "(" + getCantidad() + "cantidad)";
+        return getNombre() + "(cantidad: " + getCantidad() + ")";
     }
 }
