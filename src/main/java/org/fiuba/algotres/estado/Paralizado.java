@@ -8,7 +8,7 @@ public class Paralizado extends Estado {
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon, Pokemon ignorado) {
+    public boolean accionar(Pokemon pokemon) {
         return Math.random() >= 0.5;
     }
 }

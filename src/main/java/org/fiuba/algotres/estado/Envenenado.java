@@ -8,7 +8,7 @@ public class Envenenado extends Estado{
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon, Pokemon ignorado) {
+    public boolean accionar(Pokemon pokemon) {
         pokemon.danarPorPorcentaje(5);
         return false;
     }

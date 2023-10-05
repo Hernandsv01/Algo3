@@ -1,9 +1,12 @@
 package org.fiuba.algotres;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public enum Tipos {
 
     AGUA(
@@ -296,19 +299,29 @@ public enum Tipos {
     private static final Map<Tipos, TiposBasicos> tiposToTiposBasicosMap;
 
     static {
-        tiposToTiposBasicosMap = new HashMap<>();
-        for (Tipos tipo : values()) {
-            tiposToTiposBasicosMap.put(tipo, tipo.toBasico());
-        }
+        tiposToTiposBasicosMap = new HashMap<Tipos, TiposBasicos>() {{
+            put(Tipos.AGUA ,TiposBasicos.AGUA);
+            put(Tipos.BICHO, TiposBasicos.BICHO);
+            put(Tipos.DRAGON, TiposBasicos.DRAGON);
+            put(Tipos.ELECTRICO, TiposBasicos.ELECTRICO);
+            put(Tipos.FANTASMA, TiposBasicos.FANTASMA);
+            put(Tipos.FUEGO, TiposBasicos.FUEGO);
+            put(Tipos.HIELO, TiposBasicos.HIELO);
+            put(Tipos.LUCHA, TiposBasicos.LUCHA);
+            put(Tipos.NORMAL, TiposBasicos.NORMAL);
+            put(Tipos.PLANTA, TiposBasicos.PLANTA);
+            put(Tipos.PSIQUICO, TiposBasicos.PSIQUICO);
+            put(Tipos.ROCA, TiposBasicos.ROCA);
+            put(Tipos.TIERRA, TiposBasicos.TIERRA);
+            put(Tipos.VENENO, TiposBasicos.VENENO);
+            put(Tipos.VOLADOR, TiposBasicos.VOLADOR);
+        }};
     }
 
     Tipos(Map<TiposBasicos, Efectividad> efectividadMap) {
         this.efectividadMap = Collections.unmodifiableMap(efectividadMap);
     }
 
-    public Map<TiposBasicos, Efectividad> getEfectividadMap() {
-        return efectividadMap;
-    }
     public TiposBasicos toBasico() {
         return tiposToTiposBasicosMap.get(this);
     }

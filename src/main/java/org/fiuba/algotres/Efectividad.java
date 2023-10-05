@@ -1,5 +1,8 @@
 package org.fiuba.algotres;
 
+import lombok.Getter;
+
+@Getter
 public enum Efectividad {
     FUERTE(2.0f),
     NORMAL(1.0f),
@@ -12,7 +15,4 @@ public enum Efectividad {
         this.multiplicador = multiplicador;
     }
 
-    public float getMultiplicador() {
-        return multiplicador;
-    }
 }
