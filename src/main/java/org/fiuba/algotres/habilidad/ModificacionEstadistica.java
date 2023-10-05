@@ -15,5 +15,5 @@ public abstract class ModificacionEstadistica extends Habilidad{
      * @param victima pokemon contrario.
      */
     @Override
-    public abstract void accionarHabilidad(Pokemon atacante, Pokemon victima);
+    public abstract boolean accionarHabilidad(Pokemon atacante, Pokemon victima);
 }

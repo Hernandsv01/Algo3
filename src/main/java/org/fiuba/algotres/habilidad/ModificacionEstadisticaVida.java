@@ -13,11 +13,12 @@ public class ModificacionEstadisticaVida extends ModificacionEstadistica {
      * @param ignorado debe ser null.
      */
     @Override
-    public void accionarHabilidad(Pokemon atacante, Pokemon ignorado) {
+    public boolean accionarHabilidad(Pokemon atacante, Pokemon ignorado) {
         if (usos <= 0) {
-            return;
+            return false;
         }
         atacante.curarPorPorcentaje(porcentaje);
         usos--;
+        return true;
     }
 }

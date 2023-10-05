@@ -14,7 +14,7 @@ public abstract class Habilidad {
         this.usos = usos;
     }
 
-    public abstract void accionarHabilidad(Pokemon atacante, Pokemon victima);
+    public abstract boolean accionarHabilidad(Pokemon atacante, Pokemon victima);
 
     @Override
     public String toString() {
