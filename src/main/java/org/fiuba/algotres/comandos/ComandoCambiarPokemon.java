@@ -21,6 +21,8 @@ public class ComandoCambiarPokemon implements Comando {
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
         if(opcionElegida == opciones) return false;
 
+        cdb.getJugadorActual().getPokemonActual().getEstado().accionar(cdb.getJugadorActual().getPokemonActual());
+
         boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida-1);
         if(opExitosa){
             Tools.imprimirMensaje(cdb.getJugadorActual().getPokemonActual().getNombre() + " entra a la batalla!");

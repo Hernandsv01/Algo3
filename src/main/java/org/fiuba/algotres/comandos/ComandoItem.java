@@ -40,6 +40,8 @@ public class ComandoItem implements Comando {
 
         if(opcionElegida == opciones) return false;
 
+        cdb.getJugadorActual().getPokemonActual().getEstado().accionar(cdb.getJugadorActual().getPokemonActual());
+
         boolean opExitosa = itemElegido.usar(pokemons.get(opcionElegida-1));
         if(opExitosa){
             Tools.imprimirMensaje(itemElegido.getNombre() + " usado en " + pokemons.get(opcionElegida-1).getNombre() + "!");

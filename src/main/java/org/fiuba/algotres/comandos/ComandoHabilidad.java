@@ -1,6 +1,7 @@
 package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.CampoDeBatalla;
+import org.fiuba.algotres.estado.Estado;
 import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
@@ -21,7 +22,16 @@ public class ComandoHabilidad implements Comando {
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
         
         if(opcionElegida == opciones) return false;
-        
+
+        Estado estado = cdb.getJugadorActual().getPokemonActual().getEstado();
+        if(estado != null){
+            boolean puedeAccionar = estado.accionar(cdb.getJugadorActual().getPokemonActual());
+            if(!puedeAccionar){
+                Tools.imprimirMensaje("El pokemon está " + estado.getNombre() + "! No puede hacer nada");
+                return true;
+            }
+        }
+
         Habilidad habilidad = cdb.getJugadorActual().getPokemonActual().getHabilidades().get(opcionElegida-1);
         boolean verificador = habilidad.accionarHabilidad(
                 cdb.getJugadorActual().getPokemonActual(),
