@@ -1,6 +1,7 @@
 package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.CampoDeBatalla;
+import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.JugadorView;
 import org.fiuba.algotres.views.terminal.Tools;
@@ -21,7 +22,15 @@ public class ComandoCambiarPokemon implements Comando {
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
         if(opcionElegida == opciones) return false;
 
-        cdb.getJugadorActual().getPokemonActual().getEstado().accionar(cdb.getJugadorActual().getPokemonActual());
+        Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
+        if(pokemonActual.getEstado() != null) {
+            pokemonActual.getEstado().accionar(pokemonActual);
+        }
+        if(pokemonActual.getVidaActual() <= 0){
+            System.out.println(pokemonActual.getNombre() + " murió por los efectos de " + pokemonActual.getEstado().getNombre());
+            cdb.getJugadorActual().matarPokemonActual();
+            return true;
+        }
 
         boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida-1);
         if(opExitosa){

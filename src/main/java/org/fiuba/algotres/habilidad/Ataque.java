@@ -35,7 +35,7 @@ public class Ataque extends Habilidad{
         }
         double numeradorInterno = 2 * atacante.getNivel() *  esCritico() * this.poder * ((double) atacante.getAtaque() / (double)victima.getDefensa());
         double fraccionCompleta = (2 + (numeradorInterno/5) )/50;
-        int dano = (int)(fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(atacante, victima) * getRandom());
+        int dano = (int)(fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(victima) * getRandom());
 
         victima.danarPorPuntos(dano);
         this.usos--;
@@ -56,7 +56,8 @@ public class Ataque extends Habilidad{
         return (double) numeroAleatorio / MAXIMO_RANDOM;
     }
 
-    public double getMultiplicadorEfectividad(Pokemon atacante, Pokemon victima){
-        return atacante.getTipos().getEfectividadMap().get(victima.getTipos().toBasico()).getMultiplicador();
+    public double getMultiplicadorEfectividad(Pokemon victima){
+        double res = tipo.getEfectividadMap().get(victima.getTipos().toBasico()).getMultiplicador();
+        return res;
     }
 }
