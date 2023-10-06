@@ -15,7 +15,12 @@ import org.fiuba.algotres.views.terminal.Tools;
 
 public class JuegoController {
     
-    private static final Map<Integer, Comando> comandos = new HashMap<>();
+    private static final Map<Integer, Comando> comandos = new HashMap<>(){{
+        put(1, new ComandoHabilidad());
+        put(2, new ComandoItem());
+        put(3, new ComandoCambiarPokemon());
+        put(4, new ComandoRendirse());
+    }};
     
     public static void jugar(CampoDeBatalla cdb){
         setupInicial(cdb);
@@ -69,7 +74,6 @@ public class JuegoController {
     }
 
     public static void main(String[] args) {
-        Tools.inicializarComandos(comandos);
         CampoDeBatalla juego = inicializarJuego();
         jugar(juego);
     }
