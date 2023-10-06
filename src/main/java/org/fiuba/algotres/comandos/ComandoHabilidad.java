@@ -27,11 +27,11 @@ public class ComandoHabilidad implements Comando {
         if(pokemonActual.getEstado() != null){
             boolean puedeAccionar = pokemonActual.getEstado().accionar(pokemonActual);
             if(!puedeAccionar){
-                Tools.imprimirMensaje("El pokemon está " + pokemonActual.getEstado().getNombre() + "! No puede hacer nada");
+                Tools.imprimirMensaje("El pokemon esta " + pokemonActual.getEstado().getNombre() + "! No puede hacer nada");
                 return true;
             }
             if(pokemonActual.getVidaActual() <= 0){
-                Tools.imprimirMensaje("Tu pokemon murió antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
+                Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
                 cdb.getJugadorActual().matarPokemonActual();
             }
         }
@@ -48,7 +48,7 @@ public class ComandoHabilidad implements Comando {
         Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
 
         if(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() <= 0){
-            Tools.imprimirMensaje(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre() + " murió!");
+            Tools.imprimirMensaje(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre() + " murio!");
             cdb.getJugadores()[cdb.getSiguienteTurno()].matarPokemonActual();
         }
 

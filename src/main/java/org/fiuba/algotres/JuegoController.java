@@ -26,7 +26,7 @@ public class JuegoController {
 
         cdb.setJugadorInicialPorAtributo(Comparator.comparingInt(jugador -> jugador.getPokemonActual().getVelocidad()));
         Tools.imprimirDivisor(false);
-        Tools.imprimirMensaje("Comienza " + cdb.getJugadorActual().getNombre() + " por tener el pokemon mas rápido!");
+        Tools.imprimirMensaje("Comienza " + cdb.getJugadorActual().getNombre() + " por tener el pokemon mas rapido!");
 
         while(cdb.getGanador() == -1){
             Tools.imprimirDivisor(true);
@@ -57,14 +57,14 @@ public class JuegoController {
             pokemonElegido = InputUsuario.obtenerOpcionUsuario(opciones);
             cdb.getJugadores()[i].setPokemonActual(cdb.getJugadores()[i].getPokemonsActivos().remove(pokemonElegido-1));
 
-            Tools.imprimirMensaje("Eligió el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
+            Tools.imprimirMensaje("Eligio el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
         }
     }
 
     public static boolean turno(CampoDeBatalla cdb){
         CampoDeBatallaView.imprimirCampo(cdb);
 
-        System.out.println("Elija una opción");
+        System.out.println("Elija una opcion");
         int opciones = Tools.imprimirComandos(comandos);
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
 
