@@ -4,6 +4,7 @@ import org.fiuba.algotres.CampoDeBatalla;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.JugadorView;
+import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
 public class ComandoCambiarPokemon implements Comando {
@@ -13,7 +14,7 @@ public class ComandoCambiarPokemon implements Comando {
     @Override
     public boolean ejecutar(CampoDeBatalla cdb) {
         System.out.println("Elija el pokemon");
-        int opciones = JugadorView.imprimirPokemons(cdb.getJugadorActual().getPokemonsActivos());
+        int opciones = PokemonView.imprimirPokemons(cdb.getJugadorActual().getPokemonsActivos(), true);
         if(opciones == 0){
             Tools.imprimirMensaje("No te quedan mas pokemons con vida :(");
             return false;

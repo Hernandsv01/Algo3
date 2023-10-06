@@ -1,17 +1,16 @@
 package org.fiuba.algotres;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fiuba.algotres.comandos.*;
-
-import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
-
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
+
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
 
 public class JuegoController {
     

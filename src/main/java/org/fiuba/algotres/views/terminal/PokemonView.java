@@ -1,7 +1,8 @@
 package org.fiuba.algotres.views.terminal;
 
-import java.util.List;
 import org.fiuba.algotres.Pokemon;
+
+import java.util.List;
 
 public class PokemonView {
     public static int imprimirHabilidadesPokemon(Pokemon pokemon){

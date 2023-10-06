@@ -1,10 +1,8 @@
 package org.fiuba.algotres.views.terminal;
 
-import java.io.File;
-import java.util.Map;
-import java.util.Objects;
-
 import org.fiuba.algotres.comandos.Comando;
+
+import java.util.Map;
 
 public class Tools {
     public static void limpiarConsola(){

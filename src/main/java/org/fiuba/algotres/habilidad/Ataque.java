@@ -1,13 +1,11 @@
 package org.fiuba.algotres.habilidad;
 
-import org.fiuba.algotres.*;
-
-import java.lang.Math;
-import java.util.Random;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
+
+import java.util.Random;
 
 @Getter @Setter
 public class Ataque extends Habilidad{

@@ -4,21 +4,11 @@ import org.fiuba.algotres.CampoDeBatalla;
 import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.Tipos;
-import org.fiuba.algotres.estado.Paralizado;
 import org.fiuba.algotres.estado.Dormido;
 import org.fiuba.algotres.estado.Envenenado;
-import org.fiuba.algotres.habilidad.Ataque;
-import org.fiuba.algotres.habilidad.Habilidad;
-import org.fiuba.algotres.habilidad.ModificacionEstadisticaAtaque;
-import org.fiuba.algotres.habilidad.ModificacionEstadisticaDefensa;
-import org.fiuba.algotres.habilidad.ModificacionEstadisticaVida;
-import org.fiuba.algotres.habilidad.ModificacionEstado;
-import org.fiuba.algotres.item.Item;
-import org.fiuba.algotres.item.EstadisticaAtaque;
-import org.fiuba.algotres.item.CuraTodo;
-import org.fiuba.algotres.item.EstadisticaDefensa;
-import org.fiuba.algotres.item.Pocion;
-import org.fiuba.algotres.item.Revivir;
+import org.fiuba.algotres.estado.Paralizado;
+import org.fiuba.algotres.habilidad.*;
+import org.fiuba.algotres.item.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -614,17 +604,18 @@ public class Inicializador {
         /* *********************************************************** */
         /* *******************ASIGNACION DE ITEMS********************* */
         /* *********************************************************** */
-        List<Item> itemsJugadores = creacionItems();
+        List<Item> itemsJugador1 = creacionItems();
+        List<Item> itemsJugador2 = creacionItems();
 
         /* *********************************************************** */
         /* *********************JUGADOR 1***************************** */
         /* *********************************************************** */
-        Jugador jugador1 = new Jugador(pokemons[0], itemsJugadores);
+        Jugador jugador1 = new Jugador(pokemons[0], itemsJugador1);
 
         /* *********************************************** */
         /* ***************JUGADOR 2*********************** */
         /* *********************************************** */
-        Jugador jugador2 = new Jugador(pokemons[1], itemsJugadores);
+        Jugador jugador2 = new Jugador(pokemons[1], itemsJugador2);
 
         return new CampoDeBatalla(
                 new Jugador[]{
