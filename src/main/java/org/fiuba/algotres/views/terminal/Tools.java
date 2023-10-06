@@ -38,36 +38,4 @@ public class Tools {
         System.out.println("Presione enter para continuar");
         InputUsuario.obtenerCualquierDato(true);
     }
-
-    public static void inicializarComandos(Map<Integer, Comando> comandos) {
-        File directory = new File("target/classes/org/fiuba/algotres/comandos");
-
-        if (directory.exists() && directory.isDirectory()) {
-            File[] files = directory.listFiles();
-
-            for (int i = 0; i < Objects.requireNonNull(files).length; i++) {
-                File file = files[i];
-                if (file.isFile() && file.getName().startsWith("Comando") && file.getName().endsWith(".class") && file.getName().length() > "Comando.class".length()) {
-                    try {
-                        String className = "org.fiuba.algotres.comandos." + file.getName().replace(".class", "");
-
-                        Object instance = Class.forName(className).getDeclaredConstructor().newInstance();
-
-                        comandos.put(i, (Comando)instance);
-
-                    } catch (ClassNotFoundException e) {
-                        System.err.println("Class not found: " + e.getMessage());
-                    } catch (ClassCastException e) {
-                        System.err.println("Class not of Comando type: " + e.getMessage());
-                    } catch (NoSuchMethodException e) {
-                        System.err.println("Empty class constructor not found: " + e.getMessage());
-                    } catch (Exception e) {
-                        System.err.println("Error instantiating class: " + e.getMessage());
-                    }
-                }
-            }
-        } else {
-            System.err.println("Directory does not exist or is not a directory.");
-        }
-    }
 }

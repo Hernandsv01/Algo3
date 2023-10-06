@@ -15,8 +15,7 @@ public abstract class Estado {
 
     /**
      * @param pokemon que puede o no tener un estado aplicado.
-     * @return false en caso de que el estado persista en el pokemon;
-     * true en caso de que el pokemon no tenga un estado o se termino el efecto del mismo.
+     * @return true en caso de que el pokemon aún asi pueda realizar la operación, false en caso contrario.
      */
     public boolean accionar(Pokemon pokemon) {
         return pokemon.getEstado() == null;

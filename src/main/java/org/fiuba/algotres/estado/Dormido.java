@@ -11,6 +11,7 @@ public class Dormido extends Estado {
     public boolean accionar(Pokemon pokemon) {
         double proba = 0.25 + this.turnosAplicados * 0.25;
         if (Math.random() <= proba) {
+            pokemon.setEstado(null);
             return true;
         }
         this.turnosAplicados++;

@@ -40,9 +40,16 @@ public class ComandoItem implements Comando {
 
         if(opcionElegida == opciones) return false;
 
+        if(cdb.getJugadorActual().getPokemonActual().getEstado() != null) {
+            cdb.getJugadorActual().getPokemonActual().getEstado().accionar(cdb.getJugadorActual().getPokemonActual());
+        }
+
         boolean opExitosa = itemElegido.usar(pokemons.get(opcionElegida-1));
         if(opExitosa){
             Tools.imprimirMensaje(itemElegido.getNombre() + " usado en " + pokemons.get(opcionElegida-1).getNombre() + "!");
+            if("Revivir".equals(itemElegido.getNombre())){
+                cdb.getJugadorActual().revivirPokemon(opcionElegida-1);
+            }
         }else{
             Tools.imprimirMensaje("No se puede usar ese item en ese pokemon :/");
         }

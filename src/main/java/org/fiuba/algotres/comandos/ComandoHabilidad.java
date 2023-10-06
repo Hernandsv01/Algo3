@@ -1,6 +1,8 @@
 package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.CampoDeBatalla;
+import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.estado.Estado;
 import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
@@ -21,18 +23,36 @@ public class ComandoHabilidad implements Comando {
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
         
         if(opcionElegida == opciones) return false;
-        
-        Habilidad habilidad = cdb.getJugadorActual().getPokemonActual().getHabilidades().get(opcionElegida-1);
-        boolean verificador = habilidad.accionarHabilidad(
-                cdb.getJugadorActual().getPokemonActual(),
+
+        Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
+        if(pokemonActual.getEstado() != null){
+            boolean puedeAccionar = pokemonActual.getEstado().accionar(pokemonActual);
+            if(!puedeAccionar){
+                Tools.imprimirMensaje("El pokemon está " + pokemonActual.getEstado().getNombre() + "! No puede hacer nada");
+                return true;
+            }
+            if(pokemonActual.getVidaActual() <= 0){
+                Tools.imprimirMensaje("Tu pokemon murió antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
+                cdb.getJugadorActual().matarPokemonActual();
+            }
+        }
+
+        Habilidad habilidad = pokemonActual.getHabilidades().get(opcionElegida-1);
+        boolean habilidadExitosa = habilidad.accionarHabilidad(
+                pokemonActual,
                 cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual()
         );
-        if (verificador) {
-            Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
-        } else {
-            Tools.imprimirMensaje("Ya no te quedan usos de " + habilidad.getNombre() + ", elije otra habilidad!");
+        if (!habilidadExitosa) {
+            Tools.imprimirMensaje("Ya no te quedan usos de " + habilidad.getNombre() + ", elige otra habilidad!");
             return false;
         }
+        Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
+
+        if(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() <= 0){
+            Tools.imprimirMensaje(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre() + " murió!");
+            cdb.getJugadores()[cdb.getSiguienteTurno()].matarPokemonActual();
+        }
+
         return true;
     }
 
