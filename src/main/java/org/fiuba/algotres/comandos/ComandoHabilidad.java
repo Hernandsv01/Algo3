@@ -2,7 +2,6 @@ package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.CampoDeBatalla;
 import org.fiuba.algotres.Pokemon;
-import org.fiuba.algotres.estado.Estado;
 import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
