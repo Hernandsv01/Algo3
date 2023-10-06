@@ -604,17 +604,18 @@ public class Inicializador {
         /* *********************************************************** */
         /* *******************ASIGNACION DE ITEMS********************* */
         /* *********************************************************** */
-        List<Item> itemsJugadores = creacionItems();
+        List<Item> itemsJugador1 = creacionItems();
+        List<Item> itemsJugador2 = creacionItems();
 
         /* *********************************************************** */
         /* *********************JUGADOR 1***************************** */
         /* *********************************************************** */
-        Jugador jugador1 = new Jugador(pokemons[0], itemsJugadores);
+        Jugador jugador1 = new Jugador(pokemons[0], itemsJugador1);
 
         /* *********************************************** */
         /* ***************JUGADOR 2*********************** */
         /* *********************************************** */
-        Jugador jugador2 = new Jugador(pokemons[1], itemsJugadores);
+        Jugador jugador2 = new Jugador(pokemons[1], itemsJugador2);
 
         return new CampoDeBatalla(
                 new Jugador[]{

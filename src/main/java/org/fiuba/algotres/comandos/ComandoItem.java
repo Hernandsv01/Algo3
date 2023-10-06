@@ -22,10 +22,7 @@ public class ComandoItem implements Comando {
         int opciones = JugadorView.imprimirItems(jugador);
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
 
-        if(opcionElegida == opciones){
-            Tools.imprimirMensaje("No te quedan mas items :(");
-            return false;
-        }
+        if(opcionElegida == opciones) return false;
 
         Item itemElegido = jugador.getItems().get(opcionElegida-1);
         List<Pokemon> pokemons;
