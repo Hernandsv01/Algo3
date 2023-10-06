@@ -6,6 +6,7 @@ import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.item.Item;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.JugadorView;
+import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class ComandoItem implements Comando {
         }
 
         System.out.println("Elige a qué pokemon le quieres aplicar " + itemElegido.getNombre());
-        opciones = JugadorView.imprimirPokemons(pokemons);
+        opciones = PokemonView.imprimirPokemons(pokemons, true);
         opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
 
         if(opcionElegida == opciones) return false;
