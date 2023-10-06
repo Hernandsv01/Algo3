@@ -33,7 +33,7 @@ public class ComandoItem implements Comando {
             pokemons = jugador.getPokemonsActivos();
         }
 
-        System.out.println("Elige a qué pokemon le quieres aplicar " + itemElegido.getNombre());
+        System.out.println("Elige a que pokemon le quieres aplicar " + itemElegido.getNombre());
         opciones = PokemonView.imprimirPokemons(pokemons, true);
         opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
 

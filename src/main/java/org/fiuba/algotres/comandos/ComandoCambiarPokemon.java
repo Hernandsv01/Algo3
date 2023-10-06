@@ -28,7 +28,7 @@ public class ComandoCambiarPokemon implements Comando {
             pokemonActual.getEstado().accionar(pokemonActual);
         }
         if(pokemonActual.getVidaActual() <= 0){
-            System.out.println(pokemonActual.getNombre() + " murió por los efectos de " + pokemonActual.getEstado().getNombre());
+            System.out.println(pokemonActual.getNombre() + " murio por los efectos de " + pokemonActual.getEstado().getNombre());
             cdb.getJugadorActual().matarPokemonActual();
             return true;
         }
