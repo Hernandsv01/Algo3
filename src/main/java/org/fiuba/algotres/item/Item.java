@@ -22,9 +22,4 @@ public abstract class Item {
     public boolean usar(Pokemon pokemon) {
         return cantidad > 0;
     }
-
-    @Override
-    public String toString() {
-        return getNombre() + "(cantidad: " + getCantidad() + ")";
-    }
 }

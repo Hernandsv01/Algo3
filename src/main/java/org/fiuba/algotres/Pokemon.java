@@ -45,11 +45,6 @@ public class Pokemon {
         this.habilidades = habilidades;
     }
 
-    @Override
-    public String toString() {
-        return nombre + " (" + vidaActual + "❤️/" + vidaMaxima + "❤\uFE0F)";
-    }
-
     /**
      * Cura al máximo al pokemon
      */

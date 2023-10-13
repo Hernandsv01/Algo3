@@ -15,9 +15,4 @@ public abstract class Habilidad {
     }
 
     public abstract boolean accionarHabilidad(Pokemon atacante, Pokemon victima);
-
-    @Override
-    public String toString() {
-        return getNombre() + "(usos: " + getUsos() + ")";
-    }
 }
