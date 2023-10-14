@@ -40,22 +40,21 @@ public class Ataque extends Habilidad{
         return true;
     }
 
-    public int esCritico(){
+    private int esCritico(){
         double resultado = Math.random()*100;
         return resultado <= PROBABILIDAD_CRITICO ? MULTIPLICADOR_CRITICO : DEFAULT;
     }
 
-    public double esMismoTipo(Pokemon atacante){
+    private double esMismoTipo(Pokemon atacante){
         return (atacante.getTipos() == tipo) ? MULTIPLICADOR_MISMO_TIPO : DEFAULT;
     }
-    public double getRandom(){
+    private double getRandom(){
         Random util = new Random();
         int numeroAleatorio = util.nextInt(MAXIMO_RANDOM-MINIMO_RANDOM) + MINIMO_RANDOM;
         return (double) numeroAleatorio / MAXIMO_RANDOM;
     }
 
-    public double getMultiplicadorEfectividad(Pokemon victima){
-        double res = tipo.getEfectividadMap().get(victima.getTipos().toBasico()).getMultiplicador();
-        return res;
+    private double getMultiplicadorEfectividad(Pokemon victima){
+        return tipo.getEfectividadMap().get(victima.getTipos().toBasico()).getMultiplicador();
     }
 }
