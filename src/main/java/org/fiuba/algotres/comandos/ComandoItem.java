@@ -30,7 +30,7 @@ public class ComandoItem implements Comando {
         if("Revivir".equals(itemElegido.getNombre())){
             pokemons = jugador.getPokemonsMuertos();
         }else{
-            pokemons = jugador.getPokemonsActivos();
+            pokemons = jugador.getPokemonsVivos();
         }
 
         System.out.println("Elige a que pokemon le quieres aplicar " + itemElegido.getNombre());
@@ -43,12 +43,10 @@ public class ComandoItem implements Comando {
             cdb.getJugadorActual().getPokemonActual().getEstado().accionar(cdb.getJugadorActual().getPokemonActual());
         }
 
-        boolean opExitosa = itemElegido.usar(pokemons.get(opcionElegida-1));
+        Pokemon pokemonElegido = pokemons.get(opcionElegida-1);
+        boolean opExitosa = itemElegido.usar(pokemonElegido);
         if(opExitosa){
-            Tools.imprimirMensaje(itemElegido.getNombre() + " usado en " + pokemons.get(opcionElegida-1).getNombre() + "!");
-            if("Revivir".equals(itemElegido.getNombre())){
-                cdb.getJugadorActual().revivirPokemon(opcionElegida-1);
-            }
+            Tools.imprimirMensaje(itemElegido.getNombre() + " usado en " + pokemonElegido.getNombre() + "!");
         }else{
             Tools.imprimirMensaje("No se puede usar ese item en ese pokemon :/");
         }

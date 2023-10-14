@@ -1,6 +1,7 @@
 package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.CampoDeBatalla;
+import org.fiuba.algotres.Jugador;
 import org.fiuba.algotres.Pokemon;
 import org.fiuba.algotres.habilidad.Habilidad;
 import org.fiuba.algotres.views.terminal.InputUsuario;
@@ -32,7 +33,11 @@ public class ComandoHabilidad implements Comando {
             }
             if(pokemonActual.getVidaActual() <= 0){
                 Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
-                cdb.getJugadorActual().matarPokemonActual();
+                cdb.getJugadorActual().getPokemonActual().matar();
+                if(!cdb.getJugadorActual().getPokemonsVivos().isEmpty()){
+                    cdb.getJugadorActual().cambiarPokemonActual(0);
+                }
+                return true;
             }
         }
 
@@ -47,9 +52,13 @@ public class ComandoHabilidad implements Comando {
         }
         Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
 
-        if(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() <= 0){
-            Tools.imprimirMensaje(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre() + " murio!");
-            cdb.getJugadores()[cdb.getSiguienteTurno()].matarPokemonActual();
+        Jugador siguienteJugador = cdb.getJugadores()[cdb.getSiguienteTurno()];
+        if(siguienteJugador.getPokemonActual().getVidaActual() <= 0){
+            Tools.imprimirMensaje(siguienteJugador.getPokemonActual().getNombre() + " murio!");
+            siguienteJugador.getPokemonActual().matar();
+            if(!siguienteJugador.getPokemonsVivos().isEmpty()){
+                siguienteJugador.cambiarPokemonActual(0);
+            }
         }
 
         return true;

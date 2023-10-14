@@ -53,9 +53,10 @@ public class JuegoController {
             cdb.getJugadores()[i].setNombre(nombreUsuario);
 
             System.out.println("Elija su pokemon inicial");
-            opciones = PokemonView.imprimirPokemons(cdb.getJugadores()[i].getPokemonsActivos(), false);
+            opciones = PokemonView.imprimirPokemons(cdb.getJugadores()[i].getPokemons(), false);
             pokemonElegido = InputUsuario.obtenerOpcionUsuario(opciones);
-            cdb.getJugadores()[i].setPokemonActual(cdb.getJugadores()[i].getPokemonsActivos().remove(pokemonElegido-1));
+
+            cdb.getJugadores()[i].cambiarPokemonActual(pokemonElegido-1);
 
             Tools.imprimirMensaje("Eligio el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
         }
