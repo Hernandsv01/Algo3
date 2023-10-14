@@ -19,8 +19,8 @@ public class CampoDeBatalla {
      * @return El número del jugador que ganó o -1 en caso de que ambos tengan pokemons con vida.
      */
     public int getGanador(){
-        if(jugadores[0].getPokemonsActivos().isEmpty() && jugadores[0].getPokemonActual() == null) return 1;
-        if(jugadores[1].getPokemonsActivos().isEmpty() && jugadores[1].getPokemonActual() == null) return 0;
+        if(jugadores[0].getPokemonsVivos().isEmpty()) return 1;
+        if(jugadores[1].getPokemonsVivos().isEmpty()) return 0;
         return -1;
     }
 

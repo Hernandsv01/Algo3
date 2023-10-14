@@ -14,7 +14,7 @@ public class ComandoCambiarPokemon implements Comando {
     @Override
     public boolean ejecutar(CampoDeBatalla cdb) {
         System.out.println("Elija el pokemon");
-        int opciones = PokemonView.imprimirPokemons(cdb.getJugadorActual().getPokemonsActivos(), true);
+        int opciones = PokemonView.imprimirPokemons(cdb.getJugadorActual().getPokemonsVivos(), true);
         if(opciones == 0){
             Tools.imprimirMensaje("No te quedan mas pokemons con vida :(");
             return false;
@@ -26,11 +26,10 @@ public class ComandoCambiarPokemon implements Comando {
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
         if(pokemonActual.getEstado() != null) {
             pokemonActual.getEstado().accionar(pokemonActual);
-        }
-        if(pokemonActual.getVidaActual() <= 0){
-            System.out.println(pokemonActual.getNombre() + " murio por los efectos de " + pokemonActual.getEstado().getNombre());
-            cdb.getJugadorActual().matarPokemonActual();
-            return true;
+            if(pokemonActual.getVidaActual() <= 0){
+                System.out.println(pokemonActual.getNombre() + " murio por estar " + pokemonActual.getEstado().getNombre());
+                cdb.getJugadorActual().getPokemonActual().matar();
+            }
         }
 
         boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida-1);

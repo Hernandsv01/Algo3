@@ -19,6 +19,7 @@ public class Pokemon {
     private Integer defensa;
     private Integer ataque;
     private Estado estado;
+    private boolean estaVivo;
     private final List<Habilidad> habilidades;
 
     public Pokemon(
@@ -42,6 +43,7 @@ public class Pokemon {
         this.defensa = defensa;
         this.ataque = ataque;
         this.estado = null;
+        this.estaVivo = true;
         this.habilidades = habilidades;
     }
 
@@ -51,20 +53,13 @@ public class Pokemon {
     }
 
     /**
-     * Cura al máximo al pokemon
-     */
-    public void curar(){
-        vidaActual = vidaMaxima;
-    }
-
-    /**
      * Cura al pokemon por la cantidad de puntos del parámetro
      * @param puntos puntos de vida que agregarle al pokemon
      */
     public void curarPorPuntos(int puntos){
         vidaActual += puntos;
-        if (vidaActual + puntos > vidaMaxima) {
-            curar();
+        if (vidaActual > vidaMaxima) {
+            revivir();
         }
     }
 
@@ -75,7 +70,7 @@ public class Pokemon {
     public void curarPorPorcentaje(int porcentaje) {
         vidaActual += Math.round(((float)porcentaje / 100) * vidaMaxima);
         if (vidaActual > vidaMaxima) {
-            curar();
+            revivir();
         }
     }
 
@@ -85,7 +80,7 @@ public class Pokemon {
      */
     public void danarPorPuntos(int puntos){
         vidaActual -= puntos;
-        if (vidaActual < 0) {
+        if (vidaActual <= 0) {
             matar();
         }
     }
@@ -96,16 +91,17 @@ public class Pokemon {
      */
     public void danarPorPorcentaje(int porcentaje) {
         vidaActual -= Math.round(((float)porcentaje / 100) * vidaMaxima);
-        if (vidaActual < 0) {
+        if (vidaActual <= 0) {
             matar();
         }
     }
 
     /**
-     * Pone la vida del pokemon en cero
+     * Mata al pokemon
      */
     public void matar(){
         vidaActual = 0;
+        estaVivo = false;
     }
 
     /**
@@ -128,5 +124,14 @@ public class Pokemon {
         if (porcentaje > 0 && porcentaje < 100) {
             defensa += Math.round(((float) porcentaje / 100) * defensa);
         }
+    }
+
+    public boolean estaVivo(){
+        return estaVivo && vidaActual > 0;
+    }
+
+    public void revivir(){
+        estaVivo = true;
+        vidaActual = vidaMaxima;
     }
 }
