@@ -20,9 +20,4 @@ public abstract class Estado {
     public boolean accionar(Pokemon pokemon) {
         return pokemon.getEstado() == null;
     }
-
-    @Override
-    public String toString() {
-        return getNombre();
-    }
 }

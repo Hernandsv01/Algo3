@@ -47,11 +47,6 @@ public class Pokemon {
         this.habilidades = habilidades;
     }
 
-    @Override
-    public String toString() {
-        return nombre + " (" + vidaActual + "❤️/" + vidaMaxima + "❤\uFE0F)";
-    }
-
     /**
      * Cura al pokemon por la cantidad de puntos del parámetro
      * @param puntos puntos de vida que agregarle al pokemon
