@@ -7,40 +7,31 @@ import org.fiuba.algotres.views.terminal.JugadorView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
-public class ComandoCambiarPokemon implements Comando {
-    
-    private final String NOMBRE = "Cambiar Pokemon";
-    
+public class ComandoCambiarPokemon extends Comando {
+    public ComandoCambiarPokemon(String nombre) {
+        super(nombre);
+    }
+
     @Override
     public boolean ejecutar(CampoDeBatalla cdb) {
         System.out.println("Elija el pokemon");
-        int opciones = PokemonView.imprimirPokemons(cdb.getJugadorActual().getPokemonsVivos(), true);
-        if(opciones == 0){
-            Tools.imprimirMensaje("No te quedan mas pokemons con vida :(");
-            return false;
-        }
-
+        int opciones = PokemonView.imprimirPokemons(cdb.getJugadorActual().getPokemonsVivos().subList(1, cdb.getJugadorActual().getPokemonsVivos().size()), true);
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
         if(opcionElegida == opciones) return false;
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
         if(pokemonActual.getEstado() != null) {
             pokemonActual.getEstado().accionar(pokemonActual);
-            if(pokemonActual.getVidaActual() <= 0){
+            if(!pokemonActual.estaVivo()){
                 System.out.println(pokemonActual.getNombre() + " murio por estar " + pokemonActual.getEstado().getNombre());
-                cdb.getJugadorActual().getPokemonActual().matar();
+                opcionElegida--;
             }
         }
 
-        boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida-1);
+        boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida);
         if(opExitosa){
             Tools.imprimirMensaje(cdb.getJugadorActual().getPokemonActual().getNombre() + " entra a la batalla!");
         }
         return opExitosa;
-    }
-
-    @Override
-    public String getNombre() {
-        return NOMBRE;
     }
 }
