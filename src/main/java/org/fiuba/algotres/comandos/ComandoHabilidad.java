@@ -8,10 +8,11 @@ import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
-public class ComandoHabilidad implements Comando {
-    
-    private final String NOMBRE = "Usar habilidad";
-    
+public class ComandoHabilidad extends Comando {
+    public ComandoHabilidad(String nombre) {
+        super(nombre);
+    }
+
     @Override
     public boolean ejecutar(CampoDeBatalla cdb) {
         System.out.println("Elige la habilidad");
@@ -31,12 +32,9 @@ public class ComandoHabilidad implements Comando {
                 Tools.imprimirMensaje("El pokemon esta " + pokemonActual.getEstado().getNombre() + "! No puede hacer nada");
                 return true;
             }
-            if(pokemonActual.getVidaActual() <= 0){
+            if(!pokemonActual.estaVivo()){
                 Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
-                cdb.getJugadorActual().getPokemonActual().matar();
-                if(!cdb.getJugadorActual().getPokemonsVivos().isEmpty()){
-                    cdb.getJugadorActual().cambiarPokemonActual(0);
-                }
+                reemplazarPokemonMuerto(cdb.getJugadorActual());
                 return true;
             }
         }
@@ -53,19 +51,11 @@ public class ComandoHabilidad implements Comando {
         Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
 
         Jugador siguienteJugador = cdb.getJugadores()[cdb.getSiguienteTurno()];
-        if(siguienteJugador.getPokemonActual().getVidaActual() <= 0){
+        if(!siguienteJugador.getPokemonActual().estaVivo()){
             Tools.imprimirMensaje(siguienteJugador.getPokemonActual().getNombre() + " murio!");
-            siguienteJugador.getPokemonActual().matar();
-            if(!siguienteJugador.getPokemonsVivos().isEmpty()){
-                siguienteJugador.cambiarPokemonActual(0);
-            }
+            reemplazarPokemonMuerto(siguienteJugador);
         }
 
         return true;
-    }
-
-    @Override
-    public String getNombre() {
-        return NOMBRE;
     }
 }
