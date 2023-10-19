@@ -1,6 +1,6 @@
-package org.fiuba.algotres.item;
+package org.fiuba.algotres.model.item;
 
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 public class Revivir extends Item {
     public Revivir(int cantidad, String nombre) {

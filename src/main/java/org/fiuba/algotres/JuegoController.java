@@ -1,6 +1,7 @@
 package org.fiuba.algotres;
 
 import org.fiuba.algotres.comandos.*;
+import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
@@ -10,7 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
+import static org.fiuba.algotres.utils.Inicializador.inicializarJuego;
 
 public class JuegoController {
     

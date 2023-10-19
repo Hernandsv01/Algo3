@@ -1,9 +1,9 @@
-package org.fiuba.algotres.habilidad;
+package org.fiuba.algotres.model.habilidad;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.Pokemon;
-import org.fiuba.algotres.Tipos;
+import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.Random;
 

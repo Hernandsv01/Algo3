@@ -1,6 +1,6 @@
 package org.fiuba.algotres.views.terminal;
 
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class PokemonView {
     public static int imprimirHabilidadesPokemon(Pokemon pokemon){
         int res;
         for(res = 1; res <= pokemon.getHabilidades().size(); res++){
-            System.out.println("\t" + res + ") " + pokemon.getHabilidades().get(res-1));
+            System.out.println("\t" + res + ") " + pokemon.getHabilidades().get(res-1).getNombre());
         }
         System.out.println("\t" + res + ") Volver");
         return res;

@@ -1,13 +1,10 @@
 package org.fiuba.algotres.comandos;
 
-import org.fiuba.algotres.CampoDeBatalla;
-import org.fiuba.algotres.Jugador;
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.CampoDeBatalla;
+import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
-
-import java.util.Collections;
 
 public abstract class Comando {
     private final String nombre;

@@ -1,7 +1,7 @@
-package org.fiuba.algotres.habilidad;
+package org.fiuba.algotres.model.habilidad;
 
-import org.fiuba.algotres.Pokemon;
-import org.fiuba.algotres.estado.Estado;
+import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.estado.Estado;
 
 public class ModificacionEstado extends Habilidad {
     private final Estado estado;

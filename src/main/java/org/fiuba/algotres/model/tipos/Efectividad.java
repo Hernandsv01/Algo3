@@ -1,4 +1,4 @@
-package org.fiuba.algotres;
+package org.fiuba.algotres.model.tipos;
 
 import lombok.Getter;
 

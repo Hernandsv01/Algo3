@@ -1,14 +1,14 @@
-package org.fiuba.algotres.herramientas;
+package org.fiuba.algotres.utils;
 
-import org.fiuba.algotres.CampoDeBatalla;
-import org.fiuba.algotres.Jugador;
-import org.fiuba.algotres.Pokemon;
-import org.fiuba.algotres.Tipos;
-import org.fiuba.algotres.estado.Dormido;
-import org.fiuba.algotres.estado.Envenenado;
-import org.fiuba.algotres.estado.Paralizado;
-import org.fiuba.algotres.habilidad.*;
-import org.fiuba.algotres.item.*;
+import org.fiuba.algotres.model.CampoDeBatalla;
+import org.fiuba.algotres.model.Jugador;
+import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.estado.Dormido;
+import org.fiuba.algotres.model.estado.Envenenado;
+import org.fiuba.algotres.model.estado.Paralizado;
+import org.fiuba.algotres.model.habilidad.*;
+import org.fiuba.algotres.model.item.*;
+import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -540,13 +540,13 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        EstadisticaAtaque ataqueX = new org.fiuba.algotres.item.EstadisticaAtaque(
+        EstadisticaAtaque ataqueX = new org.fiuba.algotres.model.item.EstadisticaAtaque(
                 3,
                 "Ataque X",
                 10
         );
 
-        EstadisticaDefensa defensaX = new org.fiuba.algotres.item.EstadisticaDefensa(
+        EstadisticaDefensa defensaX = new org.fiuba.algotres.model.item.EstadisticaDefensa(
                 3,
                 "Defensa X",
                 10

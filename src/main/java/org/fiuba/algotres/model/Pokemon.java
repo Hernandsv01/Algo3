@@ -1,9 +1,10 @@
-package org.fiuba.algotres;
+package org.fiuba.algotres.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.estado.Estado;
-import org.fiuba.algotres.habilidad.Habilidad;
+import org.fiuba.algotres.model.estado.Estado;
+import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.List;
 
