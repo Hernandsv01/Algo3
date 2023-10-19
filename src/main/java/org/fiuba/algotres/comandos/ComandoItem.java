@@ -11,9 +11,10 @@ import org.fiuba.algotres.views.terminal.Tools;
 
 import java.util.List;
 
-public class ComandoItem implements Comando {
-
-    private final String NOMBRE = "Usar item";
+public class ComandoItem extends Comando {
+    public ComandoItem(String nombre) {
+        super(nombre);
+    }
 
     @Override
     public boolean ejecutar(CampoDeBatalla cdb) {
@@ -39,8 +40,14 @@ public class ComandoItem implements Comando {
 
         if(opcionElegida == opciones) return false;
 
-        if(cdb.getJugadorActual().getPokemonActual().getEstado() != null) {
-            cdb.getJugadorActual().getPokemonActual().getEstado().accionar(cdb.getJugadorActual().getPokemonActual());
+        Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
+        if(pokemonActual.getEstado() != null) {
+            pokemonActual.getEstado().accionar(pokemonActual);
+            if(!pokemonActual.estaVivo()){
+                Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
+                reemplazarPokemonMuerto(cdb.getJugadorActual());
+                return true;
+            }
         }
 
         Pokemon pokemonElegido = pokemons.get(opcionElegida-1);
@@ -51,10 +58,5 @@ public class ComandoItem implements Comando {
             Tools.imprimirMensaje("No se puede usar ese item en ese pokemon :/");
         }
         return opExitosa;
-    }
-
-    @Override
-    public String getNombre() {
-        return NOMBRE;
     }
 }

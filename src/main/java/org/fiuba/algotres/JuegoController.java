@@ -15,10 +15,10 @@ import static org.fiuba.algotres.herramientas.Inicializador.inicializarJuego;
 public class JuegoController {
     
     private static final Map<Integer, Comando> comandos = new HashMap<>(){{
-        put(1, new ComandoHabilidad());
-        put(2, new ComandoItem());
-        put(3, new ComandoCambiarPokemon());
-        put(4, new ComandoRendirse());
+        put(1, new ComandoHabilidad("Usar habilidad"));
+        put(2, new ComandoItem("Usar item"));
+        put(3, new ComandoCambiarPokemon("Cambiar Pokemon"));
+        put(4, new ComandoRendirse("Rendirse"));
     }};
     
     public static void jugar(CampoDeBatalla cdb){
