@@ -1,6 +1,6 @@
-package org.fiuba.algotres.estado;
+package org.fiuba.algotres.model.estado;
 
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 public class Paralizado extends Estado {
     private final double PROBABILIDAD = 0.5;

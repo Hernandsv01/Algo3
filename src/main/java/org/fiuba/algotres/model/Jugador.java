@@ -1,11 +1,10 @@
-package org.fiuba.algotres;
+package org.fiuba.algotres.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.item.Item;
+import org.fiuba.algotres.model.item.Item;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

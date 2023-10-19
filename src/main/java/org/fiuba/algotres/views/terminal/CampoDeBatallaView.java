@@ -1,6 +1,6 @@
 package org.fiuba.algotres.views.terminal;
 
-import org.fiuba.algotres.CampoDeBatalla;
+import org.fiuba.algotres.model.CampoDeBatalla;
 
 public class CampoDeBatallaView {
     public static void imprimirCampo(CampoDeBatalla cdb){

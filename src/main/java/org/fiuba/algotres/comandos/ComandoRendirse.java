@@ -1,6 +1,6 @@
 package org.fiuba.algotres.comandos;
 
-import org.fiuba.algotres.CampoDeBatalla;
+import org.fiuba.algotres.model.CampoDeBatalla;
 
 public class ComandoRendirse extends Comando {
     public ComandoRendirse(String nombre) {

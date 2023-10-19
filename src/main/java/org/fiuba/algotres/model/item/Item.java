@@ -1,8 +1,8 @@
-package org.fiuba.algotres.item;
+package org.fiuba.algotres.model.item;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 @Setter @Getter
 public abstract class Item {

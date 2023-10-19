@@ -1,6 +1,6 @@
-package org.fiuba.algotres.habilidad;
+package org.fiuba.algotres.model.habilidad;
 
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 public abstract class ModificacionEstadistica extends Habilidad{
     protected final Integer porcentaje;

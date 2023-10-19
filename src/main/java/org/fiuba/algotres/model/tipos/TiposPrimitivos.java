@@ -1,6 +1,6 @@
-package org.fiuba.algotres;
+package org.fiuba.algotres.model.tipos;
 
-public enum TiposBasicos {
+public enum TiposPrimitivos {
     AGUA,
     BICHO,
     DRAGON,

@@ -1,7 +1,7 @@
-package org.fiuba.algotres.estado;
+package org.fiuba.algotres.model.estado;
 
 import lombok.Getter;
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 @Getter
 public abstract class Estado {

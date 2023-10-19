@@ -1,6 +1,6 @@
-package org.fiuba.algotres.estado;
+package org.fiuba.algotres.model.estado;
 
-import org.fiuba.algotres.Pokemon;
+import org.fiuba.algotres.model.Pokemon;
 
 public class Envenenado extends Estado{
     private final int DANO = 5;
