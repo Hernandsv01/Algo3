@@ -15,4 +15,8 @@ public abstract class Habilidad {
     }
 
     public abstract boolean accionarHabilidad(Pokemon atacante, Pokemon victima);
+
+    boolean verificarUsos(int usos) {
+        return usos > 0;
+    }
 }

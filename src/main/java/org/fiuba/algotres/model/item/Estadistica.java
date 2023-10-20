@@ -9,8 +9,4 @@ public abstract class Estadistica extends Item {
         super(cantidad, nombre);
         this.porcentaje = porcentaje;
     }
-
-    public boolean usar(Pokemon pokemon) {
-        return super.usar(pokemon);
-    }
 }
