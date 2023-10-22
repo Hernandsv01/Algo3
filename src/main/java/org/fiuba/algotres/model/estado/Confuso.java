@@ -12,7 +12,7 @@ public class Confuso extends Estado {
     @Override
     public boolean accionar(Pokemon pokemon) {
         if (this.turnosAplicados >= 3) {
-            pokemon.setEstados(null);
+            pokemon.quitarEstado(this);
             return true;
         }
         this.turnosAplicados++;
