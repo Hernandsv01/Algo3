@@ -18,6 +18,6 @@ public abstract class Estado {
      * @return true en caso de que el pokemon aún asi pueda realizar la operación, false en caso contrario.
      */
     public boolean accionar(Pokemon pokemon) {
-        return pokemon.getEstado() == null;
+        return pokemon.getEstados().isEmpty();
     }
 }
