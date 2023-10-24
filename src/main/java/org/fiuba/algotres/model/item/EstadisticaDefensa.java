@@ -9,7 +9,7 @@ public class EstadisticaDefensa extends Estadistica {
 
     @Override
     public boolean usar(Pokemon pokemon) {
-        if (super.usar(pokemon)) {
+        if (verificarCantidad(cantidad)) {
             pokemon.modificarDefensa(porcentaje);
             cantidad--;
             return true;

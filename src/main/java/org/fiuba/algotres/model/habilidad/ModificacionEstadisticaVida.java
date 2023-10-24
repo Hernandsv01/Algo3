@@ -14,11 +14,10 @@ public class ModificacionEstadisticaVida extends ModificacionEstadistica {
      */
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon ignorado) {
-        if (usos <= 0) {
-            return false;
+        if (verificarUsos(usos)) {
+            atacante.curarPorPorcentaje(porcentaje);
+            usos--;
         }
-        atacante.curarPorPorcentaje(porcentaje);
-        usos--;
         return true;
     }
 }

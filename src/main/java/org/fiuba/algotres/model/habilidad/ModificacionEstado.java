@@ -11,13 +11,13 @@ public class ModificacionEstado extends Habilidad {
     }
     @Override
     public boolean accionarHabilidad(Pokemon ignorado, Pokemon victima) {
-        if (usos <= 0) {
-            return false;
-        }
-        if (!victima.getEstados().isEmpty()) {
+        if (verificarUsos(usos)) {
+          if (!victima.getEstados().isEmpty()) {
             victima.agregarEstado(this.estado);
+            usos--;
+            return true;
             }
-        usos--;
-        return true;
+        }
+      return false;        
     }
 }

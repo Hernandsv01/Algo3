@@ -10,7 +10,7 @@ public class CuraTodo extends Item{
 
     @Override
     public boolean usar(Pokemon pokemon) {
-        if (super.usar(pokemon)) {
+        if (verificarCantidad(cantidad)) {
             if (!pokemon.getEstados().isEmpty()) {
                 pokemon.getEstados().removeAll(pokemon.getEstados());
                 cantidad--;
