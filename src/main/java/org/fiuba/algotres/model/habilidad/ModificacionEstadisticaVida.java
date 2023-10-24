@@ -17,7 +17,8 @@ public class ModificacionEstadisticaVida extends ModificacionEstadistica {
         if (verificarUsos(usos)) {
             atacante.curarPorPorcentaje(porcentaje);
             usos--;
+            return true;
         }
-        return true;
+        return false;
     }
 }
