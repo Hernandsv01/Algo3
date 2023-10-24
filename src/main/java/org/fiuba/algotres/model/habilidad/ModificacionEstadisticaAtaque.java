@@ -16,7 +16,8 @@ public class ModificacionEstadisticaAtaque extends ModificacionEstadistica {
                 victima.modificarAtaque(-porcentaje);
             }
             usos--;
+            return true;
         }
-        return true;
+        return false;
     }
 }

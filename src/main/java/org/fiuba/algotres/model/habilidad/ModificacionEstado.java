@@ -18,6 +18,6 @@ public class ModificacionEstado extends Habilidad {
             return true;
             }
         }
-      return false;        
+      return false;
     }
 }

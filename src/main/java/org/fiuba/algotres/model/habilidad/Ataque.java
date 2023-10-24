@@ -35,8 +35,9 @@ public class Ataque extends Habilidad{
 
             victima.danarPorPuntos(dano);
             usos--;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private int esCritico(){
