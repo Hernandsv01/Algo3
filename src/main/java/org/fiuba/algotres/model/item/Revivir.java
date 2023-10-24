@@ -10,7 +10,7 @@ public class Revivir extends Item {
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {
-            if (pokemon.getVidaActual() == 0) {
+            if (!pokemon.estaVivo()) {
                 pokemon.revivir();
                 cantidad--;
                 return true;
