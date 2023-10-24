@@ -19,7 +19,9 @@ public abstract class Item {
      * @return false en caso de que no tenga items o no se haya aplicado porque no cumple con las condiciones;
      * caso contrario devolvera true.
      */
-    public boolean usar(Pokemon pokemon) {
+    public abstract boolean usar(Pokemon pokemon);
+
+    boolean verificarCantidad(int cantidad) {
         return cantidad > 0;
     }
 }

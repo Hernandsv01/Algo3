@@ -9,15 +9,14 @@ public class ModificacionEstadisticaDefensa extends ModificacionEstadistica{
 
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        if (usos <= 0) {
-            return false;
+        if (verificarUsos(usos)) {
+            if (atacante == victima) {
+                atacante.modificarDefensa(porcentaje);
+            } else {
+                victima.modificarDefensa(-porcentaje);
+            }
+            usos--;
         }
-        if (atacante == victima) {
-            atacante.modificarDefensa(porcentaje);
-        } else {
-            victima.modificarDefensa(-porcentaje);
-        }
-        usos--;
         return true;
     }
 }

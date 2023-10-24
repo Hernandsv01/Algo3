@@ -28,15 +28,14 @@ public class Ataque extends Habilidad{
 
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        if (usos <= 0) {
-            return false;
-        }
-        double numeradorInterno = 2 * atacante.getNivel() *  esCritico() * this.poder * ((double) atacante.getAtaque() / (double)victima.getDefensa());
-        double fraccionCompleta = (2 + (numeradorInterno/5) )/50;
-        int dano = (int)(fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(victima) * getRandom());
+        if (verificarUsos(usos)) {
+            double numeradorInterno = 2 * atacante.getNivel() * esCritico() * this.poder * ((double) atacante.getAtaque() / (double) victima.getDefensa());
+            double fraccionCompleta = (2 + (numeradorInterno / 5)) / 50;
+            int dano = (int) (fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(victima) * getRandom());
 
-        victima.danarPorPuntos(dano);
-        this.usos--;
+            victima.danarPorPuntos(dano);
+            usos--;
+        }
         return true;
     }
 
