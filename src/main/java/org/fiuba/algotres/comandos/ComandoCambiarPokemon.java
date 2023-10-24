@@ -26,10 +26,10 @@ public class ComandoCambiarPokemon extends Comando {
                 estado.accionar(pokemonActual);
                 if (!pokemonActual.estaVivo()) {
                     System.out.println(pokemonActual.getNombre() + " murio por estar " + estado.getNombre());
+                    opcionElegida--;
                     break;
                 }
             }
-            opcionElegida--;
         }
         boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida);
         if(opExitosa){
