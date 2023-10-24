@@ -3,6 +3,7 @@ package org.fiuba.algotres.comandos;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
@@ -17,15 +18,24 @@ public class ComandoHabilidad extends Comando {
     public boolean ejecutar(CampoDeBatalla cdb) {
         System.out.println("Elige la habilidad");
         int opciones = PokemonView.imprimirHabilidadesPokemon(cdb.getJugadorActual().getPokemonActual());
-        if(opciones == 0){
+        if (opciones == 0) {
             Tools.imprimirMensaje("No te quedan mas habilidades en este pokemon :(");
             return false;
         }
         int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
-        
-        if(opcionElegida == opciones) return false;
+
+        if (opcionElegida == opciones) return false;
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
+
+//        if(!pokemonActual.getEstados().isEmpty()) {
+//            boolean puedeAccionar = true;
+//            for(Estado estado : pokemonActual.getEstados()) {
+//                puedeAccionar = estado.accionar(pokemonActual);
+//            }
+//
+//        }
+
         if(pokemonActual.getEstado() != null){
             boolean puedeAccionar = pokemonActual.getEstado().accionar(pokemonActual);
             if(!puedeAccionar){
