@@ -6,6 +6,7 @@ import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.tipos.Tipos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
@@ -43,7 +44,7 @@ public class Pokemon {
         this.velocidad = velocidad;
         this.defensa = defensa;
         this.ataque = ataque;
-        this.estados = null;
+        this.estados = new ArrayList<Estado>();
         this.estaVivo = true;
         this.habilidades = habilidades;
     }
