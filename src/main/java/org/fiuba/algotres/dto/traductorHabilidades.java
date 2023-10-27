@@ -52,5 +52,6 @@ public class traductorHabilidades {
 public static void main(String[] args) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
         traductorHabilidades traductor = new traductorHabilidades();
         traductor.traducirHabilidades();
+        System.out.println("aaaaa");
     }
 }
