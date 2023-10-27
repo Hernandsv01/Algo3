@@ -1,10 +1,10 @@
 [
     {
-        "nombre": "Bulbasaur",
         "id": 10,
+        "nombre": "Bulbasaur",
         "nivel": 5,
-        "tipo": "planta",
-        "historia": "Esta es una historia",
+        "tipo": "TIERRA",
+        "historia": "quiero",
         "vidaMaxima": 100,
         "velocidad": 20,
         "defensa": 3,
@@ -12,15 +12,27 @@
         "habilidades": [56, 78, 2]
     },
     {
-        "nombre": "Charmander",
         "id": 7,
+        "nombre": "Charmander",
         "nivel": 6,
-        "tipo": "fuego",
-        "historia": "Esta es una historia",
+        "tipo": "BICHO",
+        "historia": "la ",
         "vidaMaxima": 85,
         "velocidad": 15,
         "defensa": 5,
         "ataque": 15,
         "habilidades": [3, 98, 24]
+    },
+    {
+        "id": 8,
+        "nombre": "Squirtle",
+        "nivel": 7,
+        "tipo": "DRAGON",
+        "historia": "septima",
+        "vidaMaxima": 90,
+        "velocidad": 10,
+        "defensa": 10,
+        "ataque": 20,
+        "habilidades": [7, 55, 77]
     }
 ]

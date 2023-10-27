@@ -5,7 +5,7 @@
         { "id": 62, "nombre": "Modificacion Estadistica Ataque", "usos": 11,  "poder": null, "tipo": null, "porcentajeDefensa": null, "porcentajeAtaque" : 10, "porcentajeVida" : null, "nombreEstado": null,"clima":null},
         { "id": 33, "nombre": "Burbuja", "usos": 7, "poder": 5, "tipo": "VENENO", "porcentajeDefensa": null, "porcentajeAtaque" : null, "porcentajeVida" : null, "nombreEstado": null,"clima":null},
         { "id": 48, "nombre": "Modificacion Estadistica Defensa", "usos": 40,  "poder": null, "tipo": null,"porcentajeDefensa": 50, "porcentajeAtaque" : null, "porcentajeVida" : null, "nombreEstado": null,"clima":null},
-        { "id": 48, "nombre": "Modificacion Estado", "usos": 4,  "poder": null, "tipo": "PLANTA", "porcentajeDefensa": null, "porcentajeAtaque" : null, "porcentajeVida" : null, "nombreEstado": "Envenenado","clima":null},
+        { "id": 47, "nombre": "Modificacion Estado", "usos": 4,  "poder": null, "tipo": "PLANTA", "porcentajeDefensa": null, "porcentajeAtaque" : null, "porcentajeVida" : null, "nombreEstado": "Envenenado","clima":null},
         {"id": 9, "nombre": "Modificaion vida", "usos": 7,"poder": null, "tipo": null, "porcentajeDefensa": null, "porcentajeAtaque" : null, "porcentajeVida" : 25, "nombreEstado": null, "clima":null}
 ]
 

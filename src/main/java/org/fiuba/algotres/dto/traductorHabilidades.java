@@ -2,10 +2,13 @@ package org.fiuba.algotres.dto;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
 
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Ataque;
+import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.habilidad.ModificacionEstadisticaAtaque;
 import org.fiuba.algotres.model.habilidad.ModificacionEstadisticaDefensa;
 import org.fiuba.algotres.model.habilidad.ModificacionEstadisticaVida;
@@ -18,22 +21,25 @@ public class traductorHabilidades {
     public traductorHabilidades() {
     }
 
-    public void traducirHabilidades() throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
-        //LecturaJSONHabilidades lector = new LecturaJSONHabilidades();
-        
+    public static HashMap<Integer, Habilidad> traducirHabilidades() throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
+        HashMap<Integer, Habilidad> mapeoHabilidades = new HashMap<>();
         List<LecturaJSONHabilidades> lista = LecturaJSONHabilidades.leecturadearchivos();
         for(int i = 0; i< lista.size(); i++){
             if(lista.get(i).getPoder() != null){
                 Ataque ataque = new Ataque(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPoder(), lista.get(i).getTipo());
+                mapeoHabilidades.put(lista.get(i).getId(), ataque);
             }
             else if(lista.get(i).getPorcentajeDefensa() != null){
-                ModificacionEstadisticaDefensa defensa = new ModificacionEstadisticaDefensa(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPorcentajeDefensa());
+                ModificacionEstadisticaDefensa modificacionDefensa = new ModificacionEstadisticaDefensa(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPorcentajeDefensa());
+                mapeoHabilidades.put(lista.get(i).getId(), modificacionDefensa);
             }
             else if(lista.get(i).getPorcentajeAtaque() != null){
-                ModificacionEstadisticaAtaque ataque = new ModificacionEstadisticaAtaque(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPorcentajeAtaque());
+                ModificacionEstadisticaAtaque modificacionAtaque = new ModificacionEstadisticaAtaque(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPorcentajeAtaque());
+                mapeoHabilidades.put(lista.get(i).getId(), modificacionAtaque);
             }
             else if(lista.get(i).getPorcentajeVida() != null){
-                ModificacionEstadisticaVida ataque = new ModificacionEstadisticaVida(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPorcentajeVida());
+                ModificacionEstadisticaVida modificacionVida = new ModificacionEstadisticaVida(lista.get(i).getNombre(), lista.get(i).getUsos(), lista.get(i).getPorcentajeVida());
+                mapeoHabilidades.put(lista.get(i).getId(), modificacionVida);
             }
             else if(lista.get(i).getEstado() != null){
                 //Estado estado = new Estado(lista.get(i).getNombre(), lista.get(i).getUsos(),new lista.get(i).getEstado());
@@ -45,13 +51,14 @@ public class traductorHabilidades {
             }
             else{
                 System.out.println("error");
-            }
+            }}
+        return mapeoHabilidades;
 
-    }
+
+    
 }
-public static void main(String[] args) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
+    public static void main(String[] args) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
         traductorHabilidades traductor = new traductorHabilidades();
-        traductor.traducirHabilidades();
-        System.out.println("aaaaa");
+        System.out.println(traductor.traducirHabilidades());
     }
 }

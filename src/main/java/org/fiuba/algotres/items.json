@@ -1,3 +1,10 @@
-[{ "nombre": "HiperPocion", "id": 0},
-{ "nombre": "Defensax", "id": 4}, 
-{ "nombre": "CuraTotal", "id": 67 } ]  
+[
+{"id": 0, "nombre": "HiperPocion", "cantidad":1, "cantidadDeVida": 75, "estadisticaDefensa": null, "estadisticaAtaque": null, "curaTodo": false,"revivir": false},
+{"id": 4, "nombre": "modificarEstadisticaDefensa", "cantidad":5, "cantidadDeVida": null, "estadisticaDefensa": 15, "estadisticaAtaque": null,"curaTodo": false,"revivir": false}, 
+{"id": 67, "nombre": "CuraTodo", "cantidad":5, "cantidadDeVida": null, "estadisticaDefensa": null, "estadisticaAtaque": null, "curaTodo": true,"revivir": false },
+{"id": 10, "nombre": "Revivir", "cantidad":5, "cantidadDeVida": null, "estadisticaDefensa": null, "estadisticaAtaque": null,"curaTodo": false,"revivir": true},
+{"id": 10, "nombre": "modificarEstadisticaAtaque", "cantidad":5, "cantidadDeVida": null, "estadisticaDefensa": null, "estadisticaAtaque": 15,"curaTodo": false,"revivir": false},
+{"id": 7, "nombre": "modificarEstadisticaDefensa","cantidad":5, "cantidadDeVida": null, "estadisticaDefensa": 10, "estadisticaAtaque": null,"curaTodo": false,"revivir": false},
+{"id": 77, "nombre": "Pocion","cantidad":5, "cantidadDeVida": 25, "estadisticaDefensa": null, "estadisticaAtaque": null,"curaTodo": false,"revivir": false},
+{"id": 22, "nombre": "Pocion","cantidad":5, "cantidadDeVida": 30, "estadisticaDefensa": null, "estadisticaAtaque": null,"curaTodo": false, "revivir": false} 
+]  
