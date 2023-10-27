@@ -5,6 +5,9 @@ import lombok.Setter;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.tipos.Tipos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Random;
 
 @Getter @Setter
@@ -20,7 +23,8 @@ public class Ataque extends Habilidad{
     private static final int MINIMO_RANDOM = 217;
     private static final int MAXIMO_RANDOM = 255;
 
-    public Ataque(String nombre, int usos, int poder, Tipos tipo) {
+    @JsonCreator
+    public Ataque(@JsonProperty("nombre") String nombre, @JsonProperty("usos")int usos, @JsonProperty("poder") int poder, @JsonProperty("tipo") Tipos tipo) {
         super(nombre, usos);
         this.poder = poder;
         this.tipo = tipo;
