@@ -148,6 +148,7 @@ public class Pokemon {
     public void agregarEstado(Estado estado) {
         if (!this.estados.contains(estado)) {
             this.estados.add(estado);
+            estado.setPokemon(this);
         }
     }
 
