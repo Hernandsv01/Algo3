@@ -2,6 +2,7 @@ package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
@@ -19,11 +20,15 @@ public class ComandoCambiarPokemon extends Comando {
         if(opcionElegida == opciones) return false;
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
-        if(pokemonActual.getEstado() != null) {
-            pokemonActual.getEstado().accionar(pokemonActual);
-            if(!pokemonActual.estaVivo()){
-                System.out.println(pokemonActual.getNombre() + " murio por estar " + pokemonActual.getEstado().getNombre());
-                opcionElegida--;
+
+        if(!pokemonActual.getEstados().isEmpty()) {
+            for(Estado estado : pokemonActual.getEstados()) {
+                estado.accionar();
+                if (!pokemonActual.estaVivo()) {
+                    System.out.println(pokemonActual.getNombre() + " murio por estar " + estado.getNombre());
+                    opcionElegida--;
+                    break;
+                }
             }
         }
         cdb.getClima().aplicarEfectos(pokemonActual);

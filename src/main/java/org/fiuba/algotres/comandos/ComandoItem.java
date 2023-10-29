@@ -3,6 +3,7 @@ package org.fiuba.algotres.comandos;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.JugadorView;
@@ -41,6 +42,7 @@ public class ComandoItem extends Comando {
         if(opcionElegida == opciones) return false;
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
+      
         if(pokemonActual.getEstado() != null) {
             pokemonActual.getEstado().accionar(pokemonActual);
             if(!pokemonActual.estaVivo()){
@@ -54,7 +56,7 @@ public class ComandoItem extends Comando {
             Tools.imprimirMensaje("Tu pokemon murio por el clima ");
             reemplazarPokemonMuerto(cdb.getJugadorActual());
         }
-
+      
         Pokemon pokemonElegido = pokemons.get(opcionElegida-1);
         boolean opExitosa = itemElegido.usar(pokemonElegido);
         if(opExitosa){

@@ -5,6 +5,7 @@ import org.fiuba.algotres.model.Pokemon;
 
 @Getter
 public abstract class Estado {
+    protected Pokemon pokemon;
     protected int turnosAplicados;
     private final String nombre;
 
@@ -14,10 +15,13 @@ public abstract class Estado {
     }
 
     /**
-     * @param pokemon que puede o no tener un estado aplicado.
      * @return true en caso de que el pokemon aún asi pueda realizar la operación, false en caso contrario.
      */
-    public boolean accionar(Pokemon pokemon) {
-        return pokemon.getEstado() == null;
+    public boolean accionar() {
+        return this.pokemon.getEstados().isEmpty();
+    }
+
+    public void setPokemon(Pokemon pokemon) {
+        this.pokemon = pokemon;
     }
 }
