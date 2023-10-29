@@ -3,6 +3,7 @@ package org.fiuba.algotres.model.estado;
 import org.fiuba.algotres.model.Pokemon;
 
 public class Confuso extends Estado {
+    private final int DANO = 5;
     private final double PROBABILIDAD = 0.33;
 
     public Confuso(String nombre) {
@@ -12,10 +13,12 @@ public class Confuso extends Estado {
     @Override
     public boolean accionar() {
         if (this.turnosAplicados >= 3) {
-            this.pokemon.quitarEstado(this);
-            return true;
+            pokemon.quitarEstado(this)
         }
         this.turnosAplicados++;
-        return (Math.random() >= PROBABILIDAD);
+        if (Math.random() <= PROBABILIDAD) {
+            pokemon.danarPorPorcentaje(DANO);
+        }
+        return true;
     }
 }
