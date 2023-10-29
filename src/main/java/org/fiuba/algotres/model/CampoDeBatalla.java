@@ -2,12 +2,14 @@ package org.fiuba.algotres.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.model.clima.Clima;
 
 import java.util.Comparator;
 
 @Getter @Setter
 public class CampoDeBatalla {
     private Jugador[] jugadores;
+    private Clima clima;
     private int turnoActual;
 
     public CampoDeBatalla(Jugador[] jugadores){
