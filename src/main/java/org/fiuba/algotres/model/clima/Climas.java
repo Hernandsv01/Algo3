@@ -2,6 +2,8 @@ package org.fiuba.algotres.model.clima;
 
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.habilidad.Ataque;
+import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public abstract class Climas implements Clima{
         this.cdb = cdb;
     }
 
+    /**
+     * Verifica si el turno es valido para aplicar los efectos del clima
+     * @return true en caso de que se pueda aplicar. Caso contrario, false
+     */
     public boolean turnoValido(){
         if(this.turnosAplicados == 5) {
             this.turnosAplicados = 0;
@@ -32,12 +38,25 @@ public abstract class Climas implements Clima{
         }
     };
 
+    /**
+     * Aumenta el daño de las habilidades del pokemon dependiendo de su tipo
+     * @param pokemon al cual se potenciara
+     */
     public void potenciarPokemon(Pokemon pokemon) {
         if(this.tiposFavorecidos.contains(pokemon.getTipos())) {
-            pokemon.modificarAtaque(this.PORCENTAJEPOTENCIAR);
+            for(Habilidad habilidad: pokemon.getHabilidades()) {
+                if(habilidad.getClass() == Ataque.class) {
+                    int poderActual = ((Ataque) habilidad).getPoder();
+                    ((Ataque) habilidad).setPoder(poderActual + Math.round(poderActual * (float)this.PORCENTAJEPOTENCIAR/100));
+                }
+            }
         }
     }
 
+    /**
+     * Aplica los efectos del clima al pokemon
+     * @param pokemon al cual aplicara
+     */
     @Override
     public void aplicarEfectos(Pokemon pokemon) {
         if(this.turnoValido()) {

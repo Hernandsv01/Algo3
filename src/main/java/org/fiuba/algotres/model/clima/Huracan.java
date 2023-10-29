@@ -26,6 +26,10 @@ public class Huracan extends Climas{
         }
     }
 
+    /**
+     * Dana al pokemon si no se encuentra favorecido con el clima
+     * @param pokemon al cual danara o no
+     */
     private void danarPokemon(Pokemon pokemon) {
         if( !(this.tiposFavorecidos.contains(pokemon.getTipos()))) {
             pokemon.danarPorPorcentaje(this.PORCENTAJEDANAR);
