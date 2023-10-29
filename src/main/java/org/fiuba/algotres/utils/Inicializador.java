@@ -10,6 +10,7 @@ import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.item.*;
 import org.fiuba.algotres.model.strategy.AtaqueStrategy;
 import org.fiuba.algotres.model.strategy.DefensaStrategy;
+import org.fiuba.algotres.model.strategy.VidaStrategy;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.ArrayList;
@@ -227,10 +228,11 @@ public class Inicializador {
                 15,
                 new DefensaStrategy()
         );
-        ModificacionEstadisticaVida recuperacion = new ModificacionEstadisticaVida(
+        ModificacionEstadistica recuperacion = new ModificacionEstadistica(
                 "Recuperacion",
                 25,
-                25
+                25,
+                new VidaStrategy()
         );
         ModificacionEstadistica chirrido = new ModificacionEstadistica(
                 "Chirrido",
@@ -244,10 +246,11 @@ public class Inicializador {
                 15,
                 new AtaqueStrategy()
         );
-        ModificacionEstadisticaVida descanso = new ModificacionEstadisticaVida(
+        ModificacionEstadistica descanso = new ModificacionEstadistica(
                 "Descanso",
                 5,
-                75
+                75,
+                new VidaStrategy()
         );
         ModificacionEstadistica acido = new ModificacionEstadistica(
                 "Ácido",
@@ -261,10 +264,11 @@ public class Inicializador {
                 20,
                 new DefensaStrategy()
         );
-        ModificacionEstadisticaVida absorber = new ModificacionEstadisticaVida(
+        ModificacionEstadistica absorber = new ModificacionEstadistica(
                 "Absorber",
                 20,
-                30
+                30,
+                new VidaStrategy()
         );
 
         /* *************TIPO DE MODIFICACION DE ESTADO************* */
