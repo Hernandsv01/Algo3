@@ -37,7 +37,6 @@ public class ComandoHabilidad extends Comando {
             for(Estado estado : pokemonActual.getEstados()) {
                 puedeAccionar = estado.accionar(pokemonActual);
                 estadosInhabilitantes.add(estado.getNombre());
-
             }
             if(!puedeAccionar){
                 for (String strEstado: estadosInhabilitantes) {

@@ -23,7 +23,7 @@ public class ComandoCambiarPokemon extends Comando {
 
         if(!pokemonActual.getEstados().isEmpty()) {
             for(Estado estado : pokemonActual.getEstados()) {
-                estado.accionar(pokemonActual);
+                estado.accionar();
                 if (!pokemonActual.estaVivo()) {
                     System.out.println(pokemonActual.getNombre() + " murio por estar " + estado.getNombre());
                     opcionElegida--;
