@@ -1,7 +1,7 @@
 package org.fiuba.algotres.model.habilidad;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategy.Strategy;
+import org.fiuba.algotres.model.strategies.Strategy;
 
 public class ModificacionEstadistica extends Habilidad {
     private final Strategy strategy;

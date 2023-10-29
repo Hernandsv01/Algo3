@@ -1,4 +1,4 @@
-package org.fiuba.algotres.model.strategy;
+package org.fiuba.algotres.model.strategies;
 
 import org.fiuba.algotres.model.Pokemon;
 

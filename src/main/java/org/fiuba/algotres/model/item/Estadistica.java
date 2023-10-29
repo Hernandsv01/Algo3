@@ -1,7 +1,7 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategy.Strategy;
+import org.fiuba.algotres.model.strategies.Strategy;
 
 public class Estadistica extends Item {
     private final Strategy strategy;

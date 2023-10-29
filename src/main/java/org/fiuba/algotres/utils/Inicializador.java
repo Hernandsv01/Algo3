@@ -8,9 +8,9 @@ import org.fiuba.algotres.model.estado.Envenenado;
 import org.fiuba.algotres.model.estado.Paralizado;
 import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.item.*;
-import org.fiuba.algotres.model.strategy.AtaqueStrategy;
-import org.fiuba.algotres.model.strategy.DefensaStrategy;
-import org.fiuba.algotres.model.strategy.VidaStrategy;
+import org.fiuba.algotres.model.strategies.AtaqueStrategy;
+import org.fiuba.algotres.model.strategies.DefensaStrategy;
+import org.fiuba.algotres.model.strategies.VidaStrategy;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.ArrayList;
