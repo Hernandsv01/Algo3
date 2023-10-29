@@ -9,7 +9,7 @@
         "velocidad": 20,
         "defensa": 3,
         "ataque": 10,
-        "habilidades": [56, 78, 2]
+        "habilidades": [56, 24, 2]
     },
     {
         "id": 7,
@@ -33,6 +33,6 @@
         "velocidad": 10,
         "defensa": 10,
         "ataque": 20,
-        "habilidades": [7, 55, 77]
+        "habilidades": [7, 55, 3]
     }
 ]

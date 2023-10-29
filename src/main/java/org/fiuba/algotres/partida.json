@@ -1,0 +1,4 @@
+[ 
+    { "nombre" : "Luffy" , "items" : { "67": 1 , "10" : 3 } , "pokemons" : [ 10 ] } ,
+    { "nombre" : "Ahmed" , "items" : { "0": 1 , "7" : 3, "55": 2 } , "pokemons" : [ 7 , 8 ] }
+]

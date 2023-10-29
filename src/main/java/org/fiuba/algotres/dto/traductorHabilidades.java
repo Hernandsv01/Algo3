@@ -43,22 +43,22 @@ public class traductorHabilidades {
             }
             else if(lista.get(i).getEstado() != null){
                 //Estado estado = new Estado(lista.get(i).getNombre(), lista.get(i).getUsos(),new lista.get(i).getEstado());
-                System.out.println("estado");
+                //System.out.println("estado");
             }
             else if(lista.get(i).getClima() != null){
                 //Clima clima = new Clima(lista.get(i).getNombre());
-                System.out.println("clima");
+                //System.out.println("clima");
             }
             else{
-                System.out.println("error");
+                //System.out.println("error");
             }}
         return mapeoHabilidades;
 
 
     
 }
-    public static void main(String[] args) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
-        traductorHabilidades traductor = new traductorHabilidades();
-        System.out.println(traductor.traducirHabilidades());
-    }
+  // public static void main(String[] args) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
+  //     traductorHabilidades traductor = new traductorHabilidades();
+  //     System.out.println(traductor.traducirHabilidades());
+  // }
 }

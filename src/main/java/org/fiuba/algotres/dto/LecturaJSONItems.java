@@ -5,9 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import org.fiuba.algotres.model.habilidad.Ataque;
-import org.fiuba.algotres.model.item.Item;
-import org.fiuba.algotres.model.tipos.Tipos;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -43,7 +40,7 @@ public class LecturaJSONItems {
         this.revivir = revivir;
     }
 
-    public static List<LecturaJSONItems> leecturadearchivos() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
+    public static List<LecturaJSONItems> leecturaDeArchivo() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
         ObjectMapper mapper = new ObjectMapper();
         File pathLeer = new File("src\\main\\java\\org\\fiuba\\algotres\\items.json");
 

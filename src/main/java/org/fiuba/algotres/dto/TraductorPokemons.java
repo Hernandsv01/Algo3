@@ -16,32 +16,30 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 
 public class TraductorPokemons {
-    private List<Habilidad> habilidades =  new ArrayList<>();
         
     public TraductorPokemons() {
         }
 
-    public List<Habilidad> mapearHabilidades(List<LecturaJSONPokemons> a) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
+    public List<Habilidad> mapearHabilidades(LecturaJSONPokemons a) throws InvalidDefinitionException, JsonParseException, FileNotFoundException, IOException {
         List<Habilidad> listaHabilidades = new ArrayList<>();
         HashMap<Integer, Habilidad> hashHabilidades = traductorHabilidades.traducirHabilidades();
-        for (int i = 0; i < a.size(); i++) {
-            for (int j = 0; j < a.get(i).getHabilidades().size(); j++){
-                int habilidadId = a.get(i).getHabilidades().get(j);
+        for (int i = 0; i < a.getHabilidades().size(); i++) {
+                int habilidadId = a.getHabilidades().get(i);
                 if(hashHabilidades.containsKey(habilidadId)){
                     listaHabilidades.add(hashHabilidades.get(habilidadId));
                 }
-                else{
-                    System.out.println("error");
-            }}
         }
         return listaHabilidades;
     }
     
-    public void traducirPokemons() throws StreamReadException, DatabindException, IOException {
-            
+    public HashMap<Integer, Pokemon> traducirPokemons() throws StreamReadException, DatabindException, IOException {
+        HashMap<Integer, Pokemon> mapeoPokemon = new HashMap<>();
         List<LecturaJSONPokemons> lista = LecturaJSONPokemons.leecturadearchivos();
         for(int i = 0; i< lista.size(); i++){
-            //Pokemon pokemon = new Pokemon(lista.get(i).getNombre(), lista.get(i).getNivel(), lista.get(i).getTipo(), lista.get(i).getHistoria(), lista.get(i).getVidaMaxima(), lista.get(i).getVelocidad(), lista.get(i).getDefensa(), lista.get(i).getAtaque(), lista.get(i).getHabilidades());
+            List<Habilidad> listaHabilidades = mapearHabilidades(lista.get(i));
+            mapeoPokemon.put(lista.get(i).getId(),new Pokemon(lista.get(i).getNombre(), lista.get(i).getNivel(), lista.get(i).getTipo(), lista.get(i).getHistoria(), lista.get(i).getVidaMaxima(), lista.get(i).getVelocidad(), lista.get(i).getDefensa(), lista.get(i).getAtaque(), listaHabilidades)) ;
         }
+        return mapeoPokemon;
     }
+
 }
