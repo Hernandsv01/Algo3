@@ -18,6 +18,7 @@ public class CampoDeBatallaView {
                              + cdb.getJugadores()[i].getPokemonActual().getVidaMaxima() + "❤\uFE0F");
             System.out.println();
         }
+        System.out.println("Clima actual: " + cdb.getClima().getNombre());
         System.out.println("Turno actual: " + cdb.getJugadorActual().getNombre());
         System.out.println();
     }

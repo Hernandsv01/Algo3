@@ -26,7 +26,11 @@ public class ComandoCambiarPokemon extends Comando {
                 opcionElegida--;
             }
         }
-
+        cdb.getClima().aplicarEfectos(pokemonActual);
+        if(!pokemonActual.estaVivo()) {
+            System.out.println(pokemonActual.getNombre() + " murio por el clima ");
+            opcionElegida--;
+        }
         boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida);
         if(opExitosa){
             Tools.imprimirMensaje(cdb.getJugadorActual().getPokemonActual().getNombre() + " entra a la batalla!");

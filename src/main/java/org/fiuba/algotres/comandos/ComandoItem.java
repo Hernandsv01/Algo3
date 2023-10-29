@@ -50,6 +50,13 @@ public class ComandoItem extends Comando {
             }
         }
 
+        cdb.getClima().aplicarEfectos(pokemonActual);
+        if(!pokemonActual.estaVivo()) {
+            Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por el clima ");
+            reemplazarPokemonMuerto(cdb.getJugadorActual());
+            return true;
+        }
+
         Pokemon pokemonElegido = pokemons.get(opcionElegida-1);
         boolean opExitosa = itemElegido.usar(pokemonElegido);
         if(opExitosa){
