@@ -44,17 +44,15 @@ public class ComandoItem extends Comando {
         if(pokemonActual.getEstado() != null) {
             pokemonActual.getEstado().accionar(pokemonActual);
             if(!pokemonActual.estaVivo()){
-                Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + pokemonActual.getEstado().getNombre());
+                Tools.imprimirMensaje("Tu pokemon murio por estar " + pokemonActual.getEstado().getNombre());
                 reemplazarPokemonMuerto(cdb.getJugadorActual());
-                return true;
             }
         }
 
         cdb.getClima().aplicarEfectos(pokemonActual);
         if(!pokemonActual.estaVivo()) {
-            Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por el clima ");
+            Tools.imprimirMensaje("Tu pokemon murio por el clima ");
             reemplazarPokemonMuerto(cdb.getJugadorActual());
-            return true;
         }
 
         Pokemon pokemonElegido = pokemons.get(opcionElegida-1);

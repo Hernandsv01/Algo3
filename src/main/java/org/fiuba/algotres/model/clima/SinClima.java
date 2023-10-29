@@ -7,7 +7,7 @@ import org.fiuba.algotres.model.tipos.Tipos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SinClima extends Climas{
+public class SinClima extends Clima{
 
     public SinClima(String nombre, CampoDeBatalla cdb) {
         super(nombre, cdb);

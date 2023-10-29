@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Soleado extends Climas{
+public class Soleado extends Clima{
 
     public Soleado(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);

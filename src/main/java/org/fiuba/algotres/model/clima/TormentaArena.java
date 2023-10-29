@@ -7,7 +7,7 @@ import org.fiuba.algotres.model.tipos.Tipos;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TormentaArena extends Climas{
+public class TormentaArena extends Clima{
 
     private final int PORCENTAJEDANAR = 3;
 

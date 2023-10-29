@@ -1,13 +1,13 @@
 package org.fiuba.algotres.model.habilidad;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.clima.Climas;
+import org.fiuba.algotres.model.clima.Clima;
 
 public class CambiarClima extends Habilidad{
 
-    private final Climas clima;
+    private final Clima clima;
 
-    public CambiarClima(String nombre, int usos, Climas clima){
+    public CambiarClima(String nombre, int usos, Clima clima){
         super(nombre,usos);
         this.clima = clima;
     }
