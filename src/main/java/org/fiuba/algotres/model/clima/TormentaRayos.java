@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class TormentaRayos extends Clima{
 
-    private final int PORCENTAJEDANAR = 3;
+    private final int PORCENTAJE_DANAR = 3;
 
     public TormentaRayos(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
@@ -32,7 +32,7 @@ public class TormentaRayos extends Clima{
      */
     private void danarPokemon(Pokemon pokemon) {
         if( !(this.tiposFavorecidos.contains(pokemon.getTipos()))) {
-            pokemon.danarPorPorcentaje(this.PORCENTAJEDANAR);
+            pokemon.danarPorPorcentaje(this.PORCENTAJE_DANAR);
         }
     }
 

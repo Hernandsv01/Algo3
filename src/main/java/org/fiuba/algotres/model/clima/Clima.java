@@ -12,7 +12,7 @@ public abstract class Clima {
 
     public int turnosAplicados;
     public final String nombre;
-    public final int PORCENTAJEPOTENCIAR = 10;
+    public final int PORCENTAJE_POTENCIA = 10;
     public final CampoDeBatalla cdb;
     public List<Tipos> tiposFavorecidos;
 
@@ -47,7 +47,7 @@ public abstract class Clima {
             for(Habilidad habilidad: pokemon.getHabilidades()) {
                 if(habilidad.getClass() == Ataque.class) {
                     int poderActual = ((Ataque) habilidad).getPoder();
-                    ((Ataque) habilidad).setPoder(poderActual + Math.round(poderActual * (float)this.PORCENTAJEPOTENCIAR/100));
+                    ((Ataque) habilidad).setPoder(poderActual + Math.round(poderActual * (float)this.PORCENTAJE_POTENCIA/100));
                 }
             }
         }
