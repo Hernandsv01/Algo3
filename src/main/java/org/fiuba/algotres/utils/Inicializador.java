@@ -8,6 +8,8 @@ import org.fiuba.algotres.model.estado.Envenenado;
 import org.fiuba.algotres.model.estado.Paralizado;
 import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.item.*;
+import org.fiuba.algotres.model.strategy.AtaqueStrategy;
+import org.fiuba.algotres.model.strategy.DefensaStrategy;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.ArrayList;
@@ -207,50 +209,57 @@ public class Inicializador {
         );
 
         /* **********TIPO MODIFICACION DE ESTADISTICA********** */
-        ModificacionEstadisticaAtaque danzaEspada = new ModificacionEstadisticaAtaque(
+        ModificacionEstadistica danzaEspada = new ModificacionEstadistica(
                 "Danza espada",
                 15,
-                10
+                10,
+                new AtaqueStrategy()
         );
-        ModificacionEstadisticaDefensa fortaleza = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica fortaleza = new ModificacionEstadistica(
                 "fortaleza",
                 25,
-                10
+                10,
+                new DefensaStrategy()
         );
-        ModificacionEstadisticaDefensa rizoDefensa = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica rizoDefensa = new ModificacionEstadistica(
                 "Rizo defensa",
                 25,
-                15
+                15,
+                new DefensaStrategy()
         );
         ModificacionEstadisticaVida recuperacion = new ModificacionEstadisticaVida(
                 "Recuperacion",
                 25,
                 25
         );
-        ModificacionEstadisticaAtaque chirrido = new ModificacionEstadisticaAtaque(
+        ModificacionEstadistica chirrido = new ModificacionEstadistica(
                 "Chirrido",
                 15,
-                10
+                10,
+                new AtaqueStrategy()
         );
-        ModificacionEstadisticaAtaque pantalladDeLuz = new ModificacionEstadisticaAtaque(
+        ModificacionEstadistica pantallaDeLuz = new ModificacionEstadistica(
                 "Pantalla de luz",
                 30,
-                15
+                15,
+                new AtaqueStrategy()
         );
         ModificacionEstadisticaVida descanso = new ModificacionEstadisticaVida(
                 "Descanso",
                 5,
                 75
         );
-        ModificacionEstadisticaDefensa acido = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica acido = new ModificacionEstadistica(
                 "Ácido",
                 30,
-                10
+                10,
+                new DefensaStrategy()
         );
-        ModificacionEstadisticaDefensa armaduraAcida = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica armaduraAcida = new ModificacionEstadistica(
                 "Armadura ácida",
                 15,
-                20
+                20,
+                new DefensaStrategy()
         );
         ModificacionEstadisticaVida absorber = new ModificacionEstadisticaVida(
                 "Absorber",
@@ -305,7 +314,7 @@ public class Inicializador {
         ));
 
         ArrayList<Habilidad> habilidadesAbra = new ArrayList<Habilidad>(Arrays.asList(
-                pantalladDeLuz,
+                pantallaDeLuz,
                 descanso,
                 confusion,
                 psiquico
@@ -540,16 +549,18 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        EstadisticaAtaque ataqueX = new org.fiuba.algotres.model.item.EstadisticaAtaque(
+        Estadistica ataqueX = new Estadistica(
                 3,
                 "Ataque X",
-                10
+                10,
+                new AtaqueStrategy()
         );
 
-        EstadisticaDefensa defensaX = new org.fiuba.algotres.model.item.EstadisticaDefensa(
+        Estadistica defensaX = new Estadistica(
                 3,
                 "Defensa X",
-                10
+                10,
+                new DefensaStrategy()
         );
 
         Pocion pocion = new Pocion(
