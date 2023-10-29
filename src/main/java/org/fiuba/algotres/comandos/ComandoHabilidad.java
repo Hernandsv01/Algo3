@@ -35,10 +35,10 @@ public class ComandoHabilidad extends Comando {
             boolean puedeAccionar = true;
             ArrayList<String> estadosInhabilitantes = new ArrayList<>();
             for(Estado estado : pokemonActual.getEstados()) {
-                if ("Confuso".equals(estado.getNombre()) && !estado.accionar(pokemonActual)) {
+                if ("Confuso".equals(estado.getNombre()) && !estado.accionar()) {
                     victima = pokemonActual;
                 } else {
-                    puedeAccionar = estado.accionar(pokemonActual);
+                    puedeAccionar = estado.accionar();
                     estadosInhabilitantes.add(estado.getNombre());
                 }
             }
