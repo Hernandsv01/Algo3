@@ -43,11 +43,14 @@ public class ComandoItem extends Comando {
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
       
-        if(pokemonActual.getEstado() != null) {
-            pokemonActual.getEstado().accionar(pokemonActual);
-            if(!pokemonActual.estaVivo()){
-                Tools.imprimirMensaje("Tu pokemon murio por estar " + pokemonActual.getEstado().getNombre());
-                reemplazarPokemonMuerto(cdb.getJugadorActual());
+        if(!pokemonActual.getEstados().isEmpty()) {
+            for(Estado estado : pokemonActual.getEstados()) {
+                estado.accionar();
+                if (!pokemonActual.estaVivo()) {
+                    Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + estado.getNombre());
+                    reemplazarPokemonMuerto(cdb.getJugadorActual());
+                    return true;
+                }
             }
         }
 
