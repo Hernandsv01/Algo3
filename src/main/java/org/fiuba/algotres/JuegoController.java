@@ -3,7 +3,7 @@ package org.fiuba.algotres;
 import org.fiuba.algotres.comandos.*;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
-import org.fiuba.algotres.views.terminal.InputUsuario;
+import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
@@ -12,14 +12,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.fiuba.algotres.utils.Inicializador.inicializarJuego;
+import org.fiuba.algotres.views.InputUsuario;
 
 public class JuegoController {
     
+    private static final InputUsuario input = new InputUsuarioTerminal();
     private static final Map<Integer, Comando> comandos = new HashMap<>(){{
-        put(1, new ComandoHabilidad("Usar habilidad"));
-        put(2, new ComandoItem("Usar item"));
-        put(3, new ComandoCambiarPokemon("Cambiar Pokemon"));
-        put(4, new ComandoRendirse("Rendirse"));
+        put(1, new ComandoHabilidad("Usar habilidad", input));
+        put(2, new ComandoItem("Usar item", input));
+        put(3, new ComandoCambiarPokemon("Cambiar Pokemon", input));
+        put(4, new ComandoRendirse("Rendirse", input));
     }};
     
     public static void jugar(CampoDeBatalla cdb){
@@ -50,12 +52,12 @@ public class JuegoController {
         for(int i = 0; i < cdb.getJugadores().length; i++) {
             Tools.imprimirDivisor(false);
             System.out.println("Jugador " + (i+1) + ", ingrese su nombre");
-            nombreUsuario = InputUsuario.obtenerCualquierDato(false);
+            nombreUsuario = input.obtenerCualquierDato(false);
             cdb.getJugadores()[i].setNombre(nombreUsuario);
 
             System.out.println("Elija su pokemon inicial");
             opciones = PokemonView.imprimirPokemons(cdb.getJugadores()[i].getPokemons(), false);
-            pokemonElegido = InputUsuario.obtenerOpcionUsuario(opciones);
+            pokemonElegido = input.obtenerOpcionUsuario(opciones);
 
             cdb.getJugadores()[i].cambiarPokemonActual(pokemonElegido-1);
 
@@ -70,7 +72,7 @@ public class JuegoController {
 
         System.out.println("Elija una opcion");
         int opciones = Tools.imprimirComandos(comandos);
-        int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
+        int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         Tools.imprimirDivisor(false);
         return comandos.get(opcionElegida).ejecutar(cdb);

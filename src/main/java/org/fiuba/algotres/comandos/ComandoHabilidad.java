@@ -5,15 +5,16 @@ import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
-import org.fiuba.algotres.views.terminal.InputUsuario;
+import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
 import java.util.ArrayList;
+import org.fiuba.algotres.views.InputUsuario;
 
 public class ComandoHabilidad extends Comando {
-    public ComandoHabilidad(String nombre) {
-        super(nombre);
+    public ComandoHabilidad(String nombre, InputUsuario input) {
+        super(nombre, input);
     }
 
     @Override
@@ -24,7 +25,7 @@ public class ComandoHabilidad extends Comando {
             Tools.imprimirMensaje("No te quedan mas habilidades en este pokemon :(");
             return false;
         }
-        int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
+        int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         if (opcionElegida == opciones) return false;
 

@@ -34,6 +34,6 @@ public class Tools {
     public static void imprimirMensaje(String mensaje){
         System.out.println(mensaje);
         System.out.println("Presione enter para continuar");
-        InputUsuario.obtenerCualquierDato(true);
+        new InputUsuarioTerminal().obtenerCualquierDato(true);
     }
 }
