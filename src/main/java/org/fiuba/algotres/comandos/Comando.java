@@ -1,5 +1,6 @@
 package org.fiuba.algotres.comandos;
 
+import lombok.Setter;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.views.InputUsuario;
@@ -26,7 +27,7 @@ public abstract class Comando {
         int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         jugador.cambiarPokemonActual(opcionElegida-1);
-        Tools.imprimirMensaje(jugador.getPokemonActual().getNombre() + " entra a la batalla!");
+        Tools.imprimirMensajeConEspera(input, jugador.getPokemonActual().getNombre() + " entra a la batalla!");
     }
 
     public String getNombre(){

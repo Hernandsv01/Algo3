@@ -39,7 +39,7 @@ public class ComandoCambiarPokemon extends Comando {
         }
         boolean opExitosa = cdb.getJugadorActual().cambiarPokemonActual(opcionElegida);
         if(opExitosa){
-            Tools.imprimirMensaje(cdb.getJugadorActual().getPokemonActual().getNombre() + " entra a la batalla!");
+            Tools.imprimirMensajeConEspera(input, cdb.getJugadorActual().getPokemonActual().getNombre() + " entra a la batalla!");
         }
         return opExitosa;
     }

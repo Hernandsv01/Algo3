@@ -48,7 +48,7 @@ public class ComandoItem extends Comando {
             for(Estado estado : pokemonActual.getEstados()) {
                 estado.accionar();
                 if (!pokemonActual.estaVivo()) {
-                    Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por estar " + estado.getNombre());
+                    Tools.imprimirMensajeConEspera(input, "Tu pokemon murio antes de poder hacer nada por estar " + estado.getNombre());
                     reemplazarPokemonMuerto(cdb.getJugadorActual());
                     return true;
                 }
@@ -57,16 +57,16 @@ public class ComandoItem extends Comando {
 
         cdb.getClima().aplicarEfectos(pokemonActual);
         if(!pokemonActual.estaVivo()) {
-            Tools.imprimirMensaje("Tu pokemon murio por el clima ");
+            Tools.imprimirMensajeConEspera(input, "Tu pokemon murio por el clima ");
             reemplazarPokemonMuerto(cdb.getJugadorActual());
         }
       
         Pokemon pokemonElegido = pokemons.get(opcionElegida-1);
         boolean opExitosa = itemElegido.usar(pokemonElegido);
         if(opExitosa){
-            Tools.imprimirMensaje(itemElegido.getNombre() + " usado en " + pokemonElegido.getNombre() + "!");
+            Tools.imprimirMensajeConEspera(input, itemElegido.getNombre() + " usado en " + pokemonElegido.getNombre() + "!");
         }else{
-            Tools.imprimirMensaje("No se puede usar ese item en ese pokemon :/");
+            Tools.imprimirMensajeConEspera(input, "No se puede usar ese item en ese pokemon :/");
         }
         return opExitosa;
     }

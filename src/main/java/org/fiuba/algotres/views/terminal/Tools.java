@@ -3,6 +3,7 @@ package org.fiuba.algotres.views.terminal;
 import org.fiuba.algotres.comandos.Comando;
 
 import java.util.Map;
+import org.fiuba.algotres.views.InputUsuario;
 
 public class Tools {
     public static void limpiarConsola(){
@@ -31,9 +32,9 @@ public class Tools {
         return map.size();
     }
     
-    public static void imprimirMensaje(String mensaje){
+    public static void imprimirMensajeConEspera(InputUsuario input, String mensaje){
         System.out.println(mensaje);
         System.out.println("Presione enter para continuar");
-        new InputUsuarioTerminal().obtenerCualquierDato(true);
+        input.obtenerCualquierDato(true);
     }
 }
