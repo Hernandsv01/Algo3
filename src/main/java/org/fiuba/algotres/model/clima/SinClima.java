@@ -14,4 +14,11 @@ public class SinClima extends Clima{
         this.tiposFavorecidos = new ArrayList<>();
     }
 
+    @Override
+    public boolean turnoValido() {
+        this.turnosAplicados++;
+        return true;
+    }
+
+    public void potenciarPokemon(Pokemon pokemon){};
 }

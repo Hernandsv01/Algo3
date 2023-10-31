@@ -14,11 +14,12 @@ public class CambiarClima extends Habilidad{
 
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
-        if (usos <= 0) {
-            return false;
+        if (verificarUsos(usos)) {
+            this.clima.setTurnosAplicados(0);
+            this.clima.getCdb().setClima(this.clima);
+            usos--;
+            return true;
         }
-        this.clima.getCdb().setClima(this.clima);
-        usos--;
-        return true;
+        return false;
     }
 }

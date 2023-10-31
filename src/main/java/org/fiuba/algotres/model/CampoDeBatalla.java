@@ -12,8 +12,8 @@ public class CampoDeBatalla {
     private Clima clima;
     private int turnoActual;
 
-    public CampoDeBatalla(Jugador[] jugadores){
-        this.jugadores = jugadores;
+    public CampoDeBatalla(){
+
     }
 
     /**
