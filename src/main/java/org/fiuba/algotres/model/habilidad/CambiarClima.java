@@ -17,6 +17,7 @@ public class CambiarClima extends Habilidad{
         if (usos <= 0) {
             return false;
         }
+        this.clima.setTurnosAplicados(0);
         this.clima.getCdb().setClima(this.clima);
         usos--;
         return true;

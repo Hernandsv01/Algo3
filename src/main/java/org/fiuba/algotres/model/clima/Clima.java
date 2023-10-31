@@ -70,4 +70,8 @@ public abstract class Clima {
     public String getNombre() {
         return nombre;
     }
+
+    public void setTurnosAplicados(int turno){
+        this.turnosAplicados = turno;
+    }
 }
