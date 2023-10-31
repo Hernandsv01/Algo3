@@ -35,12 +35,8 @@ public class ComandoHabilidad extends Comando {
             boolean puedeAccionar = true;
             ArrayList<String> estadosInhabilitantes = new ArrayList<>();
             for(Estado estado : pokemonActual.getEstados()) {
-                if ("Confuso".equals(estado.getNombre()) && !estado.accionar(pokemonActual)) {
-                    victima = pokemonActual;
-                } else {
-                    puedeAccionar = estado.accionar(pokemonActual);
-                    estadosInhabilitantes.add(estado.getNombre());
-                }
+                puedeAccionar = estado.accionar();
+                estadosInhabilitantes.add(estado.getNombre());
             }
             if(!puedeAccionar){
                 for (String strEstado: estadosInhabilitantes) {
@@ -54,7 +50,12 @@ public class ComandoHabilidad extends Comando {
                 return true;
             }
         }
-
+        cdb.getClima().aplicarEfectos(pokemonActual);
+        if(!pokemonActual.estaVivo()) {
+            Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por el clima ");
+            reemplazarPokemonMuerto(cdb.getJugadorActual());
+            return true;
+        }
         Habilidad habilidad = pokemonActual.getHabilidades().get(opcionElegida-1);
         boolean habilidadExitosa = habilidad.accionarHabilidad(
                 pokemonActual,
