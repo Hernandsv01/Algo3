@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 
 class VidaStrategyTest {
     @Test
-    public void testLlamaModificar() {
+    public void testLlamaCurarPorcentaje() {
         //Arrange
         Pokemon pokemon = mock(Pokemon.class);
         Strategy strategy = new VidaStrategy();
