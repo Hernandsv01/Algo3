@@ -1,24 +1,30 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.strategies.Strategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
-class RevivirTest {
+class EstadisticaTest {
     Pokemon pokemon;
+    Strategy strategy;
+    int porcentaje;
 
     @BeforeEach
     public void initEach() {
         pokemon = mock(Pokemon.class);
+        strategy = mock(Strategy.class);
+        porcentaje = 10;
     }
 
     @Test
     public void testSinCantidad() {
         //Arrange
-        Revivir item = new Revivir(0, "Revivir");
+        Estadistica item = new Estadistica(0, "Estadistica", porcentaje, strategy);
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -31,8 +37,7 @@ class RevivirTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Revivir item = new Revivir(2, "Revivir");
-        when(pokemon.estaVivo()).thenReturn(false);
+        Estadistica item = new Estadistica(2, "Estadistica", porcentaje, strategy);
 
         //Act
         Boolean res1 = item.usar(pokemon);
@@ -62,20 +67,20 @@ class RevivirTest {
     }
 
     @Test
-    public void testCheckeaVidaPokemon() {
+    public void testCheckeaModificarStrategy() {
         //Arrange
-        Revivir item = new Revivir(2, "Revivir");
+        Estadistica item = new Estadistica(2, "Estadistica",porcentaje, strategy);
 
         //Act
         item.usar(pokemon);
 
         //Assert
-        verify(pokemon, times(1)).estaVivo();
+        verify(strategy, times(1)).modificar(pokemon, porcentaje);
 
         //Act
         item.usar(pokemon);
 
         //Assert
-        verify(pokemon, times(2)).estaVivo();
+        verify(strategy, times(2)).modificar(pokemon, porcentaje);
     }
 }
