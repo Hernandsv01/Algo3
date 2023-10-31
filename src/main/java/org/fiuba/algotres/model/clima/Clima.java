@@ -29,7 +29,7 @@ public abstract class Clima {
     public boolean turnoValido(){
         if(this.turnosAplicados == 5) {
             this.turnosAplicados = 0;
-            this.cdb.setClima(new SinClima("Sin clima", cdb));
+            this.cdb.setClima(new SinClima("ninguno", cdb));
             return false;
 
         }else{
