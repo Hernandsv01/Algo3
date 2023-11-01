@@ -22,7 +22,7 @@ public class Pokemon {
     private Integer ataque;
     private List<Estado> estados;
     private boolean estaVivo;
-    private final List<Habilidad> habilidades;
+    private List<Habilidad> habilidades;
 
     public Pokemon(
             String nombre,
