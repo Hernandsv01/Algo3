@@ -16,13 +16,8 @@ import org.fiuba.algotres.views.InputUsuario;
 
 public class JuegoController {
     
-    private static final InputUsuario input = new InputUsuarioTerminal();
-    private static final Map<Integer, Comando> comandos = new HashMap<>(){{
-        put(1, new ComandoHabilidad("Usar habilidad", input));
-        put(2, new ComandoItem("Usar item", input));
-        put(3, new ComandoCambiarPokemon("Cambiar Pokemon", input));
-        put(4, new ComandoRendirse("Rendirse", input));
-    }};
+    private static InputUsuario input;
+    private static Map<Integer, Comando> comandos;
     
     public static void jugar(CampoDeBatalla cdb){
         setupInicial(cdb);
@@ -40,6 +35,16 @@ public class JuegoController {
         }
 
         System.out.println(cdb.getJugadores()[cdb.getGanador()].getNombre().toUpperCase() + " ES EL GANADOR!!!");
+    }
+    
+    public static void inicializarConfiguracion(InputUsuario input){
+        JuegoController.input = input;
+        JuegoController.comandos = new HashMap<>(){{
+            put(1, new ComandoHabilidad("Usar habilidad", input));
+            put(2, new ComandoItem("Usar item", input));
+            put(3, new ComandoCambiarPokemon("Cambiar Pokemon", input));
+            put(4, new ComandoRendirse("Rendirse", input));
+        }};
     }
     
     public static void setupInicial(CampoDeBatalla cdb){
@@ -80,6 +85,7 @@ public class JuegoController {
 
     public static void main(String[] args) {
         CampoDeBatalla juego = inicializarJuego();
+        inicializarConfiguracion(new InputUsuarioTerminal());
         jugar(juego);
     }
 }   
