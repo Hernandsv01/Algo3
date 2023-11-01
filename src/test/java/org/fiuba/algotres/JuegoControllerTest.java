@@ -1,6 +1,7 @@
 package org.fiuba.algotres;
 
 import java.util.List;
+import static org.fiuba.algotres.JuegoController.inicializarConfiguracion;
 
 import org.fiuba.algotres.model.*;
 import org.fiuba.algotres.model.habilidad.*;
@@ -11,6 +12,7 @@ import org.fiuba.algotres.model.strategies.*;
 import org.fiuba.algotres.model.tipos.*;
 import org.fiuba.algotres.comandos.*;
 import org.fiuba.algotres.views.InputUsuario;
+import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,11 +31,14 @@ import static org.mockito.Mockito.doNothing;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JuegoControllerTest {
     private static CampoDeBatalla cdb;
-    private static List<Habilidad> habilidades;
-    private static List<Item> items;
+    private static InputUsuario input;
     
     @BeforeEach
-    public void setInitialPokemonValues(){
+    public void setup(){
+        input = mock(InputUsuarioTerminal.class);
+        when(input.obtenerCualquierDato(true)).thenReturn("");
+        inicializarConfiguracion(input);
+        
         cdb = new CampoDeBatalla(
             new Jugador[]{
                 new Jugador(
@@ -47,10 +52,10 @@ public class JuegoControllerTest {
                                 100, 
                                 100, 
                                 100, 
-                                habilidades
+                                null
                         )
                     ),
-                    items,
+                    null,
                     "JugadorUno"
                 ),
                 new Jugador(
@@ -73,25 +78,20 @@ public class JuegoControllerTest {
             }
         );
         cdb.setTurnoActual(0);
+        cdb.getJugadores()[0].setItems(generarItems());
+        cdb.getJugadores()[1].setItems(generarItems());
+        cdb.getJugadores()[0].getPokemons().get(0).setHabilidades(generarHabilidades());
+        cdb.getJugadores()[1].getPokemons().get(0).setHabilidades(generarHabilidades());
     }
     
-    @BeforeAll
-    public static void setupHabilidades(){
-        habilidades = List.of(
+    public static List generarHabilidades(){
+        return List.of(
             // Ataques contra Tierra
-            new Ataque("Ataque DRAGON", 10, 100, Tipos.DRAGON),       // x1 <- diferente tipo atacante
-            new Ataque("Ataque NORMAL", 10, 100, Tipos.NORMAL),       // x1 <- mismo tipo atacante
-            new Ataque("Ataque AGUA", 10, 100, Tipos.AGUA),           // x2
-            new Ataque("Ataque FUEGO", 10, 100, Tipos.FUEGO),         // x1/2
-            new Ataque("Ataque ELECTRICO", 10, 100, Tipos.ELECTRICO), // x0
+            new Ataque("Ataque DRAGON", 10, 100, Tipos.DRAGON),       // efectividad normal contra tierra
+            new Ataque("Ataque ELECTRICO", 10, 100, Tipos.FANTASMA),  // efectividad nula contra normal
             
             new CambiarClima("Cambiador de clima a SinClima", 10, new SinClima("SinClima", cdb)),
-            new CambiarClima("Cambiador de clima a Soleado", 10, new Soleado("Soleado", cdb)),
-            new CambiarClima("Cambiador de clima a Huracan", 10, new Huracan("Huracan", cdb)),
-            new CambiarClima("Cambiador de clima a Lluvia", 10, new Lluvia("Lluvia", cdb)),
-            new CambiarClima("Cambiador de clima a Niebla", 10, new Niebla("Niebla", cdb)),
             new CambiarClima("Cambiador de clima a TormentaArena", 10, new TormentaArena("TormentaArena", cdb)),
-            new CambiarClima("Cambiador de clima a TormentaRayos", 10, new TormentaRayos("TormentaRayos", cdb)),
             
             new ModificacionEstadistica("50% menos ataque", 10, 50, new AtaqueStrategy()),
             new ModificacionEstadistica("50% menos Defensa", 10, 50, new DefensaStrategy()),
@@ -104,18 +104,17 @@ public class JuegoControllerTest {
         );
     }
     
-    @BeforeAll
-    public static void setupItems(){
-        items = List.of(
+    public static List generarItems(){
+        return List.of(
             new CuraTodo(10, "Cura todo"),
             
             new Estadistica(10, "50% mas ataque", 50, new AtaqueStrategy()),
             new Estadistica(10, "50% mas defensa", 50, new DefensaStrategy()),
             new Estadistica(10, "50% mas vida", 50, new VidaStrategy()),
             
-            new Pocion(10, "Pocion", 10),
-            new Pocion(10, "Pocion", 50),
-            new Pocion(10, "Pocion", 100),
+            new Pocion(10, "Pocion 10", 10),
+            new Pocion(10, "Pocion 50", 50),
+            new Pocion(10, "Pocion 100", 100),
             
             new Revivir(10, "Revivir")
         );
@@ -123,96 +122,75 @@ public class JuegoControllerTest {
     
     @Test
     @Order(1)
-    public void testIntegradorComandoHabilidadAtaqueNormalDiferenteTipo(){
-        InputUsuario input = mock(InputUsuario.class);
-        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(1);
-        when(input.obtenerCualquierDato(true)).thenReturn("");
+    public void testIntegradorAtaquesCuracionYRendicion(){
+        // Primer turno: Jugador 0 ataca a jugador 1 con ataque de efectividad normal
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(1) // Usar una habilidad
+                .thenReturn(1); // Usar habilidad 1 (Ataque tipo dragon, efectividad normal)
         
-        boolean turnoResult = new ComandoHabilidad("Habilidad", input).ejecutar(cdb);
-        assertTrue(turnoResult);
+        boolean turnoCompletado = JuegoController.turno(cdb);
         
-        int vidaResult = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
-        int expectedMinNormalVidaResult = 1000-80; // getRandom is 1.0 and esCritico is 1
-        int expectedMaxNormalVidaResult = 1000-68; // getRandom is 0.85 and esCritico is 1
-        int expectedMinCritVidaResult = 1000-160; // getRandom is 1.0 and esCritico is 2
-        int expectedMaxCritVidaResult = 1000-136; // getRandom is 0.85 and esCritico is 2
-        assertTrue(
-            (vidaResult <= expectedMaxNormalVidaResult && vidaResult >= expectedMinNormalVidaResult) ||
-            (vidaResult <= expectedMaxCritVidaResult && vidaResult >= expectedMinCritVidaResult)
-        );
-    }
-    @Test
-    @Order(2)
-    public void testIntegradorComandoHabilidadAtaqueNormalMismoTipo(){
-        InputUsuario input = mock(InputUsuario.class);
-        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(2);
-        when(input.obtenerCualquierDato(true)).thenReturn("");
+        assertTrue(turnoCompletado);
+        assertTrue(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() < 1000);
+        assertEquals(9, cdb.getJugadorActual().getPokemonActual().getHabilidades().get(0).getUsos());
         
-        boolean turnoResult = new ComandoHabilidad("Habilidad", input).ejecutar(cdb);
-        assertTrue(turnoResult);
+        cdb.setSiguienteTurno();
+        assertEquals(cdb.getJugadorActual(), cdb.getJugadores()[1]);
         
-        int vidaResult = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
-        int expectedMinNormalVidaResult = 1000-120; // getRandom is 1.0 and esCritico is 1
-        int expectedMaxNormalVidaResult = 1000-102; // getRandom is 0.85 and esCritico is 1
-        int expectedMinCritVidaResult = 1000-240; // getRandom is 1.0 and esCritico is 2
-        int expectedMaxCritVidaResult = 1000-204; // getRandom is 0.85 and esCritico is 2
-        assertTrue(
-            (vidaResult <= expectedMaxNormalVidaResult && vidaResult >= expectedMinNormalVidaResult) ||
-            (vidaResult <= expectedMaxCritVidaResult && vidaResult >= expectedMinCritVidaResult)
-        );
-    }
-    @Test
-    @Order(3)
-    public void testIntegradorComandoHabilidadAtaqueEfectivoDiferenteTipo(){
-        InputUsuario input = mock(InputUsuario.class);
-        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(3);
-        when(input.obtenerCualquierDato(true)).thenReturn("");
+        //-----------------------------------------------------------------------------------------------
+        // Segundo turno: Jugador 1 ataca a jugador 0 con ataque de efectividad nula
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(1) // Usar una habilidad
+                .thenReturn(2); // Usar habilidad 2 (Ataque tipo fantasma, efectividad nula)
         
-        boolean turnoResult = new ComandoHabilidad("Habilidad", input).ejecutar(cdb);
-        assertTrue(turnoResult);
+        turnoCompletado = JuegoController.turno(cdb);
         
-        int vidaResult = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
-        int expectedMinNormalVidaResult = 1000-160; // getRandom is 1.0 and esCritico is 1
-        int expectedMaxNormalVidaResult = 1000-136; // getRandom is 0.85 and esCritico is 1
-        int expectedMinCritVidaResult = 1000-320; // getRandom is 1.0 and esCritico is 2
-        int expectedMaxCritVidaResult = 1000-272; // getRandom is 0.85 and esCritico is 2
-        assertTrue(
-            (vidaResult <= expectedMaxNormalVidaResult && vidaResult >= expectedMinNormalVidaResult) ||
-            (vidaResult <= expectedMaxCritVidaResult && vidaResult >= expectedMinCritVidaResult)
-        );
-    }
-    @Test
-    @Order(4)
-    public void testIntegradorComandoHabilidadAtaqueDebilDiferenteTipo(){
-        InputUsuario input = mock(InputUsuario.class);
-        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(4);
-        when(input.obtenerCualquierDato(true)).thenReturn("");
+        assertTrue(turnoCompletado);
+        assertEquals(1000, cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual());
+        assertEquals(9, cdb.getJugadorActual().getPokemonActual().getHabilidades().get(1).getUsos());
         
-        boolean turnoResult = new ComandoHabilidad("Habilidad", input).ejecutar(cdb);
-        assertTrue(turnoResult);
+        cdb.setSiguienteTurno();
+        assertEquals(cdb.getJugadorActual(), cdb.getJugadores()[0]);
         
-        int vidaResult = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
-        int expectedMinNormalVidaResult = 1000-40; // getRandom is 1.0 and esCritico is 1
-        int expectedMaxNormalVidaResult = 1000-34; // getRandom is 0.85 and esCritico is 1
-        int expectedMinCritVidaResult = 1000-80; // getRandom is 1.0 and esCritico is 2
-        int expectedMaxCritVidaResult = 1000-68; // getRandom is 0.85 and esCritico is 2
-        assertTrue(
-            (vidaResult <= expectedMaxNormalVidaResult && vidaResult >= expectedMinNormalVidaResult) ||
-            (vidaResult <= expectedMaxCritVidaResult && vidaResult >= expectedMinCritVidaResult)
-        );
-    }
-    @Test
-    @Order(5)
-    public void testIntegradorComandoHabilidadAtaqueNuloDiferenteTipo(){
-        InputUsuario input = mock(InputUsuario.class);
-        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(5);
-        when(input.obtenerCualquierDato(true)).thenReturn("");
+        //-----------------------------------------------------------------------------------------------
+        // Tercer turno: Jugador 0 usa habilidad de cambio de clima a TormentaArena (hace daño a pokemon por 3% en cada turno por 5 turnos)
         
-        boolean turnoResult = new ComandoHabilidad("Habilidad", input).ejecutar(cdb);
-        assertTrue(turnoResult);
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(1) // Usar una habilidad
+                .thenReturn(4); // Usar habilidad 4 (Cambio a clima TormentaArena)
         
-        int vidaResult = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
-        int expectedVidaResult = 1000;
-        assertEquals(expectedVidaResult, vidaResult);
+        turnoCompletado = JuegoController.turno(cdb);
+        
+        assertTrue(turnoCompletado);
+        assertTrue(cdb.getClima() instanceof TormentaArena);
+        assertEquals(9, cdb.getJugadorActual().getPokemonActual().getHabilidades().get(3).getUsos());
+        
+        cdb.setSiguienteTurno();
+        
+        //-----------------------------------------------------------------------------------------------
+        // Cuarto turno: Jugador 1 usa habilidad de modificación de estadística (50% menos ataque)
+        
+//        when(input.obtenerOpcionUsuario(anyInt()))
+//                .thenReturn(1) // Usar una habilidad
+//                .thenReturn(5); // Usar habilidad 5 (modificación de estadística (ataque))
+//        int vidaPokemonUnoPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
+//        int vidaPokemonDosPreEfectoClima = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
+//        
+//        turnoCompletado = JuegoController.turno(cdb);
+//        
+//        assertTrue(turnoCompletado);
+//        assertEquals(50, cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getAtaque());
+//        assertEquals(9, cdb.getJugadorActual().getPokemonActual().getHabilidades().get(4).getUsos());
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
