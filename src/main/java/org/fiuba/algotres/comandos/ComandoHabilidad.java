@@ -33,15 +33,15 @@ public class ComandoHabilidad extends Comando {
         Pokemon victima = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual();
         if(!pokemonActual.getEstados().isEmpty()) {
             boolean puedeAccionar = true;
-            ArrayList<String> estadosInhabilitantes = new ArrayList<>();
+            String estadoInhabilitante = "";
             for(Estado estado : pokemonActual.getEstados()) {
                 puedeAccionar = estado.accionar();
-                estadosInhabilitantes.add(estado.getNombre());
+                if (!puedeAccionar && estadoInhabilitante.equals("")) {
+                    estadoInhabilitante = estado.getNombre();
+                }
             }
             if(!puedeAccionar){
-                for (String strEstado: estadosInhabilitantes) {
-                    Tools.imprimirMensaje("El pokemon esta " + strEstado + "! No puede hacer nada");
-                }
+                Tools.imprimirMensaje("El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
                 return true;
             }
             if(!pokemonActual.estaVivo()){
