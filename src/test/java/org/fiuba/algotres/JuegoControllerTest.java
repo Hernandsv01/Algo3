@@ -39,8 +39,8 @@ public class JuegoControllerTest {
         when(input.obtenerCualquierDato(true)).thenReturn("");
         inicializarConfiguracion(input);
         
-        cdb = new CampoDeBatalla(
-            new Jugador[]{
+        cdb = new CampoDeBatalla();
+        cdb.setJugadores(new Jugador[]{
                 new Jugador(
                     List.of(
                         new Pokemon(
@@ -51,11 +51,11 @@ public class JuegoControllerTest {
                                 1000, 
                                 100, 
                                 100, 
-                                100, 
-                                null
+                                100,
+                                generarHabilidades()
                         )
                     ),
-                    null,
+                        generarItems(),
                     "JugadorUno"
                 ),
                 new Jugador(
@@ -68,23 +68,20 @@ public class JuegoControllerTest {
                                 1000, 
                                 100, 
                                 100, 
-                                100, 
-                                null
+                                100,
+                                generarHabilidades()
                         )
                     ),
-                    null,
+                        generarItems(),
                     "JugadorDos"
                 )
             }
         );
         cdb.setTurnoActual(0);
-        cdb.getJugadores()[0].setItems(generarItems());
-        cdb.getJugadores()[1].setItems(generarItems());
-        cdb.getJugadores()[0].getPokemons().get(0).setHabilidades(generarHabilidades());
-        cdb.getJugadores()[1].getPokemons().get(0).setHabilidades(generarHabilidades());
+        cdb.setClima(new SinClima("Sin clima", cdb));
     }
     
-    public static List generarHabilidades(){
+    public static List<Habilidad> generarHabilidades(){
         return List.of(
             // Ataques contra Tierra
             new Ataque("Ataque DRAGON", 10, 100, Tipos.DRAGON),       // efectividad normal contra tierra
@@ -104,7 +101,7 @@ public class JuegoControllerTest {
         );
     }
     
-    public static List generarItems(){
+    public static List<Item> generarItems(){
         return List.of(
             new CuraTodo(10, "Cura todo"),
             
@@ -122,11 +119,11 @@ public class JuegoControllerTest {
     
     @Test
     @Order(1)
-    public void testIntegradorAtaquesCuracionYRendicion(){
-        // Primer turno: Jugador 0 ataca a jugador 1 con ataque de efectividad normal
+    public void testIntegradorHabilidadesCuracionYRendicion(){
+        /* Primer turno: Jugador 0 ataca a jugador 1 con ataque de efectividad normal */
         when(input.obtenerOpcionUsuario(anyInt()))
-                .thenReturn(1) // Usar una habilidad
-                .thenReturn(1); // Usar habilidad 1 (Ataque tipo dragon, efectividad normal)
+                .thenReturn(1)
+                .thenReturn(1);
         
         boolean turnoCompletado = JuegoController.turno(cdb);
         
@@ -138,10 +135,11 @@ public class JuegoControllerTest {
         assertEquals(cdb.getJugadorActual(), cdb.getJugadores()[1]);
         
         //-----------------------------------------------------------------------------------------------
-        // Segundo turno: Jugador 1 ataca a jugador 0 con ataque de efectividad nula
+        /* Segundo turno: Jugador 1 ataca a jugador 0 con ataque de efectividad nula */
+
         when(input.obtenerOpcionUsuario(anyInt()))
-                .thenReturn(1) // Usar una habilidad
-                .thenReturn(2); // Usar habilidad 2 (Ataque tipo fantasma, efectividad nula)
+                .thenReturn(1)
+                .thenReturn(2);
         
         turnoCompletado = JuegoController.turno(cdb);
         
@@ -153,11 +151,11 @@ public class JuegoControllerTest {
         assertEquals(cdb.getJugadorActual(), cdb.getJugadores()[0]);
         
         //-----------------------------------------------------------------------------------------------
-        // Tercer turno: Jugador 0 usa habilidad de cambio de clima a TormentaArena (hace daño a pokemon por 3% en cada turno por 5 turnos)
+        /* Tercer turno: Jugador 0 usa habilidad de cambio de clima a TormentaArena (hace daño a pokemon por 3% en cada turno por 5 turno */
         
         when(input.obtenerOpcionUsuario(anyInt()))
-                .thenReturn(1) // Usar una habilidad
-                .thenReturn(4); // Usar habilidad 4 (Cambio a clima TormentaArena)
+                .thenReturn(1)
+                .thenReturn(4);
         
         turnoCompletado = JuegoController.turno(cdb);
         
@@ -168,21 +166,114 @@ public class JuegoControllerTest {
         cdb.setSiguienteTurno();
         
         //-----------------------------------------------------------------------------------------------
-        // Cuarto turno: Jugador 1 usa habilidad de modificación de estadística (50% menos ataque)
+        /* Cuarto turno: Jugador 1 usa habilidad de modificación de estadística (50% menos ataque)
+                Side effect: No hay daño por clima, tipo favorecido
+        */
         
-//        when(input.obtenerOpcionUsuario(anyInt()))
-//                .thenReturn(1) // Usar una habilidad
-//                .thenReturn(5); // Usar habilidad 5 (modificación de estadística (ataque))
-//        int vidaPokemonUnoPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
-//        int vidaPokemonDosPreEfectoClima = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual();
-//        
-//        turnoCompletado = JuegoController.turno(cdb);
-//        
-//        assertTrue(turnoCompletado);
-//        assertEquals(50, cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getAtaque());
-//        assertEquals(9, cdb.getJugadorActual().getPokemonActual().getHabilidades().get(4).getUsos());
-        
-        
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(1)
+                .thenReturn(5);
+        int vidaPokemonPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
+
+        turnoCompletado = JuegoController.turno(cdb);
+
+        assertTrue(turnoCompletado);
+        assertEquals(50, cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getAtaque());
+        assertEquals(9, cdb.getJugadorActual().getPokemonActual().getHabilidades().get(4).getUsos());
+        assertEquals(vidaPokemonPreEfectoClima, cdb.getJugadorActual().getPokemonActual().getVidaActual());
+
+        cdb.setSiguienteTurno();
+
+        //-----------------------------------------------------------------------------------------------
+        /* Quinto turno: Jugador 0 usa habilidad de modificación de estado (envenenado)
+                Side effect: 30 de daño por clima
+        */
+
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(1)
+                .thenReturn(8);
+        vidaPokemonPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
+
+        turnoCompletado = JuegoController.turno(cdb);
+
+        assertTrue(turnoCompletado);
+        assertEquals(vidaPokemonPreEfectoClima-30, cdb.getJugadorActual().getPokemonActual().getVidaActual());
+        assertFalse(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().isEmpty());
+        assertEquals(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().get(0).getNombre(), "Envenenado");
+
+        cdb.setSiguienteTurno();
+
+        //-----------------------------------------------------------------------------------------------
+        /* Sexto turno: Jugador 1 usa item de modificacion defensa (50% más)
+                Side effect: 50 de daño por envenenado
+        */
+
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(2)
+                .thenReturn(3)
+                .thenReturn(1);
+        int vidaPokemonPreEfectoEnvenenado = cdb.getJugadorActual().getPokemonActual().getVidaActual();
+
+        turnoCompletado = JuegoController.turno(cdb);
+
+        assertTrue(turnoCompletado);
+        assertEquals(vidaPokemonPreEfectoEnvenenado-50, cdb.getJugadorActual().getPokemonActual().getVidaActual());
+        assertEquals(150, cdb.getJugadorActual().getPokemonActual().getDefensa());
+
+        cdb.setSiguienteTurno();
+
+        //-----------------------------------------------------------------------------------------------
+        /* Septimo turno: Jugador 0 usa habilidad de cambio de clima (Sin clima)
+                Side effect: 30 de daño por tormenta antes del cambio de clima
+        */
+
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(1)
+                .thenReturn(3);
+        vidaPokemonPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
+
+        turnoCompletado = JuegoController.turno(cdb);
+
+        assertTrue(turnoCompletado);
+        assertTrue(cdb.getClima() instanceof SinClima);
+        assertEquals(vidaPokemonPreEfectoClima-30, cdb.getJugadorActual().getPokemonActual().getVidaActual());
+
+        cdb.setSiguienteTurno();
+
+        //-----------------------------------------------------------------------------------------------
+        /* Octavo turno: Jugador 1 usa item cura efectos
+                Side effect: 50 de daño por envenenado aplicado antes del item
+        */
+
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(2)
+                .thenReturn(1)
+                .thenReturn(1);
+        vidaPokemonPreEfectoEnvenenado = cdb.getJugadorActual().getPokemonActual().getVidaActual();
+
+        turnoCompletado = JuegoController.turno(cdb);
+
+        assertTrue(turnoCompletado);
+        assertTrue(cdb.getJugadorActual().getPokemonActual().getEstados().isEmpty());
+        assertEquals(vidaPokemonPreEfectoEnvenenado-50, cdb.getJugadorActual().getPokemonActual().getVidaActual());
+
+        cdb.setSiguienteTurno();
+
+        //-----------------------------------------------------------------------------------------------
+        /* Noveno turno: Jugador 0 se rinde
+                Side effect: pokemons muertos y juego termina
+        */
+
+        when(input.obtenerOpcionUsuario(anyInt()))
+                .thenReturn(4);
+
+        turnoCompletado = JuegoController.turno(cdb);
+
+        assertTrue(turnoCompletado);
+        assertFalse(cdb.getJugadorActual().getPokemonActual().estaVivo());
+        assertEquals(1, cdb.getGanador());
+
+
         
         
         
