@@ -107,8 +107,9 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de ataque que se quiere modificar.
      */
     public void modificarAtaque(int porcentaje) {
-        if (porcentaje > 0 && porcentaje < 100) {
-            ataque += Math.round(((float) porcentaje / 100) * ataque);
+        ataque += Math.round(((float) porcentaje / 100) * ataque);
+        if (ataque <= 0) {
+            ataque = 1;
         }
     }
 
@@ -118,8 +119,9 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de defensa que se quiere modificar.
      */
     public void modificarDefensa(int porcentaje) {
-        if (porcentaje > 0 && porcentaje < 100) {
-            defensa += Math.round(((float) porcentaje / 100) * defensa);
+        defensa += Math.round(((float) porcentaje / 100) * defensa);
+        if (defensa <= 0) {
+            defensa = 1;
         }
     }
 
