@@ -2,11 +2,14 @@ package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
 
-public class Pocion extends ItemAbstracto{
-    private final int CANTIDADDEVIDA = 20;
+public class HiperPocion extends ItemAbstracto {
+    private final int CANTIDADDEVIDA = 100;
 
-    public Pocion(int cantidad, String nombre) {
+    public HiperPocion(int cantidad, String nombre) {
         super(cantidad, nombre);
+        if (cantidad > 1) {
+            this.cantidad = 1;
+        }
     }
 
     @Override
@@ -18,7 +21,6 @@ public class Pocion extends ItemAbstracto{
         }
         return false;
     }
-
     public int getEficiencia() {
         return CANTIDADDEVIDA;
     }

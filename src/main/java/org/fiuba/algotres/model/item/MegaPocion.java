@@ -2,10 +2,10 @@ package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
 
-public class Pocion extends ItemAbstracto{
-    private final int CANTIDADDEVIDA = 20;
+public class MegaPocion extends ItemAbstracto {
+    private final int CANTIDADDEVIDA = 50;
 
-    public Pocion(int cantidad, String nombre) {
+    public MegaPocion(int cantidad, String nombre) {
         super(cantidad, nombre);
     }
 

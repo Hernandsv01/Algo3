@@ -3,7 +3,7 @@ package org.fiuba.algotres.model.item;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.strategies.Strategy;
 
-public class Estadistica extends Item {
+public class Estadistica extends ItemAbstracto {
     private final Strategy strategy;
     protected int porcentaje;
 
@@ -16,10 +16,15 @@ public class Estadistica extends Item {
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {
-            this.strategy.modificar(pokemon,porcentaje);
+            this.strategy.modificar(pokemon, porcentaje);
             cantidad--;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int getEficiencia() {
+        return porcentaje;
     }
 }
