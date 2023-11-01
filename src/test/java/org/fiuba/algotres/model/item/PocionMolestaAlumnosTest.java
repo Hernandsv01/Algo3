@@ -1,15 +1,14 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategies.Strategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
-class PocionTest {
-
+public class PocionMolestaAlumnosTest {
     Pokemon pokemon;
 
     @BeforeEach
@@ -20,7 +19,7 @@ class PocionTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(0, "Poción");
+        Item item = FactoryItem.Crear(0, "Poción Molesta Alumnos");
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -33,7 +32,7 @@ class PocionTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción");
+        Item item = FactoryItem.Crear(2, "Poción Molesta Alumnos");
 
         //Act
         Boolean res1 = item.usar(pokemon);
@@ -63,16 +62,16 @@ class PocionTest {
     }
 
     @Test
-    public void testCheckeaCurarPuntosPokemon() {
+    public void testCheckeaCurarPorcentajePokemon() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción");
+        Item item = FactoryItem.Crear(2, "Poción Molesta Alumnos");
 
         //Act & Assert
         item.usar(pokemon);
-        verify(pokemon, times(1)).curarPorPuntos(item.getEficiencia());
+        verify(pokemon, times(1)).curarPorPorcentaje(item.getEficiencia());
 
         //Act & Assert
         item.usar(pokemon);
-        verify(pokemon, times(2)).curarPorPuntos(item.getEficiencia());
+        verify(pokemon, times(2)).curarPorPorcentaje(item.getEficiencia());
     }
 }

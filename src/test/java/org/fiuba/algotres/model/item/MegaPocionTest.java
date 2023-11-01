@@ -1,15 +1,14 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategies.Strategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
-class PocionTest {
-
+public class MegaPocionTest {
     Pokemon pokemon;
 
     @BeforeEach
@@ -20,7 +19,7 @@ class PocionTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(0, "Poción");
+        Item item = FactoryItem.Crear(0, "Mega Poción");
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -33,7 +32,7 @@ class PocionTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción");
+        Item item = FactoryItem.Crear(2, "Mega Poción");
 
         //Act
         Boolean res1 = item.usar(pokemon);
@@ -65,7 +64,7 @@ class PocionTest {
     @Test
     public void testCheckeaCurarPuntosPokemon() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción");
+        Item item = FactoryItem.Crear(2, "Mega Poción");
 
         //Act & Assert
         item.usar(pokemon);

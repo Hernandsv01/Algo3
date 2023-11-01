@@ -1,15 +1,14 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategies.Strategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
-class PocionTest {
-
+public class HiperPocionTest {
     Pokemon pokemon;
 
     @BeforeEach
@@ -20,7 +19,7 @@ class PocionTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(0, "Poción");
+        Item item = FactoryItem.Crear(0, "Hiper Poción");
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -33,15 +32,15 @@ class PocionTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción");
+        Item item = FactoryItem.Crear(2, "Hiper Poción");
 
         //Act
         Boolean res1 = item.usar(pokemon);
 
         //Assert
         assertNotEquals(2, item.getCantidad());
-        assertEquals(1, item.getCantidad());
-        assertNotEquals(0, item.getCantidad());
+        assertEquals(0, item.getCantidad());
+        assertNotEquals(1, item.getCantidad());
         assertEquals(true, res1);
 
         //Act
@@ -51,21 +50,14 @@ class PocionTest {
         assertNotEquals(1, item.getCantidad());
         assertEquals(0, item.getCantidad());
         assertNotEquals(-1, item.getCantidad());
-        assertEquals(true, res2);
-
-        //Act
-        Boolean res3 = item.usar(pokemon);
-
-        //Assert
-        assertEquals(0, item.getCantidad());
-        assertNotEquals(-1, item.getCantidad());
-        assertEquals(false, res3);
+        assertEquals(false, res2);
+        //La utiliza una vez, ya que el limite de items "Hiper Poción" está limitado a 1.
     }
 
     @Test
     public void testCheckeaCurarPuntosPokemon() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción");
+        Item item = FactoryItem.Crear(2, "Hiper Poción");
 
         //Act & Assert
         item.usar(pokemon);
@@ -73,6 +65,7 @@ class PocionTest {
 
         //Act & Assert
         item.usar(pokemon);
-        verify(pokemon, times(2)).curarPorPuntos(item.getEficiencia());
+        verify(pokemon, times(1)).curarPorPuntos(item.getEficiencia());
+        //La utiliza una vez, ya que el limite de items "Hiper Poción" está limitado a 1.
     }
 }

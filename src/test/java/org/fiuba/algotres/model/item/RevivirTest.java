@@ -18,7 +18,7 @@ class RevivirTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Revivir item = new Revivir(0, "Revivir");
+        Item item = FactoryItem.Crear(0, "Revivir");
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -31,7 +31,7 @@ class RevivirTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Revivir item = new Revivir(2, "Revivir");
+        Item item = FactoryItem.Crear(2, "Revivir");
         when(pokemon.estaVivo()).thenReturn(false);
 
         //Act
@@ -64,7 +64,7 @@ class RevivirTest {
     @Test
     public void testCheckeaVidaPokemon() {
         //Arrange
-        Revivir item = new Revivir(2, "Revivir");
+        Item item = FactoryItem.Crear(2, "Revivir");
 
         //Act
         item.usar(pokemon);
