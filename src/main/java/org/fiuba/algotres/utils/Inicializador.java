@@ -563,47 +563,14 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        Estadistica ataqueX = new Estadistica(
-                3,
-                "Ataque X",
-                10,
-                new AtaqueStrategy()
-        );
-
-        Estadistica defensaX = new Estadistica(
-                3,
-                "Defensa X",
-                10,
-                new DefensaStrategy()
-        );
-
-        Pocion pocion = new Pocion(
-                3,
-                "Poción",
-                20
-        );
-
-        Pocion megaPocion = new Pocion(
-                2,
-                "Mega Poción",
-                50
-        );
-
-        Pocion hiperPocion = new Pocion(
-                1,
-                "Hiper Poción",
-                100
-        );
-
-        CuraTodo curaTodo = new CuraTodo(
-                3,
-                "Cura Todo"
-        );
-
-        Revivir revivir = new Revivir(
-                2,
-                "Revivir"
-        );
+        Item ataqueX = FactoryItem.Crear(3, "Ataque X");
+        Item defensaX = FactoryItem.Crear(3, "Defensa X");
+        Item pocion = FactoryItem.Crear(3, "Poción");
+        Item megaPocion = FactoryItem.Crear(2, "Mega Poción");
+        Item hiperPocion = FactoryItem.Crear(1, "Hiper Poción");
+        Item curaTodo = FactoryItem.Crear(3, "Cura Todo");
+        Item revivir = FactoryItem.Crear(2, "Revivir");
+        Item pocionMolestaAlumnos = FactoryItem.Crear(2, "Poción Molesta Alumnos");
 
         return new ArrayList<>(Arrays.asList(
                 ataqueX,
@@ -612,7 +579,8 @@ public class Inicializador {
                 megaPocion,
                 hiperPocion,
                 curaTodo,
-                revivir
+                revivir,
+                pocionMolestaAlumnos
         ));
     }
 
