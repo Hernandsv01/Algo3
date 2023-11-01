@@ -5,9 +5,9 @@ import org.fiuba.algotres.model.strategies.Strategy;
 
 public class ModificacionEstadistica extends Habilidad {
     private final Strategy strategy;
-    protected final Integer porcentaje;
+    protected final int porcentaje;
 
-    public ModificacionEstadistica(String nombre, int usos, Integer porcentaje, Strategy strategy) {
+    public ModificacionEstadistica(String nombre, int usos, int porcentaje, Strategy strategy) {
         super(nombre, usos);
         this.porcentaje = porcentaje;
         this.strategy = strategy;
