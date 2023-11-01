@@ -20,10 +20,10 @@ public class ModificacionEstadistica extends Habilidad {
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
         if (verificarUsos(usos)) {
-            if (atacante == victima) {
+            if (porcentaje < 0) {
                 this.strategy.modificar(victima, porcentaje);
             } else {
-                this.strategy.modificar(victima, -porcentaje);
+                this.strategy.modificar(atacante, porcentaje);
             }
             usos--;
             return true;
