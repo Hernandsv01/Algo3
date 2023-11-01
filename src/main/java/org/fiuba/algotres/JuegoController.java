@@ -69,7 +69,7 @@ public class JuegoController {
             Tools.imprimirMensajeConEspera(input, "Eligio el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
         }
 
-        Tools.imprimirMensaje("El clima sorteado es: " + cdb.getClima().getNombre());
+        Tools.imprimirMensajeConEspera(input, "El clima sorteado es: " + cdb.getClima().getNombre());
     }
 
     public static boolean turno(CampoDeBatalla cdb){

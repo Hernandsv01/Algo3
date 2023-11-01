@@ -13,16 +13,6 @@ public class CampoDeBatalla {
     private Clima clima;
     private int turnoActual;
 
-<<<<<<< Updated upstream
-    public CampoDeBatalla(){
-
-=======
-    public CampoDeBatalla(Jugador[] jugadores){
-        clima = new SinClima("Sin clima", this);
-        this.jugadores = jugadores;
->>>>>>> Stashed changes
-    }
-
     /**
      * Verifica la vida de cada uno de los pokemons de los jugadores para ver si alguno tiene vida
      * @return El número del jugador que ganó o -1 en caso de que ambos tengan pokemons con vida.
