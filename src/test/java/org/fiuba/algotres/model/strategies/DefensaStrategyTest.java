@@ -3,6 +3,7 @@ package org.fiuba.algotres.model.strategies;
 import org.fiuba.algotres.model.Pokemon;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class DefensaStrategyTest {
@@ -24,6 +25,9 @@ class DefensaStrategyTest {
 
         //Assert
         verify(pokemon, times(2)).modificarDefensa(porcentaje);
+
+        //Assert
+        assertEquals(true, strategy.esPositivo());
     }
 
     @Test
@@ -37,12 +41,15 @@ class DefensaStrategyTest {
         strategy.modificar(pokemon, porcentaje);
 
         //Assert
-        verify(pokemon, times(1)).modificarDefensa(porcentaje);
+        verify(pokemon, times(1)).modificarDefensa(-porcentaje);
 
         //Act
         strategy.modificar(pokemon, porcentaje);
 
         //Assert
-        verify(pokemon, times(2)).modificarDefensa(porcentaje);
+        verify(pokemon, times(2)).modificarDefensa(-porcentaje);
+
+        //Assert
+        assertEquals(false, strategy.esPositivo());
     }
 }

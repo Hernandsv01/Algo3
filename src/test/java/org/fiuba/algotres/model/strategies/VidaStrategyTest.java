@@ -3,6 +3,7 @@ package org.fiuba.algotres.model.strategies;
 import org.fiuba.algotres.model.Pokemon;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class VidaStrategyTest {
@@ -24,5 +25,8 @@ class VidaStrategyTest {
 
         //Assert
         verify(pokemon, times(2)).curarPorPorcentaje(porcentaje);
+
+        //Assert
+        assertEquals(true, strategy.esPositivo());
     }
 }
