@@ -10,7 +10,7 @@ import org.fiuba.algotres.model.Pokemon;
 class EnvenenadoTest {
 
     @Test
-    void accionar() {
+    void testAccionar() {
         // Setup
         Envenenado envenenado = new Envenenado("Envenenado");
         Pokemon pokemon = mock(Pokemon.class);
