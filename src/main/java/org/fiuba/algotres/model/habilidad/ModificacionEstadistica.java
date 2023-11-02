@@ -23,7 +23,7 @@ public class ModificacionEstadistica extends Habilidad {
             if (strategy.esPositivo()) {
                 this.strategy.modificar(atacante, porcentaje);
             } else {
-                this.strategy.modificar(victima, porcentaje);
+                this.strategy.modificar(victima, -porcentaje);
             }
             usos--;
             return true;

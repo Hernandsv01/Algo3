@@ -19,7 +19,7 @@ public class PocionMolestaAlumnosTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(0, "Poción Molesta Alumnos");
+        Item item = FactoryItem.CrearPocionMolestaAlumnos(0);
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -32,7 +32,7 @@ public class PocionMolestaAlumnosTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción Molesta Alumnos");
+        Item item = FactoryItem.CrearPocionMolestaAlumnos(2);
 
         //Act
         Boolean res1 = item.usar(pokemon);
@@ -64,14 +64,14 @@ public class PocionMolestaAlumnosTest {
     @Test
     public void testCheckeaCurarPorcentajePokemon() {
         //Arrange
-        Item item = FactoryItem.Crear(2, "Poción Molesta Alumnos");
+        Item item = FactoryItem.CrearPocionMolestaAlumnos(2);
 
         //Act & Assert
         item.usar(pokemon);
-        verify(pokemon, times(1)).curarPorPorcentaje(item.getEficiencia());
+        verify(pokemon, times(1)).curarPorPorcentaje(FactoryItem.getEfectividadPocionMolestaAlumnos());
 
         //Act & Assert
         item.usar(pokemon);
-        verify(pokemon, times(2)).curarPorPorcentaje(item.getEficiencia());
+        verify(pokemon, times(2)).curarPorPorcentaje(FactoryItem.getEfectividadPocionMolestaAlumnos());
     }
 }

@@ -1,5 +1,6 @@
 package org.fiuba.algotres.model.item;
 
+import lombok.Getter;
 import org.fiuba.algotres.model.strategies.AtaqueStrategy;
 import org.fiuba.algotres.model.strategies.DefensaStrategy;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +12,21 @@ public class FactoryItem {
     private static final int CANTIDAD_VIDA_HIPER_POCION = 100;
     private static final int PORCENTAJE_DE_VIDA = 33;
 
+    public static int getEfectividadPocion() {
+        return CANTIDAD_VIDA_POCION;
+    }
+
+    public static int getEfectividadMegaPocion() {
+        return CANTIDAD_VIDA_MEGA_POCION;
+    }
+
+    public static int getEfectividadHiperPocion() {
+        return CANTIDAD_VIDA_HIPER_POCION;
+    }
+
+    public static int getEfectividadPocionMolestaAlumnos() {
+        return PORCENTAJE_DE_VIDA;
+    }
 
     public static Item CrearPocion(int cantidad) {
         return new Pocion(cantidad, "Pocion", CANTIDAD_VIDA_POCION);
@@ -21,6 +37,9 @@ public class FactoryItem {
     }
 
     public static Item CrearHiperPocion(int cantidad) {
+        if (cantidad > 1) {
+            cantidad = 1;
+        }
         return new Pocion(cantidad, "Hiper Pocion", CANTIDAD_VIDA_HIPER_POCION);
     }
 
