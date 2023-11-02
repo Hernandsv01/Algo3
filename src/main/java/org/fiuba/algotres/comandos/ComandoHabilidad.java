@@ -9,8 +9,6 @@ import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
-import java.util.ArrayList;
-
 public class ComandoHabilidad extends Comando {
     public ComandoHabilidad(String nombre) {
         super(nombre);
@@ -33,15 +31,16 @@ public class ComandoHabilidad extends Comando {
         Pokemon victima = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual();
         if(!pokemonActual.getEstados().isEmpty()) {
             boolean puedeAccionar = true;
-            ArrayList<String> estadosInhabilitantes = new ArrayList<>();
+            String estadoInhabilitante = "";
             for(Estado estado : pokemonActual.getEstados()) {
                 puedeAccionar = estado.accionar();
-                estadosInhabilitantes.add(estado.getNombre());
-            }
-            if(!puedeAccionar){
-                for (String strEstado: estadosInhabilitantes) {
-                    Tools.imprimirMensaje("El pokemon esta " + strEstado + "! No puede hacer nada");
+                if (!puedeAccionar && estadoInhabilitante.equals("")) {
+                    estadoInhabilitante = estado.getNombre();
                 }
+            }
+            pokemonActual.limpiarEstados();
+            if(!puedeAccionar){
+                Tools.imprimirMensaje("El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
                 return true;
             }
             if(!pokemonActual.estaVivo()){

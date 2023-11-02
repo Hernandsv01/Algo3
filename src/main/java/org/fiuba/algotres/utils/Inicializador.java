@@ -184,13 +184,13 @@ public class Inicializador {
                 "Danza espada",
                 15,
                 10,
-                new AtaqueStrategy()
+                new AtaqueStrategy(true)
         );
         ModificacionEstadistica rizoDefensa = new ModificacionEstadistica(
                 "Rizo defensa",
                 25,
                 15,
-                new DefensaStrategy()
+                new DefensaStrategy(true)
         );
         ModificacionEstadistica recuperacion = new ModificacionEstadistica(
                 "Recuperacion",
@@ -202,25 +202,25 @@ public class Inicializador {
                 "Chirrido",
                 15,
                 10,
-                new AtaqueStrategy()
+                new AtaqueStrategy(false)
         );
         ModificacionEstadistica pantallaDeLuz = new ModificacionEstadistica(
                 "Pantalla de luz",
                 30,
                 15,
-                new AtaqueStrategy()
+                new AtaqueStrategy(false)
         );
         ModificacionEstadistica acido = new ModificacionEstadistica(
                 "Ácido",
                 30,
                 10,
-                new DefensaStrategy()
+                new DefensaStrategy(false)
         );
         ModificacionEstadistica armaduraAcida = new ModificacionEstadistica(
                 "Armadura ácida",
                 15,
                 20,
-                new DefensaStrategy()
+                new DefensaStrategy(true)
         );
         ModificacionEstadistica absorber = new ModificacionEstadistica(
                 "Absorber",
@@ -563,47 +563,14 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        Estadistica ataqueX = new Estadistica(
-                3,
-                "Ataque X",
-                10,
-                new AtaqueStrategy()
-        );
-
-        Estadistica defensaX = new Estadistica(
-                3,
-                "Defensa X",
-                10,
-                new DefensaStrategy()
-        );
-
-        Pocion pocion = new Pocion(
-                3,
-                "Poción",
-                20
-        );
-
-        Pocion megaPocion = new Pocion(
-                2,
-                "Mega Poción",
-                50
-        );
-
-        Pocion hiperPocion = new Pocion(
-                1,
-                "Hiper Poción",
-                100
-        );
-
-        CuraTodo curaTodo = new CuraTodo(
-                3,
-                "Cura Todo"
-        );
-
-        Revivir revivir = new Revivir(
-                2,
-                "Revivir"
-        );
+        Item ataqueX = FactoryItem.CrearAtaqueX(3);
+        Item defensaX = FactoryItem.CrearDefensaX(3);
+        Item pocion = FactoryItem.CrearPocion(3);
+        Item megaPocion = FactoryItem.CrearMegaPocion(2);
+        Item hiperPocion = FactoryItem.CrearHiperPocion(1);
+        Item curaTodo = FactoryItem.CrearCuraTodo(3);
+        Item revivir = FactoryItem.CrearRevivir(2);
+        Item pocionMolestaAlumnos = FactoryItem.CrearPocionMolestaAlumnos(2);
 
         return new ArrayList<>(Arrays.asList(
                 ataqueX,
@@ -612,7 +579,8 @@ public class Inicializador {
                 megaPocion,
                 hiperPocion,
                 curaTodo,
-                revivir
+                revivir,
+                pocionMolestaAlumnos
         ));
     }
 

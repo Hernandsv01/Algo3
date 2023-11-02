@@ -23,6 +23,7 @@ public class Pokemon {
     private List<Estado> estados;
     private boolean estaVivo;
     private final List<Habilidad> habilidades;
+    private List<Estado> estadosQuitados;
 
     public Pokemon(
             String nombre,
@@ -47,6 +48,7 @@ public class Pokemon {
         this.estados = new ArrayList<Estado>();
         this.estaVivo = true;
         this.habilidades = habilidades;
+        this.estadosQuitados = new ArrayList<Estado>();
     }
 
     /**
@@ -107,8 +109,9 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de ataque que se quiere modificar.
      */
     public void modificarAtaque(int porcentaje) {
-        if (porcentaje > 0 && porcentaje < 100) {
-            ataque += Math.round(((float) porcentaje / 100) * ataque);
+        ataque += Math.round(((float) porcentaje / 100) * ataque);
+        if (ataque <= 0) {
+            ataque = 1;
         }
     }
 
@@ -118,8 +121,9 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de defensa que se quiere modificar.
      */
     public void modificarDefensa(int porcentaje) {
-        if (porcentaje > 0 && porcentaje < 100) {
-            defensa += Math.round(((float) porcentaje / 100) * defensa);
+        defensa += Math.round(((float) porcentaje / 100) * defensa);
+        if (defensa <= 0) {
+            defensa = 1;
         }
     }
 
@@ -158,6 +162,11 @@ public class Pokemon {
      * @param estado estado que se le quitar agregar al pokemon.
      */
     public void quitarEstado(Estado estado) {
-        this.estados.remove(estado);
+        this.estadosQuitados.add(estado);
+    }
+    public void limpiarEstados() {
+        for (Estado estadoquitado : this.estadosQuitados) {
+            this.estados.remove(estadoquitado);
+        }
     }
 }

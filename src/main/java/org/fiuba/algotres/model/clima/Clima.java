@@ -1,5 +1,7 @@
 package org.fiuba.algotres.model.clima;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.habilidad.Ataque;
@@ -8,6 +10,7 @@ import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.List;
 
+@Setter @Getter
 public abstract class Clima {
 
     public int turnosAplicados;
@@ -62,16 +65,4 @@ public abstract class Clima {
             potenciarPokemon(pokemon);
         }
     };
-
-    public CampoDeBatalla getCdb() {
-        return cdb;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setTurnosAplicados(int turno){
-        this.turnosAplicados = turno;
-    }
 }

@@ -5,9 +5,9 @@ import org.fiuba.algotres.model.strategies.Strategy;
 
 public class ModificacionEstadistica extends Habilidad {
     private final Strategy strategy;
-    protected final Integer porcentaje;
+    protected final int porcentaje;
 
-    public ModificacionEstadistica(String nombre, int usos, Integer porcentaje, Strategy strategy) {
+    public ModificacionEstadistica(String nombre, int usos, int porcentaje, Strategy strategy) {
         super(nombre, usos);
         this.porcentaje = porcentaje;
         this.strategy = strategy;
@@ -20,8 +20,8 @@ public class ModificacionEstadistica extends Habilidad {
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
         if (verificarUsos(usos)) {
-            if (atacante == victima) {
-                this.strategy.modificar(victima, porcentaje);
+            if (strategy.esPositivo()) {
+                this.strategy.modificar(atacante, porcentaje);
             } else {
                 this.strategy.modificar(victima, -porcentaje);
             }

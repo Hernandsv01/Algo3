@@ -1,18 +1,14 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.estado.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
-class CuraTodoTest {
-
+public class PocionMolestaAlumnosTest {
     Pokemon pokemon;
 
     @BeforeEach
@@ -23,7 +19,7 @@ class CuraTodoTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.CrearCuraTodo(0);
+        Item item = FactoryItem.CrearPocionMolestaAlumnos(0);
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -36,14 +32,7 @@ class CuraTodoTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.CrearCuraTodo(2);
-        List<Estado> estados = new ArrayList<>();
-        //Podría haber sido cualquier Estado y cualquier cantidad de Estados.
-        estados.add(new Dormido("Dormido"));
-        estados.add(new Confuso("Confuso"));
-        estados.add(new Paralizado("Paralizado"));
-        estados.add(new Envenenado("Envenenado"));
-        when(pokemon.getEstados()).thenReturn(estados);
+        Item item = FactoryItem.CrearPocionMolestaAlumnos(2);
 
         //Act
         Boolean res1 = item.usar(pokemon);
@@ -58,35 +47,31 @@ class CuraTodoTest {
         Boolean res2 = item.usar(pokemon);
 
         //Assert
-        assertNotEquals(2, item.getCantidad());
-        assertEquals(1, item.getCantidad());
-        assertNotEquals(0, item.getCantidad());
-        assertEquals(false, res2); // removio los estados que existian en el ArrayList "estados".
+        assertNotEquals(1, item.getCantidad());
+        assertEquals(0, item.getCantidad());
+        assertNotEquals(-1, item.getCantidad());
+        assertEquals(true, res2);
 
         //Act
         Boolean res3 = item.usar(pokemon);
 
         //Assert
-        assertEquals(1, item.getCantidad());
+        assertEquals(0, item.getCantidad());
         assertNotEquals(-1, item.getCantidad());
         assertEquals(false, res3);
     }
 
     @Test
-    public void testCheckeaEstadoPokemon() {
+    public void testCheckeaCurarPorcentajePokemon() {
         //Arrange
-        Item item = FactoryItem.CrearCuraTodo(2);
+        Item item = FactoryItem.CrearPocionMolestaAlumnos(2);
 
-        //Act
+        //Act & Assert
         item.usar(pokemon);
+        verify(pokemon, times(1)).curarPorPorcentaje(FactoryItem.getEfectividadPocionMolestaAlumnos());
 
-        //Assert
-        verify(pokemon, times(1)).getEstados();
-
-        //Act
+        //Act & Assert
         item.usar(pokemon);
-
-        //Assert
-        verify(pokemon, times(2)).getEstados();
+        verify(pokemon, times(2)).curarPorPorcentaje(FactoryItem.getEfectividadPocionMolestaAlumnos());
     }
 }

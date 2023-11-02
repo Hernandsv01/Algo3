@@ -16,7 +16,7 @@ public class Estadistica extends Item {
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {
-            this.strategy.modificar(pokemon,porcentaje);
+            this.strategy.modificar(pokemon, porcentaje);
             cantidad--;
             return true;
         }
