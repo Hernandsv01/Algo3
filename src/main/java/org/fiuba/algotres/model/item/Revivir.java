@@ -2,7 +2,7 @@ package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
 
-public class Revivir extends ItemAbstracto {
+public class Revivir extends Item {
     public Revivir(int cantidad, String nombre) {
         super(cantidad, nombre);
     }
@@ -17,10 +17,5 @@ public class Revivir extends ItemAbstracto {
             }
         }
         return false;
-    }
-
-    @Override
-    public int getEficiencia() {
-        return 0;
     }
 }

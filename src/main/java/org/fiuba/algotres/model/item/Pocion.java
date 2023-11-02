@@ -2,24 +2,21 @@ package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
 
-public class Pocion extends ItemAbstracto{
-    private final int CANTIDADDEVIDA = 20;
+public class Pocion extends Item{
+    private final int cantidadDeVida;
 
-    public Pocion(int cantidad, String nombre) {
+    public Pocion(int cantidad, String nombre, int cantidadDeVida) {
         super(cantidad, nombre);
+        this.cantidadDeVida = cantidadDeVida;
     }
 
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {
-            pokemon.curarPorPuntos(CANTIDADDEVIDA);
+            pokemon.curarPorPuntos(cantidadDeVida);
             cantidad--;
             return true;
         }
         return false;
-    }
-
-    public int getEficiencia() {
-        return CANTIDADDEVIDA;
     }
 }
