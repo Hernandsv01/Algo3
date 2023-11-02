@@ -184,13 +184,13 @@ public class Inicializador {
                 "Danza espada",
                 15,
                 10,
-                new AtaqueStrategy()
+                new AtaqueStrategy(true)
         );
         ModificacionEstadistica rizoDefensa = new ModificacionEstadistica(
                 "Rizo defensa",
                 25,
                 15,
-                new DefensaStrategy()
+                new DefensaStrategy(true)
         );
         ModificacionEstadistica recuperacion = new ModificacionEstadistica(
                 "Recuperacion",
@@ -202,25 +202,25 @@ public class Inicializador {
                 "Chirrido",
                 15,
                 10,
-                new AtaqueStrategy()
+                new AtaqueStrategy(false)
         );
         ModificacionEstadistica pantallaDeLuz = new ModificacionEstadistica(
                 "Pantalla de luz",
                 30,
                 15,
-                new AtaqueStrategy()
+                new AtaqueStrategy(false)
         );
         ModificacionEstadistica acido = new ModificacionEstadistica(
                 "Ácido",
                 30,
                 10,
-                new DefensaStrategy()
+                new DefensaStrategy(false)
         );
         ModificacionEstadistica armaduraAcida = new ModificacionEstadistica(
                 "Armadura ácida",
                 15,
                 20,
-                new DefensaStrategy()
+                new DefensaStrategy(true)
         );
         ModificacionEstadistica absorber = new ModificacionEstadistica(
                 "Absorber",
@@ -563,14 +563,14 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        Item ataqueX = FactoryItem.Crear(3, "Ataque X");
-        Item defensaX = FactoryItem.Crear(3, "Defensa X");
-        Item pocion = FactoryItem.Crear(3, "Poción");
-        Item megaPocion = FactoryItem.Crear(2, "Mega Poción");
-        Item hiperPocion = FactoryItem.Crear(1, "Hiper Poción");
-        Item curaTodo = FactoryItem.Crear(3, "Cura Todo");
-        Item revivir = FactoryItem.Crear(2, "Revivir");
-        Item pocionMolestaAlumnos = FactoryItem.Crear(2, "Poción Molesta Alumnos");
+        Item ataqueX = FactoryItem.CrearAtaqueX(3);
+        Item defensaX = FactoryItem.CrearDefensaX(3);
+        Item pocion = FactoryItem.CrearPocion(3);
+        Item megaPocion = FactoryItem.CrearMegaPocion(2);
+        Item hiperPocion = FactoryItem.CrearHiperPocion(1);
+        Item curaTodo = FactoryItem.CrearCuraTodo(3);
+        Item revivir = FactoryItem.CrearRevivir(2);
+        Item pocionMolestaAlumnos = FactoryItem.CrearPocionMolestaAlumnos(2);
 
         return new ArrayList<>(Arrays.asList(
                 ataqueX,
