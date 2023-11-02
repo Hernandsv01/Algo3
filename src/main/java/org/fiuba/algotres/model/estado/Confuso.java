@@ -14,10 +14,11 @@ public class Confuso extends Estado {
     public boolean accionar() {
         if (this.turnosAplicados >= 3) {
             pokemon.quitarEstado(this);
-        }
-        this.turnosAplicados++;
-        if (Math.random() <= PROBABILIDAD) {
-            pokemon.danarPorPorcentaje(DANO);
+        } else {
+            this.turnosAplicados++;
+            if (Math.random() <= PROBABILIDAD) {
+                pokemon.danarPorPorcentaje(DANO);
+            }
         }
         return true;
     }

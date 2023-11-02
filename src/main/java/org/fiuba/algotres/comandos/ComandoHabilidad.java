@@ -9,8 +9,6 @@ import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
-import java.util.ArrayList;
-
 public class ComandoHabilidad extends Comando {
     public ComandoHabilidad(String nombre) {
         super(nombre);
@@ -40,6 +38,7 @@ public class ComandoHabilidad extends Comando {
                     estadoInhabilitante = estado.getNombre();
                 }
             }
+            pokemonActual.limpiarEstados();
             if(!puedeAccionar){
                 Tools.imprimirMensaje("El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
                 return true;
