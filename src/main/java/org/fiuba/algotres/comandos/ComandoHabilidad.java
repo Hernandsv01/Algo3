@@ -20,7 +20,7 @@ public class ComandoHabilidad extends Comando {
     public boolean ejecutar(CampoDeBatalla cdb) {
         System.out.println("Elige la habilidad");
         int opciones = PokemonView.imprimirHabilidadesPokemon(cdb.getJugadorActual().getPokemonActual());
-        int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
+        int opcionElegida = input.obtenerOpcionUsuario(opciones);
         if (opcionElegida == opciones) return false;
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
