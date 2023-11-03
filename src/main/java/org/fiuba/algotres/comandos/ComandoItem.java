@@ -53,6 +53,7 @@ public class ComandoItem extends Comando {
                     return true;
                 }
             }
+            pokemonActual.limpiarEstados();
         }
 
         cdb.getClima().aplicarEfectos(pokemonActual);

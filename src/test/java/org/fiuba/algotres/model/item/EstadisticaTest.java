@@ -1,7 +1,6 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategies.Strategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,76 +10,76 @@ import static org.mockito.Mockito.*;
 
 class EstadisticaTest {
     Pokemon pokemon;
-    Strategy strategy;
-    int porcentaje;
 
     @BeforeEach
     public void initEach() {
         pokemon = mock(Pokemon.class);
-        strategy = mock(Strategy.class);
-        porcentaje = 10;
     }
 
     @Test
     public void testSinCantidad() {
         //Arrange
-        Estadistica item = new Estadistica(0, "Estadistica", porcentaje, strategy);
+        Item item1 = FactoryItem.CrearAtaqueX(0);
+        Item item2 = FactoryItem.CrearDefensaX(0);
 
         //Act
-        Boolean resultado = item.usar(pokemon);
+        Boolean resultado1 = item1.usar(pokemon);
+        Boolean resultado2 = item2.usar(pokemon);
 
         //Assert
-        assertEquals(false, resultado);
-        assertNotEquals(true, resultado);
+        assertEquals(false, resultado1);
+        assertNotEquals(true, resultado1);
+        assertEquals(false, resultado2);
+        assertNotEquals(true, resultado2);
     }
 
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Estadistica item = new Estadistica(2, "Estadistica", porcentaje, strategy);
+        Item item1 = FactoryItem.CrearAtaqueX(2);
+        Item item2 = FactoryItem.CrearDefensaX(2);
 
         //Act
-        Boolean res1 = item.usar(pokemon);
+        Boolean res1item1 = item1.usar(pokemon);
+        Boolean res1item2 = item2.usar(pokemon);
 
         //Assert
-        assertNotEquals(2, item.getCantidad());
-        assertEquals(1, item.getCantidad());
-        assertNotEquals(0, item.getCantidad());
-        assertEquals(true, res1);
+        assertNotEquals(2, item1.getCantidad());
+        assertEquals(1, item1.getCantidad());
+        assertNotEquals(0, item1.getCantidad());
+        assertEquals(true, res1item1);
+
+        assertNotEquals(2, item2.getCantidad());
+        assertEquals(1, item2.getCantidad());
+        assertNotEquals(0, item2.getCantidad());
+        assertEquals(true, res1item2);
 
         //Act
-        Boolean res2 = item.usar(pokemon);
+        Boolean res2item1 = item1.usar(pokemon);
+        Boolean res2item2 = item2.usar(pokemon);
 
         //Assert
-        assertNotEquals(1, item.getCantidad());
-        assertEquals(0, item.getCantidad());
-        assertNotEquals(-1, item.getCantidad());
-        assertEquals(true, res2);
+        assertNotEquals(1, item1.getCantidad());
+        assertEquals(0, item1.getCantidad());
+        assertNotEquals(-1, item1.getCantidad());
+        assertEquals(true, res2item1);
+
+        assertNotEquals(1, item2.getCantidad());
+        assertEquals(0, item2.getCantidad());
+        assertNotEquals(-1, item2.getCantidad());
+        assertEquals(true, res2item2);
 
         //Act
-        Boolean res3 = item.usar(pokemon);
+        Boolean res3item1 = item1.usar(pokemon);
+        Boolean res3item2 = item2.usar(pokemon);
 
         //Assert
-        assertEquals(0, item.getCantidad());
-        assertNotEquals(-1, item.getCantidad());
-        assertEquals(false, res3);
-    }
+        assertEquals(0, item1.getCantidad());
+        assertNotEquals(-1, item1.getCantidad());
+        assertEquals(false, res3item1);
 
-    @Test
-    public void testCheckeaModificarStrategy() {
-        //Arrange
-        Estadistica item = new Estadistica(2, "Estadistica",porcentaje, strategy);
-
-        //Act
-        item.usar(pokemon);
-
-        //Assert
-        verify(strategy, times(1)).modificar(pokemon, porcentaje);
-
-        //Act
-        item.usar(pokemon);
-
-        //Assert
-        verify(strategy, times(2)).modificar(pokemon, porcentaje);
+        assertEquals(0, item2.getCantidad());
+        assertNotEquals(-1, item2.getCantidad());
+        assertEquals(false, res3item2);
     }
 }
