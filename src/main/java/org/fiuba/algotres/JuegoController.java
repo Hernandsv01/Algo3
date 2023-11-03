@@ -15,7 +15,7 @@ import static org.fiuba.algotres.utils.Inicializador.inicializarJuego;
 import org.fiuba.algotres.views.InputUsuario;
 
 public class JuegoController {
-    
+
     private static InputUsuario input;
     private static Map<Integer, Comando> comandos;
     
@@ -81,6 +81,22 @@ public class JuegoController {
 
         Tools.imprimirDivisor(false);
         return comandos.get(opcionElegida).ejecutar(cdb);
+    }
+
+    public static InputUsuario getInput() {
+        return input;
+    }
+
+    public static void setInput(InputUsuario input) {
+        JuegoController.input = input;
+    }
+
+    public static Map<Integer, Comando> getComandos() {
+        return comandos;
+    }
+
+    public static void setComandos(Map<Integer, Comando> comandos) {
+        JuegoController.comandos = comandos;
     }
 
     public static void main(String[] args) {
