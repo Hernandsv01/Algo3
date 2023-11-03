@@ -37,7 +37,7 @@ public class ComandoHabilidad extends Comando {
             }
             pokemonActual.limpiarEstados();
             if(!puedeAccionar){
-                Tools.imprimirMensaje("El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
+                Tools.imprimirMensajeConEspera(input, "El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
                 return true;
             }
             if(!pokemonActual.estaVivo()){

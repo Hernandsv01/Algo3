@@ -24,12 +24,12 @@ class DormidoTest {
         Dormido dormido = new Dormido("Dormido");
 
         // Get result
-        boolean resultadoMock = dormidoMock.accionar(pokemon);
-        boolean resultado = dormido.accionar(pokemon);
+        boolean resultadoMock = dormidoMock.accionar();
+        boolean resultado = dormido.accionar();
 
         // Assert
         //Verifica si al llmar el metodo accionar, se llama al menos una vez
-        verify(dormidoMock, atLeastOnce()).accionar(pokemon);
+        verify(dormidoMock, atLeastOnce()).accionar();
         //Si el resultado es falso, el pokemon no puede atacar y sigue dormido. Pero si el resultado es true ignoramos el test
         assumeFalse(resultado);
         assertFalse(resultado);
@@ -39,16 +39,15 @@ class DormidoTest {
     void testAccionarTrue() {
         // Setup
         Dormido dormidoMock = mock(Dormido.class);
-        Pokemon pokemon = mock(Pokemon.class);
         Dormido dormido = new Dormido("Dormido");
 
         // Get result
-        boolean resultadoMock = dormidoMock.accionar(pokemon);
-        boolean resultado = dormido.accionar(pokemon);
+        boolean resultadoMock = dormidoMock.accionar();
+        boolean resultado = dormido.accionar();
 
         // Assert
         //Verifica si al llmar el metodo accionar, se llama al menos una vez
-        verify(dormidoMock, atLeastOnce()).accionar(pokemon);
+        verify(dormidoMock, atLeastOnce()).accionar();
         //Si el resultado es falso, el pokemon no puede atacar y sigue dormido. Pero si el resultado es true ignoramos el test
         assumeTrue(resultado);
         assertTrue(resultado);

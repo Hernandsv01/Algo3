@@ -24,10 +24,11 @@ public class CampoDeBatallaTest {
     public static void setup(){
         jugadorCero = mock(Jugador.class);
         jugadorUno = mock(Jugador.class);
-        cdb = new CampoDeBatalla(
+        cdb = new CampoDeBatalla();
+        cdb.setJugadores(
                 new Jugador[]{
-                    jugadorCero,
-                    jugadorUno
+                        jugadorCero,
+                        jugadorUno
                 }
         );
     }

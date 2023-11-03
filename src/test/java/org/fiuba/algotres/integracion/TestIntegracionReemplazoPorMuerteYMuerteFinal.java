@@ -95,8 +95,8 @@ public class TestIntegracionReemplazoPorMuerteYMuerteFinal {
                 new CambiarClima("Cambiador de clima a SinClima", 10, new SinClima("SinClima", cdb)),
                 new CambiarClima("Cambiador de clima a TormentaArena", 10, new TormentaArena("TormentaArena", cdb)),
 
-                new ModificacionEstadistica("50% menos ataque", 10, 50, new AtaqueStrategy()),
-                new ModificacionEstadistica("50% menos Defensa", 10, 50, new DefensaStrategy()),
+                new ModificacionEstadistica("50% menos ataque", 10, 50, new AtaqueStrategy(false)),
+                new ModificacionEstadistica("50% menos Defensa", 10, 50, new DefensaStrategy(false)),
                 new ModificacionEstadistica("50% menos Vida", 10, 50, new VidaStrategy()),
 
                 new ModificacionEstado("Aplicar Envenenado", 10, new Envenenado("Envenenado")),
@@ -110,8 +110,8 @@ public class TestIntegracionReemplazoPorMuerteYMuerteFinal {
         return List.of(
                 new CuraTodo(10, "Cura todo"),
 
-                new Estadistica(10, "50% mas ataque", 50, new AtaqueStrategy()),
-                new Estadistica(10, "50% mas defensa", 50, new DefensaStrategy()),
+                new Estadistica(10, "50% mas ataque", 50, new AtaqueStrategy(true)),
+                new Estadistica(10, "50% mas defensa", 50, new DefensaStrategy(true)),
                 new Estadistica(10, "50% mas vida", 50, new VidaStrategy()),
 
                 new Pocion(10, "Pocion 10", 10),
