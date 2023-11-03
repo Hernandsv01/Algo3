@@ -3,24 +3,30 @@ package org.fiuba.algotres.utils;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.clima.*;
 import org.fiuba.algotres.model.estado.Dormido;
 import org.fiuba.algotres.model.estado.Envenenado;
 import org.fiuba.algotres.model.estado.Paralizado;
 import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.item.*;
+import org.fiuba.algotres.model.strategies.AtaqueStrategy;
+import org.fiuba.algotres.model.strategies.DefensaStrategy;
+import org.fiuba.algotres.model.strategies.VidaStrategy;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Inicializador {
 
     /**
      * Crea los pokemons con sus respectivas habilidades
+     * @param cdb al cual se le asignara a los climas
      * @return Un arreglo de listas de los pokemons de cada jugador
      */
-    private static ArrayList<Pokemon>[] creacionPokemons() {
+    private static ArrayList<Pokemon>[] creacionPokemons(CampoDeBatalla cdb) {
         /* *********************************************** */
         /* **************HABILIDADES********************** */
         /* *********************************************** */
@@ -38,19 +44,12 @@ public class Inicializador {
                 40,
                 Tipos.FUEGO
         );
-        Ataque giroFuego = new Ataque(
-                "Giro fuego",
-                15,
-                60,
-                Tipos.FUEGO
-        );
         Ataque lanzallamas = new Ataque(
                 "Lanzallamas",
                 5,
                 95,
                 Tipos.FUEGO
         );
-
         Ataque aranazo = new Ataque(
                 "Arañazo",
                 30,
@@ -63,7 +62,6 @@ public class Inicializador {
                 50,
                 Tipos.NORMAL
         );
-
         Ataque burbuja = new Ataque(
                 "Burbuja",
                 30,
@@ -82,20 +80,12 @@ public class Inicializador {
                 65,
                 Tipos.AGUA
         );
-        Ataque pistolaAgua = new Ataque(
-                "Pistola agua",
-                25,
-                40,
-                Tipos.AGUA
-        );
-
         Ataque rayo = new Ataque(
                 "Rayo",
                 15,
                 95,
                 Tipos.ELECTRICO
         );
-
         Ataque confusion = new Ataque(
                 "Confusion",
                 25,
@@ -108,7 +98,6 @@ public class Inicializador {
                 90,
                 Tipos.PSIQUICO
         );
-
         Ataque megaCuerno = new Ataque(
                 "Mega cuerno",
                 5,
@@ -140,7 +129,6 @@ public class Inicializador {
                 30,
                 Tipos.LUCHA
         );
-
         Ataque lanzarrocas = new Ataque(
                 "Lanzarrocas",
                 15,
@@ -153,27 +141,18 @@ public class Inicializador {
                 60,
                 Tipos.ROCA
         );
-
-        Ataque ataqueArena = new Ataque(
-                "Ataque arena",
-                15,
-                85,
-                Tipos.TIERRA
-        );
         Ataque terremoto = new Ataque(
                 "Terremoto",
                 10,
                 100,
                 Tipos.TIERRA
         );
-
         Ataque picotazoVeneno = new Ataque(
                 "Picotazo veneno",
                 35,
                 35,
                 Tipos.VENENO
         );
-
         Ataque latigoCepa = new Ataque(
                 "Latigo cepa",
                 25,
@@ -199,74 +178,61 @@ public class Inicializador {
                 75,
                 Tipos.VOLADOR
         );
-        Ataque picotazo = new Ataque(
-                "Picotazo",
-                35,
-                35,
-                Tipos.VOLADOR
-        );
 
         /* **********TIPO MODIFICACION DE ESTADISTICA********** */
-        ModificacionEstadisticaAtaque danzaEspada = new ModificacionEstadisticaAtaque(
+        ModificacionEstadistica danzaEspada = new ModificacionEstadistica(
                 "Danza espada",
                 15,
-                10
+                10,
+                new AtaqueStrategy(true)
         );
-        ModificacionEstadisticaDefensa fortaleza = new ModificacionEstadisticaDefensa(
-                "fortaleza",
-                25,
-                10
-        );
-        ModificacionEstadisticaDefensa rizoDefensa = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica rizoDefensa = new ModificacionEstadistica(
                 "Rizo defensa",
                 25,
-                15
+                15,
+                new DefensaStrategy(true)
         );
-        ModificacionEstadisticaVida recuperacion = new ModificacionEstadisticaVida(
+        ModificacionEstadistica recuperacion = new ModificacionEstadistica(
                 "Recuperacion",
                 25,
-                25
+                25,
+                new VidaStrategy()
         );
-        ModificacionEstadisticaAtaque chirrido = new ModificacionEstadisticaAtaque(
+        ModificacionEstadistica chirrido = new ModificacionEstadistica(
                 "Chirrido",
                 15,
-                10
+                10,
+                new AtaqueStrategy(false)
         );
-        ModificacionEstadisticaAtaque pantalladDeLuz = new ModificacionEstadisticaAtaque(
+        ModificacionEstadistica pantallaDeLuz = new ModificacionEstadistica(
                 "Pantalla de luz",
                 30,
-                15
+                15,
+                new AtaqueStrategy(false)
         );
-        ModificacionEstadisticaVida descanso = new ModificacionEstadisticaVida(
-                "Descanso",
-                5,
-                75
-        );
-        ModificacionEstadisticaDefensa acido = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica acido = new ModificacionEstadistica(
                 "Ácido",
                 30,
-                10
+                10,
+                new DefensaStrategy(false)
         );
-        ModificacionEstadisticaDefensa armaduraAcida = new ModificacionEstadisticaDefensa(
+        ModificacionEstadistica armaduraAcida = new ModificacionEstadistica(
                 "Armadura ácida",
                 15,
-                20
+                20,
+                new DefensaStrategy(true)
         );
-        ModificacionEstadisticaVida absorber = new ModificacionEstadisticaVida(
+        ModificacionEstadistica absorber = new ModificacionEstadistica(
                 "Absorber",
                 20,
-                30
+                30,
+                new VidaStrategy()
         );
 
         /* *************TIPO DE MODIFICACION DE ESTADO************* */
         ModificacionEstado impactrueno = new ModificacionEstado(
                 "Impactrueno",
                 20,
-                new Paralizado("PARALIZADO")
-        );
-        ModificacionEstado trueno = new ModificacionEstado(
-                "Trueno",
-                10,
                 new Paralizado("PARALIZADO")
         );
         ModificacionEstado polvoVeneno = new ModificacionEstado(
@@ -285,6 +251,63 @@ public class Inicializador {
                 new Paralizado("PARALIZADO")
         );
 
+        /* *************TIPO DE CAMBIAR CLIMA************* */
+        CambiarClima solear = new CambiarClima(
+                "Solear",
+                5,
+                new Soleado(
+                        "Soleado",
+                        cdb
+                )
+        );
+        CambiarClima llovizna = new CambiarClima(
+                "Llovizna",
+                5,
+                new Lluvia(
+                        "Lluvia",
+                        cdb
+                )
+        );
+        CambiarClima tormentaArenosa = new CambiarClima(
+                "Tormenta arenosa",
+                5,
+                new TormentaArena(
+                        "Tormenta de arena",
+                        cdb
+                )
+        );
+        CambiarClima tormentaElectrica = new CambiarClima(
+                "Tormenta Electrica",
+                5,
+                new TormentaRayos(
+                        "Tormenta de rayos",
+                        cdb
+                )
+        );
+        CambiarClima huracan = new CambiarClima(
+                "Huracan",
+                5,
+                new Huracan(
+                        "Huracan",
+                        cdb
+                )
+        );
+        CambiarClima neblina = new CambiarClima(
+                "Neblina",
+                5,
+                new Niebla(
+                        "Niebla",
+                        cdb
+                )
+        );
+        CambiarClima despejar = new CambiarClima(
+                "Despejar",
+                5,
+                new SinClima(
+                        "ninguno",
+                        cdb
+                )
+        );
 
         /* *********************************************************** */
         /* *****************ASIGNACION DE HABILIDADES***************** */
@@ -294,19 +317,19 @@ public class Inicializador {
                 absorber,
                 somnifero,
                 latigoCepa,
-                hojaAfilada
+                llovizna
         ));
 
         ArrayList<Habilidad> habilidadesPikachu = new ArrayList<Habilidad>(Arrays.asList(
                 impactrueno,
-                trueno,
+                tormentaElectrica,
                 rayo,
                 aranazo
         ));
 
         ArrayList<Habilidad> habilidadesAbra = new ArrayList<Habilidad>(Arrays.asList(
-                pantalladDeLuz,
-                descanso,
+                pantallaDeLuz,
+                neblina,
                 confusion,
                 psiquico
         ));
@@ -315,7 +338,7 @@ public class Inicializador {
                 danzaEspada,
                 ataqueAereo,
                 ataqueAla,
-                picotazo
+                huracan
         ));
 
         ArrayList<Habilidad> habilidadesPinsir = new ArrayList<Habilidad>(Arrays.asList(
@@ -327,14 +350,14 @@ public class Inicializador {
         ArrayList<Habilidad> habilidadesStaryu = new ArrayList<Habilidad>(Arrays.asList(
                 burbuja,
                 hidrobomba,
-                pistolaAgua,
+                llovizna,
                 rayoBurbuja
         ));
 
         ArrayList<Habilidad> habilidadesCharmander = new ArrayList<Habilidad>(Arrays.asList(
                 llamarada,
                 ascuas,
-                giroFuego,
+                solear,
                 lanzallamas
         ));
 
@@ -348,7 +371,7 @@ public class Inicializador {
                 placaje,
                 rizoDefensa,
                 recuperacion,
-                fortaleza
+                despejar
         ));
 
         ArrayList<Habilidad> habilidadesParas = new ArrayList<Habilidad>(Arrays.asList(
@@ -361,7 +384,7 @@ public class Inicializador {
         ArrayList<Habilidad> habilidadesGeodude = new ArrayList<Habilidad>(Arrays.asList(
                 lanzarrocas,
                 avalancha,
-                ataqueArena,
+                tormentaArenosa,
                 terremoto
         ));
 
@@ -540,45 +563,14 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        EstadisticaAtaque ataqueX = new org.fiuba.algotres.model.item.EstadisticaAtaque(
-                3,
-                "Ataque X",
-                10
-        );
-
-        EstadisticaDefensa defensaX = new org.fiuba.algotres.model.item.EstadisticaDefensa(
-                3,
-                "Defensa X",
-                10
-        );
-
-        Pocion pocion = new Pocion(
-                3,
-                "Poción",
-                20
-        );
-
-        Pocion megaPocion = new Pocion(
-                2,
-                "Mega Poción",
-                50
-        );
-
-        Pocion hiperPocion = new Pocion(
-                1,
-                "Hiper Poción",
-                100
-        );
-
-        CuraTodo curaTodo = new CuraTodo(
-                3,
-                "Cura Todo"
-        );
-
-        Revivir revivir = new Revivir(
-                2,
-                "Revivir"
-        );
+        Item ataqueX = FactoryItem.CrearAtaqueX(3);
+        Item defensaX = FactoryItem.CrearDefensaX(3);
+        Item pocion = FactoryItem.CrearPocion(3);
+        Item megaPocion = FactoryItem.CrearMegaPocion(2);
+        Item hiperPocion = FactoryItem.CrearHiperPocion(1);
+        Item curaTodo = FactoryItem.CrearCuraTodo(3);
+        Item revivir = FactoryItem.CrearRevivir(2);
+        Item pocionMolestaAlumnos = FactoryItem.CrearPocionMolestaAlumnos(2);
 
         return new ArrayList<>(Arrays.asList(
                 ataqueX,
@@ -587,8 +579,55 @@ public class Inicializador {
                 megaPocion,
                 hiperPocion,
                 curaTodo,
-                revivir
+                revivir,
+                pocionMolestaAlumnos
         ));
+    }
+
+    /**
+     * Creo el clima que tendra inicialmente el campo de batalla
+     * @param cdb al cual se le asignara el clima
+     * @return El clima que comenzara el campo de batalla.
+     */
+    private static Clima creacionClima(CampoDeBatalla cdb) {
+        double probabilidadConClima = (double)2/3;
+        double probabilidad = new Random().nextDouble();
+        if(probabilidad > probabilidadConClima) {
+            ArrayList<Clima> climasPosibles = new ArrayList<Clima>(Arrays.asList(
+                    new Huracan(
+                            "Huracan",
+                            cdb
+                    ),
+                    new Lluvia(
+                            "Lluvia",
+                            cdb
+                    ),
+                    new Niebla(
+                            "Niebla",
+                            cdb
+                    ),
+                    new Soleado(
+                            "Soleado",
+                            cdb
+                    ),
+                    new TormentaRayos(
+                            "Tormenta de rayos",
+                            cdb
+                    ),
+                    new TormentaArena(
+                            "tormenta de arena",
+                            cdb
+                    )
+            ));
+
+            int indiceSorteado = new Random().nextInt(6);
+            return climasPosibles.get(indiceSorteado);
+        } else {
+            return new SinClima(
+                    "ninguno",
+                    cdb
+            );
+        }
     }
 
     /**
@@ -596,10 +635,13 @@ public class Inicializador {
      * @return El campo de batalla
      */
     public static CampoDeBatalla inicializarJuego() {
+
+        CampoDeBatalla cdb = new CampoDeBatalla();
+
         /* *********************************************************** */
         /* *******************ASIGNACION DE POKEMONS****************** */
         /* *********************************************************** */
-        ArrayList<Pokemon>[] pokemons = creacionPokemons();
+        ArrayList<Pokemon>[] pokemons = creacionPokemons(cdb);
 
         /* *********************************************************** */
         /* *******************ASIGNACION DE ITEMS********************* */
@@ -608,20 +650,26 @@ public class Inicializador {
         List<Item> itemsJugador2 = creacionItems();
 
         /* *********************************************************** */
-        /* *********************JUGADOR 1***************************** */
+        /* *******************ASIGNACION DE CLIMA********************* */
         /* *********************************************************** */
+        Clima climaSorteado = creacionClima(cdb);
+        cdb.setClima(climaSorteado);
+
+        /* *********************************************** */
+        /* *********************JUGADOR 1***************** */
+        /* *********************************************** */
         Jugador jugador1 = new Jugador(pokemons[0], itemsJugador1);
 
         /* *********************************************** */
-        /* ***************JUGADOR 2*********************** */
+        /* *********************JUGADOR 2***************** */
         /* *********************************************** */
         Jugador jugador2 = new Jugador(pokemons[1], itemsJugador2);
 
-        return new CampoDeBatalla(
-                new Jugador[]{
-                        jugador1,
-                        jugador2
-                }
-        );
+        cdb.setJugadores(new Jugador[]{
+                jugador1,
+                jugador2
+        });
+
+        return cdb;
     }
 }

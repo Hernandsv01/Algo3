@@ -1,15 +1,17 @@
 package org.fiuba.algotres.views.terminal;
 
 import java.util.Scanner;
+import org.fiuba.algotres.views.InputUsuario;
 
-public class InputUsuario {
+public class InputUsuarioTerminal implements InputUsuario {
 
     /**
      * Función que espera input de usuario entre 1 y {límite}
      * @param limite INCLUÍDO en el rango
      * @return El resultado ingresado por el usuario
      */
-    public static int obtenerOpcionUsuario(int limite){
+    @Override
+    public int obtenerOpcionUsuario(int limite){
         Scanner scanner = new Scanner(System.in);
         int result = 0;
         String inputLine = "";
@@ -35,7 +37,8 @@ public class InputUsuario {
      * @param puedeEstarVacio Indica si lo ingresado puede estar vacío o no
      * @return El resultado ingresado por el usuario
      */
-    public static String obtenerCualquierDato(boolean puedeEstarVacio){
+    @Override
+    public String obtenerCualquierDato(boolean puedeEstarVacio){
         Scanner scanner = new Scanner(System.in);
         String res;
         do{
