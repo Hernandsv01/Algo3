@@ -13,11 +13,10 @@ public class Dormido extends Estado {
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon) {
-        Random util = new Random();
+    public boolean accionar() {
         double proba = PROBABILIDAD_INICIAL + this.turnosAplicados * PROBABILIDAD_AGREGADA_POR_TURNO;
-        if (util.nextDouble() <= proba) {
-            pokemon.setEstado(null);
+        if (Math.random() <= proba) {
+            this.pokemon.quitarEstado(this);
             return true;
         }
         this.turnosAplicados++;

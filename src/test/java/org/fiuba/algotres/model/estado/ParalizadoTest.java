@@ -21,15 +21,14 @@ class ParalizadoTest {
         // Setup
         Paralizado paralizadoMock = mock(Paralizado.class);
         Paralizado paralizado = new Paralizado("Paralizado");
-        Pokemon pokemon = mock(Pokemon.class);
 
         // Get result
-        boolean resultadoMock = paralizadoMock.accionar(pokemon);
-        boolean resultado = paralizado.accionar(pokemon);
+        boolean resultadoMock = paralizadoMock.accionar();
+        boolean resultado = paralizado.accionar();
 
         // Assert
         // Verifica si al llmar el metodo accionar, se llama al menos una vez
-        verify(paralizadoMock, atLeastOnce()).accionar(pokemon);
+        verify(paralizadoMock, atLeastOnce()).accionar();
 
         // Si el resultado es falso, el pokemon no puede atacar y sigue paralizado. Pero si el resultado es true ignoramos el test
         assumeFalse(resultado);
@@ -45,13 +44,13 @@ class ParalizadoTest {
         Pokemon pokemon = mock(Pokemon.class);
 
         // Get result
-        boolean resultadoMock = paralizadoMock.accionar(pokemon);
-        boolean resultado = paralizado.accionar(pokemon);
+        boolean resultadoMock = paralizadoMock.accionar();
+        boolean resultado = paralizado.accionar();
 
 
         // Assert
         // Verifica si al llmar el metodo accionar, se llama al menos una vez
-        verify(paralizadoMock, atLeastOnce()).accionar(pokemon);
+        verify(paralizadoMock, atLeastOnce()).accionar();
 
         // Si el resultado es falso, el pokemon no puede atacar y sigue paralizado. Pero si el resultado es true ignoramos el test
         assumeTrue(resultado);

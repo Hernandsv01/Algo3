@@ -13,10 +13,9 @@ class EnvenenadoTest {
     void testAccionar() {
         // Setup
         Envenenado envenenado = new Envenenado("Envenenado");
-        Pokemon pokemon = mock(Pokemon.class);
 
         // Get result
-        boolean fueEnvenenado = envenenado.accionar(pokemon);
+        boolean fueEnvenenado = envenenado.accionar();
 
         // Assert
         assertTrue(fueEnvenenado); 
