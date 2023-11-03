@@ -1,4 +1,4 @@
-package org.fiuba.algotres.model.comandos;
+package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.comandos.ComandoRendirse;
 import org.fiuba.algotres.model.CampoDeBatalla;

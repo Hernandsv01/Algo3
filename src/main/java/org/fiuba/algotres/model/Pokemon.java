@@ -109,7 +109,6 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de ataque que se quiere modificar.
      */
     public void modificarAtaque(int porcentaje) {
-        System.out.println("Valor recibido: " + porcentaje);
         ataque += Math.round(((float) porcentaje / 100) * ataque);
         if (ataque <= 0) {
             ataque = 1;

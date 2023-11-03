@@ -1,4 +1,4 @@
-package org.fiuba.algotres.model.views;
+package org.fiuba.algotres.views;
 
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
