@@ -1,25 +1,18 @@
 package org.fiuba.algotres.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import org.fiuba.algotres.model.tipos.Tipos;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PokemonTest {
+public class PokemonTest {
     
     private static Pokemon pokemon;
     
-    @BeforeAll
-    public static void setup(){
+    @BeforeEach
+    public void setup(){
         pokemon = new Pokemon(
                 "Poketest", // Nombre
                 100, // Nivel
@@ -38,24 +31,23 @@ class PokemonTest {
     void testDanarPorPuntosConResultadoMayorAMinimo() {
         // Setup
         int expectedVida = 90;
-        int expectedPuntos = 10;
+        int puntosDano = 10;
 
         // Get result
-        pokemon.danarPorPuntos(expectedPuntos);
+        pokemon.danarPorPuntos(puntosDano);
 
         // Assert
-        //assertEquals(expectedVida, pokemon.getVidaActual());
-        verify(pokemon).getVidaActual();
+        assertEquals(expectedVida, pokemon.getVidaActual());
     }
     @Test
     @Order(2)
     void testDanarPorPorcentajeConResultadoMayorAMinimo() {
         // Setup
         int expectedVida = 80;
-        int expectedPorcentaje = 20;
+        int porcentajeDano = 20;
 
         // Get result
-        pokemon.danarPorPorcentaje(expectedPorcentaje);
+        pokemon.danarPorPorcentaje(porcentajeDano);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -66,10 +58,10 @@ class PokemonTest {
     void testDanarPorPuntosConResultadoMenorAMinimo() {
         // Setup
         int expectedVida = 0;
-        int expectedPuntos = 110;
+        int puntosDano = 110;
 
         // Get result
-        pokemon.danarPorPuntos(expectedPuntos);
+        pokemon.danarPorPuntos(puntosDano);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -81,10 +73,10 @@ class PokemonTest {
     void testDanarPorPorcentajeConResultadoMenorAMinimo() {
         // Setup
         int expectedVida = 0;
-        int expectedPorcentaje = 150;
+        int porcentajeDano = 150;
 
         // Get result
-        pokemon.danarPorPorcentaje(expectedPorcentaje);
+        pokemon.danarPorPorcentaje(porcentajeDano);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -95,13 +87,12 @@ class PokemonTest {
     @Order(5)
     void testCurarPorPuntosConResultadoMenorAMaximo() {
         // Setup
-        
         pokemon.setVidaActual(50);
         int expectedVida = 60;
-        int expectedPuntos = 10;
+        int puntosCuracion = 10;
 
         // Get result
-        pokemon.curarPorPuntos(expectedPuntos);
+        pokemon.curarPorPuntos(puntosCuracion);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -113,10 +104,10 @@ class PokemonTest {
         // Setup
         pokemon.setVidaActual(50);
         int expectedVida = 70;
-        int expectedPorcentaje = 20;
+        int porcentajeCuracion = 20;
 
         // Get result
-        pokemon.curarPorPorcentaje(expectedPorcentaje);
+        pokemon.curarPorPorcentaje(porcentajeCuracion);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -128,10 +119,10 @@ class PokemonTest {
         // Setup
         pokemon.setVidaActual(50);
         int expectedVida = 100;
-        int expectedPuntos = 130;
+        int puntosCuracion = 130;
 
         // Get result
-        pokemon.curarPorPuntos(expectedPuntos);
+        pokemon.curarPorPuntos(puntosCuracion);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -143,10 +134,10 @@ class PokemonTest {
         // Setup
         pokemon.setVidaActual(50);
         int expectedVida = 100;
-        int expectedPorcentaje = 200;
+        int porcentajeCuracion = 200;
 
         // Get result
-        pokemon.curarPorPorcentaje(expectedPorcentaje);
+        pokemon.curarPorPorcentaje(porcentajeCuracion);
 
         // Assert
         assertEquals(expectedVida, pokemon.getVidaActual());
@@ -162,7 +153,7 @@ class PokemonTest {
         pokemon.matar();
 
         // Assert
-        assertEquals(expectedEstaVivo, pokemon.isEstaVivo());
+        assertEquals(expectedEstaVivo, pokemon.estaVivo());
     }
 
     @Test
@@ -170,10 +161,10 @@ class PokemonTest {
     void testModificarAtaque() {
         // Setup
         int expectedAtaque = 110;
-        int expectedPorcentaje = 10;
+        int porcentajeModificacion = 10;
 
         // Get result
-        pokemon.modificarAtaque(expectedPorcentaje);
+        pokemon.modificarAtaque(porcentajeModificacion);
 
         // Assert
         assertEquals(expectedAtaque, pokemon.getAtaque());
@@ -183,12 +174,11 @@ class PokemonTest {
     @Order(11)
     void testModificarDefensa() {
         // Setup
-
         int expectedDefensa = 110;
-        int expectedPorcentaje = 10;
+        int porcentajeModificacion = 10;
 
         // Get result
-        pokemon.modificarDefensa(expectedPorcentaje);
+        pokemon.modificarDefensa(porcentajeModificacion);
 
         // Assert
         assertEquals(expectedDefensa, pokemon.getDefensa());
@@ -209,7 +199,7 @@ class PokemonTest {
 
     @Test
     @Order(13)
-    void testEstaVivoConPokemonMuertoTest() {
+    void testEstaVivoConPokemonMuerto() {
         // Setup
         boolean expectedEstaVivo = false;
         pokemon.matar();
@@ -240,7 +230,6 @@ class PokemonTest {
     void testRevivirConPokemonVivo() {
         // Setup
         boolean expectedEstaVivo = true;
-        
 
         // Get result
         pokemon.revivir();
