@@ -5,13 +5,15 @@ import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
-import org.fiuba.algotres.views.terminal.InputUsuario;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
+import java.util.ArrayList;
+import org.fiuba.algotres.views.InputUsuario;
+
 public class ComandoHabilidad extends Comando {
-    public ComandoHabilidad(String nombre) {
-        super(nombre);
+    public ComandoHabilidad(String nombre, InputUsuario input) {
+        super(nombre, input);
     }
 
     @Override
@@ -19,10 +21,10 @@ public class ComandoHabilidad extends Comando {
         System.out.println("Elige la habilidad");
         int opciones = PokemonView.imprimirHabilidadesPokemon(cdb.getJugadorActual().getPokemonActual());
         if (opciones == 0) {
-            Tools.imprimirMensaje("No te quedan mas habilidades en este pokemon :(");
+            Tools.imprimirMensajeConEspera(input, "No te quedan mas habilidades en este pokemon :(");
             return false;
         }
-        int opcionElegida = InputUsuario.obtenerOpcionUsuario(opciones);
+        int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         if (opcionElegida == opciones) return false;
 
@@ -44,14 +46,14 @@ public class ComandoHabilidad extends Comando {
                 return true;
             }
             if(!pokemonActual.estaVivo()){
-                Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada!");
+                Tools.imprimirMensajeConEspera(input, "Tu pokemon murio antes de poder hacer nada!");
                 reemplazarPokemonMuerto(cdb.getJugadorActual());
                 return true;
             }
         }
         cdb.getClima().aplicarEfectos(pokemonActual);
         if(!pokemonActual.estaVivo()) {
-            Tools.imprimirMensaje("Tu pokemon murio antes de poder hacer nada por el clima ");
+            Tools.imprimirMensajeConEspera(input, "Tu pokemon murio antes de poder hacer nada por el clima ");
             reemplazarPokemonMuerto(cdb.getJugadorActual());
             return true;
         }
@@ -61,14 +63,14 @@ public class ComandoHabilidad extends Comando {
                 victima
         );
         if (!habilidadExitosa) {
-            Tools.imprimirMensaje("Ya no te quedan usos de " + habilidad.getNombre() + ", elige otra habilidad!");
+            Tools.imprimirMensajeConEspera(input, "Ya no te quedan usos de " + habilidad.getNombre() + ", elige otra habilidad!");
             return false;
         }
-        Tools.imprimirMensaje("Habilidad " + habilidad.getNombre() + " usada!");
+        Tools.imprimirMensajeConEspera(input, "Habilidad " + habilidad.getNombre() + " usada!");
 
         Jugador siguienteJugador = cdb.getJugadores()[cdb.getSiguienteTurno()];
         if(!siguienteJugador.getPokemonActual().estaVivo()){
-            Tools.imprimirMensaje(siguienteJugador.getPokemonActual().getNombre() + " murio!");
+            Tools.imprimirMensajeConEspera(input, siguienteJugador.getPokemonActual().getNombre() + " murio!");
             reemplazarPokemonMuerto(siguienteJugador);
         }
 
