@@ -5,16 +5,13 @@ import lombok.Setter;
 import org.fiuba.algotres.model.clima.Clima;
 
 import java.util.Comparator;
+import org.fiuba.algotres.model.clima.SinClima;
 
 @Getter @Setter
 public class CampoDeBatalla {
     private Jugador[] jugadores;
     private Clima clima;
     private int turnoActual;
-
-    public CampoDeBatalla(){
-
-    }
 
     /**
      * Verifica la vida de cada uno de los pokemons de los jugadores para ver si alguno tiene vida
