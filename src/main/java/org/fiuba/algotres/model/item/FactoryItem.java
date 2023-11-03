@@ -3,7 +3,6 @@ package org.fiuba.algotres.model.item;
 import lombok.Getter;
 import org.fiuba.algotres.model.strategies.AtaqueStrategy;
 import org.fiuba.algotres.model.strategies.DefensaStrategy;
-import org.jetbrains.annotations.NotNull;
 
 public class FactoryItem {
     private static final int PORCENTAJE_ESTADISTICA = 10;
