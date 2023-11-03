@@ -4,6 +4,7 @@ import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.clima.*;
+import org.fiuba.algotres.model.estado.Confuso;
 import org.fiuba.algotres.model.estado.Dormido;
 import org.fiuba.algotres.model.estado.Envenenado;
 import org.fiuba.algotres.model.estado.Paralizado;
@@ -85,12 +86,6 @@ public class Inicializador {
                 15,
                 95,
                 Tipos.ELECTRICO
-        );
-        Ataque confusion = new Ataque(
-                "Confusion",
-                25,
-                50,
-                Tipos.PSIQUICO
         );
         Ataque psiquico = new Ataque(
                 "Psiquico",
@@ -250,6 +245,11 @@ public class Inicializador {
                 15,
                 new Paralizado("PARALIZADO")
         );
+        ModificacionEstado confusion = new ModificacionEstado(
+                "Confusion",
+                15,
+                new Confuso("CONFUSO")
+        );
 
         /* *************TIPO DE CAMBIAR CLIMA************* */
         CambiarClima solear = new CambiarClima(
@@ -304,7 +304,7 @@ public class Inicializador {
                 "Despejar",
                 5,
                 new SinClima(
-                        "ninguno",
+                        "Sin clima",
                         cdb
                 )
         );
@@ -624,7 +624,7 @@ public class Inicializador {
             return climasPosibles.get(indiceSorteado);
         } else {
             return new SinClima(
-                    "ninguno",
+                    "Sin clima",
                     cdb
             );
         }
