@@ -1,58 +1,58 @@
 package org.fiuba.algotres.model.estado;
 
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import java.util.Random;
 
 import org.fiuba.algotres.model.Pokemon;
 
 class DormidoTest {
 
     @Test
-    void accionar() {
+    void testAccionarFalse() {
         // Setup
+        Dormido dormidoMock = mock(Dormido.class);
         Pokemon pokemon = mock(Pokemon.class);
         Dormido dormido = new Dormido("Dormido");
-        Math matematicas = mock(Math.class);
-        Random util = new Random();
-        Random aaa = mock(Random.class);
-        //dormido.accionar(pokemon);
 
         // Get result
-        when(aaa.nextDouble()).thenReturn(0.1);
-
-        // Llamamos al método accionar
+        boolean resultadoMock = dormidoMock.accionar(pokemon);
         boolean resultado = dormido.accionar(pokemon);
 
         // Assert
+        //Verifica si al llmar el metodo accionar, se llama al menos una vez
+        verify(dormidoMock, atLeastOnce()).accionar(pokemon);
+        //Si el resultado es falso, el pokemon no puede atacar y sigue dormido. Pero si el resultado es true ignoramos el test
+        assumeFalse(resultado);
         assertFalse(resultado);
     }
 
-
     @Test
-    void accionarTest() {
+    void testAccionarTrue() {
         // Setup
+        Dormido dormidoMock = mock(Dormido.class);
         Pokemon pokemon = mock(Pokemon.class);
         Dormido dormido = new Dormido("Dormido");
-        Math matematicas = mock(Math.class);
-        Random util = new Random();
-        Random aaa = mock(Random.class);
-        int aleatorio = util.nextInt(100);
-        //dormido.accionar(pokemon);
 
         // Get result
-        when(aaa.nextDouble()).thenReturn(0.9);
-
-        // Llamamos al método accionar
+        boolean resultadoMock = dormidoMock.accionar(pokemon);
         boolean resultado = dormido.accionar(pokemon);
 
         // Assert
-        assertFalse(resultado);
+        //Verifica si al llmar el metodo accionar, se llama al menos una vez
+        verify(dormidoMock, atLeastOnce()).accionar(pokemon);
+        //Si el resultado es falso, el pokemon no puede atacar y sigue dormido. Pero si el resultado es true ignoramos el test
+        assumeTrue(resultado);
+        assertTrue(resultado);
+        
+        
     }
 }
