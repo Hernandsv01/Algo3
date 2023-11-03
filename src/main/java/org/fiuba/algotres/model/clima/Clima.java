@@ -15,9 +15,11 @@ public abstract class Clima {
 
     public int turnosAplicados;
     public final String nombre;
-    public final int PORCENTAJE_POTENCIA = 10;
     public final CampoDeBatalla cdb;
     public List<Tipos> tiposFavorecidos;
+
+    public final int PORCENTAJE_POTENCIA = 10;
+    private final int MAXIMO_TURNOS_APLICADOS = 5;
 
     public Clima(String nombre, CampoDeBatalla cdb) {
         this.nombre = nombre;
@@ -30,7 +32,7 @@ public abstract class Clima {
      * @return true en caso de que se pueda aplicar. Caso contrario, false
      */
     public boolean turnoValido(){
-        if(this.turnosAplicados == 5) {
+        if(this.turnosAplicados == MAXIMO_TURNOS_APLICADOS) {
             this.turnosAplicados = 0;
             this.cdb.setClima(new SinClima("Sin clima", cdb));
             return false;

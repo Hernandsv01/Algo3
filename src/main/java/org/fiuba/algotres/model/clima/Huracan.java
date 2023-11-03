@@ -19,6 +19,7 @@ public class Huracan extends Clima{
 
     }
 
+    @Override
     public void aplicarEfectos(Pokemon pokemon) {
         if(this.turnoValido()) {
             potenciarPokemon(pokemon);

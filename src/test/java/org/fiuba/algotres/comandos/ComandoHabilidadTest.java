@@ -1,4 +1,4 @@
-package org.fiuba.algotres.model.comandos;
+package org.fiuba.algotres.comandos;
 
 import org.fiuba.algotres.comandos.Comando;
 import org.fiuba.algotres.comandos.ComandoHabilidad;
@@ -229,5 +229,5 @@ public class ComandoHabilidadTest {
 //    }
 
     //Este ultimo Test queda documentado debido a que el procedimiento del mismo está bien,
-    //pero por algun motivo que no logre encontrar, la linea 219 no devuelve el true esperado, siempre devuelve "false"
+    //pero por algun motivo que no logre encontrar, la linea 219 no devuelve el true del thenReturn(), siempre devuelve "false"
 }
