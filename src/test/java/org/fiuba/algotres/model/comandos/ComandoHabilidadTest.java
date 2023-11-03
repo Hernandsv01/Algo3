@@ -8,7 +8,7 @@ import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.clima.Clima;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
-import org.fiuba.algotres.views.terminal.InputUsuario;
+import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +32,7 @@ public class ComandoHabilidadTest {
     Estado estadoMock;
     Habilidad habilidad1;
     Habilidad habilidad2;
+    InputUsuarioTerminal input;
 
     @BeforeEach
     public void initEach() {
@@ -42,8 +43,8 @@ public class ComandoHabilidadTest {
         jugador = mock();
         jugadorOponente = mock();
         comando = mock();
-        comandoHabilidad = new ComandoHabilidad("ch");
-
+        input = mock();
+        comandoHabilidad = new ComandoHabilidad("Comando Habilidad", input);
     }
     @Test
     public void testOpcionElegidaIgualACantidadDeOpciones() {
@@ -51,7 +52,7 @@ public class ComandoHabilidadTest {
         when(cdb.getJugadorActual()).thenReturn(jugador);
         when(jugador.getPokemonActual()).thenReturn(pokemonActual);
         when(PokemonView.imprimirHabilidadesPokemon(pokemonActual)).thenReturn(1);
-        when(InputUsuario.obtenerOpcionUsuario(1)).thenReturn(1);
+        when(input.obtenerOpcionUsuario(1)).thenReturn(1);
 
         //Act
         boolean resultado = comandoHabilidad.ejecutar(cdb);
@@ -73,7 +74,7 @@ public class ComandoHabilidadTest {
         when(cdb.getJugadorActual()).thenReturn(jugador);
         when(jugador.getPokemonActual()).thenReturn(pokemonActual);
         when(PokemonView.imprimirHabilidadesPokemon(pokemonActual)).thenReturn(2);
-        when(InputUsuario.obtenerOpcionUsuario(2)).thenReturn(1);
+        when(input.obtenerOpcionUsuario(2)).thenReturn(1);
         when(cdb.getSiguienteTurno()).thenReturn(0);
         when(cdb.getJugadores()).thenReturn(jugadores);
         when(jugadorOponente.getPokemonActual()).thenReturn(pokemonVictima);
@@ -104,7 +105,7 @@ public class ComandoHabilidadTest {
         when(cdb.getJugadorActual()).thenReturn(jugador);
         when(jugador.getPokemonActual()).thenReturn(pokemonActual);
         when(PokemonView.imprimirHabilidadesPokemon(pokemonActual)).thenReturn(2);
-        when(InputUsuario.obtenerOpcionUsuario(2)).thenReturn(1);
+        when(input.obtenerOpcionUsuario(2)).thenReturn(1);
         when(cdb.getSiguienteTurno()).thenReturn(0);
         when(cdb.getJugadores()).thenReturn(jugadores);
         when(jugadorOponente.getPokemonActual()).thenReturn(pokemonVictima);
@@ -132,7 +133,7 @@ public class ComandoHabilidadTest {
         when(cdb.getJugadorActual()).thenReturn(jugador);
         when(jugador.getPokemonActual()).thenReturn(pokemonActual);
         when(PokemonView.imprimirHabilidadesPokemon(pokemonActual)).thenReturn(2);
-        when(InputUsuario.obtenerOpcionUsuario(2)).thenReturn(1);
+        when(input.obtenerOpcionUsuario(2)).thenReturn(1);
 
         when(cdb.getSiguienteTurno()).thenReturn(0);
         when(cdb.getJugadores()).thenReturn(jugadores);
@@ -155,7 +156,6 @@ public class ComandoHabilidadTest {
     public void testPokemonActualNoQuedanMasUsosDeHabilidad() {
         //Arrange
         mockStatic(PokemonView.class);
-        mockStatic(InputUsuario.class);
         mockStatic(Tools.class);
         Jugador[] jugadores = new Jugador[2];
         jugadores[0] = jugador;
@@ -169,7 +169,7 @@ public class ComandoHabilidadTest {
         when(cdb.getJugadorActual()).thenReturn(jugador);
         when(jugador.getPokemonActual()).thenReturn(pokemonActual);
         when(PokemonView.imprimirHabilidadesPokemon(pokemonActual)).thenReturn(2);
-        when(InputUsuario.obtenerOpcionUsuario(2)).thenReturn(1);
+        when(input.obtenerOpcionUsuario(2)).thenReturn(1);
         when(cdb.getSiguienteTurno()).thenReturn(0);
         when(cdb.getJugadores()).thenReturn(jugadores);
         when(jugadorOponente.getPokemonActual()).thenReturn(pokemonVictima);
@@ -193,7 +193,7 @@ public class ComandoHabilidadTest {
 //    public void testFinalizarComando() {
 //        //Arrange
 //        mockStatic(PokemonView.class);
-//        mockStatic(InputUsuario.class);
+//        mockStatic(input.class);
 //        mockStatic(Tools.class);
 //        Jugador[] jugadores = new Jugador[2];
 //        jugadores[0] = jugador;
@@ -207,7 +207,7 @@ public class ComandoHabilidadTest {
 //        when(cdb.getJugadorActual()).thenReturn(jugador);
 //        when(jugador.getPokemonActual()).thenReturn(pokemonActual);
 //        when(PokemonView.imprimirHabilidadesPokemon(pokemonActual)).thenReturn(2);
-//        when(InputUsuario.obtenerOpcionUsuario(2)).thenReturn(1);
+//        when(input.obtenerOpcionUsuario(2)).thenReturn(1);
 //        when(cdb.getSiguienteTurno()).thenReturn(0);
 //        when(cdb.getJugadores()).thenReturn(jugadores);
 //        when(jugadorOponente.getPokemonActual()).thenReturn(pokemonVictima);

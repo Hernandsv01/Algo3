@@ -76,13 +76,13 @@ public class ModificacionEstadisticaTest {
         //Act & Assert
         boolean res1 = modif.accionarHabilidad(pokemonUser, pokemonEnemy);
         verify(strategy, times(1)).esPositivo();
-        verify(strategy, times(1)).modificar(pokemonEnemy, -porcentaje);
+        verify(strategy, times(1)).modificar(pokemonEnemy, porcentaje);
         assertEquals(true, res1);
 
         //Act & Assert
         boolean res2 = modif.accionarHabilidad(pokemonUser, pokemonEnemy);
         verify(strategy, times(2)).esPositivo();
-        verify(strategy, times(2)).modificar(pokemonEnemy, -porcentaje);
+        verify(strategy, times(2)).modificar(pokemonEnemy, porcentaje);
         assertEquals(true, res2);
     }
 

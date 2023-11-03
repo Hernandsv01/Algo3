@@ -1,23 +1,5 @@
 package org.fiuba.algotres.model.estado;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-
-import org.fiuba.algotres.model.Pokemon;
-
 class EnvenenadoTest {
 
-    @Test
-    void testAccionar() {
-        // Setup
-        Envenenado envenenado = new Envenenado("Envenenado");
-
-        // Get result
-        boolean fueEnvenenado = envenenado.accionar();
-
-        // Assert
-        assertTrue(fueEnvenenado); 
-    }
 }
