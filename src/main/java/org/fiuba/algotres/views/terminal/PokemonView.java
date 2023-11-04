@@ -2,10 +2,14 @@ package org.fiuba.algotres.views.terminal;
 
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.views.OutputUsuario;
 
 import java.util.List;
 
 public class PokemonView {
+
+    private static OutputUsuario output = new OutputUsuarioTerminal();
+
     public static int imprimirHabilidadesPokemon(Pokemon pokemon){
         int res;
         for(res = 1; res <= pokemon.getHabilidades().size(); res++){
@@ -26,5 +30,9 @@ public class PokemonView {
         }else{
             return res-1;
         }
+    }
+
+    public void setOutput(OutputUsuario output){
+        PokemonView.output = output;
     }
 }

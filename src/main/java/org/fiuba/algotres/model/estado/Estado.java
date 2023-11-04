@@ -2,12 +2,16 @@ package org.fiuba.algotres.model.estado;
 
 import lombok.Getter;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.Randomizador;
+import org.fiuba.algotres.utils.RandomizadorCustom;
 
 @Getter
 public abstract class Estado {
     protected Pokemon pokemon;
     protected int turnosAplicados;
     private final String nombre;
+
+    protected Randomizador randomizador = new RandomizadorCustom();
 
     public Estado(String nombre) {
         this.turnosAplicados = 0;

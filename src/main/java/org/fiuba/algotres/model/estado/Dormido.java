@@ -1,9 +1,5 @@
 package org.fiuba.algotres.model.estado;
 
-import java.util.Random;
-
-import org.fiuba.algotres.model.Pokemon;
-
 public class Dormido extends Estado {
     private final double PROBABILIDAD_INICIAL = 0.25;
     private final double PROBABILIDAD_AGREGADA_POR_TURNO = 0.25;
@@ -15,7 +11,7 @@ public class Dormido extends Estado {
     @Override
     public boolean accionar() {
         double proba = PROBABILIDAD_INICIAL + this.turnosAplicados * PROBABILIDAD_AGREGADA_POR_TURNO;
-        if (Math.random() <= proba) {
+        if (randomizador.getRandomValue(0, 1) <= proba) {
             this.pokemon.quitarEstado(this);
             return true;
         }

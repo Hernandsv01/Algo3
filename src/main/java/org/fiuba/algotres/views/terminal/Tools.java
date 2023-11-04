@@ -4,8 +4,12 @@ import org.fiuba.algotres.comandos.Comando;
 
 import java.util.Map;
 import org.fiuba.algotres.views.InputUsuario;
+import org.fiuba.algotres.views.OutputUsuario;
 
 public class Tools {
+
+    private static OutputUsuario output = new OutputUsuarioTerminal();
+
     public static void limpiarConsola(){
         String os = System.getProperty("os.name").toLowerCase();
         if(os.contains("windows")){
@@ -36,5 +40,9 @@ public class Tools {
         System.out.println(mensaje);
         System.out.println("Presione enter para continuar");
         input.obtenerCualquierDato(true);
+    }
+
+    public void setOutput(OutputUsuario output){
+        Tools.output = output;
     }
 }

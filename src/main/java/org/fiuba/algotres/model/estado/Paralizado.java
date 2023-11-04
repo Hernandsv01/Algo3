@@ -1,7 +1,5 @@
 package org.fiuba.algotres.model.estado;
 
-import org.fiuba.algotres.model.Pokemon;
-
 public class Paralizado extends Estado {
     private final double PROBABILIDAD = 0.5;
     public Paralizado(String nombre) {
@@ -10,6 +8,6 @@ public class Paralizado extends Estado {
 
     @Override
     public boolean accionar() {
-        return (Math.random() <= PROBABILIDAD);
+        return (randomizador.getRandomValue(0, 1) <= PROBABILIDAD);
     }
 }
