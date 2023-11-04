@@ -13,9 +13,9 @@ public class Huracan extends Clima{
 
     public Huracan(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
-        this.tiposFavorecidos = new ArrayList<Tipos>(Arrays.asList(
+        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
                 Tipos.VOLADOR
-        ));
+        )));
 
     }
 
@@ -32,7 +32,7 @@ public class Huracan extends Clima{
      * @param pokemon al cual danara o no
      */
     private void danarPokemon(Pokemon pokemon) {
-        if( !(this.tiposFavorecidos.contains(pokemon.getTipos()))) {
+        if( !(this.getTiposFavorecidos().contains(pokemon.getTipos()))) {
             pokemon.danarPorPorcentaje(this.PORCENTAJE_DANAR);
         }
     }

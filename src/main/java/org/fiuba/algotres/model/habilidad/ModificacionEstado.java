@@ -18,4 +18,8 @@ public class ModificacionEstado extends Habilidad {
         }
       return false;
     }
+
+    public Estado getEstado(){
+        return this.estado;
+    }
 }

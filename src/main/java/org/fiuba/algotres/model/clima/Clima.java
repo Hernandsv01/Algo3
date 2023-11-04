@@ -13,12 +13,12 @@ import java.util.List;
 @Setter @Getter
 public abstract class Clima {
 
-    public int turnosAplicados;
-    public final String nombre;
-    public final CampoDeBatalla cdb;
-    public List<Tipos> tiposFavorecidos;
+    private int turnosAplicados;
+    private final String nombre;
+    private final CampoDeBatalla cdb;
+    private List<Tipos> tiposFavorecidos;
 
-    public final int PORCENTAJE_POTENCIA = 10;
+    private final int PORCENTAJE_POTENCIA = 10;
     private final int MAXIMO_TURNOS_APLICADOS = 5;
 
     public Clima(String nombre, CampoDeBatalla cdb) {

@@ -11,12 +11,12 @@ public class SinClima extends Clima{
 
     public SinClima(String nombre, CampoDeBatalla cdb) {
         super(nombre, cdb);
-        this.tiposFavorecidos = new ArrayList<>();
+        this.setTiposFavorecidos(new ArrayList<>());
     }
 
     @Override
     public boolean turnoValido() {
-        this.turnosAplicados++;
+        this.setTurnosAplicados(this.getTurnosAplicados() + 1);
         return true;
     }
 

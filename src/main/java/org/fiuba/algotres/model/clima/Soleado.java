@@ -12,9 +12,9 @@ public class Soleado extends Clima{
 
     public Soleado(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
-        this.tiposFavorecidos = new ArrayList<Tipos>(Arrays.asList(
+        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
                 Tipos.FUEGO
-        ));
+        )));
     }
 
 }

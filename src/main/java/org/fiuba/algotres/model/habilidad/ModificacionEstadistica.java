@@ -30,4 +30,11 @@ public class ModificacionEstadistica extends Habilidad {
         }
         return false;
     }
+
+    public Strategy getStrategy(){
+        return this.strategy;
+    }
+    public int getPorcentaje(){
+        return this.porcentaje;
+    }
 }

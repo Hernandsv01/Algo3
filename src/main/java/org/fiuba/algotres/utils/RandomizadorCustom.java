@@ -4,9 +4,8 @@ import org.fiuba.algotres.model.Randomizador;
 
 public class RandomizadorCustom extends Randomizador {
     @Override
-    public double getRandomValue(double limiteInferior, double limiteSuperior){
-        double result = ((Math.random()*(limiteSuperior-limiteInferior)) + limiteInferior);
-        Randomizador.savedLastGeneratedValue(result);
+    public double getRandomValue(double lowerLimit, double upperLimit){
+        double result = ((Math.random()*(upperLimit-lowerLimit)) + lowerLimit);
         return result;
     }
 }

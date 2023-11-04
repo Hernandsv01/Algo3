@@ -28,4 +28,8 @@ public abstract class Estado {
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
+
+    public String getNombre(){
+        return this.nombre;
+    }
 }

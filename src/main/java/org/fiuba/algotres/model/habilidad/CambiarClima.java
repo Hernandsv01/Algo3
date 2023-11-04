@@ -22,4 +22,8 @@ public class CambiarClima extends Habilidad{
         }
         return false;
     }
+
+    public Clima getClima(){
+        return this.clima;
+    }
 }

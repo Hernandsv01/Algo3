@@ -42,6 +42,11 @@ public class Tools {
         input.obtenerCualquierDato(true);
     }
 
+    public static void esperarEnter(InputUsuario input) {
+        System.out.println("Presione enter para continuar");
+        input.obtenerCualquierDato(true);
+    }
+
     public void setOutput(OutputUsuario output){
         Tools.output = output;
     }

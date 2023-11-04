@@ -5,6 +5,7 @@ import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.views.terminal.HabilidadView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
@@ -61,7 +62,8 @@ public class ComandoHabilidad extends Comando {
             Tools.imprimirMensajeConEspera(input, "Ya no te quedan usos de " + habilidad.getNombre() + ", elige otra habilidad!");
             return false;
         }
-        Tools.imprimirMensajeConEspera(input, "Habilidad " + habilidad.getNombre() + " usada!");
+        HabilidadView.mostrarEfectoHabilidad(habilidad, pokemonActual, victima);
+        Tools.esperarEnter(input);
 
         Jugador siguienteJugador = cdb.getJugadores()[cdb.getSiguienteTurno()];
         if(!siguienteJugador.getPokemonActual().estaVivo()){
