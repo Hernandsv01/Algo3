@@ -30,19 +30,18 @@ public class Ataque extends Habilidad{
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
         if (verificarUsos(usos)) {
-            double numeradorInterno = 2 * atacante.getNivel() * esCritico() * this.poder * ((double) atacante.getAtaque() / (double) victima.getDefensa());
-            System.out.println("Numerado interno: " + numeradorInterno);
-            double fraccionCompleta = (2 + (numeradorInterno / 5)) / 50;
-            System.out.println("Fraccion completa: " + fraccionCompleta);
-            int dano = (int) (fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(victima) * (randomizador.getRandomValue(MINIMO_RANDOM, MAXIMO_RANDOM)/MAXIMO_RANDOM));
-            System.out.println("Cuenta final: " + fraccionCompleta + " * " + esMismoTipo(atacante) + " * " + getMultiplicadorEfectividad(victima) + " * " + Randomizador.getLastGeneratedValue());
-            System.out.println("Realizando " + dano + " de daño!");
+            int dano = calcularDano(victima, atacante);
             victima.danarPorPuntos(dano);
-            System.out.println("Vida luego del ataque: " + victima.getVidaActual());
             usos--;
             return true;
         }
         return false;
+    }
+
+    public int calcularDano(Pokemon atacante, Pokemon victima){
+        double numeradorInterno = 2 * atacante.getNivel() * esCritico() * this.poder * ((double) atacante.getAtaque() / (double) victima.getDefensa());
+        double fraccionCompleta = (2 + (numeradorInterno / 5)) / 50;
+        return (int) (fraccionCompleta * esMismoTipo(atacante) * getMultiplicadorEfectividad(victima) * (randomizador.getRandomValue(MINIMO_RANDOM, MAXIMO_RANDOM)/MAXIMO_RANDOM));
     }
 
     private int esCritico(){
