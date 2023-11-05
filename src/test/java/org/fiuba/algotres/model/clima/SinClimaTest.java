@@ -43,7 +43,7 @@ class SinClimaTest {
     @Test
     void TestTurnoValido(){
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, sinClima.turnosAplicados);
+            assertEquals(i, sinClima.getTurnosAplicados());
             assertEquals(esValido, sinClima.turnoValido());
         }
     }
@@ -59,7 +59,7 @@ class SinClimaTest {
     void TestAplicarEfectos(){
         for(int i = 1; i < turnosValidos; i++) {
             sinClima.aplicarEfectos(pokemon);
-            assertEquals(i, sinClima.turnosAplicados);;
+            assertEquals(i, sinClima.getTurnosAplicados());;
             verify(habilidadAtaque, times(0)).setPoder(anyInt());
         }
     };

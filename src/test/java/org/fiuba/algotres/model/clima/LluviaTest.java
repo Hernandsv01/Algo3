@@ -50,12 +50,12 @@ public class LluviaTest {
         int turnosValidos = 5;
 
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, lluvia.turnosAplicados);
+            assertEquals(i, lluvia.getTurnosAplicados());
             assertEquals(esValido, lluvia.turnoValido());
         }
-        verify(lluvia.cdb, times(0)).setClima(new SinClima("Sin clima", cdb));
+        verify(lluvia.getCdb(), times(0)).setClima(new SinClima("Sin clima", cdb));
         assertEquals(!esValido, lluvia.turnoValido());
-        assertEquals(turnoFinal, lluvia.turnosAplicados);
+        assertEquals(turnoFinal, lluvia.getTurnosAplicados());
     }
 
     @Test
@@ -82,7 +82,7 @@ public class LluviaTest {
         int turnosAplicados = 1;
 
         lluvia.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, lluvia.turnosAplicados);
+        assertEquals(turnosAplicados, lluvia.getTurnosAplicados());
         verify(primeraHabilidad, times(0)).setPoder(anyInt());
         verify(segundaHabilidad, times(0)).setPoder(anyInt());
 
@@ -90,7 +90,7 @@ public class LluviaTest {
         when(pokemon.getTipos()).thenReturn(Tipos.AGUA);
 
         lluvia.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, lluvia.turnosAplicados);
+        assertEquals(turnosAplicados, lluvia.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
 
@@ -98,7 +98,7 @@ public class LluviaTest {
         when(pokemon.getTipos()).thenReturn(Tipos.PLANTA);
 
         lluvia.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, lluvia.turnosAplicados);
+        assertEquals(turnosAplicados, lluvia.getTurnosAplicados());
         verify(primeraHabilidad, times(2)).setPoder(anyInt());
         verify(segundaHabilidad, times(2)).setPoder(anyInt());
     }

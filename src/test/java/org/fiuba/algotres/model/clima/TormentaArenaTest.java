@@ -50,12 +50,12 @@ public class TormentaArenaTest {
         int turnosValidos = 5;
 
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, tormentaArena.turnosAplicados);
+            assertEquals(i, tormentaArena.getTurnosAplicados());
             assertEquals(esValido, tormentaArena.turnoValido());
         }
-        verify(tormentaArena.cdb, times(0)).setClima(new SinClima("Sin clima", cdb));
+        verify(tormentaArena.getCdb(), times(0)).setClima(new SinClima("Sin clima", cdb));
         assertEquals(!esValido, tormentaArena.turnoValido());
-        assertEquals(turnoFinal, tormentaArena.turnosAplicados);
+        assertEquals(turnoFinal, tormentaArena.getTurnosAplicados());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class TormentaArenaTest {
 
         tormentaArena.aplicarEfectos(pokemon);
         verify(pokemon, times(1)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, tormentaArena.turnosAplicados);
+        assertEquals(turnosAplicados, tormentaArena.getTurnosAplicados());
         verify(primeraHabilidad, times(0)).setPoder(anyInt());
         verify(segundaHabilidad, times(0)).setPoder(anyInt());
 
@@ -92,7 +92,7 @@ public class TormentaArenaTest {
 
         tormentaArena.aplicarEfectos(pokemon);
         verify(pokemon, times(1)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, tormentaArena.turnosAplicados);
+        assertEquals(turnosAplicados, tormentaArena.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
 
@@ -101,7 +101,7 @@ public class TormentaArenaTest {
 
         tormentaArena.aplicarEfectos(pokemon);
         verify(pokemon, times(1)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, tormentaArena.turnosAplicados);
+        assertEquals(turnosAplicados, tormentaArena.getTurnosAplicados());
         verify(primeraHabilidad, times(2)).setPoder(anyInt());
         verify(segundaHabilidad, times(2)).setPoder(anyInt());
     }

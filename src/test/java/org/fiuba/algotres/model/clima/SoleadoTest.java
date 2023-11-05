@@ -50,12 +50,12 @@ public class SoleadoTest {
         int turnosValidos = 5;
 
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, soleado.turnosAplicados);
+            assertEquals(i, soleado.getTurnosAplicados());
             assertEquals(esValido, soleado.turnoValido());
         }
-        verify(soleado.cdb, times(0)).setClima(new SinClima("Sin clima", cdb));
+        verify(soleado.getCdb(), times(0)).setClima(new SinClima("Sin clima", cdb));
         assertEquals(!esValido, soleado.turnoValido());
-        assertEquals(turnoFinal, soleado.turnosAplicados);
+        assertEquals(turnoFinal, soleado.getTurnosAplicados());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class SoleadoTest {
         int turnosAplicados = 1;
 
         soleado.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, soleado.turnosAplicados);
+        assertEquals(turnosAplicados, soleado.getTurnosAplicados());
         verify(primeraHabilidad, times(0)).setPoder(anyInt());
         verify(segundaHabilidad, times(0)).setPoder(anyInt());
 
@@ -84,7 +84,7 @@ public class SoleadoTest {
         when(pokemon.getTipos()).thenReturn(Tipos.FUEGO);
 
         soleado.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, soleado.turnosAplicados);
+        assertEquals(turnosAplicados, soleado.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
     }
