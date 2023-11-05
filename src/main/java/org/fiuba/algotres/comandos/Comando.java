@@ -27,7 +27,7 @@ public abstract class Comando {
         int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         jugador.cambiarPokemonActual(opcionElegida-1);
-        Tools.imprimirMensajeConEspera(input, jugador.getPokemonActual().getNombre() + " entra a la batalla!");
+        Tools.imprimirMensajeConEspera(jugador.getPokemonActual().getNombre() + " entra a la batalla!");
     }
 
     public String getNombre(){

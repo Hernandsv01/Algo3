@@ -38,18 +38,18 @@ public class ComandoHabilidad extends Comando {
             }
             pokemonActual.limpiarEstados();
             if(!puedeAccionar){
-                Tools.imprimirMensajeConEspera(input, "El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
+                Tools.imprimirMensajeConEspera("El pokemon esta " + estadoInhabilitante + "! No puede hacer nada");
                 return true;
             }
             if(!pokemonActual.estaVivo()){
-                Tools.imprimirMensajeConEspera(input, "Tu pokemon murio antes de poder hacer nada!");
+                Tools.imprimirMensajeConEspera("Tu pokemon murio antes de poder hacer nada!");
                 reemplazarPokemonMuerto(cdb.getJugadorActual());
                 return true;
             }
         }
         cdb.getClima().aplicarEfectos(pokemonActual);
         if(!pokemonActual.estaVivo()) {
-            Tools.imprimirMensajeConEspera(input, "Tu pokemon murio antes de poder hacer nada por el clima ");
+            Tools.imprimirMensajeConEspera("Tu pokemon murio antes de poder hacer nada por el clima ");
             reemplazarPokemonMuerto(cdb.getJugadorActual());
             return true;
         }
@@ -59,15 +59,15 @@ public class ComandoHabilidad extends Comando {
                 victima
         );
         if (!habilidadExitosa) {
-            Tools.imprimirMensajeConEspera(input, "Ya no te quedan usos de " + habilidad.getNombre() + ", elige otra habilidad!");
+            Tools.imprimirMensajeConEspera("Ya no te quedan usos de " + habilidad.getNombre() + ", elige otra habilidad!");
             return false;
         }
         HabilidadView.mostrarEfectoHabilidad(habilidad, pokemonActual, victima);
-        Tools.esperarEnter(input);
+        Tools.esperarEnter();
 
         Jugador siguienteJugador = cdb.getJugadores()[cdb.getSiguienteTurno()];
         if(!siguienteJugador.getPokemonActual().estaVivo()){
-            Tools.imprimirMensajeConEspera(input, siguienteJugador.getPokemonActual().getNombre() + " murio!");
+            Tools.imprimirMensajeConEspera(siguienteJugador.getPokemonActual().getNombre() + " murio!");
             reemplazarPokemonMuerto(siguienteJugador);
         }
 
