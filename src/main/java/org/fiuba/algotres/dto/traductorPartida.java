@@ -121,14 +121,14 @@ public class traductorPartida {
     public static Jugador jugador1() throws StreamReadException, DatabindException, IOException{
         List<LecturaJSONPartida> listaInicial =LecturaJSONPartida.leecturaDeArchivo();
         listaInicial.get(0).getNombre();
-        Jugador jugador1 = new Jugador(listaInicial.get(0).getNombre();, mapearPokemonsJugador1(), mapearItemsJugador1());
+        Jugador jugador1 = new Jugador(mapearPokemonsJugador1(), mapearItemsJugador1(), listaInicial.get(0).getNombre());
         return jugador1;
     }
 
     public static Jugador jugador2() throws StreamReadException, DatabindException, IOException{
         List<LecturaJSONPartida> listaInicial =LecturaJSONPartida.leecturaDeArchivo();
         listaInicial.get(0).getNombre();
-        Jugador jugador2 = new Jugador(listaInicial.get(1).getNombre();, mapearPokemonsJugador2(), mapearItemsJugador2());
+        Jugador jugador2 = new Jugador(mapearPokemonsJugador2(), mapearItemsJugador2(), listaInicial.get(1).getNombre());
         return jugador2;
     }
 

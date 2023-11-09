@@ -49,7 +49,7 @@ public class LecturaJSONHabilidades {
     
     public static List<LecturaJSONHabilidades> leecturadearchivos() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
         ObjectMapper mapper = new ObjectMapper();
-        File pathLeer = new File("src\\main\\java\\org\\fiuba\\algotres\\habilidades.json");
+        File pathLeer = new File("src\\main\\resources\\habilidades.json");
 
        List<LecturaJSONHabilidades> a = mapper.readValue(pathLeer, new TypeReference<List<LecturaJSONHabilidades>>(){});
        return a;

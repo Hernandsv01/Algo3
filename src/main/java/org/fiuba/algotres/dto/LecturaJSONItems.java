@@ -42,7 +42,7 @@ public class LecturaJSONItems {
 
     public static List<LecturaJSONItems> leecturaDeArchivo() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
         ObjectMapper mapper = new ObjectMapper();
-        File pathLeer = new File("src\\main\\java\\org\\fiuba\\algotres\\items.json");
+        File pathLeer = new File("src\\main\\resources\\items.json");
 
 
        List<LecturaJSONItems> a = mapper.readValue(pathLeer, new TypeReference<List<LecturaJSONItems>>(){});

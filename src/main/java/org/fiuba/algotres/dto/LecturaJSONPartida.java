@@ -30,7 +30,7 @@ public class LecturaJSONPartida {
 
     public static List<LecturaJSONPartida> leecturaDeArchivo() throws StreamReadException, DatabindException, IOException {
         ObjectMapper  mapper = new ObjectMapper();
-        File pathALeer = new File("src\\main\\java\\org\\fiuba\\algotres\\partida.json");
+        File pathALeer = new File("src\\main\\resources\\partida.json");
         List<LecturaJSONPartida> a = mapper.readValue(pathALeer , new TypeReference<List<LecturaJSONPartida>>(){});
         return a;
     }

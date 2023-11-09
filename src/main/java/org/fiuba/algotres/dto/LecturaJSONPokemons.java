@@ -48,7 +48,7 @@ public class LecturaJSONPokemons {
 
     public static List<LecturaJSONPokemons> leecturadearchivos() throws StreamReadException, DatabindException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        File pathLeer = new File("src\\main\\java\\org\\fiuba\\algotres\\pokemons.json");
+        File pathLeer = new File("src\\main\\resources\\pokemons.json");
 
         List<LecturaJSONPokemons> a = mapper.readValue(pathLeer, new TypeReference<List<LecturaJSONPokemons>>(){});
 
