@@ -13,7 +13,7 @@ public class Paralizado extends Estado {
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon) {
-        return Math.random() <= PROBABILIDAD;
+    public boolean accionar() {
+        return (randomizador.getRandomValue(0, 1) <= PROBABILIDAD);
     }
 }

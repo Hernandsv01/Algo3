@@ -6,6 +6,7 @@ import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.tipos.Tipos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
@@ -19,9 +20,10 @@ public class Pokemon {
     private final Integer velocidad;
     private Integer defensa;
     private Integer ataque;
-    private Estado estado;
+    private List<Estado> estados;
     private boolean estaVivo;
-    private final List<Habilidad> habilidades;
+    private List<Habilidad> habilidades;
+    private List<Estado> estadosQuitados;
 
     public Pokemon(
             String nombre,
@@ -43,9 +45,10 @@ public class Pokemon {
         this.velocidad = velocidad;
         this.defensa = defensa;
         this.ataque = ataque;
-        this.estado = null;
+        this.estados = new ArrayList<Estado>();
         this.estaVivo = true;
         this.habilidades = habilidades;
+        this.estadosQuitados = new ArrayList<Estado>();
     }
 
     /**
@@ -106,8 +109,9 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de ataque que se quiere modificar.
      */
     public void modificarAtaque(int porcentaje) {
-        if (porcentaje > 0 && porcentaje < 100) {
-            ataque += Math.round(((float) porcentaje / 100) * ataque);
+        ataque += Math.round(((float) porcentaje / 100) * ataque);
+        if (ataque <= 0) {
+            ataque = 1;
         }
     }
 
@@ -117,17 +121,52 @@ public class Pokemon {
      * @param porcentaje porcentaje del valor actual de defensa que se quiere modificar.
      */
     public void modificarDefensa(int porcentaje) {
-        if (porcentaje > 0 && porcentaje < 100) {
-            defensa += Math.round(((float) porcentaje / 100) * defensa);
+        defensa += Math.round(((float) porcentaje / 100) * defensa);
+        if (defensa <= 0) {
+            defensa = 1;
         }
     }
 
+    /**
+     * Verifica si el pokemon se encuentra con vida.
+     * @return True si el pokemon se encuentra disponible para la batalla.
+     * False si el pokemon se encuentra debilitado.
+     */
     public boolean estaVivo(){
         return estaVivo && vidaActual > 0;
     }
 
+    /**
+     * Revive al pokemon
+     */
     public void revivir(){
         estaVivo = true;
         vidaActual = vidaMaxima;
+    }
+
+    /**
+     * Incorpora un nuevo estado, pasado por parametro, al pokemon.
+     * En caso de que el pokemon ya posea el estado, no se le incorporara.
+     * @param estado estado que se le quiere agregar al pokemon.
+     */
+    public void agregarEstado(Estado estado) {
+        if (!this.estados.contains(estado)) {
+            this.estados.add(estado);
+            estado.setPokemon(this);
+        }
+    }
+
+    /**
+     * Elimina el estado, pasado por parametro, del pokemon.
+     * En caso de que el pokemon no posea el estado, no se efectuaran cambios.
+     * @param estado estado que se le quitar agregar al pokemon.
+     */
+    public void quitarEstado(Estado estado) {
+        this.estadosQuitados.add(estado);
+    }
+    public void limpiarEstados() {
+        for (Estado estadoquitado : this.estadosQuitados) {
+            this.estados.remove(estadoquitado);
+        }
     }
 }

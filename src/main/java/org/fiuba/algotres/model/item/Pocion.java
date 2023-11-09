@@ -3,7 +3,7 @@ package org.fiuba.algotres.model.item;
 import org.fiuba.algotres.model.Pokemon;
 
 public class Pocion extends Item{
-    protected int cantidadDeVida;
+    private final int cantidadDeVida;
 
     public Pocion(int cantidad, String nombre, int cantidadDeVida) {
         super(cantidad, nombre);

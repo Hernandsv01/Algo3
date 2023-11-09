@@ -13,8 +13,8 @@ public class Envenenado extends Estado{
     }
 
     @Override
-    public boolean accionar(Pokemon pokemon) {
-        pokemon.danarPorPorcentaje(DANO);
+    public boolean accionar() {
+        this.pokemon.danarPorPorcentaje(DANO);
         return true;
     }
 }
