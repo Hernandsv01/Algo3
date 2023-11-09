@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fiuba.algotres.utils.Inicializador.inicializarJuego;
+import static org.fiuba.algotres.inicializadores.java.Inicializador.inicializarJuego;
 
 public class JuegoController {
     

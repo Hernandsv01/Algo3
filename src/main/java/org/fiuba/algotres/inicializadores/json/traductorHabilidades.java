@@ -1,12 +1,11 @@
-package org.fiuba.algotres.dto;
+package org.fiuba.algotres.inicializadores.json;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.HashMap;
 
-import org.fiuba.algotres.model.estado.Estado;
+import org.fiuba.algotres.inicializadores.json.dto.LecturaJSONHabilidades;
 import org.fiuba.algotres.model.habilidad.Ataque;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.habilidad.ModificacionEstadisticaAtaque;

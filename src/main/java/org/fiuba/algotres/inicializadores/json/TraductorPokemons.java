@@ -1,4 +1,4 @@
-package org.fiuba.algotres.dto;
+package org.fiuba.algotres.inicializadores.json.dto;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.fiuba.algotres.dto.traductorHabilidades;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 

@@ -1,4 +1,4 @@
-package org.fiuba.algotres.dto;
+package org.fiuba.algotres.inicializadores.json.dto;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,12 +15,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 
 @Getter @Setter @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LecturaJSONHabilidades {
+public class HabilidadDTO {
 
     private Integer id;
     private String nombre;
@@ -34,7 +33,7 @@ public class LecturaJSONHabilidades {
     private String clima;
 
     @JsonCreator
-    public LecturaJSONHabilidades(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty("usos")Integer usos,@JsonProperty("poder") Integer poder, @JsonProperty("tipo") Tipos tipo, @JsonProperty("porcentajeDefensa") Integer porcentajeDefensa,@JsonProperty("porcentajeAtaque") Integer porcentajeAtaque,@JsonProperty("porcentajeVida") Integer porcentajeVida, @JsonProperty("nombreEstado") String estado, @JsonProperty("clima") String clima) {
+    public HabilidadDTO(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty("usos")Integer usos, @JsonProperty("poder") Integer poder, @JsonProperty("tipo") Tipos tipo, @JsonProperty("porcentajeDefensa") Integer porcentajeDefensa, @JsonProperty("porcentajeAtaque") Integer porcentajeAtaque, @JsonProperty("porcentajeVida") Integer porcentajeVida, @JsonProperty("nombreEstado") String estado, @JsonProperty("clima") String clima) {
         this.id = id;
         this.nombre = nombre;
         this.usos = usos;
@@ -47,11 +46,11 @@ public class LecturaJSONHabilidades {
         this.clima = clima;
     }
     
-    public static List<LecturaJSONHabilidades> leecturadearchivos() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
+    public static List<HabilidadDTO> leecturadearchivos() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
         ObjectMapper mapper = new ObjectMapper();
         File pathLeer = new File("src\\main\\resources\\habilidades.json");
 
-       List<LecturaJSONHabilidades> a = mapper.readValue(pathLeer, new TypeReference<List<LecturaJSONHabilidades>>(){});
+       List<HabilidadDTO> a = mapper.readValue(pathLeer, new TypeReference<List<HabilidadDTO>>(){});
        return a;
         
         

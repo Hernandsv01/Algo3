@@ -1,4 +1,4 @@
-package org.fiuba.algotres.dto;
+package org.fiuba.algotres.inicializadores.json;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.fiuba.algotres.inicializadores.json.dto.LecturaJSONPartida;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;

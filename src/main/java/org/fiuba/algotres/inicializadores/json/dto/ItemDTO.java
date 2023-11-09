@@ -1,4 +1,4 @@
-package org.fiuba.algotres.dto;
+package org.fiuba.algotres.inicializadores.json.dto;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class LecturaJSONItems {
+public class ItemDTO {
 
     private Integer id;
     private String nombre;
@@ -29,7 +29,7 @@ public class LecturaJSONItems {
     private boolean revivir;
 
     @JsonCreator
-    public LecturaJSONItems(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre,@JsonProperty ("cantidad") Integer cantidad,@JsonProperty ("cantidadVida") Integer cantidadDeVida,@JsonProperty ("estadisticaDefensa") Integer estadisticaDefensa,@JsonProperty("estadisticaAtaque") Integer estadisticaAtaque,@JsonProperty ("curaTodo") boolean curaTodo, @JsonProperty ("revivir") boolean revivir) {
+    public ItemDTO(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty ("cantidad") Integer cantidad, @JsonProperty ("cantidadVida") Integer cantidadDeVida, @JsonProperty ("estadisticaDefensa") Integer estadisticaDefensa, @JsonProperty("estadisticaAtaque") Integer estadisticaAtaque, @JsonProperty ("curaTodo") boolean curaTodo, @JsonProperty ("revivir") boolean revivir) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -40,12 +40,12 @@ public class LecturaJSONItems {
         this.revivir = revivir;
     }
 
-    public static List<LecturaJSONItems> leecturaDeArchivo() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
+    public static List<ItemDTO> leecturaDeArchivo() throws IOException, FileNotFoundException, InvalidDefinitionException, JsonParseException {
         ObjectMapper mapper = new ObjectMapper();
         File pathLeer = new File("src\\main\\resources\\items.json");
 
 
-       List<LecturaJSONItems> a = mapper.readValue(pathLeer, new TypeReference<List<LecturaJSONItems>>(){});
+       List<ItemDTO> a = mapper.readValue(pathLeer, new TypeReference<List<ItemDTO>>(){});
         //for(int i = 0; i< a.size(); i++){
         //    System.out.println("ID " + a.get(i).getId());
         //    System.out.println("NOMBRE " + a.get(i).getNombre());
