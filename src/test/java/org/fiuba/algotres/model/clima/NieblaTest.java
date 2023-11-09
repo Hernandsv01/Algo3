@@ -50,12 +50,12 @@ public class NieblaTest {
         int turnosValidos = 5;
 
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, niebla.turnosAplicados);
+            assertEquals(i, niebla.getTurnosAplicados());
             assertEquals(esValido, niebla.turnoValido());
         }
-        verify(niebla.cdb, times(0)).setClima(new SinClima("Sin clima", cdb));
+        verify(niebla.getCdb(), times(0)).setClima(new SinClima("Sin clima", cdb));
         assertEquals(!esValido, niebla.turnoValido());
-        assertEquals(turnoFinal, niebla.turnosAplicados);
+        assertEquals(turnoFinal, niebla.getTurnosAplicados());
     }
 
     @Test
@@ -82,7 +82,7 @@ public class NieblaTest {
         int turnosAplicados = 1;
 
         niebla.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, niebla.turnosAplicados);
+        assertEquals(turnosAplicados, niebla.getTurnosAplicados());
         verify(primeraHabilidad, times(0)).setPoder(anyInt());
         verify(segundaHabilidad, times(0)).setPoder(anyInt());
 
@@ -90,7 +90,7 @@ public class NieblaTest {
         when(pokemon.getTipos()).thenReturn(Tipos.PSIQUICO);
 
         niebla.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, niebla.turnosAplicados);
+        assertEquals(turnosAplicados, niebla.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
 
@@ -98,7 +98,7 @@ public class NieblaTest {
         when(pokemon.getTipos()).thenReturn(Tipos.FANTASMA);
 
         niebla.aplicarEfectos(pokemon);
-        assertEquals(turnosAplicados, niebla.turnosAplicados);
+        assertEquals(turnosAplicados, niebla.getTurnosAplicados());
         verify(primeraHabilidad, times(2)).setPoder(anyInt());
         verify(segundaHabilidad, times(2)).setPoder(anyInt());
     }

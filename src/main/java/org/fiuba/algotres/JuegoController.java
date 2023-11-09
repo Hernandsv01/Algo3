@@ -24,7 +24,7 @@ public class JuegoController {
 
         cdb.setJugadorInicialPorAtributo(Comparator.comparingInt(jugador -> jugador.getPokemonActual().getVelocidad()));
         Tools.imprimirDivisor(false);
-        Tools.imprimirMensajeConEspera(input, "Comienza " + cdb.getJugadorActual().getNombre() + " por tener el pokemon mas rapido!");
+        Tools.imprimirMensajeConEspera("Comienza " + cdb.getJugadorActual().getNombre() + " por tener el pokemon mas rapido!");
 
         while(cdb.getGanador() == -1){
             Tools.imprimirDivisor(true);
@@ -66,10 +66,10 @@ public class JuegoController {
 
             cdb.getJugadores()[i].cambiarPokemonActual(pokemonElegido-1);
 
-            Tools.imprimirMensajeConEspera(input, "Eligio el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
+            Tools.imprimirMensajeConEspera("Eligio el pokemon: " + cdb.getJugadores()[i].getPokemonActual().getNombre());
         }
 
-        Tools.imprimirMensajeConEspera(input, "El clima sorteado es: " + cdb.getClima().getNombre());
+        Tools.imprimirMensajeConEspera("El clima sorteado es: " + cdb.getClima().getNombre());
     }
 
     public static boolean turno(CampoDeBatalla cdb){

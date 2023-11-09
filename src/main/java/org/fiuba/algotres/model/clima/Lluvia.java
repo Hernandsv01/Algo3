@@ -12,10 +12,10 @@ public class Lluvia extends Clima{
 
     public Lluvia(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
-        this.tiposFavorecidos = new ArrayList<Tipos>(Arrays.asList(
+        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
                 Tipos.AGUA,
                 Tipos.PLANTA
-        ));
+        )));
     }
 
 }

@@ -50,12 +50,12 @@ public class HuracanTest {
         int turnosValidos = 5;
 
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, huracan.turnosAplicados);
+            assertEquals(i, huracan.getTurnosAplicados());
             assertEquals(esValido, huracan.turnoValido());
         }
-        verify(huracan.cdb, times(0)).setClima(new SinClima("Sin clima", cdb));
+        verify(huracan.getCdb(), times(0)).setClima(new SinClima("Sin clima", cdb));
         assertEquals(!esValido, huracan.turnoValido());
-        assertEquals(turnoFinal, huracan.turnosAplicados);
+        assertEquals(turnoFinal, huracan.getTurnosAplicados());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class HuracanTest {
 
         huracan.aplicarEfectos(pokemon);
         verify(pokemon, times(0)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, huracan.turnosAplicados);
+        assertEquals(turnosAplicados, huracan.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
 
@@ -86,7 +86,7 @@ public class HuracanTest {
 
         huracan.aplicarEfectos(pokemon);
         verify(pokemon, times(1)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, huracan.turnosAplicados);
+        assertEquals(turnosAplicados, huracan.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
     }

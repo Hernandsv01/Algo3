@@ -13,10 +13,10 @@ public class TormentaArena extends Clima{
 
     public TormentaArena(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
-        this.tiposFavorecidos = new ArrayList<Tipos>(Arrays.asList(
+        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
                 Tipos.ROCA,
                 Tipos.TIERRA
-        ));
+        )));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TormentaArena extends Clima{
      * @param pokemon al cual danara o no
      */
     private void danarPokemon(Pokemon pokemon) {
-        if( !(this.tiposFavorecidos.contains(pokemon.getTipos()))) {
+        if( !(this.getTiposFavorecidos().contains(pokemon.getTipos()))) {
             pokemon.danarPorPorcentaje(this.PORCENTAJE_DANAR);
         }
     }

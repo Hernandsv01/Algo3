@@ -5,6 +5,8 @@ import org.fiuba.algotres.views.InputUsuario;
 
 public class InputUsuarioTerminal implements InputUsuario {
 
+    private static Scanner scanner = new Scanner(System.in);
+
     /**
      * Función que espera input de usuario entre 1 y {límite}
      * @param limite INCLUÍDO en el rango
@@ -12,7 +14,6 @@ public class InputUsuarioTerminal implements InputUsuario {
      */
     @Override
     public int obtenerOpcionUsuario(int limite){
-        Scanner scanner = new Scanner(System.in);
         int result = 0;
         String inputLine = "";
 
@@ -39,12 +40,15 @@ public class InputUsuarioTerminal implements InputUsuario {
      */
     @Override
     public String obtenerCualquierDato(boolean puedeEstarVacio){
-        Scanner scanner = new Scanner(System.in);
         String res;
         do{
             res = scanner.nextLine();
         }while(!puedeEstarVacio && (res == null || "".equals(res.trim())));
 
         return res;
+    }
+
+    public void setScanner(Scanner scanner){
+        InputUsuarioTerminal.scanner = scanner;
     }
 }

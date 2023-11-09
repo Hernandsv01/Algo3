@@ -50,12 +50,12 @@ public class TormentaRayosTest {
         int turnosValidos = 5;
 
         for(int i = 0; i < turnosValidos; i++) {
-            assertEquals(i, tormentaRayos.turnosAplicados);
+            assertEquals(i, tormentaRayos.getTurnosAplicados());
             assertEquals(esValido, tormentaRayos.turnoValido());
         }
-        verify(tormentaRayos.cdb, times(0)).setClima(new SinClima("Sin clima", cdb));
+        verify(tormentaRayos.getCdb(), times(0)).setClima(new SinClima("Sin clima", cdb));
         assertEquals(!esValido, tormentaRayos.turnoValido());
-        assertEquals(turnoFinal, tormentaRayos.turnosAplicados);
+        assertEquals(turnoFinal, tormentaRayos.getTurnosAplicados());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TormentaRayosTest {
 
         tormentaRayos.aplicarEfectos(pokemon);
         verify(pokemon, times(1)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, tormentaRayos.turnosAplicados);
+        assertEquals(turnosAplicados, tormentaRayos.getTurnosAplicados());
         verify(primeraHabilidad, times(0)).setPoder(anyInt());
         verify(segundaHabilidad, times(0)).setPoder(anyInt());
 
@@ -86,7 +86,7 @@ public class TormentaRayosTest {
 
         tormentaRayos.aplicarEfectos(pokemon);
         verify(pokemon, times(1)).danarPorPorcentaje(anyInt());
-        assertEquals(turnosAplicados, tormentaRayos.turnosAplicados);
+        assertEquals(turnosAplicados, tormentaRayos.getTurnosAplicados());
         verify(primeraHabilidad, times(1)).setPoder(anyInt());
         verify(segundaHabilidad, times(1)).setPoder(anyInt());
     }
