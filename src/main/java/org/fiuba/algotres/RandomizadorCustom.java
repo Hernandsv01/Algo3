@@ -1,4 +1,4 @@
-package org.fiuba.algotres.utils;
+package org.fiuba.algotres;
 
 import org.fiuba.algotres.model.Randomizador;
 
