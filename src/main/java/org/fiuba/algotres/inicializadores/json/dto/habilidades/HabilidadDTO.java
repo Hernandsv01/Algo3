@@ -14,7 +14,7 @@ import org.fiuba.algotres.model.habilidad.*;
 
 
 @Getter @Setter
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "tipo")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "habilidad")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AtaqueDTO.class, name = "ataque"),
         @JsonSubTypes.Type(value = CambiarClimaDTO.class, name = "cambiarclima"),

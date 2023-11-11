@@ -1,6 +1,11 @@
 package org.fiuba.algotres.inicializadores.json.dto.items;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.fiuba.algotres.inicializadores.json.dto.Utils;
+import org.fiuba.algotres.model.item.Estadistica;
+import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.model.strategies.Strategy;
 
 @JsonTypeName("estadistica")
@@ -9,9 +14,15 @@ public class EstadisticaDTO extends ItemDTO {
     private final boolean esPositivo;
     protected int porcentaje;
 
-    public EstadisticaDTO(Integer id, String nombre, Integer cantidad, String estadistica, boolean esPositivo) {
-        super(id, nombre, cantidad);
+    @JsonCreator
+    public EstadisticaDTO(@JsonProperty("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty("estadistica") String estadistica, @JsonProperty("esPositivo") boolean esPositivo) {
+        super(id, nombre);
         this.estadistica = estadistica;
         this.esPositivo = esPositivo;
+    }
+
+    @Override
+    public Item toItem() {
+        return new Estadistica(getNombre(), porcentaje, Utils.getStrategy(estadistica, esPositivo), getId());
     }
 }

@@ -24,6 +24,6 @@ public class ModificacionEstadisticaDTO extends HabilidadDTO {
 
     @Override
     public Habilidad toHabilidad() {
-        return new ModificacionEstadistica(getNombre(), getUsos(), porcentaje, Utils.getStrategy(estadistica, esPositivo));
+        return new ModificacionEstadistica(getId(), getNombre(), getUsos(), porcentaje, Utils.getStrategy(estadistica, esPositivo));
     }
 }

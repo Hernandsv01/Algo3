@@ -18,7 +18,7 @@ public class AtaqueDTO extends HabilidadDTO {
 
 
     @JsonCreator
-    public AtaqueDTO(@JsonProperty("id") int id, @JsonProperty("nombre") String nombre, @JsonProperty("usos")int usos, @JsonProperty("poder") int poder, @JsonProperty("tipo") String tipo) {
+    public AtaqueDTO(@JsonProperty("id") int id, @JsonProperty("nombre") String nombre, @JsonProperty("usos") int usos, @JsonProperty("poder") int poder, @JsonProperty("tipo") String tipo) {
         super(id, nombre, usos);
         this.poder = poder;
         this.tipo = tipo;
@@ -26,6 +26,6 @@ public class AtaqueDTO extends HabilidadDTO {
 
     @Override
     public Habilidad toHabilidad() {
-        return new Ataque(this.getNombre(), this.getUsos(), poder, Utils.getTipo(tipo));
+        return new Ataque(getId(), this.getNombre(), this.getUsos(), poder, Utils.getTipo(tipo));
     }
 }

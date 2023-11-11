@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class JugadorDTO {
     private String nombre;
-    private HashMap<Integer, Integer> itemIDs;
+    private HashMap<String, Integer> itemIDs;
     private List<Integer> pokemonIDs;
 
     @JsonCreator
-    public JugadorDTO(@JsonProperty("nombre") String nombre, @JsonProperty("items") HashMap<Integer, Integer> itemIDs, @JsonProperty("pokemons") List<Integer> pokemonIDs) {
+    public JugadorDTO(@JsonProperty("nombre") String nombre, @JsonProperty("items") HashMap<String, Integer> itemIDs, @JsonProperty("pokemons") List<Integer> pokemonIDs) {
         this.nombre = nombre;
         this.itemIDs = itemIDs;
         this.pokemonIDs = pokemonIDs;

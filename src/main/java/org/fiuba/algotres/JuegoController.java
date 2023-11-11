@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.fiuba.algotres.inicializadores.java.Inicializador.inicializarJuego;
+import static org.fiuba.algotres.inicializadores.json.JSONInitializer.loadCampoDeBatalla;
+
 import org.fiuba.algotres.views.InputUsuario;
 
 public class JuegoController {
@@ -100,7 +102,8 @@ public class JuegoController {
     }
 
     public static void main(String[] args) {
-        CampoDeBatalla juego = inicializarJuego();
+//        CampoDeBatalla juego = inicializarJuego();
+        CampoDeBatalla juego = loadCampoDeBatalla();
         inicializarConfiguracion(new InputUsuarioTerminal());
         jugar(juego);
     }

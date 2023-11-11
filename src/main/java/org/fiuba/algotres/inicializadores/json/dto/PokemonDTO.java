@@ -37,7 +37,18 @@ public class PokemonDTO {
     private List<Integer> habilidades;
 
     @JsonCreator
-    public PokemonDTO(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty ("nivel") Integer nivel, @JsonProperty ("tipo") Tipos tipo, @JsonProperty ("historia") String historia, @JsonProperty ("vidaMaxima") Integer vidaMaxima, @JsonProperty ("velocidad") Integer velocidad, @JsonProperty ("defensa") Integer defensa, @JsonProperty ("ataque") Integer ataque, @JsonProperty ("habilidades") List<Integer> habilidades) {
+    public PokemonDTO(
+            @JsonProperty("id") Integer id,
+            @JsonProperty("nombre") String nombre,
+            @JsonProperty("nivel") Integer nivel,
+            @JsonProperty("tipo") Tipos tipo,
+            @JsonProperty("historia") String historia,
+            @JsonProperty("vidaMaxima") Integer vidaMaxima,
+            @JsonProperty("velocidad") Integer velocidad,
+            @JsonProperty("defensa") Integer defensa,
+            @JsonProperty("ataque") Integer ataque,
+            @JsonProperty("habilidades") List<Integer> habilidades
+    ){
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
@@ -72,7 +83,7 @@ public class PokemonDTO {
     }
 
     public Pokemon toPokemon(List<Habilidad> habilidades){
-        return new Pokemon(
+        Pokemon res =  new Pokemon(
                 nombre,
                 id,
                 nivel,
@@ -84,5 +95,6 @@ public class PokemonDTO {
                 ataque,
                 habilidades
         );
+        return res;
     }
 }

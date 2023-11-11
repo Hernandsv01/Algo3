@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Getter;
@@ -16,7 +17,7 @@ import lombok.Setter;
 import org.fiuba.algotres.model.item.*;
 
 @Getter @Setter
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "tipo")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "item")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CuraTodoDTO.class, name = "curatodo"),
         @JsonSubTypes.Type(value = EstadisticaDTO.class, name = "estadistica"),
@@ -28,23 +29,19 @@ public abstract class ItemDTO {
 
     private Integer id;
     private String nombre;
-    private Integer cantidad;
 
     @JsonCreator
-    public ItemDTO(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty ("cantidad") Integer cantidad) {
+    public ItemDTO(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.cantidad = cantidad;
     }
 
     public static List<ItemDTO> loadItemsJson(String path) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File(path);
-        return mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, Item.class));
+        return mapper.readValue(file, new TypeReference<>() {});
     }
 
-    public Item toItem(){
-        return null;
-    }
+    public abstract Item toItem();
 
 }

@@ -13,6 +13,7 @@ import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.item.Item;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.fiuba.algotres.inicializadores.json.dto.habilidades.HabilidadDTO.loadHabilidadesJson;
 import static org.fiuba.algotres.inicializadores.json.dto.items.ItemDTO.loadItemsJson;
@@ -40,12 +41,30 @@ public class JSONInitializer {
             return null;
         }
 
-        // Todos se asigna a todo, falta mapear con IDs
+
         List<Habilidad> habilidades = habilidadesDTO.stream().map(HabilidadDTO::toHabilidad).toList();
         List<Item> items = itemsDTO.stream().map(ItemDTO::toItem).toList();
-        List<Pokemon> pokemons = pokemonsDTO.stream().map(pokemonDTO -> pokemonDTO.toPokemon(habilidades)).toList();
-        Jugador[] jugadores = jugadoresDTO.stream().map(jugadorDTO -> jugadorDTO.toJugador(pokemons, items)).toArray(Jugador[]::new);
 
+
+        // Mapeamos las habilidades que le corresponden a cada pokemon
+        List<Pokemon> pokemons = pokemonsDTO.stream().map(
+                pokemonDTO -> pokemonDTO.toPokemon(
+                        habilidades.stream().filter(
+                                habilidad -> pokemonDTO.getHabilidades().contains(habilidad.getId())
+                        ).toList()
+                )
+        ).toList();
+
+        // Mapeamos los pokemons e items que le corresponden a cada jugador
+        Jugador[] jugadores = jugadoresDTO.stream().map(
+                jugadorDTO -> jugadorDTO.toJugador(
+                        pokemons.stream().filter(pokemon -> jugadorDTO.getPokemonIDs().contains(pokemon.getId())).toList(),
+                        items.stream().filter(item -> jugadorDTO.getItemIDs().containsKey("" + item.getId())).toList()
+                )
+        ).toArray(Jugador[]::new);
+
+        // Setteamos la cantidad a cada item
+        IntStream.range(0, jugadores.length).forEach(i ->jugadores[i].getItems().forEach(item -> item.setCantidad(jugadoresDTO.get(i).getItemIDs().get("" + item.getId()))));
 
         CampoDeBatalla cdb = new CampoDeBatalla();
         cdb.setJugadores(jugadores);
@@ -55,7 +74,7 @@ public class JSONInitializer {
 
     private static Clima getRandomClima(){
         String[] nombresclimas = new String[]{"Huracan", "Lluvia", "Niebla", "Soleado", "TormentaArena", "TormentaRayos"};
-        int res = (int) (Math.random()*3);
+        int res = (int) Math.round(Math.random()*3);
         if(res < 2){
             return Utils.getClima("SinClima");
         }else{

@@ -20,6 +20,6 @@ public class ModificacionEstadoDTO extends HabilidadDTO{
 
     @Override
     public Habilidad toHabilidad() {
-        return new ModificacionEstado(getNombre(), getUsos(), Utils.getEstado(estado));
+        return new ModificacionEstado(getId(), getNombre(), getUsos(), Utils.getEstado(estado));
     }
 }
