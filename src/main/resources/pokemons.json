@@ -1,38 +1,26 @@
 [
-    {
-        "id": 10,
-        "nombre": "Bulbasaur",
-        "nivel": 5,
-        "tipo": "TIERRA",
-        "historia": "quiero",
-        "vidaMaxima": 100,
-        "velocidad": 20,
-        "defensa": 3,
-        "ataque": 10,
-        "habilidades": [56, 24, 2]
-    },
-    {
-        "id": 7,
-        "nombre": "Charmander",
-        "nivel": 6,
-        "tipo": "BICHO",
-        "historia": "la ",
-        "vidaMaxima": 85,
-        "velocidad": 15,
-        "defensa": 5,
-        "ataque": 15,
-        "habilidades": [3, 98, 24]
-    },
-    {
-        "id": 8,
-        "nombre": "Squirtle",
-        "nivel": 7,
-        "tipo": "DRAGON",
-        "historia": "septima",
-        "vidaMaxima": 90,
-        "velocidad": 10,
-        "defensa": 10,
-        "ataque": 20,
-        "habilidades": [7, 55, 3]
-    }
+  {
+    "id": 1,
+    "nombre": "Bulbasaur",
+    "nivel": 100,
+    "tipo": "TIERRA",
+    "historia": "Nuestra querida rata de laboratorio",
+    "vidaMaxima": 1000,
+    "velocidad": 100,
+    "defensa": 100,
+    "ataque": 100,
+    "habilidades": [1, 2, 3, 4]
+  },
+  {
+    "id": 2,
+    "nombre": "Charmander",
+    "nivel": 100,
+    "tipo": "BICHO",
+    "historia": "La otra rata",
+    "vidaMaxima": 1000,
+    "velocidad": 100,
+    "defensa": 100,
+    "ataque": 100,
+    "habilidades": [5, 6, 7, 8]
+  }
 ]
