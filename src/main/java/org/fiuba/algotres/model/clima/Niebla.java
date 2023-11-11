@@ -12,11 +12,17 @@ public class Niebla extends Clima{
 
     public Niebla(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
+        inicializarTiposFavorecidos();
+    }
+    public Niebla(String nombre){
+        super(nombre);
+        inicializarTiposFavorecidos();
+    }
+    private void inicializarTiposFavorecidos(){
         this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
                 Tipos.FANTASMA,
                 Tipos.PSIQUICO
         )));
-
     }
 
 }

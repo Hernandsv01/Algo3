@@ -1,12 +1,14 @@
 package org.fiuba.algotres.model.habilidad;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.strategies.Strategy;
 
 public class ModificacionEstadistica extends Habilidad {
     private final Strategy strategy;
     protected final int porcentaje;
-
     public ModificacionEstadistica(String nombre, int usos, int porcentaje, Strategy strategy) {
         super(nombre, usos);
         this.porcentaje = porcentaje;

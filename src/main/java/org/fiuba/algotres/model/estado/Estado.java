@@ -3,7 +3,7 @@ package org.fiuba.algotres.model.estado;
 import lombok.Getter;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.Randomizador;
-import org.fiuba.algotres.utils.RandomizadorCustom;
+import org.fiuba.algotres.RandomizadorCustom;
 
 @Getter
 public abstract class Estado {

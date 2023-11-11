@@ -11,7 +11,11 @@ public class SinClima extends Clima{
 
     public SinClima(String nombre, CampoDeBatalla cdb) {
         super(nombre, cdb);
-        this.setTiposFavorecidos(new ArrayList<>());
+        inicializarTiposFavorecidos();
+    }
+    public SinClima(String nombre) {
+        super(nombre);
+        inicializarTiposFavorecidos();
     }
 
     @Override
@@ -20,5 +24,7 @@ public class SinClima extends Clima{
         return true;
     }
 
-    public void potenciarPokemon(Pokemon pokemon){};
+    private void inicializarTiposFavorecidos(){
+        this.setTiposFavorecidos(new ArrayList<>());
+    }
 }

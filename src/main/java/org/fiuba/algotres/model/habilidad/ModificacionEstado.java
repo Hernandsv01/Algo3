@@ -1,5 +1,6 @@
 package org.fiuba.algotres.model.habilidad;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 
@@ -8,8 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ModificacionEstado extends Habilidad {
     private final Estado estado;
-    @JsonCreator
-    public ModificacionEstado(@JsonProperty ("nombre") String nombre,@JsonProperty ("usos") int usos,@JsonProperty ("estado") Estado estado) {
+    public ModificacionEstado(String nombre, int usos, Estado estado) {
         super(nombre, usos);
         this.estado = estado;
     }

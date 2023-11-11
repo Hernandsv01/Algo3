@@ -6,9 +6,16 @@ import org.fiuba.algotres.model.Pokemon;
 
 @Setter @Getter
 public abstract class Item{
-    protected int cantidad;
+    private int id;
     private final String nombre;
+    protected int cantidad;
 
+
+    public Item(int id, int cantidad, String nombre) {
+        this.id = id;
+        this.cantidad = cantidad;
+        this.nombre = nombre;
+    }
     public Item(int cantidad, String nombre) {
         this.cantidad = cantidad;
         this.nombre = nombre;

@@ -2,11 +2,12 @@ package org.fiuba.algotres.model.strategies;
 
 import org.fiuba.algotres.model.Pokemon;
 
-public class DefensaStrategy implements Strategy {
-    boolean efectoPositivo;
+public class DefensaStrategy extends Strategy {
 
+    public DefensaStrategy() {
+    }
     public DefensaStrategy(boolean efectoPositivo) {
-        this.efectoPositivo = efectoPositivo;
+        super(efectoPositivo);
     }
 
     @Override
