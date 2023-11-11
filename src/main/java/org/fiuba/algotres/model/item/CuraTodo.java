@@ -5,6 +5,10 @@ import org.fiuba.algotres.model.estado.Estado;
 
 public class CuraTodo extends Item {
 
+    public CuraTodo(String nombre, int id) {
+        super(nombre, id);
+    }
+
     public CuraTodo(int cantidad, String nombre) {
         super(cantidad, nombre);
     }

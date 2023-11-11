@@ -20,6 +20,10 @@ public abstract class Item{
         this.cantidad = cantidad;
         this.nombre = nombre;
     }
+    public Item(String nombre, int id) {
+        this.nombre = nombre;
+        this.id = id;
+    }
 
     public abstract boolean usar(Pokemon pokemon);
 

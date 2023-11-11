@@ -15,6 +15,12 @@ public class ModificacionEstadistica extends Habilidad {
         this.strategy = strategy;
     }
 
+    public ModificacionEstadistica(int id, String nombre, int usos, int porcentaje, Strategy strategy) {
+        super(id, nombre, usos);
+        this.strategy = strategy;
+        this.porcentaje = porcentaje;
+    }
+
     /**
      * @param atacante pokemon propio.
      * @param victima pokemon contrario.

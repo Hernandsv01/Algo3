@@ -29,6 +29,12 @@ public class Ataque extends Habilidad{
         this.tipo = tipo;
     }
 
+    public Ataque(int id, String nombre, int usos, int poder, Tipos tipo) {
+        super(id, nombre, usos);
+        this.poder = poder;
+        this.tipo = tipo;
+    }
+
     @Override
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
         // cambiar dato guardado en randomizador por dato guardado acá, guardar daño completo.

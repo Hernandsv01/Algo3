@@ -7,6 +7,10 @@ public class Revivir extends Item {
         super(cantidad, nombre);
     }
 
+    public Revivir(String nombre, int id) {
+        super(nombre, id);
+    }
+
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {

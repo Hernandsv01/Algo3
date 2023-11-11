@@ -13,6 +13,12 @@ public class ModificacionEstado extends Habilidad {
         super(nombre, usos);
         this.estado = estado;
     }
+
+    public ModificacionEstado(int id, String nombre, int usos, Estado estado) {
+        super(id, nombre, usos);
+        this.estado = estado;
+    }
+
     @Override
     public boolean accionarHabilidad(Pokemon ignorado, Pokemon victima) {
         if (verificarUsos(usos)) {
