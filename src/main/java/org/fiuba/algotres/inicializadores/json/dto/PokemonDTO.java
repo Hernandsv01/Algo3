@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import org.fiuba.algotres.model.Jugador;
+import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -46,12 +50,39 @@ public class PokemonDTO {
         this.habilidades = habilidades;
     }
 
-    public static List<PokemonDTO> leecturadearchivos() throws StreamReadException, DatabindException, IOException {
+    public static List<PokemonDTO> loadPokemonsJson(String path) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        File pathLeer = new File("src\\main\\resources\\pokemons.json");
+        File file = new File(path);
+        return mapper.readValue(file, new TypeReference<>() {});
+    }
 
-        List<PokemonDTO> a = mapper.readValue(pathLeer, new TypeReference<List<PokemonDTO>>(){});
+    public Pokemon toPokemon(){
+        return new Pokemon(
+                nombre,
+                id,
+                nivel,
+                tipo,
+                historia,
+                vidaMaxima,
+                velocidad,
+                defensa,
+                ataque,
+                null
+        );
+    }
 
-        return a;
+    public Pokemon toPokemon(List<Habilidad> habilidades){
+        return new Pokemon(
+                nombre,
+                id,
+                nivel,
+                tipo,
+                historia,
+                vidaMaxima,
+                velocidad,
+                defensa,
+                ataque,
+                habilidades
+        );
     }
 }

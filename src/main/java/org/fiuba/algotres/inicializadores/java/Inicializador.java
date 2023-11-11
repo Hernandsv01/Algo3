@@ -1,4 +1,4 @@
-package org.fiuba.algotres.utils;
+package org.fiuba.algotres.inicializadores.java;
 
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
