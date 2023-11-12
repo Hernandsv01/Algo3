@@ -1,12 +1,11 @@
-package org.fiuba.algotres.inicializadores.json.dto.items;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto.items;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import org.fiuba.algotres.inicializadores.json.dto.Utils;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
 import org.fiuba.algotres.model.item.Estadistica;
 import org.fiuba.algotres.model.item.Item;
-import org.fiuba.algotres.model.strategies.Strategy;
 
 @JsonTypeName("estadistica")
 public class EstadisticaDTO extends ItemDTO {

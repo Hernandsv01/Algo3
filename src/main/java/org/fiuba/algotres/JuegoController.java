@@ -11,8 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fiuba.algotres.inicializadores.java.Inicializador.inicializarJuego;
-import static org.fiuba.algotres.inicializadores.json.JSONInitializer.loadCampoDeBatalla;
+import static org.fiuba.algotres.persistencia.inicializadores.json.JSONInitializer.loadCampoDeBatalla;
 
 import org.fiuba.algotres.views.InputUsuario;
 

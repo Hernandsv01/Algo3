@@ -1,4 +1,4 @@
-package org.fiuba.algotres.inicializadores.json.dto.items;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto.items;
 
 import java.io.File;
 import java.io.IOException;

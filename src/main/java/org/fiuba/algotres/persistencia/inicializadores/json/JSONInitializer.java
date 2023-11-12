@@ -1,10 +1,10 @@
-package org.fiuba.algotres.inicializadores.json;
+package org.fiuba.algotres.persistencia.inicializadores.json;
 
-import org.fiuba.algotres.inicializadores.json.dto.Utils;
-import org.fiuba.algotres.inicializadores.json.dto.habilidades.HabilidadDTO;
-import org.fiuba.algotres.inicializadores.json.dto.items.ItemDTO;
-import org.fiuba.algotres.inicializadores.json.dto.JugadorDTO;
-import org.fiuba.algotres.inicializadores.json.dto.PokemonDTO;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.habilidades.HabilidadDTO;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.items.ItemDTO;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.JugadorDTO;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.PokemonDTO;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
@@ -15,10 +15,8 @@ import org.fiuba.algotres.model.item.Item;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.fiuba.algotres.inicializadores.json.dto.habilidades.HabilidadDTO.loadHabilidadesJson;
-import static org.fiuba.algotres.inicializadores.json.dto.items.ItemDTO.loadItemsJson;
-import static org.fiuba.algotres.inicializadores.json.dto.JugadorDTO.loadJugadoresJson;
-import static org.fiuba.algotres.inicializadores.json.dto.PokemonDTO.loadPokemonsJson;
+import static org.fiuba.algotres.persistencia.inicializadores.json.dto.items.ItemDTO.loadItemsJson;
+import static org.fiuba.algotres.persistencia.inicializadores.json.dto.JugadorDTO.loadJugadoresJson;
 
 public class JSONInitializer {
     private static final String JUGADORES_PATH = "src\\main\\resources\\partida.json";
@@ -33,8 +31,8 @@ public class JSONInitializer {
         List<ItemDTO> itemsDTO;
         try {
             jugadoresDTO = loadJugadoresJson(JUGADORES_PATH);
-            pokemonsDTO = loadPokemonsJson(POKEMONS_PATH);
-            habilidadesDTO = loadHabilidadesJson(HABILIDADES_PATH);
+            pokemonsDTO = PokemonDTO.loadPokemonsJson(POKEMONS_PATH);
+            habilidadesDTO = HabilidadDTO.loadHabilidadesJson(HABILIDADES_PATH);
             itemsDTO = loadItemsJson(ITEMS_PATH);
         } catch (Exception e) {
             e.printStackTrace();

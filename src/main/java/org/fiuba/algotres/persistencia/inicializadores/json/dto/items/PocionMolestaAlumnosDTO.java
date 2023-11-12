@@ -1,4 +1,4 @@
-package org.fiuba.algotres.inicializadores.json.dto.items;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto.items;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

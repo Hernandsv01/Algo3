@@ -1,12 +1,7 @@
 package org.fiuba.algotres.model.habilidad;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.inicializadores.json.dto.habilidades.CambiarClimaDTO;
 import org.fiuba.algotres.model.Pokemon;
 
 @Setter @Getter

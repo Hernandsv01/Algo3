@@ -1,4 +1,4 @@
-package org.fiuba.algotres.inicializadores.json.dto;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto;
 
 import lombok.Getter;
 import org.fiuba.algotres.model.CampoDeBatalla;

@@ -1,4 +1,4 @@
-package org.fiuba.algotres.inicializadores.json.dto.habilidades;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto.habilidades;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

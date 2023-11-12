@@ -1,24 +1,17 @@
-package org.fiuba.algotres.inicializadores.json.dto;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.habilidad.Habilidad;
-import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.model.tipos.Tipos;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 
 import lombok.Getter;
 import lombok.Setter;

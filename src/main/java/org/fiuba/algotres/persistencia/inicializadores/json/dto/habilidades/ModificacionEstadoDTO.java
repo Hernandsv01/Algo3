@@ -1,10 +1,9 @@
-package org.fiuba.algotres.inicializadores.json.dto.habilidades;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto.habilidades;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import org.fiuba.algotres.inicializadores.json.dto.Utils;
-import org.fiuba.algotres.model.estado.Estado;
+import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.habilidad.ModificacionEstado;
 

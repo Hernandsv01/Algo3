@@ -1,4 +1,4 @@
-package org.fiuba.algotres.inicializadores.json.dto;
+package org.fiuba.algotres.persistencia.inicializadores.json.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,10 +12,8 @@ import org.fiuba.algotres.model.item.Item;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter @Setter
 public class JugadorDTO {
