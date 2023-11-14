@@ -1,9 +1,8 @@
-package org.fiuba.algotres;
+package org.fiuba.algotres.controllers.terminal;
 
 import org.fiuba.algotres.comandos.*;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
-import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
@@ -11,11 +10,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fiuba.algotres.persistencia.inicializadores.json.JSONInitializer.loadCampoDeBatalla;
-
 import org.fiuba.algotres.views.InputUsuario;
 
-public class JuegoController {
+public class TerminalController {
 
     private static InputUsuario input;
     private static Map<Integer, Comando> comandos;
@@ -39,8 +36,8 @@ public class JuegoController {
     }
     
     public static void inicializarConfiguracion(InputUsuario input){
-        JuegoController.input = input;
-        JuegoController.comandos = new HashMap<>(){{
+        TerminalController.input = input;
+        TerminalController.comandos = new HashMap<>(){{
             put(1, new ComandoHabilidad("Usar habilidad", input));
             put(2, new ComandoItem("Usar item", input));
             put(3, new ComandoCambiarPokemon("Cambiar Pokemon", input));
@@ -89,7 +86,7 @@ public class JuegoController {
     }
 
     public static void setInput(InputUsuario input) {
-        JuegoController.input = input;
+        TerminalController.input = input;
     }
 
     public static Map<Integer, Comando> getComandos() {
@@ -97,13 +94,6 @@ public class JuegoController {
     }
 
     public static void setComandos(Map<Integer, Comando> comandos) {
-        JuegoController.comandos = comandos;
-    }
-
-    public static void main(String[] args) {
-//        CampoDeBatalla juego = inicializarJuego();
-        CampoDeBatalla juego = loadCampoDeBatalla();
-        inicializarConfiguracion(new InputUsuarioTerminal());
-        jugar(juego);
+        TerminalController.comandos = comandos;
     }
 }   

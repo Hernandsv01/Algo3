@@ -1,9 +1,9 @@
 package org.fiuba.algotres.integracion;
 
 import java.util.List;
-import static org.fiuba.algotres.JuegoController.inicializarConfiguracion;
+import static org.fiuba.algotres.controllers.terminal.TerminalController.inicializarConfiguracion;
 
-import org.fiuba.algotres.JuegoController;
+import org.fiuba.algotres.controllers.terminal.TerminalController;
 import org.fiuba.algotres.model.*;
 import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.item.*;
@@ -117,7 +117,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(1)
                 .thenReturn(1);
 
-        boolean turnoCompletado = JuegoController.turno(cdb);
+        boolean turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertTrue(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() < 1000);
@@ -133,7 +133,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(1)
                 .thenReturn(2);
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(1000, cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual());
@@ -149,7 +149,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(1)
                 .thenReturn(4);
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertTrue(cdb.getClima() instanceof TormentaArena);
@@ -167,7 +167,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(5);
         int vidaPokemonPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(50, cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getAtaque());
@@ -186,7 +186,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(8);
         vidaPokemonPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(vidaPokemonPreEfectoClima-30, cdb.getJugadorActual().getPokemonActual().getVidaActual());
@@ -206,7 +206,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(1);
         int vidaPokemonPreEfectoEnvenenado = cdb.getJugadorActual().getPokemonActual().getVidaActual();
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(vidaPokemonPreEfectoEnvenenado-50, cdb.getJugadorActual().getPokemonActual().getVidaActual());
@@ -224,7 +224,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(3);
         vidaPokemonPreEfectoClima = cdb.getJugadorActual().getPokemonActual().getVidaActual();
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertTrue(cdb.getClima() instanceof SinClima);
@@ -243,7 +243,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
                 .thenReturn(1);
         vidaPokemonPreEfectoEnvenenado = cdb.getJugadorActual().getPokemonActual().getVidaActual();
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertTrue(cdb.getJugadorActual().getPokemonActual().getEstados().isEmpty());
@@ -259,7 +259,7 @@ public class TestIntegracionHabilidadesCuracionRendicion {
         when(input.obtenerOpcionUsuario(anyInt()))
                 .thenReturn(4);
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertFalse(cdb.getJugadorActual().getPokemonActual().estaVivo());

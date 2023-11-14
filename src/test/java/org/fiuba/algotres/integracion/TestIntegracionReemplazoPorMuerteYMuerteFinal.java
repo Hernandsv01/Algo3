@@ -1,6 +1,6 @@
 package org.fiuba.algotres.integracion;
 
-import org.fiuba.algotres.JuegoController;
+import org.fiuba.algotres.controllers.terminal.TerminalController;
 import org.fiuba.algotres.model.*;
 import org.fiuba.algotres.model.clima.*;
 import org.fiuba.algotres.model.estado.*;
@@ -10,7 +10,7 @@ import org.fiuba.algotres.model.strategies.*;
 import org.fiuba.algotres.model.tipos.Tipos;
 import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
-import static org.fiuba.algotres.JuegoController.inicializarConfiguracion;
+import static org.fiuba.algotres.controllers.terminal.TerminalController.inicializarConfiguracion;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -132,7 +132,7 @@ public class TestIntegracionReemplazoPorMuerteYMuerteFinal {
                 .thenReturn(1)
                 .thenReturn(1);
 
-        boolean turnoCompletado = JuegoController.turno(cdb);
+        boolean turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(-1, cdb.getGanador());
@@ -146,7 +146,7 @@ public class TestIntegracionReemplazoPorMuerteYMuerteFinal {
                 .thenReturn(1)
                 .thenReturn(1);
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(-1, cdb.getGanador());
@@ -162,7 +162,7 @@ public class TestIntegracionReemplazoPorMuerteYMuerteFinal {
                 .thenReturn(1)
                 .thenReturn(1);
 
-        turnoCompletado = JuegoController.turno(cdb);
+        turnoCompletado = TerminalController.turno(cdb);
 
         assertTrue(turnoCompletado);
         assertEquals(1, cdb.getGanador());
