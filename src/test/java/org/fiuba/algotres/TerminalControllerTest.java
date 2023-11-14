@@ -1,6 +1,7 @@
 package org.fiuba.algotres;
 
 import org.fiuba.algotres.comandos.*;
+import org.fiuba.algotres.controllers.terminal.TerminalController;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
@@ -16,7 +17,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class JuegoControllerTest {
+public class TerminalControllerTest {
     private static InputUsuario input;
 
     @BeforeAll
@@ -27,10 +28,10 @@ public class JuegoControllerTest {
     @Test
     @Order(1)
     void testInicializarConfiguracion() {
-        JuegoController.inicializarConfiguracion(input);
+        TerminalController.inicializarConfiguracion(input);
 
-        assertEquals(input, JuegoController.getInput());
-        assertNotNull(JuegoController.getComandos());
+        assertEquals(input, TerminalController.getInput());
+        assertNotNull(TerminalController.getComandos());
     }
 
     @Test
@@ -56,7 +57,7 @@ public class JuegoControllerTest {
                 .thenReturn("")
                 .thenReturn("");
 
-        JuegoController.setupInicial(cdb);
+        TerminalController.setupInicial(cdb);
 
         verify(cdb.getJugadores()[0], times(1)).setNombre(any());
         verify(cdb.getJugadores()[0], times(1)).setNombre(any());
@@ -69,19 +70,19 @@ public class JuegoControllerTest {
     @Order(3)
     void testTurno() {
         CampoDeBatalla cdb = mock(CampoDeBatalla.class);
-        JuegoController.setComandos(new HashMap<>(){{
+        TerminalController.setComandos(new HashMap<>(){{
             put(1, mock(Comando.class));
         }});
 
-        when(JuegoController.getComandos().get(1).ejecutar(cdb)).thenReturn(true);
+        when(TerminalController.getComandos().get(1).ejecutar(cdb)).thenReturn(true);
         when(cdb.getJugadores()).thenReturn(new Jugador[]{});
         when(cdb.getClima()).thenReturn(mock(Clima.class));
         when(cdb.getClima().getNombre()).thenReturn("Clima de prueba");
         when(cdb.getJugadorActual()).thenReturn(mock(Jugador.class));
         when(cdb.getJugadorActual().getNombre()).thenReturn("Jugador de prueba");
 
-        JuegoController.turno(cdb);
+        TerminalController.turno(cdb);
 
-        verify(JuegoController.getComandos().get(1), times(1)).ejecutar(cdb);
+        verify(TerminalController.getComandos().get(1), times(1)).ejecutar(cdb);
     }
 }
