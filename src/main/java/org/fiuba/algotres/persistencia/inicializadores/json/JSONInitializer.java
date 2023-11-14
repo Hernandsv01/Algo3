@@ -1,5 +1,6 @@
 package org.fiuba.algotres.persistencia.inicializadores.json;
 
+import org.fiuba.algotres.model.habilidad.CambiarClima;
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.habilidades.HabilidadDTO;
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.items.ItemDTO;
@@ -12,7 +13,9 @@ import org.fiuba.algotres.model.clima.*;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.item.Item;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.fiuba.algotres.persistencia.inicializadores.json.dto.items.ItemDTO.loadItemsJson;
@@ -40,8 +43,8 @@ public class JSONInitializer {
         }
 
 
-        List<Habilidad> habilidades = habilidadesDTO.stream().map(HabilidadDTO::toHabilidad).toList();
-        List<Item> items = itemsDTO.stream().map(ItemDTO::toItem).toList();
+        List<Habilidad> habilidades = habilidadesDTO.stream().map(HabilidadDTO::toHabilidad).collect(Collectors.toCollection(ArrayList::new));
+        List<Item> items = itemsDTO.stream().map(ItemDTO::toItem).collect(Collectors.toCollection(ArrayList::new));
 
 
         // Mapeamos las habilidades que le corresponden a cada pokemon
@@ -49,15 +52,15 @@ public class JSONInitializer {
                 pokemonDTO -> pokemonDTO.toPokemon(
                         habilidades.stream().filter(
                                 habilidad -> pokemonDTO.getHabilidades().contains(habilidad.getId())
-                        ).toList()
+                        ).collect(Collectors.toCollection(ArrayList::new))
                 )
-        ).toList();
+        ).collect(Collectors.toCollection(ArrayList::new));
 
         // Mapeamos los pokemons e items que le corresponden a cada jugador
         Jugador[] jugadores = jugadoresDTO.stream().map(
                 jugadorDTO -> jugadorDTO.toJugador(
-                        pokemons.stream().filter(pokemon -> jugadorDTO.getPokemonIDs().contains(pokemon.getId())).toList(),
-                        items.stream().filter(item -> jugadorDTO.getItemIDs().containsKey("" + item.getId())).toList()
+                        pokemons.stream().filter(pokemon -> jugadorDTO.getPokemonIDs().contains(pokemon.getId())).collect(Collectors.toCollection(ArrayList::new)),
+                        items.stream().filter(item -> jugadorDTO.getItemIDs().containsKey("" + item.getId())).collect(Collectors.toCollection(ArrayList::new))
                 )
         ).toArray(Jugador[]::new);
 
@@ -67,7 +70,18 @@ public class JSONInitializer {
         CampoDeBatalla cdb = new CampoDeBatalla();
         cdb.setJugadores(jugadores);
         cdb.setClima(getRandomClima());
+        setMissingAttributes(cdb);
         return cdb;
+    }
+
+    private static void setMissingAttributes(CampoDeBatalla cdb) {
+        for (Jugador jugador : cdb.getJugadores()) {
+            for (Pokemon pokemon : jugador.getPokemons()) {
+                pokemon.getHabilidades().stream()
+                        .filter(habilidad -> habilidad instanceof CambiarClima)
+                        .forEach(habilidad -> ((CambiarClima) habilidad).getClima().setCdb(cdb));
+            }
+        }
     }
 
     private static Clima getRandomClima(){

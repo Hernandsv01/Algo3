@@ -5,7 +5,7 @@
     "usos": 6,
     "habilidad": "ataque",
     "poder": 50,
-    "tipo": "BICHO"
+    "tipo": "bicho"
   },
   {
     "id": 2,
@@ -36,7 +36,7 @@
     "usos": 6,
     "habilidad": "ataque",
     "poder": 50,
-    "tipo": "BICHO"
+    "tipo": "bicho"
   },
   {
     "id": 6,
