@@ -6,8 +6,15 @@ import org.fiuba.algotres.model.Pokemon;
 
 @Setter @Getter
 public abstract class Habilidad {
+    private int id;
     private final String nombre;
     protected int usos;
+
+    public Habilidad(int id, String nombre, int usos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.usos = usos;
+    }
 
     public Habilidad(String nombre, int usos) {
         this.nombre = nombre;

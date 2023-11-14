@@ -10,6 +10,11 @@ public class PocionMolestaAlumnos extends Item {
         this.porcentajeDeVida = porcentajeDeVida;
     }
 
+    public PocionMolestaAlumnos(String nombre, int porcentajeDeVida, int id) {
+        super(nombre, id);
+        this.porcentajeDeVida = porcentajeDeVida;
+    }
+
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {

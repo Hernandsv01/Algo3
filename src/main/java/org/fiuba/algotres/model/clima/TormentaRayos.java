@@ -13,10 +13,11 @@ public class TormentaRayos extends Clima{
 
     public TormentaRayos(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
-        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
-                Tipos.ELECTRICO
-        )));
-
+        inicializarTiposFavorecidos();
+    }
+    public TormentaRayos(String nombre){
+        super(nombre);
+        inicializarTiposFavorecidos();
     }
 
     @Override
@@ -35,6 +36,12 @@ public class TormentaRayos extends Clima{
         if( !(this.getTiposFavorecidos().contains(pokemon.getTipos()))) {
             pokemon.danarPorPorcentaje(this.PORCENTAJE_DANAR);
         }
+    }
+
+    private void inicializarTiposFavorecidos(){
+        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
+                Tipos.ELECTRICO
+        )));
     }
 
 }

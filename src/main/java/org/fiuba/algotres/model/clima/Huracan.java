@@ -6,6 +6,7 @@ import org.fiuba.algotres.model.tipos.Tipos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Huracan extends Clima{
 
@@ -13,10 +14,17 @@ public class Huracan extends Clima{
 
     public Huracan(String nombre, CampoDeBatalla cdb){
         super(nombre, cdb);
-        this.setTiposFavorecidos(new ArrayList<Tipos>(Arrays.asList(
-                Tipos.VOLADOR
-        )));
+        inicializarTiposFavorecidos();
+    }
+    public Huracan(String nombre){
+        super(nombre);
+        inicializarTiposFavorecidos();
+    }
 
+    private void inicializarTiposFavorecidos(){
+        this.setTiposFavorecidos(List.of(
+                Tipos.VOLADOR
+        ));
     }
 
     @Override

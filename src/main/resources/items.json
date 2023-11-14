@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cura Todo",
+    "item": "curatodo"
+  },
+  {
+    "id": 2,
+    "nombre": "Ataque up 50%",
+    "item": "estadistica",
+    "estadistica": "ataque",
+    "esPositivo": true
+  },
+  {
+    "id": 3,
+    "nombre": "Defensa up 50%",
+    "item": "estadistica",
+    "estadistica": "defensa",
+    "esPositivo": true
+  },
+  {
+    "id": 4,
+    "nombre": "Pocion chica",
+    "item": "pocion",
+    "cantidadDeVida": 10
+  },
+  {
+    "id": 5,
+    "nombre": "Pocion mediana",
+    "item": "pocion",
+    "cantidadDeVida": 50
+  },
+  {
+    "id": 6,
+    "nombre": "Pocion grande",
+    "item": "pocion",
+    "cantidadDeVida": 100
+  },
+  {
+    "id": 7,
+    "nombre": "Curación completa",
+    "item": "pocionmolestaalumnos",
+    "porcentajeDeVida": 100
+  },
+  {
+    "id": 8,
+    "nombre": "Revivir",
+    "item": "revivir"
+  },
+  {
+    "id": 9,
+    "nombre": "Cura Todo",
+    "item": "curatodo"
+  },
+  {
+    "id": 10,
+    "nombre": "Ataque up 50%",
+    "item": "estadistica",
+    "estadistica": "ataque",
+    "esPositivo": true
+  },
+  {
+    "id": 11,
+    "nombre": "Defensa up 50%",
+    "item": "estadistica",
+    "estadistica": "defensa",
+    "esPositivo": true
+  },
+  {
+    "id": 12,
+    "nombre": "Pocion chica",
+    "item": "pocion",
+    "cantidadDeVida": 10
+  },
+  {
+    "id": 13,
+    "nombre": "Pocion mediana",
+    "item": "pocion",
+    "cantidadDeVida": 50
+  },
+  {
+    "id": 14,
+    "nombre": "Pocion grande",
+    "item": "pocion",
+    "cantidadDeVida": 100
+  },
+  {
+    "id": 15,
+    "nombre": "Curación completa",
+    "item": "pocionmolestaalumnos",
+    "porcentajeDeVida": 100
+  },
+  {
+    "id": 16,
+    "nombre": "Revivir",
+    "item": "revivir"
+  }
+]

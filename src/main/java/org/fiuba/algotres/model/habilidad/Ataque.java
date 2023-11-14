@@ -5,7 +5,8 @@ import lombok.Setter;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.Randomizador;
 import org.fiuba.algotres.model.tipos.Tipos;
-import org.fiuba.algotres.utils.RandomizadorCustom;
+
+import org.fiuba.algotres.RandomizadorCustom;
 
 @Getter @Setter
 public class Ataque extends Habilidad{
@@ -24,6 +25,12 @@ public class Ataque extends Habilidad{
 
     public Ataque(String nombre, int usos, int poder, Tipos tipo) {
         super(nombre, usos);
+        this.poder = poder;
+        this.tipo = tipo;
+    }
+
+    public Ataque(int id, String nombre, int usos, int poder, Tipos tipo) {
+        super(id, nombre, usos);
         this.poder = poder;
         this.tipo = tipo;
     }

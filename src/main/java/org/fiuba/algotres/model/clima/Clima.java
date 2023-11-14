@@ -15,7 +15,7 @@ public abstract class Clima {
 
     private int turnosAplicados;
     private final String nombre;
-    private final CampoDeBatalla cdb;
+    private CampoDeBatalla cdb;
     private List<Tipos> tiposFavorecidos;
 
     private final int PORCENTAJE_POTENCIA = 10;
@@ -25,6 +25,10 @@ public abstract class Clima {
         this.nombre = nombre;
         this.turnosAplicados = 0;
         this.cdb = cdb;
+    }
+    public Clima(String nombre) {
+        this.nombre = nombre;
+        this.turnosAplicados = 0;
     }
 
     /**

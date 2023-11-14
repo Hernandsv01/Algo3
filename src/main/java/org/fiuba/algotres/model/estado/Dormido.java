@@ -1,10 +1,16 @@
 package org.fiuba.algotres.model.estado;
 
+import org.fiuba.algotres.model.Pokemon;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Dormido extends Estado {
     private final double PROBABILIDAD_INICIAL = 0.25;
     private final double PROBABILIDAD_AGREGADA_POR_TURNO = 0.25;
 
-    public Dormido(String nombre) {
+    @JsonCreator
+    public Dormido(@JsonProperty("nombreEstado") String nombre) {
         super(nombre);
     }
 

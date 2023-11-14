@@ -1,8 +1,14 @@
 package org.fiuba.algotres.model.estado;
 
+import org.fiuba.algotres.model.Pokemon;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Paralizado extends Estado {
     private final double PROBABILIDAD = 0.5;
-    public Paralizado(String nombre) {
+    @JsonCreator
+    public Paralizado(@JsonProperty("nombreEstado") String nombre) {
         super(nombre);
     }
 

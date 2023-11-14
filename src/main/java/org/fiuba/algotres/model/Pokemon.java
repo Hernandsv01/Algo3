@@ -12,6 +12,7 @@ import java.util.List;
 @Getter @Setter
 public class Pokemon {
     private final String nombre;
+    private int id;
     private final Integer nivel;
     private final Tipos tipos;
     private final String historia;
@@ -37,6 +38,33 @@ public class Pokemon {
             List<Habilidad> habilidades
     ) {
         this.nombre = nombre;
+        this.nivel = nivel;
+        this.tipos = tipos;
+        this.historia = historia;
+        this.vidaMaxima = vidaMaxima;
+        this.vidaActual = vidaMaxima;
+        this.velocidad = velocidad;
+        this.defensa = defensa;
+        this.ataque = ataque;
+        this.estados = new ArrayList<Estado>();
+        this.estaVivo = true;
+        this.habilidades = habilidades;
+        this.estadosQuitados = new ArrayList<Estado>();
+    }
+    public Pokemon(
+            String nombre,
+            int id,
+            Integer nivel,
+            Tipos tipos,
+            String historia,
+            Integer vidaMaxima,
+            Integer velocidad,
+            Integer defensa,
+            Integer ataque,
+            List<Habilidad> habilidades
+    ) {
+        this.nombre = nombre;
+        this.id = id;
         this.nivel = nivel;
         this.tipos = tipos;
         this.historia = historia;

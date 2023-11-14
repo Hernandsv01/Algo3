@@ -13,6 +13,12 @@ public class Estadistica extends Item {
         this.strategy = strategy;
     }
 
+    public Estadistica(String nombre, int porcentaje, Strategy strategy, int id) {
+        super(nombre, id);
+        this.strategy = strategy;
+        this.porcentaje = porcentaje;
+    }
+
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {
