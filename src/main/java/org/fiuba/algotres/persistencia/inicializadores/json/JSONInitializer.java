@@ -22,10 +22,10 @@ import static org.fiuba.algotres.persistencia.inicializadores.json.dto.items.Ite
 import static org.fiuba.algotres.persistencia.inicializadores.json.dto.JugadorDTO.loadJugadoresJson;
 
 public class JSONInitializer {
-    private static final String JUGADORES_PATH = "src\\main\\resources\\partida.json";
-    private static final String ITEMS_PATH = "src\\main\\resources\\items.json";
-    private static final String HABILIDADES_PATH = "src\\main\\resources\\habilidades.json";
-    private static final String POKEMONS_PATH = "src\\main\\resources\\pokemons.json";
+    private static final String JUGADORES_PATH = "src\\main\\resources\\json\\partida.json";
+    private static final String ITEMS_PATH = "src\\main\\resources\\json\\items.json";
+    private static final String HABILIDADES_PATH = "src\\main\\resources\\json\\habilidades.json";
+    private static final String POKEMONS_PATH = "src\\main\\resources\\json\\pokemons.json";
 
     public static CampoDeBatalla loadCampoDeBatalla(){
         List<JugadorDTO> jugadoresDTO;
