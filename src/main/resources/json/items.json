@@ -1,98 +1,102 @@
 [
   {
     "id": 1,
-    "nombre": "Cura Todo",
-    "item": "curatodo"
+    "nombre": "Ataque X",
+    "item": "estadistica",
+    "estadistica": "ataque",
+    "esPositivo": true,
+    "porcentaje": 10
   },
   {
     "id": 2,
-    "nombre": "Ataque up 50%",
+    "nombre": "Defensa X",
     "item": "estadistica",
-    "estadistica": "ataque",
-    "esPositivo": true
+    "estadistica": "defensa",
+    "esPositivo": true,
+    "porcentaje": 10
   },
   {
     "id": 3,
-    "nombre": "Defensa up 50%",
-    "item": "estadistica",
-    "estadistica": "defensa",
-    "esPositivo": true
+    "nombre": "Pocion",
+    "item": "pocion",
+    "cantidadDeVida": 20
   },
   {
     "id": 4,
-    "nombre": "Pocion chica",
-    "item": "pocion",
-    "cantidadDeVida": 10
-  },
-  {
-    "id": 5,
-    "nombre": "Pocion mediana",
+    "nombre": "Mega Pocion",
     "item": "pocion",
     "cantidadDeVida": 50
   },
   {
-    "id": 6,
-    "nombre": "Pocion grande",
+    "id": 5,
+    "nombre": "Hiper pocion",
     "item": "pocion",
     "cantidadDeVida": 100
   },
   {
-    "id": 7,
-    "nombre": "Curación completa",
-    "item": "pocionmolestaalumnos",
-    "porcentajeDeVida": 100
-  },
-  {
-    "id": 8,
-    "nombre": "Revivir",
-    "item": "revivir"
-  },
-  {
-    "id": 9,
+    "id": 6,
     "nombre": "Cura Todo",
     "item": "curatodo"
   },
   {
-    "id": 10,
-    "nombre": "Ataque up 50%",
+    "id": 7,
+    "nombre": "Revivir",
+    "item": "revivir"
+  },
+  {
+    "id": 8,
+    "nombre": "Curación completa",
+    "item": "pocionmolestaalumnos",
+    "porcentajeDeVida": 33
+  },
+  {
+    "id": 9,
+    "nombre": "Ataque X",
     "item": "estadistica",
     "estadistica": "ataque",
-    "esPositivo": true
+    "esPositivo": true,
+    "porcentaje": 10
+  },
+  {
+    "id": 10,
+    "nombre": "Defensa X",
+    "item": "estadistica",
+    "estadistica": "defensa",
+    "esPositivo": true,
+    "porcentaje": 10
   },
   {
     "id": 11,
-    "nombre": "Defensa up 50%",
-    "item": "estadistica",
-    "estadistica": "defensa",
-    "esPositivo": true
+    "nombre": "Pocion",
+    "item": "pocion",
+    "cantidadDeVida": 20
   },
   {
     "id": 12,
-    "nombre": "Pocion chica",
-    "item": "pocion",
-    "cantidadDeVida": 10
-  },
-  {
-    "id": 13,
-    "nombre": "Pocion mediana",
+    "nombre": "Mega Pocion",
     "item": "pocion",
     "cantidadDeVida": 50
   },
   {
-    "id": 14,
-    "nombre": "Pocion grande",
+    "id": 13,
+    "nombre": "Hiper pocion",
     "item": "pocion",
     "cantidadDeVida": 100
   },
   {
+    "id": 14,
+    "nombre": "Cura Todo",
+    "item": "curatodo"
+  },
+  {
     "id": 15,
-    "nombre": "Curación completa",
-    "item": "pocionmolestaalumnos",
-    "porcentajeDeVida": 100
+    "nombre": "Revivir",
+    "item": "revivir"
   },
   {
     "id": 16,
-    "nombre": "Revivir",
-    "item": "revivir"
+    "nombre": "Curación completa",
+    "item": "pocionmolestaalumnos",
+    "porcentajeDeVida": 33
   }
 ]
