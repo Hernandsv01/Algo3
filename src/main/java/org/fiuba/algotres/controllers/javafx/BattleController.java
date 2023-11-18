@@ -1,20 +1,25 @@
 package org.fiuba.algotres.controllers.javafx;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import org.fiuba.algotres.model.CampoDeBatalla;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.utils.GeneradorDeMensajes;
+import org.fiuba.algotres.utils.enums.BattleState;
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class BattleController implements Initializable{
     private static final String UP_KEY = "UP";
@@ -26,12 +31,24 @@ public class BattleController implements Initializable{
     private static final String ACTIVATED_LABEL_COLOR = "red";
     private static final String DEACTIVATED_LABEL_COLOR = "white";
 
+    private BattleState state;
+
+    private List<Habilidad> habilidades;
+
+    private List<String> colaDeMensajes;
 
     @FXML
     private AnchorPane rootPane;
-
+    @FXML
+    private ImageView imagenAtacante;
+    @FXML
+    private ImageView imagenVictima;
     @FXML
     private GridPane optionGrid;
+    @FXML
+    private TextArea pantallaMensaje;
+    @FXML
+    private Rectangle blackScreen;
 
     public static void toggleLabel(Label label){
         String colorAttribute = Arrays.stream(label.getStyle().split(";")).filter(s -> s.contains("-fx-border-color")).toList().get(0);
@@ -54,18 +71,17 @@ public class BattleController implements Initializable{
         String tecla = event.getCode().toString();
         System.out.println("Key pressed: " + tecla);
 
-        if(tecla.equals(UP_KEY) || tecla.equals(DOWN_KEY) || tecla.equals(RIGHT_KEY) || tecla.equals(LEFT_KEY)){
-            moveSelector(tecla);
-        }else if(tecla.equals(ENTER_KEY)){
-            select();
-        }else if(tecla.equals(ESCAPE_KEY)){
-            goBack();
+        switch (tecla) {
+            case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
+            case ENTER_KEY -> select();
+            case ESCAPE_KEY -> goBack();
         }
 
     }
 
     private void moveSelector(String tecla){
         BorderPane currentElement = getSelectedGridElement();
+        if(currentElement == null) return;
         Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(currentElement), GridPane.getRowIndex(currentElement));
 
         Coordinate newPos = switch (tecla) {
@@ -85,26 +101,112 @@ public class BattleController implements Initializable{
 
     private void select() {
         BorderPane selectedElement = getSelectedGridElement();
-        Coordinate selectedPos = new Coordinate(GridPane.getColumnIndex(selectedElement), GridPane.getRowIndex(selectedElement));
+        Coordinate selectedPos = null;
+        if(selectedElement != null){
+            selectedPos = new Coordinate(GridPane.getColumnIndex(selectedElement), GridPane.getRowIndex(selectedElement));
+        }
 
-        if(selectedPos.posCol == 0 && selectedPos.posRow == 0){
-            loadHabilidades();
-        }else if(selectedPos.posCol == 1 && selectedPos.posRow == 0){
-            System.out.println("Items todavía no fue implementado");
-        }else if(selectedPos.posCol == 0 && selectedPos.posRow == 1){
-            System.out.println("Cambiar todavía no fue implementado");
-        }else if(selectedPos.posCol == 1 && selectedPos.posRow == 1){
-            System.out.println("Rendirse todavía no fue implementado");
+        if(state == BattleState.SELECCION_ACCION) {
+            if (selectedPos.posCol == 0 && selectedPos.posRow == 0) {
+                state = BattleState.SELECCION_HABILIDAD;
+                loadHabilidades();
+            } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
+                System.out.println("Items todavía no fue implementado");
+//                state = BattleState.SELECCION_ITEM;
+                // Llamar a scene de items
+                // Comenzar cola de mensajes
+            } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
+                System.out.println("Cambiar todavía no fue implementado");
+//                state = BattleState.SELECCION_POKEMON;
+                // Llamar a scene de selección de pokemons
+                // Comenzar cola de mensajes
+            } else if (selectedPos.posCol == 1 && selectedPos.posRow == 1) {
+                System.out.println("Rendirse todavía no fue implementado");
+//                state = BattleState.CONFIRMACION_RENDICION;
+                // Crear popup preguntando si está seguro
+            }
+        }else{
+            if(state == BattleState.SELECCION_HABILIDAD){
+                state = BattleState.ACCIONANDO;
+                colaDeMensajes.add("Aca iría el mensaje de estado accionado");
+                colaDeMensajes.add("Aca iría el mensaje de clima accionado");
+                accionarHabilidad();
+                disableGrid();
+                loadNextMessage();
+            }else if(state == BattleState.CONFIRMACION_RENDICION){
+                // Verificar si popup fue confirmado o negado
+                //      Negado se vuelve al estado de seleccion de opción
+                //      Aceptado se rinde y se llama a scene de victoria
+
+            }else if(state == BattleState.ACCIONANDO){
+                if(!colaDeMensajes.isEmpty()){
+                    loadNextMessage();
+                }else{
+                    state = BattleState.SELECCION_ACCION;
+                    prepararSiguienteTurno();
+                }
+            }
         }
     }
 
+    private void prepararSiguienteTurno() {
+        pantallaMensaje.setText("");
+
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        fadeIn.setOnFinished(event -> {
+            JavafxController.getCdb().setSiguienteTurno();
+            setImagenesPokemons();
+            fadeOut.play();
+        });
+        fadeIn.play();
+
+        fadeOut.setOnFinished(event -> {
+            loadAcciones();
+            pantallaMensaje.setText("Elija una opción");
+            setSelectedGridElement(0, 0);
+        });
+    }
+
     private void goBack() {
+        if(state == BattleState.SELECCION_ACCION || state == BattleState.ACCIONANDO) {
+            // Opción salir al menú
+        }else if(state == BattleState.SELECCION_HABILIDAD || state == BattleState.CONFIRMACION_RENDICION){
+            state = BattleState.SELECCION_ACCION;
+            loadAcciones();
+            setSelectedGridElement(0, 0);
+        }
     }
 
     private void loadHabilidades(){
         for(int i = 0; i < getGridElements().size(); i++){
-            ((Label)getGridElements().get(i).getCenter()).setText(JavafxController.getCdb().getJugadorActual().getPokemonActual().getHabilidades().get(i).getNombre());
+            Habilidad habilidad = JavafxController.getCdb().getJugadorActual().getPokemonActual().getHabilidades().get(i);
+            ((Label)getGridElements().get(i).getCenter()).setText(habilidad.getNombre());
+            habilidades.add(habilidad);
         }
+    }
+
+    private void loadAcciones(){
+        ((Label)getGridElements().get(0).getCenter()).setText("Habilidad");
+        ((Label)getGridElements().get(1).getCenter()).setText("Cambiar");
+        ((Label)getGridElements().get(2).getCenter()).setText("Items");
+        ((Label)getGridElements().get(3).getCenter()).setText("Rendirse");
+    }
+
+    private void accionarHabilidad(){
+        int posicionHabilidad = getGridElements().indexOf(getSelectedGridElement());
+        if(posicionHabilidad == -1) return;
+        Habilidad habilidad = habilidades.get(posicionHabilidad);
+        Pokemon atacante = JavafxController.getCdb().getJugadorActual().getPokemonActual();
+        Pokemon victima = JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual();
+
+        habilidad.accionarHabilidad(atacante, victima);
+        colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEfectoHabilidad(habilidad, atacante, victima));
     }
 
     private List<BorderPane> getGridElements(){
@@ -117,20 +219,49 @@ public class BattleController implements Initializable{
     private BorderPane getSelectedGridElement(){
         return getGridElements().stream()
                 .filter(borderPane -> borderPane.getCenter().getStyle().contains("-fx-border-color: red"))
-                .toList().get(0);
+                .findFirst().orElse(null);
     }
 
     private void setSelectedGridElement(int col, int row){
-        toggleLabel((Label)getSelectedGridElement().getCenter());
+        BorderPane previousElement = getSelectedGridElement();
+        if(previousElement != null) {
+            toggleLabel((Label)previousElement.getCenter());
+        }
 
         toggleLabel((Label)getGridElements().stream()
                 .filter(borderPane -> GridPane.getRowIndex(borderPane) == row && GridPane.getColumnIndex(borderPane) == col)
                 .toList().get(0).getCenter());
     }
 
+    private void disableGrid(){
+        toggleLabel((Label)getSelectedGridElement().getCenter());
+        getGridElements().forEach(borderPane -> ((Label)borderPane.getCenter()).setText(""));
+    }
+
+    private void loadNextMessage() {
+        pantallaMensaje.setText(colaDeMensajes.remove(0));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        rootPane.requestFocus();
+        state = BattleState.SELECCION_ACCION;
+        habilidades = new ArrayList<>();
+        colaDeMensajes = new ArrayList<>();
+        setImagenesPokemons();
+        System.out.println("Inicializado!");
+    }
+
+    private void setImagenesPokemons(){
+        imagenAtacante.setImage(new Image(
+                getClass().getResourceAsStream("/imagenes/pokemons/" + capitalizar(JavafxController.getCdb().getJugadorActual().getPokemonActual().getNombre()) + "-back.gif")
+        ));
+        imagenVictima.setImage(new Image(
+                getClass().getResourceAsStream("/imagenes/pokemons/" + capitalizar(JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual().getNombre()) + "-front.gif")
+        ));
+    }
+
+    private static String capitalizar(String string){
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
     private record Coordinate(int posCol, int posRow) {
