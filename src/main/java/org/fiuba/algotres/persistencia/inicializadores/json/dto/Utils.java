@@ -15,21 +15,21 @@ import java.util.Map;
 
 public class Utils {
     private static final Map<String, Tipos> tiposMap = new HashMap<>(){{
-        put("agua", Tipos.NORMAL);
-        put("bicho", Tipos.BICHO);
-        put("dragon", Tipos.DRAGON);
-        put("electrico", Tipos.ELECTRICO);
-        put("fantasma", Tipos.FANTASMA);
-        put("fuego", Tipos.FUEGO);
-        put("hielo", Tipos.HIELO);
-        put("lucha", Tipos.LUCHA);
-        put("normal", Tipos.NORMAL);
-        put("planta", Tipos.PLANTA);
-        put("psiquico", Tipos.PSIQUICO);
-        put("roca", Tipos.ROCA);
-        put("tierra", Tipos.TIERRA);
-        put("veneno", Tipos.VENENO);
-        put("volador", Tipos.VOLADOR);
+        put("AGUA", Tipos.AGUA);
+        put("BICHO", Tipos.BICHO);
+        put("DRAGON", Tipos.DRAGON);
+        put("ELECTRICO", Tipos.ELECTRICO);
+        put("FANTASMA", Tipos.FANTASMA);
+        put("FUEGO", Tipos.FUEGO);
+        put("HIELO", Tipos.HIELO);
+        put("LUCHA", Tipos.LUCHA);
+        put("NORMAL", Tipos.NORMAL);
+        put("PLANTA", Tipos.PLANTA);
+        put("PSIQUICO", Tipos.PSIQUICO);
+        put("ROCA", Tipos.ROCA);
+        put("TIERRA", Tipos.TIERRA);
+        put("VENENO", Tipos.VENENO);
+        put("VOLADOR", Tipos.VOLADOR);
     }};
 
     private static final Map<String, Clima> climasMap = new HashMap<>(){{

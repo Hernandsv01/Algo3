@@ -14,10 +14,11 @@ public class EstadisticaDTO extends ItemDTO {
     protected int porcentaje;
 
     @JsonCreator
-    public EstadisticaDTO(@JsonProperty("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty("estadistica") String estadistica, @JsonProperty("esPositivo") boolean esPositivo) {
+    public EstadisticaDTO(@JsonProperty("id") Integer id, @JsonProperty("nombre") String nombre, @JsonProperty("estadistica") String estadistica, @JsonProperty("esPositivo") boolean esPositivo, @JsonProperty("porcentaje") int porcentaje) {
         super(id, nombre);
         this.estadistica = estadistica;
         this.esPositivo = esPositivo;
+        this.porcentaje = porcentaje;
     }
 
     @Override
