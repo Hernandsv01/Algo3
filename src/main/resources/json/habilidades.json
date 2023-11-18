@@ -309,14 +309,14 @@
     "nombre": "Tormenta arenosa",
     "usos": 5,
     "habilidad": "cambiarclima",
-    "clima": "Tormenta de arena"
+    "clima": "TormentaArena"
   },
   {
     "id": 40,
     "nombre": "Tormenta Electrica",
     "usos": 5,
     "habilidad": "cambiarclima",
-    "clima": "Tormenta de rayos"
+    "clima": "TormentaRayos"
   },
   {
     "id": 41,
@@ -337,7 +337,7 @@
     "nombre": "Despejar",
     "usos": 5,
     "habilidad": "cambiarclima",
-    "clima": "Sin clima"
+    "clima": "SinClima"
   },
   {
     "id": 44,
