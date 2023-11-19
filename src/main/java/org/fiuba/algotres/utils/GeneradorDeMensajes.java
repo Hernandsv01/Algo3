@@ -1,6 +1,11 @@
 package org.fiuba.algotres.utils;
 
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.clima.Clima;
+import org.fiuba.algotres.model.clima.TormentaArena;
+import org.fiuba.algotres.model.clima.TormentaRayos;
+import org.fiuba.algotres.model.estado.Envenenado;
+import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.strategies.AtaqueStrategy;
 import org.fiuba.algotres.model.strategies.DefensaStrategy;
@@ -33,5 +38,26 @@ public class GeneradorDeMensajes {
         }else{
             return "Habilidad" + habilidad.getNombre() + " usada!";
         }
+    }
+
+    public static String generarMensajeClima(Clima clima){
+        if(clima instanceof TormentaRayos || clima instanceof TormentaArena){
+            return "Tu pokemon recibió daño por la tormenta!";
+        }
+        return null;
+    }
+
+    public static String generarMensajeEstado(Estado estado, Pokemon pokemon, boolean pokemonInhabilitado){
+        if(pokemonInhabilitado){
+            return pokemon.getNombre() + " no pudo hacer nada por estar " + estado.getNombre();
+        }
+        if(estado instanceof Envenenado){
+            return pokemon.getNombre() + " recibió daño por estar envenenado";
+        }
+        return null;
+    }
+
+    public static String generarMensajeMuertePrematura(Pokemon pokemon){
+        return pokemon.getNombre() + " murió antes de poder hacer nada!";
     }
 }

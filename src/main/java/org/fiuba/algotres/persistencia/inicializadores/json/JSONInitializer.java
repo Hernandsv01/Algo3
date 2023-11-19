@@ -1,5 +1,7 @@
 package org.fiuba.algotres.persistencia.inicializadores.json;
 
+import org.fiuba.algotres.RandomizadorCustom;
+import org.fiuba.algotres.model.Randomizador;
 import org.fiuba.algotres.model.habilidad.CambiarClima;
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.habilidades.HabilidadDTO;
@@ -26,6 +28,8 @@ public class JSONInitializer {
     private static final String ITEMS_PATH = "src\\main\\resources\\json\\items.json";
     private static final String HABILIDADES_PATH = "src\\main\\resources\\json\\habilidades.json";
     private static final String POKEMONS_PATH = "src\\main\\resources\\json\\pokemons.json";
+
+    private static final Randomizador randomizador = new RandomizadorCustom();
 
     public static CampoDeBatalla loadCampoDeBatalla(){
         List<JugadorDTO> jugadoresDTO;
@@ -86,7 +90,8 @@ public class JSONInitializer {
 
     private static Clima getRandomClima(){
         String[] nombresclimas = new String[]{"Huracan", "Lluvia", "Niebla", "Soleado", "TormentaArena", "TormentaRayos"};
-        int res = (int) Math.round(Math.random()*3);
+        randomizador.getRandomValue(0, 3);
+        int res = (int) randomizador.getRandomValue(0, 3);
         if(res < 2){
             return Utils.getClima("SinClima");
         }else{

@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.enums.BattleState;
@@ -39,6 +40,8 @@ public class BattleController implements Initializable{
 
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private ImageView imagenClima;
     @FXML
     private ImageView imagenAtacante;
     @FXML
@@ -70,6 +73,7 @@ public class BattleController implements Initializable{
     public void onKeyTyped(KeyEvent event){
         String tecla = event.getCode().toString();
         System.out.println("Key pressed: " + tecla);
+        System.out.println("Clima actual: " + JavafxController.getCdb().getClima().getNombre());
 
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
@@ -128,11 +132,12 @@ public class BattleController implements Initializable{
         }else{
             if(state == BattleState.SELECCION_HABILIDAD){
                 state = BattleState.ACCIONANDO;
-                colaDeMensajes.add("Aca iría el mensaje de estado accionado");
-                colaDeMensajes.add("Aca iría el mensaje de clima accionado");
-                accionarHabilidad();
+                boolean llamadaPantallaPokemon = activarHabilidadSeleccionada();
                 disableGrid();
                 loadNextMessage();
+                if(llamadaPantallaPokemon){
+                    // Llamar pagina pokemon
+                }
             }else if(state == BattleState.CONFIRMACION_RENDICION){
                 // Verificar si popup fue confirmado o negado
                 //      Negado se vuelve al estado de seleccion de opción
@@ -161,7 +166,7 @@ public class BattleController implements Initializable{
 
         fadeIn.setOnFinished(event -> {
             JavafxController.getCdb().setSiguienteTurno();
-            setImagenesPokemons();
+            render();
             fadeOut.play();
         });
         fadeIn.play();
@@ -171,6 +176,45 @@ public class BattleController implements Initializable{
             pantallaMensaje.setText("Elija una opción");
             setSelectedGridElement(0, 0);
         });
+    }
+
+    /**
+     *
+     * @return true si hay que llamar a la pantalla de selección pokemon
+     */
+    private boolean activarHabilidadSeleccionada(){
+        // Climas
+        JavafxController.getCdb().getClima().aplicarEfectos(JavafxController.getCdb().getJugadorActual().getPokemonActual());
+        String mensajeClima = GeneradorDeMensajes.generarMensajeClima(JavafxController.getCdb().getClima());
+        if(mensajeClima != null){
+            colaDeMensajes.add(mensajeClima);
+        }
+        if(!JavafxController.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JavafxController.getCdb().getJugadorActual().getPokemonActual()));
+            return true;
+        }
+
+        // Estados
+        boolean puedeAccionar = true;
+        Estado estadoInhabilitante = null;
+        List<Estado> estados = JavafxController.getCdb().getJugadorActual().getPokemonActual().getEstados();
+        for (Estado estado : estados) {
+            puedeAccionar = estado.accionar();
+            if (!puedeAccionar && estadoInhabilitante == null) {
+                estadoInhabilitante = estado;
+            }
+        }
+        if(JavafxController.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            if(puedeAccionar){
+                accionarHabilidad();
+            }else{
+                colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JavafxController.getCdb().getJugadorActual().getPokemonActual(), true));
+            }
+        }else{
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JavafxController.getCdb().getJugadorActual().getPokemonActual()));
+            return true;
+        }
+        return false;
     }
 
     private void goBack() {
@@ -184,6 +228,7 @@ public class BattleController implements Initializable{
     }
 
     private void loadHabilidades(){
+        habilidades.clear();
         for(int i = 0; i < getGridElements().size(); i++){
             Habilidad habilidad = JavafxController.getCdb().getJugadorActual().getPokemonActual().getHabilidades().get(i);
             ((Label)getGridElements().get(i).getCenter()).setText(habilidad.getNombre());
@@ -247,11 +292,14 @@ public class BattleController implements Initializable{
         state = BattleState.SELECCION_ACCION;
         habilidades = new ArrayList<>();
         colaDeMensajes = new ArrayList<>();
-        setImagenesPokemons();
+        render();
         System.out.println("Inicializado!");
     }
 
-    private void setImagenesPokemons(){
+    private void render(){
+        imagenClima.setImage(new Image(
+                getClass().getResourceAsStream("/imagenes/climas/" + capitalizar(JavafxController.getCdb().getClima().getNombre()) + ".gif")
+        ));
         imagenAtacante.setImage(new Image(
                 getClass().getResourceAsStream("/imagenes/pokemons/" + capitalizar(JavafxController.getCdb().getJugadorActual().getPokemonActual().getNombre()) + "-back.gif")
         ));
