@@ -183,6 +183,21 @@ public class BattleController implements Initializable{
      * @return true si hay que llamar a la pantalla de selección pokemon
      */
     private boolean activarHabilidadSeleccionada(){
+        // Estados
+        boolean puedeAccionar = true;
+        Estado estadoInhabilitante = null;
+        List<Estado> estados = JavafxController.getCdb().getJugadorActual().getPokemonActual().getEstados();
+        for (Estado estado : estados) {
+            puedeAccionar = estado.accionar();
+            if (!puedeAccionar && estadoInhabilitante == null) {
+                estadoInhabilitante = estado;
+            }
+        }
+        if(!JavafxController.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JavafxController.getCdb().getJugadorActual().getPokemonActual()));
+            return true;
+        }
+
         // Climas
         JavafxController.getCdb().getClima().aplicarEfectos(JavafxController.getCdb().getJugadorActual().getPokemonActual());
         String mensajeClima = GeneradorDeMensajes.generarMensajeClima(JavafxController.getCdb().getClima());
@@ -194,26 +209,13 @@ public class BattleController implements Initializable{
             return true;
         }
 
-        // Estados
-        boolean puedeAccionar = true;
-        Estado estadoInhabilitante = null;
-        List<Estado> estados = JavafxController.getCdb().getJugadorActual().getPokemonActual().getEstados();
-        for (Estado estado : estados) {
-            puedeAccionar = estado.accionar();
-            if (!puedeAccionar && estadoInhabilitante == null) {
-                estadoInhabilitante = estado;
-            }
-        }
-        if(JavafxController.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            if(puedeAccionar){
-                accionarHabilidad();
-            }else{
-                colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JavafxController.getCdb().getJugadorActual().getPokemonActual(), true));
-            }
+        // Accionar
+        if(puedeAccionar){
+            accionarHabilidad();
         }else{
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JavafxController.getCdb().getJugadorActual().getPokemonActual()));
-            return true;
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JavafxController.getCdb().getJugadorActual().getPokemonActual(), true));
         }
+
         return false;
     }
 
