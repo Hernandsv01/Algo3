@@ -20,7 +20,7 @@ public class GeneradorReporteJSON implements GeneradorReporte {
         List<ReporteJugadorDTO> reporte = objectToDTO(cdb);
 
         ObjectMapper mapper = new ObjectMapper();
-        File outputFile = new File("src\\main\\resources\\informe_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH-mm-ss")) + ".json");
+        File outputFile = new File("src\\main\\resources\\json\\reportes\\informe_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH-mm-ss")) + ".json");
         System.out.println("Intentando guardar reporte en: " + outputFile.getPath());
         try {
             mapper.writeValue(outputFile, reporte);
