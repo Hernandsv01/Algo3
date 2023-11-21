@@ -1,0 +1,350 @@
+[
+  {
+    "id": 1,
+    "nombre": "Llamarada",
+    "usos": 10,
+    "habilidad": "ataque",
+    "poder": 120,
+    "tipo": "FUEGO"
+  },
+  {
+    "id": 2,
+    "nombre": "Ascuas",
+    "usos": 25,
+    "habilidad": "ataque",
+    "poder": 40,
+    "tipo": "FUEGO"
+  },
+  {
+    "id": 3,
+    "nombre": "Lanzallamas",
+    "usos": 5,
+    "habilidad": "ataque",
+    "poder": 95,
+    "tipo": "FUEGO"
+  },
+  {
+    "id": 4,
+    "nombre": "Arañazo",
+    "usos": 30,
+    "habilidad": "ataque",
+    "poder": 40,
+    "tipo": "NORMAL"
+  },
+  {
+    "id": 5,
+    "nombre": "Placaje",
+    "usos": 30,
+    "habilidad": "ataque",
+    "poder": 50,
+    "tipo": "NORMAL"
+  },
+  {
+    "id": 6,
+    "nombre": "Burbuja",
+    "usos": 30,
+    "habilidad": "ataque",
+    "poder": 40,
+    "tipo": "AGUA"
+  },
+  {
+    "id": 7,
+    "nombre": "Hidrobomba",
+    "usos": 5,
+    "habilidad": "ataque",
+    "poder": 110,
+    "tipo": "AGUA"
+  },
+  {
+    "id": 8,
+    "nombre": "Rayo burbuja",
+    "usos": 30,
+    "habilidad": "ataque",
+    "poder": 65,
+    "tipo": "AGUA"
+  },
+  {
+    "id": 9,
+    "nombre": "Rayo",
+    "usos": 15,
+    "habilidad": "ataque",
+    "poder": 95,
+    "tipo": "ELECTRICO"
+  },
+  {
+    "id": 10,
+    "nombre": "Psiquico",
+    "usos": 10,
+    "habilidad": "ataque",
+    "poder": 90,
+    "tipo": "PSIQUICO"
+  },
+  {
+    "id": 11,
+    "nombre": "Mega cuerno",
+    "usos": 5,
+    "habilidad": "ataque",
+    "poder": 120,
+    "tipo": "BICHO"
+  },
+  {
+    "id": 12,
+    "nombre": "Pin misil",
+    "usos": 20,
+    "habilidad": "ataque",
+    "poder": 30,
+    "tipo": "BICHO"
+  },
+  {
+    "id": 13,
+    "nombre": "Golpe karate",
+    "usos": 25,
+    "habilidad": "ataque",
+    "poder": 50,
+    "tipo": "LUCHA"
+  },
+  {
+    "id": 14,
+    "nombre": "Sismico",
+    "usos": 10,
+    "habilidad": "ataque",
+    "poder": 80,
+    "tipo": "LUCHA"
+  },
+  {
+    "id": 15,
+    "nombre": "Doble patada",
+    "usos": 30,
+    "habilidad": "ataque",
+    "poder": 30,
+    "tipo": "LUCHA"
+  },
+  {
+    "id": 16,
+    "nombre": "Lanzarrocas",
+    "usos": 15,
+    "habilidad": "ataque",
+    "poder": 50,
+    "tipo": "ROCA"
+  },
+  {
+    "id": 17,
+    "nombre": "Avalancha",
+    "usos": 10,
+    "habilidad": "ataque",
+    "poder": 60,
+    "tipo": "ROCA"
+  },
+  {
+    "id": 18,
+    "nombre": "Terremoto",
+    "usos": 10,
+    "habilidad": "ataque",
+    "poder": 100,
+    "tipo": "TIERRA"
+  },
+  {
+    "id": 19,
+    "nombre": "Picotazo veneno",
+    "usos": 35,
+    "habilidad": "ataque",
+    "poder": 35,
+    "tipo": "VENENO"
+  },
+  {
+    "id": 20,
+    "nombre": "Latigo cepa",
+    "usos": 25,
+    "habilidad": "ataque",
+    "poder": 45,
+    "tipo": "PLANTA"
+  },
+  {
+    "id": 21,
+    "nombre": "Hoja afilada",
+    "usos": 15,
+    "habilidad": "ataque",
+    "poder": 70,
+    "tipo": "PLANTA"
+  },
+  {
+    "id": 22,
+    "nombre": "Ataque ala",
+    "usos": 35,
+    "habilidad": "ataque",
+    "poder": 60,
+    "tipo": "VOLADOR"
+  },
+  {
+    "id": 23,
+    "nombre": "Ataque aéreo",
+    "usos": 20,
+    "habilidad": "ataque",
+    "poder": 75,
+    "tipo": "VOLADOR"
+  },
+  {
+    "id": 24,
+    "nombre": "Danza espada",
+    "usos": 15,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 10,
+    "estadistica": "ataque",
+    "esPositivo": true
+  },
+  {
+    "id": 25,
+    "nombre": "Rizo defensa",
+    "usos": 25,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 15,
+    "estadistica": "defensa",
+    "esPositivo": true
+  },
+  {
+    "id": 26,
+    "nombre": "Recuperacion",
+    "usos": 25,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 25,
+    "estadistica": "vida",
+    "esPositivo": true
+  },
+  {
+    "id": 27,
+    "nombre": "Chirrido",
+    "usos": 15,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 10,
+    "estadistica": "ataque",
+    "esPositivo": false
+  },
+  {
+    "id": 28,
+    "nombre": "Pantalla de luz",
+    "usos": 30,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 15,
+    "estadistica": "ataque",
+    "esPositivo": false
+  },
+  {
+    "id": 29,
+    "nombre": "Ácido",
+    "usos": 30,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 10,
+    "estadistica": "defensa",
+    "esPositivo": false
+  },
+  {
+    "id": 30,
+    "nombre": "Armadura ácida",
+    "usos": 15,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 20,
+    "estadistica": "defensa",
+    "esPositivo": true
+  },
+  {
+    "id": 31,
+    "nombre": "Absorber",
+    "usos": 20,
+    "habilidad": "modificacionestadistica",
+    "porcentaje": 30,
+    "estadistica": "vida",
+    "esPositivo": true
+  },
+  {
+    "id": 32,
+    "nombre": "Impactrueno",
+    "usos": 20,
+    "habilidad": "modificacionestado",
+    "estado": "paralizado"
+  },
+  {
+    "id": 33,
+    "nombre": "Polvo veneno",
+    "usos": 35,
+    "habilidad": "modificacionestado",
+    "estado": "envenenado"
+  },
+  {
+    "id": 34,
+    "nombre": "Somnífero",
+    "usos": 10,
+    "habilidad": "modificacionestado",
+    "estado": "dormido"
+  },
+  {
+    "id": 35,
+    "nombre": "Paralizador",
+    "usos": 15,
+    "habilidad": "modificacionestado",
+    "estado": "paralizado"
+  },
+  {
+    "id": 36,
+    "nombre": "Confusion",
+    "usos": 15,
+    "habilidad": "modificacionestado",
+    "estado": "confuso"
+  },
+  {
+    "id": 37,
+    "nombre": "Solear",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "Soleado"
+  },
+  {
+    "id": 38,
+    "nombre": "Llovizna",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "Lluvia"
+  },
+  {
+    "id": 39,
+    "nombre": "Tormenta arenosa",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "TormentaArena"
+  },
+  {
+    "id": 40,
+    "nombre": "Tormenta Electrica",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "TormentaRayos"
+  },
+  {
+    "id": 41,
+    "nombre": "Huracan",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "Huracan"
+  },
+  {
+    "id": 42,
+    "nombre": "Neblina",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "Niebla"
+  },
+  {
+    "id": 43,
+    "nombre": "Despejar",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "SinClima"
+  },
+  {
+    "id": 44,
+    "nombre": "Picotazo",
+    "usos": 35,
+    "habilidad": "ataque",
+    "poder": 35,
+    "tipo": "VENENO"
+  }
+]
