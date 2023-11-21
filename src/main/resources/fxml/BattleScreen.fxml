@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -85,6 +86,21 @@
             </GridPane>
         </HBox>
       <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="641.0" />
+      <AnchorPane layoutX="63.0" layoutY="31.0" prefHeight="82.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-width: 5; -fx-border-color: grey;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="28.0" prefWidth="133.0" text="Bulbasaur">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ProgressBar layoutX="57.0" layoutY="50.0" prefHeight="18.0" prefWidth="171.0" progress="0.5" style="-fx-accent: green;" />
+            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="109.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/estados/Paralizado.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
     </children>
     <cursor>
         <Cursor fx:constant="NONE" />
