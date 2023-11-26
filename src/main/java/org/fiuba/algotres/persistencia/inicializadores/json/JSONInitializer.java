@@ -14,6 +14,7 @@ import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.item.Item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -49,23 +50,34 @@ public class JSONInitializer {
 
         // Mapeamos las habilidades que le corresponden a cada pokemon
         List<Pokemon> pokemons = pokemonsDTO.stream().map(
-                pokemonDTO -> pokemonDTO.toPokemon(
-                        habilidades.stream().filter(
-                                habilidad -> pokemonDTO.getHabilidades().contains(habilidad.getId())
-                        ).collect(Collectors.toCollection(ArrayList::new))
-                )
+            pokemonDTO -> pokemonDTO.toPokemon(
+                habilidades.stream().filter(
+                    habilidad -> pokemonDTO.getHabilidades().contains(habilidad.getId())
+                ).collect(Collectors.toCollection(ArrayList::new))
+            )
         ).collect(Collectors.toCollection(ArrayList::new));
 
         // Mapeamos los pokemons e items que le corresponden a cada jugador
         Jugador[] jugadores = jugadoresDTO.stream().map(
-                jugadorDTO -> jugadorDTO.toJugador(
-                        pokemons.stream().filter(pokemon -> jugadorDTO.getPokemonIDs().contains(pokemon.getId())).collect(Collectors.toCollection(ArrayList::new)),
-                        items.stream().filter(item -> jugadorDTO.getItemIDs().containsKey("" + item.getId())).collect(Collectors.toCollection(ArrayList::new))
-                )
+            jugadorDTO -> jugadorDTO.toJugador(
+                pokemons.stream().filter(pokemon -> jugadorDTO.getPokemonIDs().contains(pokemon.getId())).collect(Collectors.toCollection(ArrayList::new)),
+                items.stream().filter(item -> jugadorDTO.getItemIDs().containsKey("" + item.getId())).collect(Collectors.toCollection(ArrayList::new))
+            )
         ).toArray(Jugador[]::new);
 
-        // Setteamos la cantidad a cada item
-        IntStream.range(0, jugadores.length).forEach(i ->jugadores[i].getItems().forEach(item -> item.setCantidad(jugadoresDTO.get(i).getItemIDs().get("" + item.getId()))));
+        // Setteamos la cantidad a cada item (verificando que no haya mas de una HiperPocion por jugador)
+        IntStream.range(0, jugadores.length).forEach(
+                i ->jugadores[i].getItems().forEach(
+                        item -> {
+                            int cantidad = jugadoresDTO.get(i).getItemIDs().get("" + item.getId());
+                            if(item.getNombre().equals("Hiper Pocion") && cantidad > 1){
+                                item.setCantidad(1);
+                            }else{
+                                item.setCantidad(cantidad);
+                            }
+                        }
+                )
+        );
 
         CampoDeBatalla cdb = new CampoDeBatalla();
         cdb.setJugadores(jugadores);
