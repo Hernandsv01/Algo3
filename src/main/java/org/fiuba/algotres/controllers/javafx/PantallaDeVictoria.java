@@ -20,7 +20,7 @@ public class PantallaDeVictoria extends Application {
 
     
 
-    private final Sound backgroundMusic = new Sound("/audios/sonidoVictoria.wav");
+    private final Sound backgroundMusic = new Sound("src/main/resources/audios/trompetasdela12.wav");
 
     @Override
     public void start(Stage stage ) {
@@ -39,7 +39,7 @@ public class PantallaDeVictoria extends Application {
             //root.getChildren().add(gifFirework);
             imagenVictoria.toBack();
             stage.getIcons().add(new Image("/imagenes/otros/app-logo.png"));
-            //playSound();
+            playSound();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
