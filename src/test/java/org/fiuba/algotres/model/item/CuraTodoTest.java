@@ -23,7 +23,7 @@ class CuraTodoTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.CrearCuraTodo(0);
+        Item item = FactoryItem.crearCuraTodo(0);
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -36,7 +36,7 @@ class CuraTodoTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.CrearCuraTodo(2);
+        Item item = FactoryItem.crearCuraTodo(2);
         List<Estado> estados = new ArrayList<>();
         //Podría haber sido cualquier Estado y cualquier cantidad de Estados.
         estados.add(new Dormido("Dormido"));
@@ -75,7 +75,7 @@ class CuraTodoTest {
     @Test
     public void testCheckeaEstadoPokemon() {
         //Arrange
-        Item item = FactoryItem.CrearCuraTodo(2);
+        Item item = FactoryItem.crearCuraTodo(2);
 
         //Act
         item.usar(pokemon);

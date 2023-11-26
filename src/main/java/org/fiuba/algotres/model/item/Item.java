@@ -24,6 +24,9 @@ public abstract class Item{
         this.nombre = nombre;
         this.id = id;
     }
+    public Item(String nombre) {
+        this.nombre = nombre;
+    }
 
     public abstract boolean usar(Pokemon pokemon);
 

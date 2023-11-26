@@ -19,8 +19,8 @@ class EstadisticaTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item1 = FactoryItem.CrearAtaqueX(0);
-        Item item2 = FactoryItem.CrearDefensaX(0);
+        Item item1 = FactoryItem.crearAtaqueX(0);
+        Item item2 = FactoryItem.crearDefensaX(0);
 
         //Act
         Boolean resultado1 = item1.usar(pokemon);
@@ -36,8 +36,8 @@ class EstadisticaTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item1 = FactoryItem.CrearAtaqueX(2);
-        Item item2 = FactoryItem.CrearDefensaX(2);
+        Item item1 = FactoryItem.crearAtaqueX(2);
+        Item item2 = FactoryItem.crearDefensaX(2);
 
         //Act
         Boolean res1item1 = item1.usar(pokemon);

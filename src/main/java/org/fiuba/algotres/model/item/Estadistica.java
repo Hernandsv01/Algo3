@@ -19,6 +19,12 @@ public class Estadistica extends Item {
         this.porcentaje = porcentaje;
     }
 
+    public Estadistica(String nombre, int porcentaje, Strategy strategy) {
+        super(nombre);
+        this.strategy = strategy;
+        this.porcentaje = porcentaje;
+    }
+
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {
