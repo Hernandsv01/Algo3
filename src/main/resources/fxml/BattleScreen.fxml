@@ -12,10 +12,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" onKeyPressed="#onKeyTyped" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.BattleController">
+<AnchorPane fx:id="rootPane" onKeyPressed="#onKeyTyped" prefHeight="481.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.BattleController">
     <children>
         <ImageView fitHeight="320.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../imagenes/otros/background.png" />
@@ -26,11 +27,11 @@
         <ImageView fx:id="imagenVictima" fitHeight="150.0" fitWidth="94.0" layoutX="422.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../imagenes/pokemons/Bulbasaur-front.gif" />
         </ImageView>
-        <ImageView fx:id="imagenClima" fitHeight="481.0" fitWidth="642.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
+        <ImageView fx:id="imagenClima" fitHeight="481.0" fitWidth="640.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
             <Image url="@../imagenes/climas/Lluvia.gif" />
         </ImageView>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="182.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
-        <HBox layoutY="299.0" prefWidth="640.0">
+        <HBox fx:id="informationBox" layoutY="299.0" prefWidth="640.0">
             <TextArea fx:id="pantallaMensaje" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="320.0" style="-fx-border-color: #D3B38C; -fx-border-width: 10px; -fx-background-color: #F6E1CE; -fx-border-radius: 0;" text="Elija una opción." wrapText="true">
                 <font>
                     <Font size="24.0" />
@@ -85,22 +86,37 @@
                 </children>
             </GridPane>
         </HBox>
-      <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="641.0" />
-      <AnchorPane layoutX="63.0" layoutY="31.0" prefHeight="82.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-width: 5; -fx-border-color: grey;">
+      <AnchorPane layoutX="303.0" layoutY="206.0" prefHeight="61.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-width: 5; -fx-border-color: grey;">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="28.0" prefWidth="133.0" text="Bulbasaur">
+            <Label fx:id="nombreAtacante" layoutX="14.0" layoutY="11.0" prefHeight="28.0" prefWidth="133.0" text="Charmander">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <ProgressBar layoutX="57.0" layoutY="50.0" prefHeight="18.0" prefWidth="171.0" progress="0.5" style="-fx-accent: green;" />
-            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="109.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../imagenes/estados/Paralizado.gif" />
-               </image>
-            </ImageView>
+            <ProgressBar fx:id="barraVidaAtacante" layoutX="62.0" layoutY="41.0" prefHeight="18.0" prefWidth="171.0" progress="1.0" style="-fx-accent: #00fc00;" />
+             <ImageView fx:id="imagenEstadoAtacante" fitHeight="24.0" fitWidth="26.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                 <Image url="@../imagenes/estados/Confuso.gif" />
+             </ImageView>
+            <Label fx:id="numeroVidaAtacante" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="41.0" prefHeight="18.0" prefWidth="47.0" text="200/200" />
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="28.0" prefHeight="61.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-width: 5; -fx-border-color: grey;">
+         <children>
+            <Label fx:id="nombreVictima" layoutX="14.0" layoutY="11.0" prefHeight="28.0" prefWidth="133.0" text="Bulbasaur">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="barraVidaVictima" layoutX="65.0" layoutY="41.0" prefHeight="18.0" prefWidth="171.0" progress="1.0" style="-fx-accent: #00fc00;" />
+             <ImageView fx:id="imagenEstadoVictima" fitHeight="24.0" fitWidth="26.0" layoutX="209.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                 <Image url="@../imagenes/estados/Confuso.gif" />
+             </ImageView>
+            <Label fx:id="numeroVidaVictima" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="41.0" prefHeight="18.0" prefWidth="47.0" text="200/200" />
+         </children>
+      </AnchorPane>
+      <Polygon fill="DODGERBLUE" layoutX="318.0" layoutY="150.0" points="67.4263916015625, -57.43510055541992, 102.25090026855469, -40.160133361816406, 94.58076477050781, -54.7393798828125, 106.40510559082031, -65.7426986694336" rotate="-143.5" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: grey;" />
+      <Polygon fill="DODGERBLUE" layoutX="216.0" layoutY="328.0" points="67.4263916015625, -57.43510055541992, 102.25090026855469, -40.160133361816406, 94.58076477050781, -54.7393798828125, 106.40510559082031, -65.7426986694336" rotate="-48.6" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: grey;" />
+      <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
     </children>
     <cursor>
         <Cursor fx:constant="NONE" />
