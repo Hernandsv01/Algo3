@@ -73,18 +73,6 @@ public class PantallaDeVictoria extends Application {
 
     }
 
-  // public ImageView setearGifFirework(){
-  //     Image gif = new Image(getClass().getResourceAsStream("/imagenes/otros/fireworks.gif"));
-  //     ImageView gifFirework = new ImageView();
-  //     gifFirework.setImage(gif);
-  //     gifFirework.setScaleY(-0.5);
-  //     gifFirework.setX(508);
-  //     gifFirework.setY(0);
-  //     gifFirework.setScaleX(1.0);
-  //     return gifFirework;
-
-  // }
-
     public ImageView setearGifPokemon(){
         //Que tome el pokemon del jugador ganador
         Image gif = new Image(getClass().getResourceAsStream("/imagenes/pokemons/Paras-front.gif"));
@@ -115,4 +103,9 @@ public class PantallaDeVictoria extends Application {
     public void stopSound(){
         backgroundMusic.stopSound();
     }
+
+   //public static void main(String[] args) {
+   //    launch(args);
+
+   //}
 }
