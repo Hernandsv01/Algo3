@@ -563,14 +563,14 @@ public class Inicializador {
      * @return Lista de items
      */
     private static List<Item> creacionItems(){
-        Item ataqueX = FactoryItem.CrearAtaqueX(3);
-        Item defensaX = FactoryItem.CrearDefensaX(3);
-        Item pocion = FactoryItem.CrearPocion(3);
-        Item megaPocion = FactoryItem.CrearMegaPocion(2);
-        Item hiperPocion = FactoryItem.CrearHiperPocion(1);
-        Item curaTodo = FactoryItem.CrearCuraTodo(3);
-        Item revivir = FactoryItem.CrearRevivir(2);
-        Item pocionMolestaAlumnos = FactoryItem.CrearPocionMolestaAlumnos(2);
+        Item ataqueX = FactoryItem.crearAtaqueX(3);
+        Item defensaX = FactoryItem.crearDefensaX(3);
+        Item pocion = FactoryItem.crearPocion(3);
+        Item megaPocion = FactoryItem.crearMegaPocion(2);
+        Item hiperPocion = FactoryItem.crearHiperPocion(1);
+        Item curaTodo = FactoryItem.crearCuraTodo(3);
+        Item revivir = FactoryItem.crearRevivir(2);
+        Item pocionMolestaAlumnos = FactoryItem.crearPocionMolestaAlumnos(2);
 
         return new ArrayList<>(Arrays.asList(
                 ataqueX,
