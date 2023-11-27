@@ -52,12 +52,10 @@ public abstract class Clima {
      * @param pokemon al cual se potenciara
      */
     public void potenciarPokemon(Pokemon pokemon) {
-        if(this.tiposFavorecidos.contains(pokemon.getTipos())) {
-            for(Habilidad habilidad: pokemon.getHabilidades()) {
-                if(habilidad.getClass() == Ataque.class) {
-                    int poderActual = ((Ataque) habilidad).getPoder();
-                    ((Ataque) habilidad).setPoder(poderActual + Math.round(poderActual * (float)this.PORCENTAJE_POTENCIA/100));
-                }
+        if (this.tiposFavorecidos.contains(pokemon.getTipos())) {
+            for (Habilidad habilidad : pokemon.getHabilidades()) {
+                int poderActual = habilidad.getPoder();
+                habilidad.setPoder(poderActual + Math.round(poderActual * (float) this.PORCENTAJE_POTENCIA / 100));
             }
         }
     }

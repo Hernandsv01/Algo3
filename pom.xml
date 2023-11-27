@@ -15,6 +15,34 @@
     </properties>
 
     <dependencies>
+    <dependency>
+            <groupId>com.vladsch.javafx-webview-debugger</groupId>
+            <artifactId>javafx-webview-debugger</artifactId>
+            <version>0.8.6</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.1</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.1</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <version>0.0.8</version>
+            <type>pom</type>
+        </dependency>
+
+        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -42,17 +70,30 @@
             <artifactId>mockito-core</artifactId>
             <version>5.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.6</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
                 <configuration>
-                    <trimStackTrace>false</trimStackTrace>
+                    <mainClass>org.fiuba.algotres.controllers.javafx.JavafxController</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 
 </project>

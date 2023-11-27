@@ -26,6 +26,7 @@ public class ComandoHabilidad extends Comando {
 
         Pokemon pokemonActual = cdb.getJugadorActual().getPokemonActual();
 
+        //Clima
         Pokemon victima = cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual();
         if(!pokemonActual.getEstados().isEmpty()) {
             boolean puedeAccionar = true;
@@ -47,12 +48,16 @@ public class ComandoHabilidad extends Comando {
                 return true;
             }
         }
+
+        // Estados
         cdb.getClima().aplicarEfectos(pokemonActual);
         if(!pokemonActual.estaVivo()) {
             Tools.imprimirMensajeConEspera("Tu pokemon murio antes de poder hacer nada por el clima ");
             reemplazarPokemonMuerto(cdb.getJugadorActual());
             return true;
         }
+
+        // Accionar habilidad
         Habilidad habilidad = pokemonActual.getHabilidades().get(opcionElegida-1);
         boolean habilidadExitosa = habilidad.accionarHabilidad(
                 pokemonActual,
