@@ -13,6 +13,10 @@ public class CuraTodo extends Item {
         super(cantidad, nombre);
     }
 
+    public CuraTodo(String nombre) {
+        super(nombre);
+    }
+
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {

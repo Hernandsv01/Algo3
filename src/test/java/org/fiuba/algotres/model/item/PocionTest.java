@@ -1,7 +1,6 @@
 package org.fiuba.algotres.model.item;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.strategies.Strategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +19,9 @@ class PocionTest {
     @Test
     public void testCreacionCorrectaDeVariantesCantidadCero() {
         //Arrange
-        Item itemPocionCero = FactoryItem.CrearPocion(0);
-        Item itemMegaPocionCero = FactoryItem.CrearMegaPocion(0);
-        Item itemHiperPocionCero = FactoryItem.CrearHiperPocion(0);
+        Item itemPocionCero = FactoryItem.crearPocion(0);
+        Item itemMegaPocionCero = FactoryItem.crearMegaPocion(0);
+        Item itemHiperPocionCero = FactoryItem.crearHiperPocion(0);
 
         //Assert
         assertEquals("Pocion", itemPocionCero.getNombre());
@@ -38,9 +37,9 @@ class PocionTest {
     @Test
     public void testCreacionCorrectaDeVariantesCantidadDistintaDeCero() {
         //Arrange
-        Item itemPocionCero = FactoryItem.CrearPocion(10);
-        Item itemMegaPocionCero = FactoryItem.CrearMegaPocion(10);
-        Item itemHiperPocionCero = FactoryItem.CrearHiperPocion(10);
+        Item itemPocionCero = FactoryItem.crearPocion(10);
+        Item itemMegaPocionCero = FactoryItem.crearMegaPocion(10);
+        Item itemHiperPocionCero = FactoryItem.crearHiperPocion(10);
 
         //Assert
         assertEquals("Pocion", itemPocionCero.getNombre());
@@ -57,7 +56,7 @@ class PocionTest {
     @Test
     public void testSinCantidad() {
         //Arrange
-        Item item = FactoryItem.CrearPocion(0);
+        Item item = FactoryItem.crearPocion(0);
 
         //Act
         Boolean resultado = item.usar(pokemon);
@@ -70,7 +69,7 @@ class PocionTest {
     @Test
     public void testReduceCantidad() {
         //Arrange
-        Item item = FactoryItem.CrearPocion(2);
+        Item item = FactoryItem.crearPocion(2);
 
         //Act
         Boolean res1 = item.usar(pokemon);
@@ -102,7 +101,7 @@ class PocionTest {
     @Test
     public void testCheckeaCurarPuntosPokemonPocion() {
         //Arrange
-        Item item = FactoryItem.CrearPocion(2);
+        Item item = FactoryItem.crearPocion(2);
 
         //Act & Assert
         item.usar(pokemon);
@@ -116,7 +115,7 @@ class PocionTest {
     @Test
     public void testCheckeaCurarPuntosPokemonMegaPocion() {
         //Arrange
-        Item item = FactoryItem.CrearMegaPocion(2);
+        Item item = FactoryItem.crearMegaPocion(2);
 
         //Act & Assert
         item.usar(pokemon);
@@ -130,7 +129,7 @@ class PocionTest {
     @Test
     public void testCheckeaCurarPuntosPokemonHiperPocion() {
         //Arrange
-        Item item = FactoryItem.CrearHiperPocion(2);
+        Item item = FactoryItem.crearHiperPocion(2);
 
         //Act & Assert
         item.usar(pokemon);
