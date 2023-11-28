@@ -51,7 +51,6 @@ public class BattleController implements Initializable{
     private BattleState state;
 
     private List<Habilidad> habilidades;
-
     private List<String> colaDeMensajes;
 
     @FXML
@@ -457,6 +456,14 @@ public class BattleController implements Initializable{
     private record Coordinate(int posCol, int posRow) {
     }
 
+    private void accionarItem() {
+
+    }
+
+    private void accionarCambioPokemon() {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backgroundMusic.playSound(true, -10.0f);
@@ -475,4 +482,5 @@ public class BattleController implements Initializable{
 //            throw new RuntimeException("Algo anduvo mal con los archivos FXMLs");
 //        }
 //    }
+
 }
