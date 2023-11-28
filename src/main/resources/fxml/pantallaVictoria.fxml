@@ -7,8 +7,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane onKeyPressed="#onKeyTyped" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.PantallaDeVictoriaController">
    <children>
+      <VBox layoutY="110.0" prefHeight="330.0" prefWidth="502.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" />
+      <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/otros/fondoPantallaVictoria.png" />
+         </image>
+      </ImageView>
+      <ImageView id="firework" fitHeight="157.0" fitWidth="133.0" layoutX="491.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../imagenes/otros/fireworks.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="197.0" fitWidth="286.0" layoutX="466.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" scaleY="1.5" AnchorPane.bottomAnchor="83.0" AnchorPane.rightAnchor="1.625">
+         <image>
+            <Image url="@../imagenes/otros/entrenador.gif" />
+         </image>
+      </ImageView>
       <VBox prefHeight="150.0" prefWidth="501.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="mensajeVictoria" prefHeight="157.0" prefWidth="507.0" text="Felicidades jugador ganaste la batalla pokemon!!!" textAlignment="CENTER">
@@ -18,11 +34,5 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutY="110.0" prefHeight="330.0" prefWidth="502.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" />
-      <ImageView id="firework" fitHeight="157.0" fitWidth="133.0" layoutX="491.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../imagenes/otros/fireworks.gif" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
