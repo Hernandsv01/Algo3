@@ -34,7 +34,7 @@ public class JavafxController extends Application {
 
         gameStage.setResizable(false);
         gameStage.setTitle("Fede aprobanos por favor");
-        gameStage.getIcons().add(new Image(getClass().getResource("/fxml/pantalla-menu.fxml").toString()));
+        gameStage.getIcons().add(new Image("/imagenes/otros/app-logo.png"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pantalla-menu.fxml"));
         StackPane stackPane = loader.load();
