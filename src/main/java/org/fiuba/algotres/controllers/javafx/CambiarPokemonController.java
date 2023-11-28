@@ -1,26 +1,21 @@
 package org.fiuba.algotres.controllers.javafx;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import lombok.Getter;
-import lombok.Setter;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.utils.enums.BattleState;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class SeleccionPokemonController implements Initializable {
+public class CambiarPokemonController implements Initializable {
     private static final String UP_KEY = "UP";
     private static final String DOWN_KEY = "DOWN";
     private static final String RIGHT_KEY = "RIGHT";
@@ -31,40 +26,68 @@ public class SeleccionPokemonController implements Initializable {
     private static final String DESACTIVATED_POKEMON_PANE_COLOR = "#0f2c64";
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 6;
-    @Getter @Setter
-    private BattleState state;
+    @FXML
     public ImageView ImagenActual;
+    @FXML
     public Label NombreActual;
+    @FXML
     public Label TipoActual;
+    @FXML
     public Label NivelActual;
+    @FXML
     public Label VidaActual;
+    @FXML
     public ImageView Imagen1;
+    @FXML
     public Label Nombre1;
+    @FXML
     public Label Tipo1;
+    @FXML
     public Label Nivel1;
+    @FXML
     public Label Vida1;
+    @FXML
     public ImageView Imagen2;
+    @FXML
     public Label Nombre2;
+    @FXML
     public Label Tipo2;
+    @FXML
     public Label Nivel2;
+    @FXML
     public Label Vida2;
+    @FXML
     public ImageView Imagen3;
+    @FXML
     public Label Nombre3;
+    @FXML
     public Label Tipo3;
+    @FXML
     public Label Nivel3;
+    @FXML
     public Label Vida3;
+    @FXML
     public ImageView Imagen4;
+    @FXML
     public Label Nombre4;
+    @FXML
     public Label Tipo4;
+    @FXML
     public Label Nivel4;
+    @FXML
     public Label Vida4;
+    @FXML
     public ImageView Imagen5;
+    @FXML
     public Label Nombre5;
+    @FXML
     public Label Tipo5;
+    @FXML
     public Label Nivel5;
+    @FXML
     public Label Vida5;
+    @FXML
     public AnchorPane botonVolver;
-
     @FXML
     private VBox vBox1;
 
@@ -82,7 +105,7 @@ public class SeleccionPokemonController implements Initializable {
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
             case ENTER_KEY -> select();
-            case ESCAPE_KEY -> goBack();
+//            case ESCAPE_KEY -> goBack();
         }
     }
 
@@ -161,19 +184,18 @@ public class SeleccionPokemonController implements Initializable {
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el pokemon inicial
-                state = BattleState.ACCIONANDO;
                 JavafxController.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos);
-            } else {
-                goBack();
             }
+//            } else {
+//                goBack();
+//            }
         }
     }
 
-    private void goBack() throws IOException {
-        state = BattleState.SELECCION_ACCION;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-        JavafxController.setScene(loader.load);
-    }
+//    private void goBack() throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+//        JavafxController.setScene(loader.load);
+//    }
 
     private List<Label> getLabel(String tipo) {
         ArrayList<Label> list = new ArrayList<>();

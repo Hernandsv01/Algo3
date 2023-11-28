@@ -31,11 +31,8 @@ public class BattleController implements Initializable{
     private static final String ESCAPE_KEY = "ESCAPE";
     private static final String ACTIVATED_LABEL_COLOR = "red";
     private static final String DEACTIVATED_LABEL_COLOR = "white";
-
-    private BattleState state;
-
+    private static BattleState state;
     private List<Habilidad> habilidades;
-
     private List<String> colaDeMensajes;
 
     @FXML
@@ -315,5 +312,13 @@ public class BattleController implements Initializable{
     }
 
     private record Coordinate(int posCol, int posRow) {
+    }
+
+    private void accionarItem() {
+
+    }
+
+    private void accionarCambioPokemon() {
+
     }
 }

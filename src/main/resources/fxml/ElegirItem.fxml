@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyTyped" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.SeleccionItemController">
+   <children>
+      <ImageView fitHeight="480.0" fitWidth="640.0" opacity="0.85" pickOnBounds="true" preserveRatio="true" smooth="false">
+         <image>
+            <Image url="@../imagenes/otros/Fondo_pantallas_pokemon.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="hhhh" layoutX="-20.0" layoutY="-50.0" prefHeight="600.0" prefWidth="800.0" style="-fx-border-color: #135962; -fx-border-width: 70; -fx-border-radius: 70;" />
+      <Pane layoutX="15.0" layoutY="130.0" prefHeight="150.0" prefWidth="170.0">
+         <children>
+            <ImageView fitHeight="149.0" fitWidth="170.0" pickOnBounds="true" y="1.0">
+               <image>
+                  <Image url="@../imagenes/items/fondo_mochila.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="150.0" prefWidth="170.0" style="-fx-border-color: #673507; -fx-border-width: 6; -fx-border-radius: 10;" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="360.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" y="210.0">
+         <image>
+            <Image url="@../imagenes/items/sombra_mochila.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="360.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="360.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7" y="120.0">
+               <image>
+                  <Image url="@../imagenes/items/mochila.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="360.0" prefWidth="640.0">
+         <children>
+            <Pane prefHeight="360.0" prefWidth="200.0" />
+            <Pane prefHeight="360.0" prefWidth="440.0">
+               <children>
+                  <ImageView fitHeight="340.0" fitWidth="440.0" pickOnBounds="true" y="10.0">
+                     <image>
+                        <Image url="@../imagenes/items/fondo_items.png" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutY="9.0" prefHeight="341.0" prefWidth="440.0" style="-fx-border-color: #673507; -fx-border-width: 6; -fx-border-radius: 10;" />
+                  <HBox prefHeight="360.0" prefWidth="440.0">
+                     <children>
+                        <VBox fx:id="vBox1" prefHeight="360.0" prefWidth="220.0">
+                           <children>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane id="CLONAR" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_rojo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Pocion" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadPocion" text="4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_rojo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Hiper Pocion" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadHiperPocion" text="1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_azul.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Defensa X" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadDefensaX" text="2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_verde.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Cura Todo" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadCuraTodo" text="3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="vBox2" prefHeight="360.0" prefWidth="220.0">
+                           <children>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_rojo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Mega Pocion" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadMegaPocion" text="2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                    <children>
+                                       <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                          <image>
+                                             <Image url="@../imagenes/items/item_rojo.png" />
+                                          </image>
+                                       </ImageView>
+                                    </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Pocion Molesta Alumnos" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadPocionMolestaAlumnos" text="2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_azul.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Ataque X" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadAtaqueX" text="4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #ffe172; -fx-background-radius: 11; -fx-border-color: #574329; -fx-border-radius: 8;">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 12; -fx-border-color: #574329; -fx-border-radius: 5; -fx-border-width: 4;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="-1.0">
+                                       <children>
+                                          <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
+                                             <image>
+                                                <Image url="@../imagenes/items/item_rojo.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                       <children>
+                                          <Label text="Revivir" textFill="#000000d9" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eed3b3; -fx-background-radius: 5; -fx-border-color: #574329; -fx-border-radius: 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
+                                       <children>
+                                          <Label text="Cantidad: " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="cantidadRevivir" text="3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="24.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Pane>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="-15.0" layoutY="377.0" minHeight="-Infinity" prefHeight="118.0" prefWidth="455.0" style="-fx-background-color: #f5e1ce; -fx-background-radius: 15; -fx-border-color: #d2b48c; -fx-border-width: 7; -fx-border-radius: 10;">
+         <children>
+            <Label fx:id="mensajeInferior" text="Por favor elija un item." wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="-5.0">
+               <font>
+                  <Font name="PKMN RBYGSC Regular" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="botonVolver" layoutX="451.0" layoutY="383.0" prefHeight="75.0" prefWidth="175.0" style="-fx-background-radius: 45; -fx-background-color: #c20000; -fx-border-color: #610000; -fx-border-width: 5; -fx-border-radius: 35;">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="70.0">
+                     <children>
+                        <ImageView fitHeight="75.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../imagenes/otros/pokeball_volver.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Label alignment="CENTER" minWidth="-Infinity" prefHeight="75.0" prefWidth="88.0" text="VOLVER" textFill="WHITE">
+                     <font>
+                        <Font name="PKMN RBYGSC Regular" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

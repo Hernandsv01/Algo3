@@ -10,14 +10,13 @@ import javafx.scene.layout.*;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SeleccionPokemonInicialController implements Initializable {
+public class ElegirPokemonInicialController implements Initializable {
     private static final String UP_KEY = "UP";
     private static final String DOWN_KEY = "DOWN";
     private static final String RIGHT_KEY = "RIGHT";
@@ -26,37 +25,66 @@ public class SeleccionPokemonInicialController implements Initializable {
     private static final String ACTIVATED_PANE_COLOR = "#efb810";
     private static final String DEACTIVATED_PANE_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_POKEMONS = 6;
+    @FXML
     public ImageView Imagen1;
+    @FXML
     public Label Nombre1;
+    @FXML
     public Label Tipo1;
+    @FXML
     public Label Nivel1;
+    @FXML
     public Label Vida1;
+    @FXML
     public ImageView Imagen2;
+    @FXML
     public Label Nombre2;
+    @FXML
     public Label Tipo2;
+    @FXML
     public Label Nivel2;
+    @FXML
     public Label Vida2;
+    @FXML
     public ImageView Imagen3;
+    @FXML
     public Label Nombre3;
+    @FXML
     public Label Tipo3;
+    @FXML
     public Label Nivel3;
+    @FXML
     public Label Vida3;
+    @FXML
     public ImageView Imagen4;
+    @FXML
     public Label Nombre4;
+    @FXML
     public Label Tipo4;
+    @FXML
     public Label Nivel4;
+    @FXML
     public Label Vida4;
+    @FXML
     public ImageView Imagen5;
+    @FXML
     public Label Nombre5;
+    @FXML
     public Label Tipo5;
+    @FXML
     public Label Nivel5;
+    @FXML
     public Label Vida5;
+    @FXML
     public ImageView Imagen6;
+    @FXML
     public Label Nombre6;
+    @FXML
     public Label Tipo6;
+    @FXML
     public Label Nivel6;
+    @FXML
     public Label Vida6;
-
     @FXML
     private VBox vBox1;
     @FXML
@@ -66,7 +94,7 @@ public class SeleccionPokemonInicialController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadPokemonesJugadorActual();
-        setSelectedVBoxElement(0);
+        setSelectedSceneElement(0);
     }
 
     @FXML
@@ -89,7 +117,7 @@ public class SeleccionPokemonInicialController implements Initializable {
         }
     }
 
-    private List<AnchorPane> getVBoxElements() {
+    private List<AnchorPane> getSceneElements() {
         List<AnchorPane> v1  = vBox1.getChildren().stream()
                 .filter(node -> node instanceof AnchorPane)
                 .map(node -> (AnchorPane)node)
@@ -107,23 +135,23 @@ public class SeleccionPokemonInicialController implements Initializable {
         return opcionesPokemons;
     }
 
-    private AnchorPane getSelectedVboxElement(){
-        return getVBoxElements().stream()
+    private AnchorPane getSelectedSceneElement(){
+        return getSceneElements().stream()
                 .filter(anchorPane -> anchorPane.getStyle().contains("-fx-border-color: #efb810"))
                 .findFirst().orElse(null);
     }
 
-    private void setSelectedVBoxElement(int pos){
-        AnchorPane previousElement = getSelectedVboxElement();
+    private void setSelectedSceneElement(int pos){
+        AnchorPane previousElement = getSelectedSceneElement();
 
         if (previousElement != null) {
             togglePane(previousElement);
         }
-        togglePane(getVBoxElements().get(pos));
+        togglePane(getSceneElements().get(pos));
     }
 
     private void moveSelector(String tecla){
-        AnchorPane currentElement = getSelectedVboxElement();
+        AnchorPane currentElement = getSelectedSceneElement();
         if(currentElement == null) return;
 
         int actualPos = coordenadas(currentElement);
@@ -138,11 +166,11 @@ public class SeleccionPokemonInicialController implements Initializable {
         if(newPos == -1){
             return;
         }
-        setSelectedVBoxElement(newPos);
+        setSelectedSceneElement(newPos);
     }
 
     private int coordenadas(AnchorPane element) {
-        return getVBoxElements().indexOf(element);
+        return getSceneElements().indexOf(element);
     }
 
     private static int verifyPosition(int pos){
@@ -153,7 +181,7 @@ public class SeleccionPokemonInicialController implements Initializable {
     }
 
     private void select() {
-        AnchorPane selectedElement = getSelectedVboxElement();
+        AnchorPane selectedElement = getSelectedSceneElement();
         int selectedPos = verifyPosition(coordenadas(selectedElement));
         if (selectedPos != -1) {
             //codigo que selecciona el pokemon inicial
@@ -224,12 +252,13 @@ public class SeleccionPokemonInicialController implements Initializable {
             String name = pokemons.get(i).getNombre();
             String type = pokemons.get(i).getTipos().toString();
             String level = pokemons.get(i).getNivel().toString();
+            String lifeActual = pokemons.get(i).getVidaActual().toString();
             String lifeMax = pokemons.get(i).getVidaMaxima().toString();
 
             labelsNombre.get(i).setText(name);
             labelsNivel.get(i).setText("Nv. " + level);
             labelsTipo.get(i).setText(type.toUpperCase());
-            labelsVida.get(i).setText("PS. " + lifeMax + "/" + lifeMax);
+            labelsVida.get(i).setText("PS. " + lifeActual + "/" + lifeMax);
 
             try {
                 images.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
