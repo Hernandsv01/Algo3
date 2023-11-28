@@ -7,6 +7,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,10 +36,9 @@ public class JavafxController extends Application {
         gameStage.setTitle("Fede aprobanos por favor");
         gameStage.getIcons().add(new Image("/imagenes/otros/app-logo.png"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-        AnchorPane anchorPane = loader.load();
-        Scene scene = new Scene(anchorPane);
-        scene.getRoot().requestFocus();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pantalla-menu.fxml"));
+        StackPane stackPane = loader.load();
+        Scene scene = new Scene(stackPane);
         gameStage.setScene(scene);
         gameStage.show();
     }
