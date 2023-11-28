@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
@@ -109,7 +110,7 @@ public class BattleController implements Initializable{
     public void onKeyTyped(KeyEvent event){
         String tecla = event.getCode().toString();
         System.out.println("Key pressed: " + tecla);
-        System.out.println("Clima actual: " + JavafxController.getCdb().getClima().getNombre());
+        System.out.println("Clima actual: " + JuegoJavafx.getCdb().getClima().getNombre());
 
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
@@ -208,7 +209,7 @@ public class BattleController implements Initializable{
         fadeOut.setToValue(0.0);
 
         fadeIn.setOnFinished(event -> {
-            JavafxController.getCdb().setSiguienteTurno();
+            JuegoJavafx.getCdb().setSiguienteTurno();
             renderImages();
             renderHealth(true);
             fadeOut.play();
@@ -230,26 +231,26 @@ public class BattleController implements Initializable{
         // Estados
         boolean puedeAccionar = true;
         Estado estadoInhabilitante = null;
-        List<Estado> estados = JavafxController.getCdb().getJugadorActual().getPokemonActual().getEstados();
+        List<Estado> estados = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getEstados();
         for (Estado estado : estados) {
             puedeAccionar = estado.accionar();
             if (!puedeAccionar && estadoInhabilitante == null) {
                 estadoInhabilitante = estado;
             }
         }
-        if(!JavafxController.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JavafxController.getCdb().getJugadorActual().getPokemonActual()));
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
             return true;
         }
 
         // Climas
-        JavafxController.getCdb().getClima().aplicarEfectos(JavafxController.getCdb().getJugadorActual().getPokemonActual());
-        String mensajeClima = GeneradorDeMensajes.generarMensajeClima(JavafxController.getCdb().getClima());
+        JuegoJavafx.getCdb().getClima().aplicarEfectos(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual());
+        String mensajeClima = GeneradorDeMensajes.generarMensajeClima(JuegoJavafx.getCdb().getClima());
         if(mensajeClima != null){
             colaDeMensajes.add(mensajeClima);
         }
-        if(!JavafxController.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JavafxController.getCdb().getJugadorActual().getPokemonActual()));
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
             return true;
         }
 
@@ -257,7 +258,7 @@ public class BattleController implements Initializable{
         if(puedeAccionar){
             accionarHabilidad();
         }else{
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JavafxController.getCdb().getJugadorActual().getPokemonActual(), true));
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JuegoJavafx.getCdb().getJugadorActual().getPokemonActual(), true));
         }
 
         return false;
@@ -284,7 +285,7 @@ public class BattleController implements Initializable{
 
         habilidades.clear();
         for(int i = 0; i < getGridElements().size(); i++){
-            Habilidad habilidad = JavafxController.getCdb().getJugadorActual().getPokemonActual().getHabilidades().get(i);
+            Habilidad habilidad = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getHabilidades().get(i);
             ((Label)getGridElements().get(i).getCenter()).setText(habilidad.getNombre());
             habilidades.add(habilidad);
         }
@@ -324,8 +325,8 @@ public class BattleController implements Initializable{
         int posicionHabilidad = getGridElements().indexOf(getSelectedGridElement());
         if(posicionHabilidad == -1) return;
         Habilidad habilidad = habilidades.get(posicionHabilidad);
-        Pokemon atacante = JavafxController.getCdb().getJugadorActual().getPokemonActual();
-        Pokemon victima = JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual();
+        Pokemon atacante = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual();
+        Pokemon victima = JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual();
 
         habilidad.accionarHabilidad(atacante, victima);
         colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEfectoHabilidad(habilidad, atacante, victima));
@@ -338,7 +339,7 @@ public class BattleController implements Initializable{
 
         confirmation.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                JavafxController.getCdb().getJugadorActual().rendirse();
+                JuegoJavafx.getCdb().getJugadorActual().rendirse();
                 // Llamar a scene de fin de juego
             }
         });
@@ -374,7 +375,7 @@ public class BattleController implements Initializable{
     }
 
     private void renderImages(){
-        CampoDeBatalla cdb = JavafxController.getCdb();
+        CampoDeBatalla cdb = JuegoJavafx.getCdb();
         imagenClima.setImage(new Image(
                 getClass().getResourceAsStream("/imagenes/climas/" + capitalizar(cdb.getClima().getNombre()) + ".gif")
         ));
@@ -417,20 +418,20 @@ public class BattleController implements Initializable{
     }
 
     private void renderHealth(boolean transicionRapida){
-        nombreAtacante.setText(JavafxController.getCdb().getJugadorActual().getPokemonActual().getNombre());
-        nombreVictima.setText(JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual().getNombre());
+        nombreAtacante.setText(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getNombre());
+        nombreVictima.setText(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getNombre());
 
         numeroVidaAtacante.setText(
-                JavafxController.getCdb().getJugadorActual().getPokemonActual().getVidaActual() + "/" +
-                JavafxController.getCdb().getJugadorActual().getPokemonActual().getVidaMaxima()
+                JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaActual() + "/" +
+                JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaMaxima()
         );
         numeroVidaVictima.setText(
-                JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual().getVidaActual() + "/" +
-                JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual().getVidaMaxima()
+                JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaActual() + "/" +
+                JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaMaxima()
         );
 
-        double vidaFinalAtacante = (double) JavafxController.getCdb().getJugadorActual().getPokemonActual().getVidaActual() /JavafxController.getCdb().getJugadorActual().getPokemonActual().getVidaMaxima();
-        double vidaFinalVictima = (double) JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual().getVidaActual() /JavafxController.getCdb().getJugadores()[JavafxController.getCdb().getSiguienteTurno()].getPokemonActual().getVidaMaxima();
+        double vidaFinalAtacante = (double) JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaActual() / JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaMaxima();
+        double vidaFinalVictima = (double) JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaActual() / JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaMaxima();
 
         if(transicionRapida){
             barraVidaAtacante.setProgress(vidaFinalAtacante);

@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 
@@ -184,7 +185,7 @@ public class CambiarPokemonController implements Initializable {
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el pokemon inicial
-                JavafxController.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos);
+                JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos);
             }
 //            } else {
 //                goBack();
@@ -228,7 +229,7 @@ public class CambiarPokemonController implements Initializable {
     }
 
     private void loadPokemonesJugadorActual() {
-        Jugador jugadorActual = JavafxController.getCdb().getJugadorActual();
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Pokemon> pokemons = jugadorActual.getPokemons();
         List<Label> labelsNombre = getLabel("Nombre");
         List<Label> labelsTipo = getLabel("Tipo");

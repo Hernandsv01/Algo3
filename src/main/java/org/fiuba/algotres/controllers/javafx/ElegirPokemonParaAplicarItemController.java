@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 
@@ -214,7 +215,7 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                     Scene scene = new Scene(loader.load());
-                    JavafxController.setScene(scene);
+                    JuegoJavafx.setScene(scene);
                 } catch (IOException e) {
                     System.out.println("Error en la carga de BattleScreen.fxml");
                 }
@@ -228,7 +229,7 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirItem.fxml"));
             Scene scene = new Scene(loader.load());
-            JavafxController.setScene(scene);
+            JuegoJavafx.setScene(scene);
         } catch (IOException e) {
             System.out.println("Error en la carga de ElegirItem.fxml");
         }
@@ -285,7 +286,7 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     }
 
     private void loadPokemonesJugadorActual() {
-        Jugador jugadorActual = JavafxController.getCdb().getJugadorActual();
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Pokemon> pokemons = jugadorActual.getPokemons();
         List<Label> labelsNombre = getLabel("Nombre");
         List<Label> labelsTipo = getLabel("Tipo");

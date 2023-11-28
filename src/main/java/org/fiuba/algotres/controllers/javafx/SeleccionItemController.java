@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
-import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.utils.enums.BattleState;
 
@@ -125,7 +123,7 @@ public class SeleccionItemController implements Initializable {
         int selectedPos = verifyPosition(pos);
         String itemElegidoNombre = "";
         if (selectedPos > -1 && selectedPos < CANTIDAD_DE_OPCIONES - 2) {
-            itemElegidoNombre = JavafxController.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
+            itemElegidoNombre = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
             System.out.println(itemElegidoNombre);
         }
         loadMessage(itemElegidoNombre);
@@ -184,11 +182,11 @@ public class SeleccionItemController implements Initializable {
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el item a usar
-                Item itemElegido = JavafxController.getCdb().getJugadorActual().getItems().get(selectedPos);
+                Item itemElegido = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos);
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonParaAplicarItem.fxml"));
                     Scene scene = new Scene(loader.load());
-                    JavafxController.setScene(scene);
+                    JuegoJavafx.setScene(scene);
                 }catch (IOException e) {
                     System.out.println("Error en la carga de ElegirPokemonParaAplicarItem.fxml");
                 }
@@ -202,7 +200,7 @@ public class SeleccionItemController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
             Scene scene = new Scene(loader.load());
-            JavafxController.setScene(scene);
+            JuegoJavafx.setScene(scene);
         } catch (IOException e) {
             System.out.println("Error en la carga de BattleScreen.fxml");
         }
@@ -238,7 +236,7 @@ public class SeleccionItemController implements Initializable {
     }
 
     private void loadItemsJugadorActual() {
-        Jugador jugadorActual = JavafxController.getCdb().getJugadorActual();
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Item> items = jugadorActual.getItems();
         List<Label> labelsNombre = getLabelsCantidad();
 

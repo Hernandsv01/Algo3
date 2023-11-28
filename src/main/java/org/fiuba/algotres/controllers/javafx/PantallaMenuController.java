@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.Sound;
 
 import java.net.URL;
@@ -73,7 +74,7 @@ public class PantallaMenuController {
                 AnchorPane anchorPane = loader.load();
                 Scene scene = new Scene(anchorPane);
                 Stage gameStage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
-                JavafxController.setScene(scene);
+                JuegoJavafx.setScene(scene);
                 gameStage.show();
                 menuSound.stopSound();
             } catch (Exception e) {
@@ -110,7 +111,7 @@ public class PantallaMenuController {
                 }
             });
 
-            URL imagenTeclasFlechitas = (JavafxController.class.getResource("/imagenes/otros/teclas_flechas.png"));
+            URL imagenTeclasFlechitas = (JuegoJavafx.class.getResource("/imagenes/otros/teclas_flechas.png"));
             Label LabelimagenTeclasFlechitas = new Label();
             LabelimagenTeclasFlechitas.setStyle("-fx-background-image: url('" + imagenTeclasFlechitas + "'); " +
                     "-fx-background-size: cover; " +
@@ -122,7 +123,7 @@ public class PantallaMenuController {
                     "-fx-translate-y: -70px; "
             );
 
-            URL imagenTeclaEscape = (JavafxController.class.getResource("/imagenes/otros/teclas_esc.png"));
+            URL imagenTeclaEscape = (JuegoJavafx.class.getResource("/imagenes/otros/teclas_esc.png"));
             Label LabelimagenTeclaEscape = new Label();
             LabelimagenTeclaEscape.setStyle("-fx-background-image: url('" + imagenTeclaEscape + "'); " +
                     "-fx-background-size: cover; " +
@@ -134,7 +135,7 @@ public class PantallaMenuController {
                     "-fx-translate-y: 55px; "
             );
 
-            URL imagenTeclaEnter = (JavafxController.class.getResource("/imagenes/otros/teclas_enter.png"));
+            URL imagenTeclaEnter = (JuegoJavafx.class.getResource("/imagenes/otros/teclas_enter.png"));
             Label LabelimagenTeclaEnter = new Label();
             LabelimagenTeclaEnter.setStyle("-fx-background-image: url('" + imagenTeclaEnter + "'); " +
                     "-fx-background-size: cover; " +
@@ -146,7 +147,7 @@ public class PantallaMenuController {
                     "-fx-translate-y: 0px; "
             );
 
-            URL imagenFondoURL = JavafxController.class.getResource("/imagenes/otros/fondo_ayuda.jpg");
+            URL imagenFondoURL = JuegoJavafx.class.getResource("/imagenes/otros/fondo_ayuda.jpg");
             String estiloFondo = "-fx-background-image: url('" + imagenFondoURL + "'); " +
                     "-fx-background-size: cover; " +
                     "-fx-background-position: center; ";
@@ -219,7 +220,7 @@ public class PantallaMenuController {
 
             dialogPane.lookup(".content.label").getStyleClass().add("content-text");
 
-            URL imagenFondo = (JavafxController.class.getResource("/imagenes/otros/pikachu_triste.gif"));
+            URL imagenFondo = (JuegoJavafx.class.getResource("/imagenes/otros/pikachu_triste.gif"));
             dialogPane.setStyle("-fx-background-image: url('" + imagenFondo + "'); " +
                     "-fx-background-size: 150 100; " +
                     "-fx-background-repeat: no-repeat; " +

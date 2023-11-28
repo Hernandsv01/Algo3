@@ -1,24 +1,17 @@
-package org.fiuba.algotres.controllers.javafx;
+package org.fiuba.algotres;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import lombok.Getter;
-import lombok.Setter;
 import org.fiuba.algotres.model.CampoDeBatalla;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static org.fiuba.algotres.persistencia.inicializadores.json.JSONInitializer.loadCampoDeBatalla;
 
-public class JavafxController extends Application {
+public class JuegoJavafx extends Application {
     private static Stage gameStage;
     private static CampoDeBatalla cdb;
 
@@ -47,7 +40,7 @@ public class JavafxController extends Application {
         return cdb;
     }
     public static void setCdb(CampoDeBatalla cdb) {
-        JavafxController.cdb = cdb;
+        JuegoJavafx.cdb = cdb;
     }
 
     public static void setScene(Scene scene){
