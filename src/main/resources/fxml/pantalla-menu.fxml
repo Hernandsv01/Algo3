@@ -8,28 +8,28 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.PantallaMenuController">
+<StackPane fx:id="stackPane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.PantallaMenuController">
     <!-- Background Image -->
     <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true">
         <image>
-            <Image url="@imagenes/pantalla_fondo.gif" />
+            <Image url="@../imagenes/otros/pantalla_fondo.gif" />
         </image>
     </ImageView>
 
     <!-- Buttons -->
-    <Button fx:id="jugarButton" onKeyPressed="#onJugarKeyPressed" stylesheets="@estilos.css" text="Jugar">
+    <Button fx:id="jugarButton" onKeyPressed="#onJugarKeyPressed" stylesheets="@../fxml/estilos.css" text="Jugar">
     </Button>
 
-    <Button fx:id="ayudaButton" onKeyPressed="#onAyudaKeyPressed" stylesheets="@estilos.css" text="Ayuda" translateY="80.0">
+    <Button fx:id="ayudaButton" onKeyPressed="#onAyudaKeyPressed" stylesheets="@../fxml/estilos.css" text="Ayuda" translateY="80.0">
     </Button>
 
-    <Button fx:id="salirButton" onKeyPressed="#onSalirKeyPressed" stylesheets="@estilos.css" text="Salir" translateY="160.0">
+    <Button fx:id="salirButton" onKeyPressed="#onSalirKeyPressed" stylesheets="@../fxml/estilos.css" text="Salir" translateY="160.0">
     </Button>
 
     <!-- Title -->
     <ImageView fitHeight="180.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true" translateY="-150.0">
         <image>
-            <Image url="@imagenes/titulo_pokemon.png" />
+            <Image url="@../imagenes/otros/titulo_pokemon.png" />
         </image>
     </ImageView>
 
@@ -42,6 +42,6 @@
 
     <!-- Style buttons -->
     <stylesheets>
-        <URL value="@estilos.css" />
+        <URL value="@../fxml/estilos.css" />
     </stylesheets>
 </StackPane>

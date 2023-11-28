@@ -2,30 +2,20 @@ package org.fiuba.algotres.controllers.javafx;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.fiuba.algotres.utils.Sound;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -43,40 +33,49 @@ public class PantallaMenuController {
     @FXML
     StackPane stackPane;
 
-    String estiloBotonVentana = "-fx-font-size: 12; " +
-            "-fx-background-color: #698ce2; " +
-            "-fx-border-color: #2d4586; " +
-            "-fx-border-width: 2px; " +
-            "-fx-font-family: 'PKMN RBYGSC Regular'; "
-            ;
+    private final Sound menuSound = new Sound("src/main/resources/audios/MenuSong.wav");
 
-    String estiloBotonActualVentana = "-fx-background-color: #7661cc; ";
+    private final Sound BotonMovido = new Sound("src/main/resources/audios/OpcionMovida.wav");
 
-    String estiloTituloVentana = "-fx-font-size: 22px; " +
-            "-fx-font-family: 'PKMN RBYGSC Regular'; "
-            ;
-
-    String estiloTextoVentana = "-fx-font-size: 13px; " +
-            "-fx-font-family: 'PKMN RBYGSC Regular'; "
-            ;
-
-    // Otros campos y métodos del controlador
+    private final Sound BotonSeleccionado = new Sound("src/main/resources/audios/BotonSeleccionado.wav");
 
     @FXML
     public void initialize() {
-        // Desactivar la interactividad del ratón para el StackPane
+        menuSound.playSound(true, -25.0f);
         stackPane.setMouseTransparent(true);
+
+        jugarButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                BotonMovido.playSound(false, -20.0f);
+            }
+        });
+
+        ayudaButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                BotonMovido.playSound(false, -20.0f);
+            }
+        });
+
+        salirButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                BotonMovido.playSound(false, -20.0f);
+            }
+        });
+
     }
 
     @FXML
     public void onJugarKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("escena-batalla.fxml"));
-                Parent nuevaEscena = loader.load();
-                Scene scene = new Scene(nuevaEscena);
-                Stage stage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
-                stage.setScene(scene);
+                BotonSeleccionado.playSound(false, -20.0f);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                AnchorPane anchorPane = loader.load();
+                Scene scene = new Scene(anchorPane);
+                Stage gameStage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
+                JavafxController.setScene(scene);
+                gameStage.show();
+                menuSound.stopSound();
             } catch (Exception e) {
                 System.out.println("Ups");
             }
@@ -86,6 +85,7 @@ public class PantallaMenuController {
     @FXML
     protected void onAyudaKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
+            BotonSeleccionado.playSound(false, -20.0f);
             Stage ventanaDeAyuda = new Stage();
             ventanaDeAyuda.initModality(Modality.APPLICATION_MODAL);
             ventanaDeAyuda.setTitle("Ayuda");
@@ -95,7 +95,7 @@ public class PantallaMenuController {
             ventanaDeAyuda.setScene(scene);
 
             ObservableList<String> stylesheets = stackPane.getScene().getStylesheets();
-            stylesheets.add(Objects.requireNonNull(getClass().getResource("estilos.css")).toExternalForm());
+            stylesheets.add(Objects.requireNonNull(getClass().getResource("/fxml/estilos.css")).toExternalForm());
 
             Label mensaje0 = new Label("Controles");
             Label mensaje1 = new Label("Usa las teclas de direccion para moverte entre los botones");
@@ -105,11 +105,12 @@ public class PantallaMenuController {
             Button botonCerrar = new Button("Cerrar");
             botonCerrar.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.ESCAPE) {
+                    BotonSeleccionado.playSound(false, -20.0f);
                     ventanaDeAyuda.close();
                 }
             });
 
-            URL imagenTeclasFlechitas = (PantallaMenu.class.getResource("imagenes/otros/teclas_flechas.png"));
+            URL imagenTeclasFlechitas = (JavafxController.class.getResource("/imagenes/otros/teclas_flechas.png"));
             Label LabelimagenTeclasFlechitas = new Label();
             LabelimagenTeclasFlechitas.setStyle("-fx-background-image: url('" + imagenTeclasFlechitas + "'); " +
                     "-fx-background-size: cover; " +
@@ -121,7 +122,7 @@ public class PantallaMenuController {
                     "-fx-translate-y: -70px; "
             );
 
-            URL imagenTeclaEscape = (PantallaMenu.class.getResource("imagenes/otros/teclas_esc.png"));
+            URL imagenTeclaEscape = (JavafxController.class.getResource("/imagenes/otros/teclas_esc.png"));
             Label LabelimagenTeclaEscape = new Label();
             LabelimagenTeclaEscape.setStyle("-fx-background-image: url('" + imagenTeclaEscape + "'); " +
                     "-fx-background-size: cover; " +
@@ -133,7 +134,7 @@ public class PantallaMenuController {
                     "-fx-translate-y: 55px; "
             );
 
-            URL imagenTeclaEnter = (PantallaMenu.class.getResource("imagenes/otros/teclas_enter.png"));
+            URL imagenTeclaEnter = (JavafxController.class.getResource("/imagenes/otros/teclas_enter.png"));
             Label LabelimagenTeclaEnter = new Label();
             LabelimagenTeclaEnter.setStyle("-fx-background-image: url('" + imagenTeclaEnter + "'); " +
                     "-fx-background-size: cover; " +
@@ -145,7 +146,7 @@ public class PantallaMenuController {
                     "-fx-translate-y: 0px; "
             );
 
-            URL imagenFondoURL = PantallaMenu.class.getResource("imagenes/otros/fondo_ayuda.jpg");
+            URL imagenFondoURL = JavafxController.class.getResource("/imagenes/otros/fondo_ayuda.jpg");
             String estiloFondo = "-fx-background-image: url('" + imagenFondoURL + "'); " +
                     "-fx-background-size: cover; " +
                     "-fx-background-position: center; ";
@@ -197,6 +198,7 @@ public class PantallaMenuController {
     @FXML
     protected void onSalirKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
+            BotonSeleccionado.playSound(false, -20.0f);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Salir");
             alert.setHeaderText(null);
@@ -213,11 +215,11 @@ public class PantallaMenuController {
             dialogPane.setPrefHeight(225);
 
             ObservableList<String> stylesheets = dialogPane.getStylesheets();
-            stylesheets.add(Objects.requireNonNull(getClass().getResource("estilos.css")).toExternalForm());
+            stylesheets.add(Objects.requireNonNull(getClass().getResource("/fxml/estilos.css")).toExternalForm());
 
             dialogPane.lookup(".content.label").getStyleClass().add("content-text");
 
-            URL imagenFondo = (PantallaMenu.class.getResource("imagenes/otros/pikachu_triste.gif"));
+            URL imagenFondo = (JavafxController.class.getResource("/imagenes/otros/pikachu_triste.gif"));
             dialogPane.setStyle("-fx-background-image: url('" + imagenFondo + "'); " +
                     "-fx-background-size: 150 100; " +
                     "-fx-background-repeat: no-repeat; " +
@@ -236,9 +238,24 @@ public class PantallaMenuController {
                 }
             });
 
+            buttonAceptar.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    BotonMovido.playSound(false, -20.0f);
+                }
+            });
+
+            buttonCancelar.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    BotonMovido.playSound(false, -20.0f);
+                }
+            });
+
             alert.showAndWait().ifPresent(response -> {
                 if (response == botonAceptar) {
+                    BotonSeleccionado.playSound(false, -20.0f);
                     Platform.exit();
+                } else if(response == botonCancelar) {
+                    BotonSeleccionado.playSound(false, -20.0f);
                 }
             });
 
