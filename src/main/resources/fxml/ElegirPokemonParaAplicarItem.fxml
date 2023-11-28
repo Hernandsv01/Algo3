@@ -14,9 +14,104 @@
          </image>
       </ImageView>
       <Pane layoutX="-20.0" layoutY="-50.0" prefHeight="600.0" prefWidth="800.0" style="-fx-border-color: #135962; -fx-border-width: 70; -fx-border-radius: 70;" />
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="360.0" prefWidth="640.0">
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="340.0" prefWidth="640.0">
          <children>
-            <VBox fx:id="vBox1" prefHeight="360.0" prefWidth="320.0">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="320.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="230.0" style="-fx-background-color: #f5e1ce; -fx-background-radius: 13; -fx-border-radius: 10; -fx-border-color: #d2b48c; -fx-border-width: 5;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="100.0">
+                     <children>
+                        <Label text="POKEMON ACTUAL" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0">
+                           <font>
+                              <Font name="PKMN RBYGSC Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="PokemonActual" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="151.0">
+                     <children>
+                        <HBox prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
+                                 <children>
+                                    <ImageView fx:id="ImagenActual" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/otros/pokeball_default.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="NombreActual" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="Bulbasur" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="TipoActual" text="PLANTA">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="NivelActual" text="Nv. 4">
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
+                              <AnchorPane minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <ProgressBar fx:id="BarraActual" progress="1.0" style="-fx-accent: green">
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" top="10.0" />
+                                                   </padding>
+                                                </ProgressBar>
+                                             </children>
+                                          </Pane>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="VidaActual" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 104/104" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="10.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets top="3.0" />
+                                                   </padding>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <VBox fx:id="vBox1" prefHeight="340.0" prefWidth="320.0">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -27,9 +122,9 @@
                            <children>
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
                                  <children>
-                                    <ImageView fx:id="Imagen1" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="Imagen1" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../imagenes/pokemons/Bulbasaur-portada.png" />
+                                          <Image url="@../imagenes/otros/pokeball_default.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -38,7 +133,7 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label fx:id="Nombre1" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Bulbasur" textAlignment="CENTER">
+                                          <Label fx:id="Nombre1" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="Bulbasur" textAlignment="CENTER">
                                              <font>
                                                 <Font name="PKMN RBYGSC Regular" size="12.0" />
                                              </font>
@@ -47,13 +142,13 @@
                                              <children>
                                                 <Label fx:id="Tipo1" text="PLANTA">
                                                    <HBox.margin>
-                                                      <Insets right="5.0" />
+                                                      <Insets right="10.0" />
                                                    </HBox.margin>
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="Nivel1" text="Nv. 5">
+                                                <Label fx:id="Nivel1" text="Nv. 4">
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
@@ -76,7 +171,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra1" progress="1.0" style="-fx-accent: green">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -85,10 +180,13 @@
                                           </Pane>
                                           <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <Label fx:id="Vida1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 45/45" textAlignment="CENTER">
+                                                <Label fx:id="Vida1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 104/104" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="10.0" />
                                                    </font>
+                                                   <padding>
+                                                      <Insets top="3.0" />
+                                                   </padding>
                                                 </Label>
                                              </children>
                                           </Pane>
@@ -100,7 +198,7 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="60.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </AnchorPane>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
@@ -109,9 +207,9 @@
                            <children>
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
                                  <children>
-                                    <ImageView fx:id="Imagen2" fitHeight="55.0" fitWidth="55.0" layoutX="5.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="Imagen2" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../imagenes/pokemons/Pidgey-portada.png" />
+                                          <Image url="@../imagenes/otros/pokeball_default.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -120,22 +218,22 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label fx:id="Nombre2" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Pidgey" textAlignment="CENTER">
+                                          <Label fx:id="Nombre2" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="Bulbasur" textAlignment="CENTER">
                                              <font>
                                                 <Font name="PKMN RBYGSC Regular" size="12.0" />
                                              </font>
                                           </Label>
                                           <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <Label fx:id="Tipo2" text="NORMAL">
+                                                <Label fx:id="Tipo2" text="PLANTA">
                                                    <HBox.margin>
-                                                      <Insets right="5.0" />
+                                                      <Insets right="10.0" />
                                                    </HBox.margin>
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="Nivel2" text="Nv. 3">
+                                                <Label fx:id="Nivel2" text="Nv. 4">
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
@@ -158,7 +256,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra2" progress="1.0" style="-fx-accent: green">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -167,10 +265,13 @@
                                           </Pane>
                                           <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <Label fx:id="Vida2" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 40/40" textAlignment="CENTER">
+                                                <Label fx:id="Vida2" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 104/104" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="10.0" />
                                                    </font>
+                                                   <padding>
+                                                      <Insets top="3.0" />
+                                                   </padding>
                                                 </Label>
                                              </children>
                                           </Pane>
@@ -182,7 +283,7 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="45.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </AnchorPane>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
@@ -191,9 +292,9 @@
                            <children>
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
                                  <children>
-                                    <ImageView fx:id="Imagen3" fitHeight="55.0" fitWidth="55.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="Imagen3" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../imagenes/pokemons/Pikachu-portada.png" />
+                                          <Image url="@../imagenes/otros/pokeball_default.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -202,16 +303,16 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Label fx:id="Nombre3" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Pikachu" textAlignment="CENTER">
+                                          <Label fx:id="Nombre3" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="Bulbasur" textAlignment="CENTER">
                                              <font>
                                                 <Font name="PKMN RBYGSC Regular" size="12.0" />
                                              </font>
                                           </Label>
                                           <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <Label fx:id="Tipo3" text="ELECTRICO">
+                                                <Label fx:id="Tipo3" text="PLANTA">
                                                    <HBox.margin>
-                                                      <Insets right="5.0" />
+                                                      <Insets right="10.0" />
                                                    </HBox.margin>
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
@@ -240,7 +341,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra3" progress="1.0" style="-fx-accent: green">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -249,10 +350,13 @@
                                           </Pane>
                                           <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <Label fx:id="Vida3" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 35/35" textAlignment="CENTER">
+                                                <Label fx:id="Vida3" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 104/104" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="PKMN RBYGSC Regular" size="10.0" />
                                                    </font>
+                                                   <padding>
+                                                      <Insets top="3.0" />
+                                                   </padding>
                                                 </Label>
                                              </children>
                                           </Pane>
@@ -264,7 +368,177 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="45.0" />
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
+                     <children>
+                        <HBox prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
+                                 <children>
+                                    <ImageView fx:id="Imagen4" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/otros/pokeball_default.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="Nombre4" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="Bulbasur" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="Tipo4" text="PLANTA">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="Nivel4" text="Nv. 4">
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
+                              <AnchorPane minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <ProgressBar fx:id="Barra4" progress="1.0" style="-fx-accent: green">
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" top="10.0" />
+                                                   </padding>
+                                                </ProgressBar>
+                                             </children>
+                                          </Pane>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="Vida4" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 104/104" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="10.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets top="3.0" />
+                                                   </padding>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
+                     <children>
+                        <HBox prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
+                                 <children>
+                                    <ImageView fx:id="Imagen5" fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/otros/pokeball_default.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="Nombre5" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="Bulbasur" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="PKMN RBYGSC Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="Tipo5" text="PLANTA">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="Nivel5" text="Nv. 4">
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
+                              <AnchorPane minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <ProgressBar fx:id="Barra5" progress="1.0" style="-fx-accent: green">
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" top="10.0" />
+                                                   </padding>
+                                                </ProgressBar>
+                                             </children>
+                                          </Pane>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="Vida5" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 104/104" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="PKMN RBYGSC Regular" size="10.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets top="3.0" />
+                                                   </padding>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </AnchorPane>
                </children>
@@ -272,266 +546,13 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox fx:id="vBox2" prefHeight="360.0" prefWidth="320.0">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-               <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
-                     <children>
-                        <HBox prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
-                                 <children>
-                                    <ImageView fx:id="Imagen4" fitHeight="60.0" fitWidth="60.0" layoutX="5.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../imagenes/pokemons/Abra-portada.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label fx:id="Nombre4" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Abra" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="PKMN RBYGSC Regular" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <Label fx:id="Tipo4" text="PSÍQUICO">
-                                                   <HBox.margin>
-                                                      <Insets right="5.0" />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="Nivel4" text="Nv. 6">
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                              </AnchorPane>
-                              <AnchorPane minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <ProgressBar progress="1.0" style="-fx-accent: green">
-                                                   <padding>
-                                                      <Insets left="5.0" right="5.0" top="10.0" />
-                                                   </padding>
-                                                </ProgressBar>
-                                             </children>
-                                          </Pane>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <Label fx:id="Vida4" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 25/25" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="10.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="60.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
-                     <children>
-                        <HBox prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
-                                 <children>
-                                    <ImageView fx:id="Imagen5" fitHeight="60.0" fitWidth="60.0" layoutX="-2.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../imagenes/pokemons/Staryu-portada.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label fx:id="Nombre5" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Staryu" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="PKMN RBYGSC Regular" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <Label fx:id="Tipo5" text="AGUA">
-                                                   <HBox.margin>
-                                                      <Insets right="5.0" />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="Nivel5" text="Nv. 5">
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                              </AnchorPane>
-                              <AnchorPane minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <ProgressBar progress="1.0" style="-fx-accent: green">
-                                                   <padding>
-                                                      <Insets left="5.0" right="5.0" top="10.0" />
-                                                   </padding>
-                                                </ProgressBar>
-                                             </children>
-                                          </Pane>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <Label fx:id="Vida5" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 30/30" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="10.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="45.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #006fad; -fx-background-radius: 10; -fx-border-color: #0f2c64; -fx-border-radius: 10; -fx-border-width: 2;">
-                     <children>
-                        <HBox prefHeight="60.0" prefWidth="300.0" style="-fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="60.0">
-                                 <children>
-                                    <ImageView fx:id="Imagen6" fitHeight="50.0" fitWidth="50.0" layoutX="2.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../imagenes/pokemons/Pinsir-portada.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label fx:id="Nombre6" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="107.0" text="Pinsir" textAlignment="CENTER">
-                                             <font>
-                                                <Font name="PKMN RBYGSC Regular" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <Label fx:id="Tipo6" text="BICHO">
-                                                   <HBox.margin>
-                                                      <Insets right="5.0" />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="Nivel6" text="Nv. 3">
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="8.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                              </AnchorPane>
-                              <AnchorPane minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <ProgressBar progress="1.0" style="-fx-accent: green">
-                                                   <padding>
-                                                      <Insets left="5.0" right="5.0" top="10.0" />
-                                                   </padding>
-                                                </ProgressBar>
-                                             </children>
-                                          </Pane>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
-                                             <children>
-                                                <Label fx:id="Vida6" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="100.0" text="PS. 65/65" textAlignment="CENTER">
-                                                   <font>
-                                                      <Font name="PKMN RBYGSC Regular" size="10.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="45.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-               </children>
-            </VBox>
          </children>
       </HBox>
       <AnchorPane layoutX="-15.0" layoutY="377.0" minHeight="-Infinity" prefHeight="118.0" prefWidth="455.0" style="-fx-background-color: #f5e1ce; -fx-background-radius: 15; -fx-border-color: #d2b48c; -fx-border-width: 7; -fx-border-radius: 10;">
          <children>
-            <Label text="Elija el pokemon al cual aplicar el item." wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="-5.0">
+            <Label text="Sobre que pokemon queres aplicar el item?" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="-5.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="PKMN RBYGSC Regular" size="18.0" />
                </font>
             </Label>
          </children>
