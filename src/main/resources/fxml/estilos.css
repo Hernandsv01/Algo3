@@ -1,0 +1,28 @@
+.button {
+    -fx-color: white;
+    -fx-font-family: "PKMN RBYGSC Regular";
+    -fx-font-size: 20;
+    -fx-border-radius: 5; /* Ajusta este valor para un aspecto más pixelado */
+    -fx-background-radius: 5; /* Ajusta este valor para un aspecto más pixelado */
+    -fx-border-color: #2d4586;
+    -fx-border-width: 4;
+    -fx-background-color: #698ce2;
+    /* Agrega otros estilos según sea necesario */
+}
+
+.button:focused {
+    -fx-background-color: #7661cc;
+}
+
+.button-window {
+    -fx-font-size: 12px;
+    -fx-background-color: #698ce2;
+    -fx-border-color: #2d4586;
+    -fx-border-width: 2px;
+    -fx-font-family: 'PKMN RBYGSC Regular';
+}
+
+.content-text{
+    -fx-font-size: 13px;
+    -fx-font-family: 'PKMN RBYGSC Regular';
+}

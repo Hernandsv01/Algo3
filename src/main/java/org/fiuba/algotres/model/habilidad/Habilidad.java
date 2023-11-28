@@ -26,4 +26,11 @@ public abstract class Habilidad {
     boolean verificarUsos(int usos) {
         return usos > 0;
     }
+
+    public int getPoder() {
+        return 0;
+    }
+
+    public void setPoder(int nuevoPoder){}
+
 }

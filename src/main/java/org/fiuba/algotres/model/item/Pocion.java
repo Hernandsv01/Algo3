@@ -15,6 +15,11 @@ public class Pocion extends Item{
         this.cantidadDeVida = cantidadDeVida;
     }
 
+    public Pocion(String nombre, int cantidadDeVida) {
+        super(nombre);
+        this.cantidadDeVida = cantidadDeVida;
+    }
+
     @Override
     public boolean usar(Pokemon pokemon) {
         if (verificarCantidad(cantidad)) {

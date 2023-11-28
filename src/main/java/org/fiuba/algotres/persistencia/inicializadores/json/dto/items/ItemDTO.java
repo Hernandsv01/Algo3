@@ -20,20 +20,21 @@ import org.fiuba.algotres.model.item.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "item")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CuraTodoDTO.class, name = "curatodo"),
-        @JsonSubTypes.Type(value = EstadisticaDTO.class, name = "estadistica"),
+        @JsonSubTypes.Type(value = AtaqueXDTO.class, name = "ataquex"),
+        @JsonSubTypes.Type(value = DefensaXDTO.class, name = "defensax"),
         @JsonSubTypes.Type(value = PocionDTO.class, name = "pocion"),
+        @JsonSubTypes.Type(value = MegaPocionDTO.class, name = "megapocion"),
+        @JsonSubTypes.Type(value = HiperPocionDTO.class, name = "hiperpocion"),
         @JsonSubTypes.Type(value = PocionMolestaAlumnosDTO.class, name = "pocionmolestaalumnos"),
         @JsonSubTypes.Type(value = RevivirDTO.class, name = "revivir")
 })
 public abstract class ItemDTO {
 
     private Integer id;
-    private String nombre;
 
     @JsonCreator
-    public ItemDTO(@JsonProperty ("id") Integer id, @JsonProperty("nombre") String nombre) {
+    public ItemDTO(@JsonProperty ("id") Integer id) {
         this.id = id;
-        this.nombre = nombre;
     }
 
     public static List<ItemDTO> loadItemsJson(String path) throws IOException {

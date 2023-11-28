@@ -3,6 +3,7 @@ package org.fiuba.algotres.controllers.javafx;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -47,5 +48,11 @@ public class JavafxController extends Application {
     }
     public static void setCdb(CampoDeBatalla cdb) {
         JavafxController.cdb = cdb;
+    }
+
+    public static void setScene(Scene scene){
+        gameStage.setScene(scene);
+        scene.getRoot().requestFocus();
+        scene.setCursor(Cursor.NONE);
     }
 }
