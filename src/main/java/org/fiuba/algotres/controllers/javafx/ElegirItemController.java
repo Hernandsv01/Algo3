@@ -63,8 +63,6 @@ public class ElegirItemController extends ItemPokemonController implements Initi
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializeMessages();
-        initializeDataCantidades();
         loadItemsJugadorActual();
         setSelectedSceneElement(0);
     }
