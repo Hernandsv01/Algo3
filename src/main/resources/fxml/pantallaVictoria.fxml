@@ -4,17 +4,17 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed"  prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.PantallaDeVictoriaController">
+<?import javafx.scene.shape.Rectangle?>
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.PantallaDeVictoriaController">
    <children>
       <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/otros/fondoPantallaVictoria.png" />
          </image>
       </ImageView>
-      <ImageView id="firework" fitHeight="157.0" fitWidth="133.0" layoutX="491.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+      <ImageView id="firework" fitHeight="480.0" fitWidth="640.0" layoutX="491.0" pickOnBounds="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../imagenes/otros/fireworks.gif" />
          </image>
@@ -29,10 +29,11 @@
             <Image url="@../imagenes/pokemons/Abra-front.gif" />
          </image>
       </ImageView>
-      <Label fx:id="mensajeVictoria" prefHeight="157.0" prefWidth="507.0" text="Felicidades jugador ganaste la batalla pokemon!!!" textAlignment="CENTER">
+      <Label fx:id="mensajeVictoria" alignment="CENTER" prefHeight="157.0" prefWidth="640.0" text="Felicidades jugador ganaste la batalla pokemon!!!" textAlignment="CENTER">
           <font>
-            <Font size="22.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
+      <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" opacity="1.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
    </children>
 </AnchorPane>

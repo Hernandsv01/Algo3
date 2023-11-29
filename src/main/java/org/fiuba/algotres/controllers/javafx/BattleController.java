@@ -482,6 +482,12 @@ public class BattleController implements Initializable{
         renderHealth(true);
         habilidades = new ArrayList<>();
 
+
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.play();
+
         System.out.println("Inicializado!");
     }
 
@@ -507,14 +513,20 @@ public class BattleController implements Initializable{
         }
     }
     public void callVictoryScene(){
-        try {
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(0.0);
+        fadeOut.setToValue(1.0);
+        fadeOut.setOnFinished(actionEvent -> {
             backgroundMusic.stopSound();
-            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/pantallaVictoria.fxml")).load());
-            JuegoJavafx.setScene(scene, true);
-        }catch(IOException e){
-            e.printStackTrace();
-            throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
-        }
+            try {
+                Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/pantallaVictoria.fxml")).load());
+                JuegoJavafx.setScene(scene, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
+            }
+        });
+        fadeOut.play();
     }
 
     public List<String> getColaDeMensajes(){

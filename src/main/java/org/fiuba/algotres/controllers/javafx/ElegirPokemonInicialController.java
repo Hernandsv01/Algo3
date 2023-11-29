@@ -1,5 +1,6 @@
 package org.fiuba.algotres.controllers.javafx;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
@@ -90,6 +93,8 @@ public class ElegirPokemonInicialController implements Initializable {
     @FXML
     public Label Vida6;
     @FXML
+    public Rectangle blackScreen;
+    @FXML
     private VBox vBox1;
     @FXML
     private VBox vBox2;
@@ -101,6 +106,11 @@ public class ElegirPokemonInicialController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadPokemonesJugador(idJugadorActual);
         setSelectedSceneElement(0);
+
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.play();
     }
 
     @FXML
@@ -190,18 +200,30 @@ public class ElegirPokemonInicialController implements Initializable {
         AnchorPane selectedElement = getSelectedSceneElement();
         int selectedPos = verifyPosition(coordenadas(selectedElement));
         if (selectedPos != -1) {
-            //codigo que selecciona el pokemon inicial
             JuegoJavafx.getCdb().getJugadores()[idJugadorActual].cambiarPokemonActual(selectedPos);
             if(idJugadorActual == 0){
                 loadPokemonesJugador(1);
                 idJugadorActual = 1;
             }else{
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    JuegoJavafx.setScene(scene, true);
-                } catch (IOException e) {
-                    System.out.println("Error en la carga de BattleScreen.fxml");
+//                    BotonSeleccionado.playSound(false, -20.0f);
+
+                    FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
+                    fadeIn.setFromValue(0.0);
+                    fadeIn.setToValue(1.0);
+
+                    fadeIn.setOnFinished(event -> {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        try {
+                            JuegoJavafx.setScene(new Scene(loader.load()), true);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+//                    menuSound.stopSound();
+                    fadeIn.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
