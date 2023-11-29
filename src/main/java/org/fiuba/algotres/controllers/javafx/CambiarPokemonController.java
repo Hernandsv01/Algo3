@@ -243,16 +243,13 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         put(3, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3, Estado3, Barra3));
         put(4, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4, Estado4, Barra4));
         put(5, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5, Estado5, Barra5));
-
     }};
+
 
 
     private void loadPokemonesJugadorActual() {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Pokemon> pokemons = jugadorActual.getPokemons();
-
-        
-        List<ImageView> imagesEstados = getImages("Estado");
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
             String name = pokemons.get(i).getNombre();
@@ -261,26 +258,21 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             int lifeActual = pokemons.get(i).getVidaActual();
             int lifeMax = pokemons.get(i).getVidaMaxima();
 
-
             ((Label) data.get(i).get(0)).setText(name); //Nombre
             ((Label) data.get(i).get(1)).setText(type.toUpperCase()); //Tipo
             ((Label) data.get(i).get(2)).setText("Nv. " + level); //Nivel
             ((Label) data.get(i).get(3)).setText("PS. " + lifeActual + "/" + lifeMax); //Vida
+            ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
             ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual/lifeMax); //BarraProgreso
 
-            try {
-                ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
-            } catch (Exception e) {
-              e.printStackTrace();
-            }
 
             if (!pokemons.get(i).getEstados().isEmpty()) {
                 switch (pokemons.get(i).getEstados().get(0).getNombre()) {
-                    case "Paralizado" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
-                    case "Envenenado" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
-                    case "Dormido" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
-                    case "Confuso" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
-                    default -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+                    case "Paralizado" -> ((ImageView) data.get(i).get(5)).setImage(ImageLoader.getJavafxImage("imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
+                    case "Envenenado" -> ((ImageView) data.get(i).get(5)).setImage(ImageLoader.getJavafxImage("imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
+                    case "Dormido" -> ((ImageView) data.get(i).get(5)).setImage(ImageLoader.getJavafxImage("imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
+                    case "Confuso" -> ((ImageView) data.get(i).get(5)).setImage(ImageLoader.getJavafxImage("imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
+                    default -> ((ImageView) data.get(i).get(5)).setImage(ImageLoader.getJavafxImage("imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
                 }
             }
         }

@@ -108,7 +108,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
             togglePane(previousElement, ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_ITEM_PANE_COLOR);
         }
         int selectedPos = verifyPosition(pos, CANTIDAD_DE_OPCIONES);
-        String itemElegidoNombre = "";
+        String itemElegidoNombre = "Boton Volver";
         if (selectedPos > -1 && selectedPos < CANTIDAD_DE_OPCIONES - 1) {
             itemElegidoNombre = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
         }
@@ -180,44 +180,44 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         }
     }
 
+    HashMap<String, String> messages = new HashMap<>(){{
+       put("Pocion", "Pocion cura 20 PS. de tu Pokemon.");
+       put("Mega Pocion", "Mega Pocion cura 50 PS. de tu Pokemon.");
+       put("Hiper Pocion", "Hiper Pocion cura 100 PS. de tu Pokemon.");
+       put("Pocion Molesta Alumnos", "Pocion Molesta Alumnos cura 33% de la vida maxima de tu Pokemon.");
+       put("Ataque X", "Ataque X aumenta 10% el ataque de tu Pokemon.");
+       put("Defensa X", "Defensa X aumenta 10% el defensa de tu Pokemon.");
+       put("Revivir", "Revivir trae de vuelta al combate a un Pokemon muerto.");
+       put("Cura Todo", "Cura Todo elimina todos los efectos negativos de tu Pokemon.");
+    }};
+
     private void loadMessage(String nombre) {
         String message = nombre;
         switch (nombre) {
-            case "Pocion" -> message += " cura 20 PS. de tu Pokemon.";
-            case "Mega Pocion" -> message += " cura 50 PS. de tu Pokemon.";
-            case "Hiper Pocion" -> message += " cura 100 PS. de tu Pokemon.";
-            case "Pocion Molesta Alumnos" -> message += " cura 33% de la vida maxima de tu Pokemon.";
-            case "Ataque X" -> message += " aumenta 10% el ataque de tu Pokemon.";
-            case "Defensa X" -> message += " aumenta 10% el defensa de tu Pokemon.";
-            case "Revivir" -> message += " trae de vuelta al combate a un Pokemon muerto.";
-            case "Cura Todo" -> message += " elimina todos los efectos negativos de tu Pokemon.";
-            default -> message = "Desea volver atras?";
+            case "Boton Volver" -> message = "Desea volver atras?";
+            default -> message = messages.get(nombre);
         }
         mensajeInferior.setText(message);
     }
 
-    private List<Label> getLabelsCantidad() {
-        ArrayList<Label> list = new ArrayList<>();
-        list.add(cantidadPocion);
-        list.add(cantidadHiperPocion);
-        list.add(cantidadDefensaX);
-        list.add(cantidadCuraTodo);
-        list.add(cantidadMegaPocion);
-        list.add(cantidadPocionMolestaAlumnos);
-        list.add(cantidadAtaqueX);
-        list.add(cantidadRevivir);
-        return list;
-    }
+    List<Label> dataCantidades = new ArrayList<>(List.of(
+            cantidadPocion,
+            cantidadHiperPocion,
+            cantidadDefensaX,
+            cantidadCuraTodo,
+            cantidadMegaPocion,
+            cantidadPocionMolestaAlumnos,
+            cantidadAtaqueX,
+            cantidadRevivir));
+
 
     private void loadItemsJugadorActual() {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Item> items = jugadorActual.getItems();
-        List<Label> labelsNombre = getLabelsCantidad();
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES - 1; i++) {
             int cant = items.get(i).getCantidad();
-            labelsNombre.get(i).setText(Integer.toString(cant));
-
+            dataCantidades.get(i).setText(Integer.toString(cant));
         }
     }
 }
