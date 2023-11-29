@@ -116,9 +116,6 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     public ProgressBar Barra5;
     @FXML
     public AnchorPane botonVolver;
-
-
-
     @FXML
     private VBox vBox1;
 
@@ -199,7 +196,10 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                Pokemon pokemon = JavafxController.getCdb().getJugadorActual().getPokemons().get(selectedPos);
+                Pokemon pokemon = JavafxController.getCdb().getJugadorActual().getPokemons().get(selectedPos + 1);
+                if (pokemon.getVidaActual() <= 0) {
+                    return;
+                }
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
