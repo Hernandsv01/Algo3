@@ -261,7 +261,7 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
         List<Pokemon> pokemons = jugadorActual.getPokemons();
         HashMap<Integer, List<Node>> data = getData();
 
-        for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
+        for (int i = 0; i < CANTIDAD_DE_OPCIONES - 1; i++) {
             String name = pokemons.get(i).getNombre();
             String type = pokemons.get(i).getTipos().toString();
             String level = pokemons.get(i).getNivel().toString();
