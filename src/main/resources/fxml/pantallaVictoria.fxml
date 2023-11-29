@@ -24,7 +24,7 @@
             <Image url="@../imagenes/otros/entrenador.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="gifPokemon" fitHeight="277.0" fitWidth="211.0" layoutX="1.0" layoutY="193.0" onKeyPressed="#stopSound" onKeyTyped="#stopSound" onMouseClicked="#stopSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+      <ImageView fx:id="gifPokemon" fitHeight="277.0" fitWidth="211.0" layoutX="1.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <image>
             <Image url="@../imagenes/pokemons/Abra-front.gif" />
          </image>

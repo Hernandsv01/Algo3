@@ -15,9 +15,8 @@ import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.utils.ImageLoader;
-import org.fiuba.algotres.utils.enums.DefaultImageType;
-import lombok.Setter;
 import org.fiuba.algotres.utils.enums.CambiarPokemonState;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -35,9 +34,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 6;
-    @Setter
     private CambiarPokemonState state;
-    @Setter
     public Jugador jugadorActual;
     @FXML
     public ProgressBar BarraActual;
@@ -130,8 +127,11 @@ public class CambiarPokemonController extends ItemPokemonController implements I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPokemonesJugadorActual();
-        setSelectedSceneElement(0);
+        try {
+            setSelectedSceneElement(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -209,14 +209,18 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                Pokemon pokemon = jugadorActual.getPokemons().get(selectedPos+1);
+                Pokemon pokemon = jugadorActual.getPokemons().get(selectedPos + 1);
                 if (pokemon.getVidaActual() <= 0) {
                     return;
                 }
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
-                        jugadorActual.cambiarPokemonActual(selectedPos+1);
+                        if(jugadorActual.getPokemonActual().estaVivo()) {
+                            jugadorActual.cambiarPokemonActual(selectedPos + 1);
+                        }else{
+                            jugadorActual.cambiarPokemonActual(selectedPos);
+                        }
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         JuegoJavafx.setScene(scene, true);
@@ -263,7 +267,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             ((Label) data.get(i).get(2)).setText("Nv. " + level); //Nivel
             ((Label) data.get(i).get(3)).setText("PS. " + lifeActual + "/" + lifeMax); //Vida
             ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
-            ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual/lifeMax); //BarraProgreso
+            ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual / lifeMax); //BarraProgreso
 
 
             if (!pokemons.get(i).getEstados().isEmpty()) {
@@ -276,5 +280,14 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                 }
             }
         }
+    }
+
+    public void setState(CambiarPokemonState state) {
+        this.state = state;
+    }
+
+    public void setJugadorActual(Jugador jugadorActual) {
+        this.jugadorActual = jugadorActual;
+        loadPokemonesJugadorActual();
     }
 }

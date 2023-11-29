@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.CampoDeBatalla;
+import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Ataque;
@@ -45,9 +46,9 @@ public class BattleController implements Initializable{
     private static final String ACTIVATED_LABEL_COLOR = "red";
     private static final String DEACTIVATED_LABEL_COLOR = "white";
 
-    private final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
-    private final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\Megalovania.wav");
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
+    private static final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\Megalovania.wav");
 
     private final double DEFAULT_LABEL_WIDTH = 120;
 
@@ -165,7 +166,7 @@ public class BattleController implements Initializable{
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
                 callItemScene();
             } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
-                callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION, JuegoJavafx.getCdb().getTurnoActual());
+                callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION, JuegoJavafx.getCdb().getJugadorActual());
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 1) {
                 accionarRendicion();
             }
@@ -187,6 +188,9 @@ public class BattleController implements Initializable{
 
     private void prepararSiguienteTurno() {
         verificarVictoria();
+        if(state == BattleState.TERMINADA){
+            return;
+        }
         verificarMuertePokemon();
         pantallaMensaje.setText("");
 
@@ -214,15 +218,16 @@ public class BattleController implements Initializable{
 
     public void verificarVictoria(){
         if(JuegoJavafx.getCdb().getGanador() != -1){
+            state = BattleState.TERMINADA;
             callVictoryScene();
         }
     }
 
     public void verificarMuertePokemon(){
         if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getTurnoActual());
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadorActual());
         }else if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().estaVivo()){
-            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getSiguienteTurno());
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()]);
         }
     }
 
@@ -480,11 +485,12 @@ public class BattleController implements Initializable{
         System.out.println("Inicializado!");
     }
 
-    public void callPokemonScene(CambiarPokemonState state, int idJugador){
+    public void callPokemonScene(CambiarPokemonState state, Jugador jugador){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml"));
             Pane pane = loader.load();
             ((CambiarPokemonController)loader.getController()).setState(state);
+            ((CambiarPokemonController)loader.getController()).setJugadorActual(jugador);
 
             Scene scene = new Scene(pane);
             JuegoJavafx.setScene(scene, true);
@@ -506,6 +512,7 @@ public class BattleController implements Initializable{
             Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/pantallaVictoria.fxml")).load());
             JuegoJavafx.setScene(scene, true);
         }catch(IOException e){
+            e.printStackTrace();
             throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
         }
     }
