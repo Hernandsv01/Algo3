@@ -195,15 +195,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
 
     private void loadMessage(String nombre) {
         HashMap<String, String> messages = getMessages();
-        String message = "Esta no es una opcion valida";
-
-        try {
-            message = messages.get(nombre);
-        } catch (NullPointerException e) {
-            message = "Desea volver atras?";
-        } finally {
-            mensajeInferior.setText(message);
-        }
+        mensajeInferior.setText(messages.getOrDefault(nombre, "Desea volver atras?"));
     }
 
     private List<Label> getData() {
