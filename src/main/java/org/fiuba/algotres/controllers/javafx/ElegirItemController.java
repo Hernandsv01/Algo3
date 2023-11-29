@@ -180,40 +180,48 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         }
     }
 
-    HashMap<String, String> messages = new HashMap<>(){{
-       put("Pocion", "Pocion cura 20 PS. de tu Pokemon.");
-       put("Mega Pocion", "Mega Pocion cura 50 PS. de tu Pokemon.");
-       put("Hiper Pocion", "Hiper Pocion cura 100 PS. de tu Pokemon.");
-       put("Pocion Molesta Alumnos", "Pocion Molesta Alumnos cura 33% de la vida maxima de tu Pokemon.");
-       put("Ataque X", "Ataque X aumenta 10% el ataque de tu Pokemon.");
-       put("Defensa X", "Defensa X aumenta 10% el defensa de tu Pokemon.");
-       put("Revivir", "Revivir trae de vuelta al combate a un Pokemon muerto.");
-       put("Cura Todo", "Cura Todo elimina todos los efectos negativos de tu Pokemon.");
-    }};
-
-    private void loadMessage(String nombre) {
-        String message = nombre;
-        switch (nombre) {
-            case "Boton Volver" -> message = "Desea volver atras?";
-            default -> message = messages.get(nombre);
-        }
-        mensajeInferior.setText(message);
+    private HashMap<String, String> getMessages() {
+        return new HashMap<>(){{
+            put("Pocion", "Pocion cura 20 PS. de tu Pokemon.");
+            put("Mega Pocion", "Mega Pocion cura 50 PS. de tu Pokemon.");
+            put("Hiper Pocion", "Hiper Pocion cura 100 PS. de tu Pokemon.");
+            put("Pocion Molesta Alumnos", "Pocion Molesta Alumnos cura 33% de la vida maxima de tu Pokemon.");
+            put("Ataque X", "Ataque X aumenta 10% el ataque de tu Pokemon.");
+            put("Defensa X", "Defensa X aumenta 10% el defensa de tu Pokemon.");
+            put("Revivir", "Revivir trae de vuelta al combate a un Pokemon muerto.");
+            put("Cura Todo", "Cura Todo elimina todos los efectos negativos de tu Pokemon.");
+        }};
     }
 
-    List<Label> dataCantidades = new ArrayList<>(List.of(
-            cantidadPocion,
-            cantidadHiperPocion,
-            cantidadDefensaX,
-            cantidadCuraTodo,
-            cantidadMegaPocion,
-            cantidadPocionMolestaAlumnos,
-            cantidadAtaqueX,
-            cantidadRevivir));
+    private void loadMessage(String nombre) {
+        HashMap<String, String> messages = getMessages();
+        String message = "Esta no es una opcion valida";
 
+        try {
+            message = messages.get(nombre);
+        } catch (NullPointerException e) {
+            message = "Desea volver atras?";
+        } finally {
+            mensajeInferior.setText(message);
+        }
+    }
+
+    private List<Label> getData() {
+        return new ArrayList<>(List.of(
+                cantidadPocion,
+                cantidadHiperPocion,
+                cantidadDefensaX,
+                cantidadCuraTodo,
+                cantidadMegaPocion,
+                cantidadPocionMolestaAlumnos,
+                cantidadAtaqueX,
+                cantidadRevivir));
+    }
 
     private void loadItemsJugadorActual() {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Item> items = jugadorActual.getItems();
+        List<Label> dataCantidades = getData();
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES - 1; i++) {
             int cant = items.get(i).getCantidad();

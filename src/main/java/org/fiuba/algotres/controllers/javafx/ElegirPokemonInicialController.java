@@ -207,18 +207,21 @@ public class ElegirPokemonInicialController implements Initializable {
         }
     }
 
-    HashMap<Integer, List<Node>> data = new HashMap<>() {{
-        put(0, List.of(Nombre1, Tipo1, Nivel1, Vida1, Imagen1));
-        put(1, List.of(Nombre2, Tipo2, Nivel2, Vida2, Imagen2));
-        put(2, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3));
-        put(3, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4));
-        put(4, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5));
-        put(5, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5));
-    }};
+    private HashMap<Integer, List<Node>> getData() {
+        return new HashMap<>() {{
+            put(0, List.of(Nombre1, Tipo1, Nivel1, Vida1, Imagen1));
+            put(1, List.of(Nombre2, Tipo2, Nivel2, Vida2, Imagen2));
+            put(2, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3));
+            put(3, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4));
+            put(4, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5));
+            put(5, List.of(Nombre6, Tipo6, Nivel6, Vida6, Imagen6));
+        }};
+    }
 
     private void loadPokemonesJugador(int id) {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadores()[id];
         List<Pokemon> pokemons = jugadorActual.getPokemons();
+        HashMap<Integer, List<Node>> data = getData();
 
         for (int i = 0; i < CANTIDAD_DE_POKEMONS; i++) {
             String name = pokemons.get(i).getNombre();
