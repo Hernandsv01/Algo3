@@ -10,7 +10,9 @@ import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -70,9 +72,7 @@ public class TerminalControllerTest {
     @Order(3)
     void testTurno() {
         CampoDeBatalla cdb = mock(CampoDeBatalla.class);
-        TerminalController.setComandos(new HashMap<>(){{
-            put(1, mock(Comando.class));
-        }});
+        TerminalController.setComandos(new ArrayList<>(List.of(mock(Comando.class))));
 
         when(TerminalController.getComandos().get(1).ejecutar(cdb)).thenReturn(true);
         when(cdb.getJugadores()).thenReturn(new Jugador[]{});
