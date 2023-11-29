@@ -346,5 +346,27 @@
     "habilidad": "ataque",
     "poder": 35,
     "tipo": "VENENO"
+  },
+  {
+    "id": 45,
+    "nombre": "Neblina",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "Niebla"
+  },
+  {
+    "id": 46,
+    "nombre": "Despejar",
+    "usos": 5,
+    "habilidad": "cambiarclima",
+    "clima": "SinClima"
+  },
+  {
+    "id": 47,
+    "nombre": "Picotazo",
+    "usos": 35,
+    "habilidad": "ataque",
+    "poder": 35,
+    "tipo": "VENENO"
   }
 ]
