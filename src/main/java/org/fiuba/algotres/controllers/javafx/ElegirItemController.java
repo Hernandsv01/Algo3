@@ -4,14 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.JuegoJavafx;
@@ -24,7 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class ElegirItemController implements Initializable {
+public class ElegirItemController extends ItemPokemonController implements Initializable {
     private static final String UP_KEY = "UP";
     private static final String DOWN_KEY = "DOWN";
     private static final String RIGHT_KEY = "RIGHT";
@@ -77,22 +73,7 @@ public class ElegirItemController implements Initializable {
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
             case ENTER_KEY -> select();
-            case ESCAPE_KEY -> goBack();
-        }
-    }
-
-    public static void togglePane(AnchorPane pane){
-        String colorAttribute = Arrays.stream(pane.getStyle().split(";")).filter(s -> s.contains("-fx-border-color")).toList().get(0);
-        String nameAttribute = pane.getId();
-        if(colorAttribute.contains(ACTIVATED_PANE_COLOR)){
-            if (!Objects.equals(nameAttribute, "botonVolver")) {
-                pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DESACTIVATED_ITEM_PANE_COLOR));
-            }
-            pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR));
-        }else if(colorAttribute.contains(DESACTIVATED_ITEM_PANE_COLOR)){
-            pane.setStyle(pane.getStyle().replace(DESACTIVATED_ITEM_PANE_COLOR, ACTIVATED_PANE_COLOR));
-        }else if(colorAttribute.contains(DESACTIVATED_VOLVER_PANE_COLOR)) {
-            pane.setStyle(pane.getStyle().replace(DESACTIVATED_VOLVER_PANE_COLOR, ACTIVATED_PANE_COLOR));
+            case ESCAPE_KEY -> goBack("/fxml/BattleScreen.fxml");
         }
     }
 
@@ -122,15 +103,15 @@ public class ElegirItemController implements Initializable {
         AnchorPane previousElement = getSelectedSceneElement();
 
         if (previousElement != null) {
-            togglePane(previousElement);
+            togglePane(previousElement, ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_ITEM_PANE_COLOR);
         }
-        int selectedPos = verifyPosition(pos);
+        int selectedPos = verifyPosition(pos, CANTIDAD_DE_OPCIONES);
         String itemElegidoNombre = "";
         if (selectedPos > -1 && selectedPos < CANTIDAD_DE_OPCIONES - 1) {
             itemElegidoNombre = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
         }
         loadMessage(itemElegidoNombre);
-        togglePane(getSceneElements().get(pos));
+        togglePane(getSceneElements().get(pos), ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_ITEM_PANE_COLOR);
     }
 
     private void moveSelector(String tecla){
@@ -141,21 +122,21 @@ public class ElegirItemController implements Initializable {
         int newPos;
         switch (tecla) {
             case UP_KEY ->
-                newPos = verifyPosition(actualPos - 1);
+                newPos = verifyPosition(actualPos - 1, CANTIDAD_DE_OPCIONES);
             case DOWN_KEY ->
-                newPos = verifyPosition(actualPos + 1);
+                newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
             case RIGHT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 2) {
-                    newPos = verifyPosition(actualPos + 1);
+                    newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
                 } else {
-                    newPos = verifyPosition(actualPos + OPCIONES_POR_COLUMNA);
+                    newPos = verifyPosition(actualPos + OPCIONES_POR_COLUMNA, CANTIDAD_DE_OPCIONES);
                 }
             }
             case LEFT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 1) {
-                    newPos = verifyPosition(actualPos - 1);
+                    newPos = verifyPosition(actualPos - 1, CANTIDAD_DE_OPCIONES);
                 } else {
-                    newPos = verifyPosition(actualPos - OPCIONES_POR_COLUMNA);
+                    newPos = verifyPosition(actualPos - OPCIONES_POR_COLUMNA, CANTIDAD_DE_OPCIONES);
                 }
             }
             default -> newPos = -1;
@@ -171,22 +152,15 @@ public class ElegirItemController implements Initializable {
         return getSceneElements().indexOf(element);
     }
 
-    private int verifyPosition(int pos){
-        if(pos >= 0 && pos < CANTIDAD_DE_OPCIONES){
-            return pos;
-        }
-        return -1;
-    }
-
     private void select() {
         AnchorPane selectedElement = getSelectedSceneElement();
         String selectedElementId = selectedElement.getId();
-        int selectedPos = verifyPosition(coordenadas(selectedElement));
+        int selectedPos = verifyPosition(coordenadas(selectedElement), CANTIDAD_DE_OPCIONES);
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el item a usar
                 Item itemElegido = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos);
-                OpcionesEmergentes result = confirmarDecision(itemElegido.getNombre());
+                OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonParaAplicarItem.fxml"));
@@ -199,32 +173,8 @@ public class ElegirItemController implements Initializable {
                     }
                 }
             } else {
-                goBack();
+                goBack("/fxml/BattleScreen.fxml");
             }
-        }
-    }
-
-    private OpcionesEmergentes confirmarDecision(String nombreItem){
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage stage = (Stage) confirmation.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
-        confirmation.setTitle("Confirmacion");
-        confirmation.setHeaderText("Estas seguro que deseas elegir " + nombreItem + "?");
-
-        Optional<ButtonType> result = confirmation.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            return OpcionesEmergentes.CONFIRMADA;
-        }
-        return OpcionesEmergentes.DENEGADA;
-    }
-
-    private void goBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-            Scene scene = new Scene(loader.load());
-            JuegoJavafx.setScene(scene);
-        } catch (IOException e) {
-            System.out.println("Error en la carga de BattleScreen.fxml");
         }
     }
 

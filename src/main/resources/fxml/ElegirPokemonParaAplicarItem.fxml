@@ -82,7 +82,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar fx:id="BarraActual" progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="BarraActual" progress="1.0" style="-fx-accent: #00fc00">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -171,7 +171,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar fx:id="Barra1" progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra1" progress="1.0" style="-fx-accent: #00fc00">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -256,7 +256,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar fx:id="Barra2" progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra2" progress="1.0" style="-fx-accent: #00fc00">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -341,7 +341,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar fx:id="Barra3" progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra3" progress="1.0" style="-fx-accent: #00fc00">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -426,7 +426,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar fx:id="Barra4" progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra4" progress="1.0" style="-fx-accent: #00fc00">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
@@ -511,7 +511,7 @@
                                        <children>
                                           <Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="100.0">
                                              <children>
-                                                <ProgressBar fx:id="Barra5" progress="1.0" style="-fx-accent: green">
+                                                <ProgressBar fx:id="Barra5" progress="1.0" style="-fx-accent: #00fc00">
                                                    <padding>
                                                       <Insets left="5.0" right="5.0" top="10.0" />
                                                    </padding>
