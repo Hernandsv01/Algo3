@@ -37,6 +37,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private static final int CANTIDAD_DE_OPCIONES = 6;
     @Setter
     private CambiarPokemonState state;
+    @Setter
+    public Jugador jugadorActual;
     @FXML
     public ProgressBar BarraActual;
     @FXML
@@ -207,14 +209,14 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos + 1);
+                Pokemon pokemon = jugadorActual.getPokemons().get(selectedPos+1);
                 if (pokemon.getVidaActual() <= 0) {
                     return;
                 }
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
-                        JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos + 1);
+                        jugadorActual.cambiarPokemonActual(selectedPos+1);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         JuegoJavafx.setScene(scene, true);
@@ -246,7 +248,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     }
 
     private void loadPokemonesJugadorActual() {
-        List<Pokemon> pokemons = JuegoJavafx.getCdb().getJugadorActual().getPokemons();
+        List<Pokemon> pokemons = jugadorActual.getPokemons();
         HashMap<Integer, List<Node>> data = getData();
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
