@@ -11,12 +11,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.Sound;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -66,19 +68,20 @@ public class PantallaMenuController {
     }
 
     @FXML
-    public void onJugarKeyPressed(KeyEvent keyEvent) {
+    public void onJugarKeyPressed(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             try {
                 BotonSeleccionado.playSound(false, -20.0f);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-                AnchorPane anchorPane = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonInicial.fxml"));
+
+                Pane anchorPane = loader.load();
                 Scene scene = new Scene(anchorPane);
                 Stage gameStage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
-                JuegoJavafx.setScene(scene);
+                JuegoJavafx.setScene(scene, true);
                 gameStage.show();
                 menuSound.stopSound();
             } catch (Exception e) {
-                System.out.println("Ups");
+                e.printStackTrace();
             }
         }
     }

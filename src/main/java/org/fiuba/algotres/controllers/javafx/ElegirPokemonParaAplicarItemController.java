@@ -12,11 +12,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
-import javafx.stage.Stage;
 import lombok.Setter;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;
+import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -212,8 +212,14 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
                         Scene scene = new Scene(loader.load());
                         boolean itemWorks = itemElegido.usar(pokemon);
                         if (itemWorks) {
-                            JavafxController.setScene(scene);
+                            JuegoJavafx.setScene(scene, true);
                         }
+
+                        BattleController battleController = loader.getController();
+                        battleController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeItem(itemElegido.getNombre()));
+                        battleController.accionar();
+
+                        JuegoJavafx.setScene(scene, true);
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }

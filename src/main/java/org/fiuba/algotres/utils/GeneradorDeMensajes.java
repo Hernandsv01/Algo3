@@ -7,6 +7,7 @@ import org.fiuba.algotres.model.clima.TormentaRayos;
 import org.fiuba.algotres.model.estado.Envenenado;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.*;
+import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.model.strategies.AtaqueStrategy;
 import org.fiuba.algotres.model.strategies.DefensaStrategy;
 import org.fiuba.algotres.model.strategies.VidaStrategy;
@@ -59,5 +60,25 @@ public class GeneradorDeMensajes {
 
     public static String generarMensajeMuertePrematura(Pokemon pokemon){
         return pokemon.getNombre() + " murió antes de poder hacer nada!";
+    }
+
+    public static String generarMensajeMuerte(Pokemon pokemon) {
+        return pokemon.getNombre() + " murió!";
+    }
+
+    public static String generarMensajeItem(String item){
+        String message = item;
+        switch (item) {
+            case "Pocion" -> message += " cura 20 PS. de tu Pokemon.";
+            case "Mega Pocion" -> message += " cura 50 PS. de tu Pokemon.";
+            case "Hiper Pocion" -> message += " cura 100 PS. de tu Pokemon.";
+            case "Pocion Molesta Alumnos" -> message += " cura 33% de la vida maxima de tu Pokemon.";
+            case "Ataque X" -> message += " aumenta 10% el ataque de tu Pokemon.";
+            case "Defensa X" -> message += " aumenta 10% el defensa de tu Pokemon.";
+            case "Revivir" -> message += " trae de vuelta al combate a un Pokemon muerto.";
+            case "Cura Todo" -> message += " elimina todos los efectos negativos de tu Pokemon.";
+            default -> message = "Desea volver atras?";
+        }
+        return message;
     }
 }

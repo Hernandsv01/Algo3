@@ -4,10 +4,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.JuegoJavafx;
@@ -165,7 +167,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonParaAplicarItem.fxml"));
                         Scene scene = new Scene(loader.load());
-                        JuegoJavafx.setScene(scene);
+                        JuegoJavafx.setScene(scene, true);
                         ElegirPokemonParaAplicarItemController controller = loader.getController();
                         controller.setItemElegido(itemElegido);
                     } catch (IOException e) {

@@ -36,4 +36,8 @@ public class Sound {
     public void stopSound(){
         clip.close();
     }
+
+    public boolean isPlaying(){
+        return clip != null;
+    }
 }

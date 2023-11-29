@@ -3,6 +3,7 @@ package org.fiuba.algotres.controllers.javafx;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.Sound;
 
 import javafx.application.Application;
@@ -49,7 +50,7 @@ public class PantallaDeVictoriaController  implements Initializable  {
 
 
    public void setMensajeVictoria(){
-       mensajeVictoria.setText("Felicidades " + JavafxController.getCdb().getJugadorActual().getNombre() + " has ganado la partida");
+       mensajeVictoria.setText("Felicidades " + JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getGanador()].getNombre() + " has ganado la partida");
    }
 
    @FXML
@@ -63,7 +64,7 @@ public class PantallaDeVictoriaController  implements Initializable  {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pantalla-menu.fxml"));
             Scene scene = new Scene(loader.load());
-            JavafxController.setScene(scene);
+            JuegoJavafx.setScene(scene, false);
         } catch (IOException e) {
             System.out.println("Error en la carga de BattleScreen.fxml");
         }
@@ -78,7 +79,7 @@ public class PantallaDeVictoriaController  implements Initializable  {
     }
 
     public void setearGifPokemon(){
-    try{gifPokemon.setImage( new Image(getClass().getResourceAsStream("/imagenes/pokemons/"+ JavafxController.getCdb().getJugadorActual().getPokemonActual().getNombre() +"-front.gif")));}
+    try{gifPokemon.setImage( new Image(getClass().getResourceAsStream("/imagenes/pokemons/"+ JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getGanador()].getPokemonActual().getNombre() +"-front.gif")));}
     catch(Exception e){
         System.out.println("No se pudo cargar el gif");
     }

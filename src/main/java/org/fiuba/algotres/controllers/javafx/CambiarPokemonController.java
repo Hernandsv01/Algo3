@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -185,14 +186,18 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                String pokemonNombre = JavafxController.getCdb().getJugadorActual().getPokemons().get(selectedPos).getNombre();
+                String pokemonNombre = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos).getNombre();
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemonNombre + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
                         JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
-                        JavafxController.setScene(scene);
+                        JuegoJavafx.setScene(scene, true);
+
+                        BattleController battleController = loader.getController();
+                        battleController.getColaDeMensajes().add(pokemonNombre + " entra a la batalla!");
+                        battleController.accionar();
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }

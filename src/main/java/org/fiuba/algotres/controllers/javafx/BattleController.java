@@ -6,8 +6,10 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +30,7 @@ import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.BattleState;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -49,10 +52,10 @@ public class BattleController implements Initializable{
 
     private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
 
-    private BattleState state;
+    private static BattleState state = BattleState.NO_EMPEZADA;
 
     private List<Habilidad> habilidades;
-    private List<String> colaDeMensajes;
+    private static List<String> colaDeMensajes;
 
     @FXML
     private AnchorPane rootPane;
@@ -159,33 +162,16 @@ public class BattleController implements Initializable{
                 loadHabilidades();
                 loadHabilidadInfo();
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
-                System.out.println("Items todavía no fue implementado");
-//                state = BattleState.SELECCION_ITEM;
-                // Llamar a scene de items
-                // Comenzar cola de mensajes
+                callItemScene();
             } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
-                System.out.println("Cambiar todavía no fue implementado");
-//                state = BattleState.SELECCION_POKEMON;
-                // Llamar a scene de selección de pokemons
-                // Comenzar cola de mensajes
+                callPokemonScene();
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 1) {
                 accionarRendicion();
             }
         }else{
             if(state == BattleState.SELECCION_HABILIDAD){
-                state = BattleState.ACCIONANDO;
-                boolean llamadaPantallaPokemon = activarHabilidadSeleccionada();
-                loadAcciones();
-                disableGrid();
-                loadNextMessage();
-                if(llamadaPantallaPokemon){
-                    // Llamar pagina pokemon
-                }
-            }else if(state == BattleState.CONFIRMACION_RENDICION){
-                // Verificar si popup fue confirmado o negado
-                //      Negado se vuelve al estado de seleccion de opción
-                //      Aceptado se rinde y se llama a scene de victoria
-
+                activarHabilidadSeleccionada();
+                accionar();
             }else if(state == BattleState.ACCIONANDO){
                 if(!colaDeMensajes.isEmpty()){
                     loadNextMessage();
@@ -223,11 +209,7 @@ public class BattleController implements Initializable{
         });
     }
 
-    /**
-     *
-     * @return true si hay que llamar a la pantalla de selección pokemon
-     */
-    private boolean activarHabilidadSeleccionada(){
+    private void activarHabilidadSeleccionada(){
         // Estados
         boolean puedeAccionar = true;
         Estado estadoInhabilitante = null;
@@ -240,7 +222,7 @@ public class BattleController implements Initializable{
         }
         if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
             colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
-            return true;
+            return;
         }
 
         // Climas
@@ -251,7 +233,7 @@ public class BattleController implements Initializable{
         }
         if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
             colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
-            return true;
+            return;
         }
 
         // Accionar
@@ -261,7 +243,9 @@ public class BattleController implements Initializable{
             colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JuegoJavafx.getCdb().getJugadorActual().getPokemonActual(), true));
         }
 
-        return false;
+        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().estaVivo()){
+            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuerte(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual()));
+        }
     }
 
     private void goBack() {
@@ -333,14 +317,14 @@ public class BattleController implements Initializable{
     }
 
     private void accionarRendicion(){
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmation.setTitle("Confirmation");
-        confirmation.setHeaderText("Estas seguro que te querés rendir?");
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmacion");
+        confirmacion.setHeaderText("Estas seguro que te querés rendir?");
 
-        confirmation.showAndWait().ifPresent(response -> {
+        confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 JuegoJavafx.getCdb().getJugadorActual().rendirse();
-                // Llamar a scene de fin de juego
+                callVictoryScene();
             }
         });
     }
@@ -457,31 +441,67 @@ public class BattleController implements Initializable{
     private record Coordinate(int posCol, int posRow) {
     }
 
-    private void accionarItem() {
+    public void accionar() {
+        state = BattleState.ACCIONANDO;
+        loadAcciones();
+        disableGrid();
+        if(!colaDeMensajes.isEmpty()){
+            loadNextMessage();
+        }else{
+            state = BattleState.SELECCION_ACCION;
+            prepararSiguienteTurno();
+        }
 
+        renderHealth(false);
     }
 
-    private void accionarCambioPokemon() {
-
+    public void initializeData(){
+        if(!backgroundMusic.isPlaying()){
+            backgroundMusic.playSound(true, -10.0f);
+        }
+        state = BattleState.SELECCION_ACCION;
+        colaDeMensajes = new ArrayList<>();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backgroundMusic.playSound(true, -10.0f);
-        state = BattleState.SELECCION_ACCION;
-        habilidades = new ArrayList<>();
-        colaDeMensajes = new ArrayList<>();
+        if(state == BattleState.NO_EMPEZADA){
+            initializeData();
+        }
         renderImages();
         renderHealth(true);
+        habilidades = new ArrayList<>();
+
         System.out.println("Inicializado!");
     }
 
-//    public void callPokemonScene(){
-//        try {
-//            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml")).load());
-//        }catch(IOException e){
-//            throw new RuntimeException("Algo anduvo mal con los archivos FXMLs");
-//        }
-//    }
+    public void callPokemonScene(){
+        try {
+            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml")).load());
+            JuegoJavafx.setScene(scene, true);
+        }catch(IOException e){
+            throw new RuntimeException("Algo anduvo mal con el archivo de cambiar pokemon");
+        }
+    }
+    public void callItemScene(){
+        try {
+            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/ElegirItem.fxml")).load());
+            JuegoJavafx.setScene(scene, true);
+        }catch(IOException e){
+            throw new RuntimeException("Algo anduvo mal con el archivo de items");
+        }
+    }
+    public void callVictoryScene(){
+        try {
+            backgroundMusic.stopSound();
+            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/pantallaVictoria.fxml")).load());
+            JuegoJavafx.setScene(scene, true);
+        }catch(IOException e){
+            throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
+        }
+    }
 
+    public List<String> getColaDeMensajes(){
+        return colaDeMensajes;
+    }
 }

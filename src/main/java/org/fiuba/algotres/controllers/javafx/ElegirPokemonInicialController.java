@@ -1,7 +1,9 @@
 package org.fiuba.algotres.controllers.javafx;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,6 +13,7 @@ import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,10 +94,12 @@ public class ElegirPokemonInicialController implements Initializable {
     @FXML
     private VBox vBox2;
 
+    private static int idJugadorActual = 0;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPokemonesJugadorActual();
+        loadPokemonesJugador(idJugadorActual);
         setSelectedSceneElement(0);
     }
 
@@ -186,7 +191,19 @@ public class ElegirPokemonInicialController implements Initializable {
         int selectedPos = verifyPosition(coordenadas(selectedElement));
         if (selectedPos != -1) {
             //codigo que selecciona el pokemon inicial
-            JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos);
+            JuegoJavafx.getCdb().getJugadores()[idJugadorActual].cambiarPokemonActual(selectedPos);
+            if(idJugadorActual == 0){
+                loadPokemonesJugador(1);
+                idJugadorActual = 1;
+            }else{
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    JuegoJavafx.setScene(scene, true);
+                } catch (IOException e) {
+                    System.out.println("Error en la carga de BattleScreen.fxml");
+                }
+            }
         }
     }
 
@@ -240,8 +257,8 @@ public class ElegirPokemonInicialController implements Initializable {
         return list;
     }
 
-    private void loadPokemonesJugadorActual() {
-        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
+    private void loadPokemonesJugador(int id) {
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadores()[id];
         List<Pokemon> pokemons = jugadorActual.getPokemons();
         List<Label> labelsNombre = getLabel("Nombre");
         List<Label> labelsTipo = getLabel("Tipo");
