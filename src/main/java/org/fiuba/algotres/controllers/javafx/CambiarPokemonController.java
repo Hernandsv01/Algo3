@@ -11,8 +11,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import lombok.Setter;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.utils.enums.CambiarPokemonState;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -30,6 +32,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 6;
+    @Setter
+    private CambiarPokemonState state;
     @FXML
     public ProgressBar BarraActual;
     @FXML
@@ -133,7 +137,11 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
             case ENTER_KEY -> select();
-            case ESCAPE_KEY -> goBack("/fxml/BattleScreen.fxml");
+            case ESCAPE_KEY -> {
+                if (state == CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION) {
+                    goBack("/fxml/BattleScreen.fxml");
+                }
+            }
         }
     }
 
@@ -209,7 +217,9 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }
-                } else {
+                }
+            } else {
+                if (state == CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION) {
                     goBack("/fxml/BattleScreen.fxml");
                 }
             }
