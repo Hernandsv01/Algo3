@@ -12,6 +12,8 @@ import javafx.scene.layout.*;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -279,7 +281,7 @@ public class ElegirPokemonInicialController implements Initializable {
             labelsVida.get(i).setText("PS. " + lifeActual + "/" + lifeMax);
 
             try {
-                images.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
+                images.get(i).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.OTRO));
             } catch (Exception e) {
               e.printStackTrace();
             }

@@ -17,6 +17,8 @@ import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
+import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -343,43 +345,18 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
             bar.setProgress((double) lifeActual/lifeMax);
 
             try {
-                imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
+                imagesPortadas.get(i).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.OTRO));
             } catch (Exception e) {
               e.printStackTrace();
             }
 
             if (!pokemons.get(i).getEstados().isEmpty()) {
                 switch (pokemons.get(i).getEstados().get(0).getNombre()) {
-                    case "Paralizado":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Paralizado.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    case "Envenenado":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Envenenado.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    case "Dormido":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Dormido.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    case "Confuso":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Confuso.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    default:
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/SinEstado.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    case "Paralizado" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
+                    case "Envenenado" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
+                    case "Dormido" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
+                    case "Confuso" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
+                    default -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
                 }
             }
         }

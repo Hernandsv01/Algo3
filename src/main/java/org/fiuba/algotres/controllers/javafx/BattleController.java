@@ -27,8 +27,10 @@ import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Ataque;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
+import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.BattleState;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -360,9 +362,7 @@ public class BattleController implements Initializable{
 
     private void renderImages(){
         CampoDeBatalla cdb = JuegoJavafx.getCdb();
-        imagenClima.setImage(new Image(
-                getClass().getResourceAsStream("/imagenes/climas/" + capitalizar(cdb.getClima().getNombre()) + ".gif")
-        ));
+        imagenClima.setImage(ImageLoader.getJavafxImage("/imagenes/climas/" + capitalizar(cdb.getClima().getNombre()) + ".gif", DefaultImageType.CLIMA));
 
         numeroVidaAtacante.setText(
                 cdb.getJugadorActual().getPokemonActual().getVidaActual() + "/" +
@@ -370,17 +370,11 @@ public class BattleController implements Initializable{
         );
         barraVidaAtacante.setProgress((double) cdb.getJugadorActual().getPokemonActual().getVidaActual() /cdb.getJugadorActual().getPokemonActual().getVidaMaxima());
         if(!cdb.getJugadorActual().getPokemonActual().getEstados().isEmpty()){
-            imagenEstadoAtacante.setImage(new Image(
-                    getClass().getResourceAsStream("/imagenes/estados/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getEstados().get(0).getNombre()) + ".gif")
-            ));
+            imagenEstadoAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/estados/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getEstados().get(0).getNombre()) + ".gif", DefaultImageType.ESTADO));
         }else{
-            imagenEstadoAtacante.setImage(new Image(
-                    getClass().getResourceAsStream("/imagenes/estados/SinEstado.gif")
-            ));
+            imagenEstadoAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
         }
-        imagenAtacante.setImage(new Image(
-                getClass().getResourceAsStream("/imagenes/pokemons/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getNombre()) + "-back.gif")
-        ));
+        imagenAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getNombre()) + "-back.gif", DefaultImageType.POKEMON));
 
         numeroVidaVictima.setText(
                 cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() + "/" +
@@ -388,17 +382,11 @@ public class BattleController implements Initializable{
         );
         barraVidaVictima.setProgress((double) cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() /cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaMaxima());
         if(!cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().isEmpty()){
-            imagenEstadoVictima.setImage(new Image(
-                    getClass().getResourceAsStream("/imagenes/estados/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().get(0).getNombre()) + ".gif")
-            ));
+            imagenEstadoVictima.setImage(ImageLoader.getJavafxImage("/imagenes/estados/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().get(0).getNombre()) + ".gif", DefaultImageType.ESTADO));
         }else{
-            imagenEstadoVictima.setImage(new Image(
-                    getClass().getResourceAsStream("/imagenes/estados/SinEstado.gif")
-            ));
+            imagenEstadoVictima.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
         }
-        imagenVictima.setImage(new Image(
-                getClass().getResourceAsStream("/imagenes/pokemons/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre()) + "-front.gif")
-        ));
+        imagenVictima.setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre()) + "-front.gif", DefaultImageType.POKEMON));
     }
 
     private void renderHealth(boolean transicionRapida){
