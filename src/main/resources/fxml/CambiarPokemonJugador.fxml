@@ -64,6 +64,11 @@
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
+                                                <ImageView fx:id="EstadoActual" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
@@ -153,6 +158,11 @@
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
+                                                <ImageView fx:id="Estado1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
@@ -238,6 +248,11 @@
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
+                                                <ImageView fx:id="Estado2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
@@ -323,6 +338,11 @@
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
+                                                <ImageView fx:id="Estado3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
@@ -408,6 +428,11 @@
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
+                                                <ImageView fx:id="Estado4" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
@@ -493,6 +518,11 @@
                                                       <Font name="PKMN RBYGSC Regular" size="8.0" />
                                                    </font>
                                                 </Label>
+                                                <ImageView fx:id="Estado5" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
