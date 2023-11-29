@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +14,6 @@ import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 import lombok.Setter;
@@ -159,13 +157,13 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         return v1;
     }
 
-    private AnchorPane getSelectedSceneElement(){
+    private AnchorPane getSelectedSceneElement() {
         return getSceneElements().stream()
                 .filter(anchorPane -> anchorPane.getStyle().contains("-fx-border-color: #efb810"))
                 .findFirst().orElse(null);
     }
 
-    private void setSelectedSceneElement(int pos){
+    private void setSelectedSceneElement(int pos) {
         AnchorPane previousElement = getSelectedSceneElement();
 
         if (previousElement != null) {
@@ -174,9 +172,9 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         togglePane(getSceneElements().get(pos), ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_POKEMON_COLOR);
     }
 
-    private void moveSelector(String tecla){
+    private void moveSelector(String tecla) {
         AnchorPane currentElement = getSelectedSceneElement();
-        if(currentElement == null) return;
+        if (currentElement == null) return;
 
         int actualPos = coordenadas(currentElement);
         int newPos = 0;
@@ -185,14 +183,14 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             case DOWN_KEY -> newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
             case RIGHT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 2) {
-                newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
+                    newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
                 }
             }
             case LEFT_KEY -> newPos = verifyPosition(actualPos, CANTIDAD_DE_OPCIONES);
             default -> newPos = -1;
-        };
+        }
 
-        if(newPos == -1){
+        if (newPos == -1) {
             return;
         }
         setSelectedSceneElement(newPos);
@@ -209,14 +207,14 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos+1);
+                Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos + 1);
                 if (pokemon.getVidaActual() <= 0) {
                     return;
                 }
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
-                        JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos+1);
+                        JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos + 1);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         JuegoJavafx.setScene(scene, true);
@@ -248,8 +246,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
 
 
     private void loadPokemonesJugadorActual() {
-        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
-        List<Pokemon> pokemons = jugadorActual.getPokemons();
+        List<Pokemon> pokemons = JuegoJavafx.getCdb().getJugadorActual().getPokemons();
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
             String name = pokemons.get(i).getNombre();

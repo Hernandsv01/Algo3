@@ -14,10 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
@@ -30,6 +27,7 @@ import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.BattleState;
+import org.fiuba.algotres.utils.enums.CambiarPokemonState;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
@@ -166,7 +164,7 @@ public class BattleController implements Initializable{
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
                 callItemScene();
             } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
-                callPokemonScene();
+                callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION, JuegoJavafx.getCdb().getTurnoActual());
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 1) {
                 accionarRendicion();
             }
@@ -187,6 +185,7 @@ public class BattleController implements Initializable{
     }
 
     private void prepararSiguienteTurno() {
+        verificarMuertePokemon();
         pantallaMensaje.setText("");
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
@@ -209,6 +208,14 @@ public class BattleController implements Initializable{
             pantallaMensaje.setText("Elija una opción");
             setSelectedGridElement(0, 0);
         });
+    }
+
+    public void verificarMuertePokemon(){
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getTurnoActual());
+        }else if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().estaVivo()){
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getSiguienteTurno());
+        }
     }
 
     private void activarHabilidadSeleccionada(){
@@ -463,9 +470,13 @@ public class BattleController implements Initializable{
         System.out.println("Inicializado!");
     }
 
-    public void callPokemonScene(){
+    public void callPokemonScene(CambiarPokemonState state, int idJugador){
         try {
-            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml")).load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml"));
+            Pane pane = loader.load();
+            ((CambiarPokemonController)loader.getController()).setState(state);
+
+            Scene scene = new Scene(pane);
             JuegoJavafx.setScene(scene, true);
         }catch(IOException e){
             throw new RuntimeException("Algo anduvo mal con el archivo de cambiar pokemon");
