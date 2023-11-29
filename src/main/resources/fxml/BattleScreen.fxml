@@ -21,15 +21,16 @@
         <ImageView fitHeight="320.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../imagenes/otros/background.png" />
         </ImageView>
+                <ImageView fx:id="imagenClima" fitHeight="481.0" opacity="0.9" fitWidth="640.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
+            <Image url="@../imagenes/climas/Niebla.gif" />
+        </ImageView>
         <ImageView fx:id="imagenAtacante" fitHeight="197.0" fitWidth="193.0" layoutX="63.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../imagenes/pokemons/Charmander-back.gif" />
         </ImageView>
         <ImageView fx:id="imagenVictima" fitHeight="150.0" fitWidth="94.0" layoutX="422.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../imagenes/pokemons/Bulbasaur-front.gif" />
         </ImageView>
-        <ImageView fx:id="imagenClima" fitHeight="481.0" fitWidth="640.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
-            <Image url="@../imagenes/climas/Lluvia.gif" />
-        </ImageView>
+
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="182.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
         <HBox fx:id="informationBox" layoutY="299.0" prefWidth="640.0">
             <TextArea fx:id="pantallaMensaje" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="320.0" style="-fx-border-color: #D3B38C; -fx-border-width: 10px; -fx-background-color: #F6E1CE; -fx-border-radius: 0;" text="Elija una opción." wrapText="true">
