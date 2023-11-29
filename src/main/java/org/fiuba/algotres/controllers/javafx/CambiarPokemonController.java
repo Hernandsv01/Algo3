@@ -3,6 +3,7 @@ package org.fiuba.algotres.controllers.javafx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -17,6 +18,8 @@ import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
+import lombok.Setter;
+import org.fiuba.algotres.utils.enums.CambiarPokemonState;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -34,6 +37,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 6;
+    @Setter
+    private CambiarPokemonState state;
     @FXML
     public ProgressBar BarraActual;
     @FXML
@@ -137,7 +142,11 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
             case ENTER_KEY -> select();
-            case ESCAPE_KEY -> goBack("/fxml/BattleScreen.fxml");
+            case ESCAPE_KEY -> {
+                if (state == CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION) {
+                    goBack("/fxml/BattleScreen.fxml");
+                }
+            }
         }
     }
 
@@ -218,93 +227,31 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }
-                } else {
+                }
+            } else {
+                if (state == CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION) {
                     goBack("/fxml/BattleScreen.fxml");
                 }
             }
         }
     }
 
-    private List<Label> getLabel(String tipo) {
-        ArrayList<Label> list = new ArrayList<>();
+    HashMap<Integer, List<Node>> data = new HashMap<>() {{
+        put(0, List.of(NombreActual, TipoActual, NivelActual, VidaActual, ImagenActual, EstadoActual, BarraActual));
+        put(1, List.of(Nombre1, Tipo1, Nivel1, Vida1, Imagen1, Estado1, Barra1));
+        put(2, List.of(Nombre2, Tipo2, Nivel2, Vida2, Imagen2, Estado2, Barra2));
+        put(3, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3, Estado3, Barra3));
+        put(4, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4, Estado4, Barra4));
+        put(5, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5, Estado5, Barra5));
 
-        switch (tipo) {
-            case "Nombre":
-                list.add(NombreActual);
-                list.add(Nombre1);
-                list.add(Nombre2);
-                list.add(Nombre3);
-                list.add(Nombre4);
-                list.add(Nombre5);
+    }};
 
-            case "Tipo":
-                list.add(TipoActual);
-                list.add(Tipo1);
-                list.add(Tipo2);
-                list.add(Tipo3);
-                list.add(Tipo4);
-                list.add(Tipo5);
-
-            case "Nivel":
-                list.add(NivelActual);
-                list.add(Nivel1);
-                list.add(Nivel2);
-                list.add(Nivel3);
-                list.add(Nivel4);
-                list.add(Nivel5);
-
-            case "Vida":
-                list.add(VidaActual);
-                list.add(Vida1);
-                list.add(Vida2);
-                list.add(Vida3);
-                list.add(Vida4);
-                list.add(Vida5);
-        }
-        return list;
-    }
-
-    private List<ProgressBar> getLifeBars() {
-        ArrayList<ProgressBar> list = new ArrayList<>();
-        list.add(BarraActual);
-        list.add(Barra1);
-        list.add(Barra2);
-        list.add(Barra3);
-        list.add(Barra4);
-        list.add(Barra5);
-        return list;
-    }
-
-    private List<ImageView> getImages(String tipo) {
-        ArrayList<ImageView> list = new ArrayList<>();
-        switch (tipo) {
-            case "Portada":
-                list.add(ImagenActual);
-                list.add(Imagen1);
-                list.add(Imagen2);
-                list.add(Imagen3);
-                list.add(Imagen4);
-                list.add(Imagen5);
-            case "Estado":
-                list.add(EstadoActual);
-                list.add(Estado1);
-                list.add(Estado2);
-                list.add(Estado3);
-                list.add(Estado4);
-                list.add(Estado5);
-        }
-        return list;
-    }
 
     private void loadPokemonesJugadorActual() {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Pokemon> pokemons = jugadorActual.getPokemons();
-        List<Label> labelsNombre = getLabel("Nombre");
-        List<Label> labelsTipo = getLabel("Tipo");
-        List<Label> labelsNivel = getLabel("Nivel");
-        List<Label> labelsVida = getLabel("Vida");
-        List<ProgressBar> lifeBars = getLifeBars();
-        List<ImageView> imagesPortadas = getImages("Portada");
+
+        
         List<ImageView> imagesEstados = getImages("Estado");
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
@@ -313,16 +260,16 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             String level = pokemons.get(i).getNivel().toString();
             int lifeActual = pokemons.get(i).getVidaActual();
             int lifeMax = pokemons.get(i).getVidaMaxima();
-            ProgressBar bar = lifeBars.get(i);
 
-            labelsNombre.get(i).setText(name);
-            labelsNivel.get(i).setText("Nv. " + level);
-            labelsTipo.get(i).setText(type.toUpperCase());
-            labelsVida.get(i).setText("PS. " + lifeActual + "/" + lifeMax);
-            bar.setProgress((double) lifeActual/lifeMax);
+
+            ((Label) data.get(i).get(0)).setText(name); //Nombre
+            ((Label) data.get(i).get(1)).setText(type.toUpperCase()); //Tipo
+            ((Label) data.get(i).get(2)).setText("Nv. " + level); //Nivel
+            ((Label) data.get(i).get(3)).setText("PS. " + lifeActual + "/" + lifeMax); //Vida
+            ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual/lifeMax); //BarraProgreso
 
             try {
-                imagesPortadas.get(i).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
+                ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
             } catch (Exception e) {
               e.printStackTrace();
             }
