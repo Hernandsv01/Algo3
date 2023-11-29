@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -13,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lombok.Setter;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
@@ -24,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class ElegirPokemonParaAplicarItemController implements Initializable {
+public class ElegirPokemonParaAplicarItemController extends ItemPokemonController implements Initializable {
     private static final String UP_KEY = "UP";
     private static final String DOWN_KEY = "DOWN";
     private static final String RIGHT_KEY = "RIGHT";
@@ -117,9 +114,6 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     @FXML
     public AnchorPane botonVolver;
 
-    public ElegirPokemonParaAplicarItemController() {
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadPokemonesJugadorActual();
@@ -134,22 +128,7 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
             case ENTER_KEY -> select();
-            case ESCAPE_KEY -> goBack();
-        }
-    }
-
-    public static void togglePane(AnchorPane pane){
-        String colorAttribute = Arrays.stream(pane.getStyle().split(";")).filter(s -> s.contains("-fx-border-color")).toList().get(0);
-        String nameAttribute = pane.getId();
-        if(colorAttribute.contains(ACTIVATED_PANE_COLOR)){
-            if (!Objects.equals(nameAttribute, "botonVolver")) {
-                pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DESACTIVATED_POKEMON_COLOR));
-            }
-            pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR));
-        }else if(colorAttribute.contains(DESACTIVATED_POKEMON_COLOR)){
-            pane.setStyle(pane.getStyle().replace(DESACTIVATED_POKEMON_COLOR, ACTIVATED_PANE_COLOR));
-        }else if(colorAttribute.contains(DESACTIVATED_VOLVER_PANE_COLOR)) {
-            pane.setStyle(pane.getStyle().replace(DESACTIVATED_VOLVER_PANE_COLOR, ACTIVATED_PANE_COLOR));
+            case ESCAPE_KEY -> goBack("/fxml/ElegirItem.fxml");
         }
     }
 
@@ -176,9 +155,9 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         AnchorPane previousElement = getSelectedSceneElement();
 
         if (previousElement != null) {
-            togglePane(previousElement);
+            togglePane(previousElement, ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_POKEMON_COLOR);
         }
-        togglePane(getSceneElements().get(pos));
+        togglePane(getSceneElements().get(pos), ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_POKEMON_COLOR);
     }
 
     private void moveSelector(String tecla){
@@ -188,18 +167,18 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         int actualPos = coordenadas(currentElement);
         int newPos = -1;
         switch (tecla) {
-            case UP_KEY -> newPos = verifyPosition(actualPos - 1);
-            case DOWN_KEY -> newPos = verifyPosition(actualPos + 1);
+            case UP_KEY -> newPos = verifyPosition(actualPos - 1, CANTIDAD_DE_OPCIONES);
+            case DOWN_KEY -> newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
             case RIGHT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 2) {
-                    newPos = verifyPosition(actualPos + 1);
+                    newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
                 } else if (actualPos == 0) {
-                    newPos = verifyPosition(actualPos + 1);
+                    newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
                 }
             }
             case LEFT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 1) {
-                    newPos = verifyPosition(actualPos - 1);
+                    newPos = verifyPosition(actualPos - 1, CANTIDAD_DE_OPCIONES);
                 } else if (actualPos < CANTIDAD_DE_OPCIONES - 1 && actualPos > 0) {
                     newPos = 0;
                 }
@@ -216,59 +195,30 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         return getSceneElements().indexOf(element);
     }
 
-    private int verifyPosition(int pos){
-        if(pos >= 0 && pos < CANTIDAD_DE_OPCIONES){
-            return pos;
-        }
-        return -1;
-    }
-
     private void select() {
         AnchorPane selectedElement = getSelectedSceneElement();
         String selectedElementId = selectedElement.getId();
-        int selectedPos = verifyPosition(coordenadas(selectedElement));
+        int selectedPos = verifyPosition(coordenadas(selectedElement), CANTIDAD_DE_OPCIONES);
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
                 Pokemon pokemon = JavafxController.getCdb().getJugadorActual().getPokemons().get(selectedPos);
-                OpcionesEmergentes result = confirmarDecision(pokemon.getNombre(), itemElegido.getNombre());
+                OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para aplicar " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
-                        JavafxController.setScene(scene);
-                        itemElegido.usar(pokemon);
+                        boolean itemWorks = itemElegido.usar(pokemon);
+                        if (itemWorks) {
+                            JavafxController.setScene(scene);
+                        }
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }
                 } else {
-                    goBack();
+                    goBack("/fxml/ElegirItem.fxml");
                 }
             }
-        }
-    }
-
-    private OpcionesEmergentes confirmarDecision(String nombrePokemon, String nombreItem){
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage stage = (Stage) confirmation.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
-        confirmation.setTitle("Confirmacion");
-        confirmation.setHeaderText("Estas seguro que deseas elegir a " + nombrePokemon + " para aplicar " +nombreItem + "?");
-
-        Optional<ButtonType> result = confirmation.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            return OpcionesEmergentes.CONFIRMADA;
-        }
-        return OpcionesEmergentes.DENEGADA;
-    }
-
-    private void goBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirItem.fxml"));
-            Scene scene = new Scene(loader.load());
-            JavafxController.setScene(scene);
-        } catch (IOException e) {
-            System.out.println("Error en la carga de ElegirItem.fxml");
         }
     }
 
