@@ -127,11 +127,62 @@ public class CambiarPokemonController extends ItemPokemonController implements I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            setSelectedSceneElement(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setSelectedSceneElement(0);
+        Barra1.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra1.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra1.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra1.progressProperty())
+        );
+        Barra2.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra2.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra2.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra2.progressProperty())
+        );
+        Barra3.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra3.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra3.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra3.progressProperty())
+        );
+        Barra4.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra4.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra4.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra4.progressProperty())
+        );
+        Barra5.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra5.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra5.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra5.progressProperty())
+        );
     }
 
     @FXML

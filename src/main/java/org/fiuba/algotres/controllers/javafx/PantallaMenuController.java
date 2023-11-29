@@ -52,6 +52,10 @@ public class PantallaMenuController {
     public void initialize() {
         menuSound.playSound(true, -25.0f);
         stackPane.setMouseTransparent(true);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.play();
 
         jugarButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {

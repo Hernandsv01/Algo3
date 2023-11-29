@@ -6,9 +6,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Rectangle?>
 <StackPane fx:id="stackPane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fiuba.algotres.controllers.javafx.PantallaMenuController">
     <!-- Background Image -->
     <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true">
@@ -40,7 +40,7 @@
             <Font name="PKMN RBYGSC Regular" size="17.0" />
         </font>
     </Label>
-    <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
+    <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
 
     <!-- Style buttons -->
     <stylesheets>

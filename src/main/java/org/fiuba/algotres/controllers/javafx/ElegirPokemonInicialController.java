@@ -17,6 +17,7 @@ import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
@@ -98,6 +99,8 @@ public class ElegirPokemonInicialController implements Initializable {
     private VBox vBox1;
     @FXML
     private VBox vBox2;
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
 
     private static int idJugadorActual = 0;
 
@@ -182,6 +185,7 @@ public class ElegirPokemonInicialController implements Initializable {
         if(newPos == -1){
             return;
         }
+        changedOption.playSound(false, 0);
         setSelectedSceneElement(newPos);
     }
 
@@ -201,6 +205,7 @@ public class ElegirPokemonInicialController implements Initializable {
         int selectedPos = verifyPosition(coordenadas(selectedElement));
         if (selectedPos != -1) {
             JuegoJavafx.getCdb().getJugadores()[idJugadorActual].cambiarPokemonActual(selectedPos);
+            selectedOption.playSound(false, 0);
             if(idJugadorActual == 0){
                 FadeTransition fadeIn = new FadeTransition(Duration.millis(300), blackScreen);
                 fadeIn.setFromValue(0.0);
@@ -217,8 +222,6 @@ public class ElegirPokemonInicialController implements Initializable {
                 fadeIn.play();
             }else{
                 try {
-//                    BotonSeleccionado.playSound(false, -20.0f);
-
                     FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
                     fadeIn.setFromValue(0.0);
                     fadeIn.setToValue(1.0);

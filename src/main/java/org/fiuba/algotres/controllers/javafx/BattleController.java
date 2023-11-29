@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -48,13 +49,38 @@ public class BattleController implements Initializable{
 
     private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
     private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
-    private static final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\Megalovania.wav");
+    private static final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\MusicaBatalla.wav");
+    private static final Sound sonidaAtaque = new Sound("src\\main\\resources\\audios\\SonidoAtaque.wav");
 
     private final double DEFAULT_LABEL_WIDTH = 120;
 
     private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
 
     private static BattleState state = BattleState.NO_EMPEZADA;
+
+    @FXML
+    public ImageView pokebolaAtacanteSuplente1;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente2;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente3;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente4;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente5;
+    @FXML
+    public ImageView pokebolaVictimaSuplente1;
+    @FXML
+    public ImageView pokebolaVictimaSuplente2;
+    @FXML
+    public ImageView pokebolaVictimaSuplente3;
+    @FXML
+    public ImageView pokebolaVictimaSuplente4;
+    @FXML
+    public ImageView pokebolaVictimaSuplente5;
+
+    private final List<ImageView> pokebolasAtacante = new ArrayList<>();
+    private final List<ImageView> pokebolasVictima = new ArrayList<>();
 
     private List<Habilidad> habilidades;
     private static List<String> colaDeMensajes;
@@ -335,6 +361,7 @@ public class BattleController implements Initializable{
         Pokemon victima = JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual();
 
         habilidad.accionarHabilidad(atacante, victima);
+        sonidaAtaque.playSound(false, 0);
         colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEfectoHabilidad(habilidad, atacante, victima));
     }
 
@@ -444,6 +471,26 @@ public class BattleController implements Initializable{
         timelineVictima.play();
     }
 
+//    public void renderPokebolas(){
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente1);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente2);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente3);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente4);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente5);
+//
+//        pokebolasVictima.add(pokebolaVictimaSuplente1);
+//        pokebolasVictima.add(pokebolaVictimaSuplente2);
+//        pokebolasVictima.add(pokebolaVictimaSuplente3);
+//        pokebolasVictima.add(pokebolaVictimaSuplente4);
+//        pokebolasVictima.add(pokebolaVictimaSuplente5);
+//
+//        for (int i = 1; i <= pokebolasAtacante.size(); i++) {
+//            if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(i).estaVivo()){
+//                pokebolasAtacante.get(i-1).setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+//            }
+//        }
+//    }
+
     private static String capitalizar(String string){
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
@@ -482,10 +529,33 @@ public class BattleController implements Initializable{
             fadeOut.setToValue(0.0);
             fadeOut.play();
         }
+//        renderPokebolas();
         renderImages();
         renderHealth(true);
         habilidades = new ArrayList<>();
-
+        barraVidaAtacante.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (barraVidaAtacante.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (barraVidaAtacante.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, barraVidaAtacante.progressProperty())
+        );
+        barraVidaVictima.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (barraVidaVictima.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (barraVidaVictima.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, barraVidaVictima.progressProperty())
+        );
+        blackScreen.setOpacity(0);
         System.out.println("Inicializado!");
     }
 
