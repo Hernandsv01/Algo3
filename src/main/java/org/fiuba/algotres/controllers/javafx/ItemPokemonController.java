@@ -7,6 +7,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public abstract class ItemPokemonController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(ruta));
             Scene scene = new Scene(loader.load());
-            JavafxController.setScene(scene);
+            JuegoJavafx.setScene(scene, true);
         } catch (IOException e) {
             System.out.println("Error en la carga de " + ruta);
         }

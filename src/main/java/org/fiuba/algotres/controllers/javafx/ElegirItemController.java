@@ -4,12 +4,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.utils.enums.BattleState;
@@ -107,8 +110,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         int selectedPos = verifyPosition(pos, CANTIDAD_DE_OPCIONES);
         String itemElegidoNombre = "";
         if (selectedPos > -1 && selectedPos < CANTIDAD_DE_OPCIONES - 1) {
-            itemElegidoNombre = JavafxController.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
-            System.out.println(itemElegidoNombre);
+            itemElegidoNombre = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
         }
         loadMessage(itemElegidoNombre);
         togglePane(getSceneElements().get(pos), ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_ITEM_PANE_COLOR);
@@ -159,22 +161,17 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el item a usar
-                Item itemElegido = JavafxController.getCdb().getJugadorActual().getItems().get(selectedPos);
+                Item itemElegido = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos);
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonParaAplicarItem.fxml"));
-
-
                         Scene scene = new Scene(loader.load());
-                        JavafxController.setScene(scene);
-
+                        JuegoJavafx.setScene(scene, true);
                         ElegirPokemonParaAplicarItemController controller = loader.getController();
                         controller.setItemElegido(itemElegido);
                     } catch (IOException e) {
                         System.out.println("Error en la carga de ElegirPokemonParaAplicarItem.fxml");
-                    } catch (NullPointerException e) {
-                        System.out.println("no hay controller");
                     }
                 }
             } else {
@@ -213,7 +210,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
     }
 
     private void loadItemsJugadorActual() {
-        Jugador jugadorActual = JavafxController.getCdb().getJugadorActual();
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Item> items = jugadorActual.getItems();
         List<Label> labelsNombre = getLabelsCantidad();
 

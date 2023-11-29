@@ -1,15 +1,21 @@
 package org.fiuba.algotres.controllers.javafx;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,10 +96,12 @@ public class ElegirPokemonInicialController implements Initializable {
     @FXML
     private VBox vBox2;
 
+    private static int idJugadorActual = 0;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPokemonesJugadorActual();
+        loadPokemonesJugador(idJugadorActual);
         setSelectedSceneElement(0);
     }
 
@@ -185,7 +193,19 @@ public class ElegirPokemonInicialController implements Initializable {
         int selectedPos = verifyPosition(coordenadas(selectedElement));
         if (selectedPos != -1) {
             //codigo que selecciona el pokemon inicial
-            JavafxController.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos);
+            JuegoJavafx.getCdb().getJugadores()[idJugadorActual].cambiarPokemonActual(selectedPos);
+            if(idJugadorActual == 0){
+                loadPokemonesJugador(1);
+                idJugadorActual = 1;
+            }else{
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    JuegoJavafx.setScene(scene, true);
+                } catch (IOException e) {
+                    System.out.println("Error en la carga de BattleScreen.fxml");
+                }
+            }
         }
     }
 
@@ -239,8 +259,8 @@ public class ElegirPokemonInicialController implements Initializable {
         return list;
     }
 
-    private void loadPokemonesJugadorActual() {
-        Jugador jugadorActual = JavafxController.getCdb().getJugadorActual();
+    private void loadPokemonesJugador(int id) {
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadores()[id];
         List<Pokemon> pokemons = jugadorActual.getPokemons();
         List<Label> labelsNombre = getLabel("Nombre");
         List<Label> labelsTipo = getLabel("Tipo");
@@ -261,7 +281,7 @@ public class ElegirPokemonInicialController implements Initializable {
             labelsVida.get(i).setText("PS. " + lifeActual + "/" + lifeMax);
 
             try {
-                images.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
+                images.get(i).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.OTRO));
             } catch (Exception e) {
               e.printStackTrace();
             }

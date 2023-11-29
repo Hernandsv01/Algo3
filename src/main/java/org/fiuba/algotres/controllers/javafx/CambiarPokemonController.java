@@ -12,9 +12,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import lombok.Setter;
+import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.utils.GeneradorDeMensajes;
+import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
+import lombok.Setter;
 import org.fiuba.algotres.utils.enums.CambiarPokemonState;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
@@ -205,16 +209,21 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                Pokemon pokemon = JavafxController.getCdb().getJugadorActual().getPokemons().get(selectedPos + 1);
+                Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos+1);
                 if (pokemon.getVidaActual() <= 0) {
                     return;
                 }
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
+                        JuegoJavafx.getCdb().getJugadorActual().cambiarPokemonActual(selectedPos+1);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
-                        JavafxController.setScene(scene);
+                        JuegoJavafx.setScene(scene, true);
+
+                        BattleController battleController = loader.getController();
+                        battleController.getColaDeMensajes().add(pokemon.getNombre() + " entra a la batalla!");
+                        battleController.accionar();
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }
@@ -239,7 +248,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
 
 
     private void loadPokemonesJugadorActual() {
-        Jugador jugadorActual = JavafxController.getCdb().getJugadorActual();
+        Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Pokemon> pokemons = jugadorActual.getPokemons();
 
         
@@ -260,43 +269,18 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual/lifeMax); //BarraProgreso
 
             try {
-                ((ImageView) data.get(i).get(4)).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
+                ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
             } catch (Exception e) {
               e.printStackTrace();
             }
 
             if (!pokemons.get(i).getEstados().isEmpty()) {
                 switch (pokemons.get(i).getEstados().get(0).getNombre()) {
-                    case "Paralizado":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Paralizado.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    case "Envenenado":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Envenenado.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    case "Dormido":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Dormido.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    case "Confuso":
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Confuso.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    default:
-                        try {
-                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/SinEstado.gif")));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    case "Paralizado" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
+                    case "Envenenado" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
+                    case "Dormido" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
+                    case "Confuso" -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
+                    default -> imagesEstados.get(i).setImage(ImageLoader.getJavafxImage("imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
                 }
             }
         }
