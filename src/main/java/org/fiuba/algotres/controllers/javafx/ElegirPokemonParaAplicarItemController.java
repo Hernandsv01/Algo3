@@ -245,20 +245,23 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
         }
     }
 
-    HashMap<Integer, List<Node>> data = new HashMap<>() {{
-        put(0, List.of(NombreActual, TipoActual, NivelActual, VidaActual, ImagenActual, EstadoActual, BarraActual));
-        put(1, List.of(Nombre1, Tipo1, Nivel1, Vida1, Imagen1, Estado1, Barra1));
-        put(2, List.of(Nombre2, Tipo2, Nivel2, Vida2, Imagen2, Estado2, Barra2));
-        put(3, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3, Estado3, Barra3));
-        put(4, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4, Estado4, Barra4));
-        put(5, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5, Estado5, Barra5));
-    }};
+    private HashMap<Integer, List<Node>> getData() {
+        return new HashMap<>() {{
+            put(0, List.of(NombreActual, TipoActual, NivelActual, VidaActual, ImagenActual, EstadoActual, BarraActual));
+            put(1, List.of(Nombre1, Tipo1, Nivel1, Vida1, Imagen1, Estado1, Barra1));
+            put(2, List.of(Nombre2, Tipo2, Nivel2, Vida2, Imagen2, Estado2, Barra2));
+            put(3, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3, Estado3, Barra3));
+            put(4, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4, Estado4, Barra4));
+            put(5, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5, Estado5, Barra5));
+        }};
+    }
 
     private void loadPokemonesJugadorActual() {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Pokemon> pokemons = jugadorActual.getPokemons();
+        HashMap<Integer, List<Node>> data = getData();
 
-        for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
+        for (int i = 0; i < CANTIDAD_DE_OPCIONES - 1; i++) {
             String name = pokemons.get(i).getNombre();
             String type = pokemons.get(i).getTipos().toString();
             String level = pokemons.get(i).getNivel().toString();
@@ -269,7 +272,7 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
             ((Label) data.get(i).get(1)).setText(type.toUpperCase()); //Tipo
             ((Label) data.get(i).get(2)).setText("Nv. " + level); //Nivel
             ((Label) data.get(i).get(3)).setText("PS. " + lifeActual + "/" + lifeMax); //Vida
-            ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
+            ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON)); //Imagen Principal
             ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual/lifeMax); //BarraProgreso
 
 

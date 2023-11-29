@@ -19,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.CampoDeBatalla;
@@ -322,6 +323,8 @@ public class BattleController implements Initializable{
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmacion");
         confirmacion.setHeaderText("Estas seguro que te querés rendir?");
+        Stage stage = (Stage) confirmacion.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
 
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {

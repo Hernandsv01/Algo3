@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -93,6 +94,7 @@ public class PantallaMenuController {
             Stage ventanaDeAyuda = new Stage();
             ventanaDeAyuda.initModality(Modality.APPLICATION_MODAL);
             ventanaDeAyuda.setTitle("Ayuda");
+            ventanaDeAyuda.getIcons().add(new Image("/imagenes/otros/app-logo.png"));
 
             StackPane stackPane = new StackPane();
             Scene scene = new Scene(stackPane, 400, 280);
@@ -204,6 +206,8 @@ public class PantallaMenuController {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             BotonSeleccionado.playSound(false, -20.0f);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
             alert.setTitle("Salir");
             alert.setHeaderText(null);
             alert.setContentText("¿Estás seguro que deseas salir?");
