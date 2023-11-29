@@ -296,6 +296,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         List<Label> labelsVida = getLabel("Vida");
         List<ProgressBar> lifeBars = getLifeBars();
         List<ImageView> imagesPortadas = getImages("Portada");
+        List<ImageView> imagesEstados = getImages("Estado");
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
             String name = pokemons.get(i).getNombre();
@@ -321,31 +322,31 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                 switch (pokemons.get(i).getEstados().get(0).getNombre()) {
                     case "Paralizado":
                         try {
-                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Paralizado.gif")));
+                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Paralizado.gif")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case "Envenenado":
                         try {
-                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Envenenado.gif")));
+                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Envenenado.gif")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case "Dormido":
                         try {
-                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Dormido.gif")));
+                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Dormido.gif")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case "Confuso":
                         try {
-                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Confuso.gif")));
+                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Confuso.gif")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     default:
                         try {
-                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/SinEstado.gif")));
+                            imagesEstados.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/SinEstado.gif")));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
