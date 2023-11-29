@@ -6,16 +6,14 @@ import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import org.fiuba.algotres.views.InputUsuario;
 
 public class TerminalController {
 
     private static InputUsuario input;
-    private static Map<Integer, Comando> comandos;
+    private static List<Comando> comandos;
     
     public static void jugar(CampoDeBatalla cdb){
         setupInicial(cdb);
@@ -37,12 +35,13 @@ public class TerminalController {
     
     public static void inicializarConfiguracion(InputUsuario input){
         TerminalController.input = input;
-        TerminalController.comandos = new HashMap<>(){{
-            put(1, new ComandoHabilidad("Usar habilidad", input));
-            put(2, new ComandoItem("Usar item", input));
-            put(3, new ComandoCambiarPokemon("Cambiar Pokemon", input));
-            put(4, new ComandoRendirse("Rendirse", input));
-        }};
+
+        TerminalController.comandos = new ArrayList<>(List.of(
+                new ComandoHabilidad("Usar habilidad", input),
+                new ComandoItem("Usar item", input),
+                new ComandoCambiarPokemon("Cambiar Pokemon", input),
+                new ComandoRendirse("Rendirse", input)
+        ));
     }
     
     public static void setupInicial(CampoDeBatalla cdb){
@@ -78,7 +77,7 @@ public class TerminalController {
         int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         Tools.imprimirDivisor(false);
-        return comandos.get(opcionElegida).ejecutar(cdb);
+        return comandos.get(opcionElegida - 1).ejecutar(cdb);
     }
 
     public static InputUsuario getInput() {
@@ -89,11 +88,11 @@ public class TerminalController {
         TerminalController.input = input;
     }
 
-    public static Map<Integer, Comando> getComandos() {
+    public static List<Comando> getComandos() {
         return comandos;
     }
 
-    public static void setComandos(Map<Integer, Comando> comandos) {
+    public static void setComandos(List<Comando> comandos) {
         TerminalController.comandos = comandos;
     }
 }   

@@ -10,7 +10,9 @@ import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -70,11 +72,12 @@ public class TerminalControllerTest {
     @Order(3)
     void testTurno() {
         CampoDeBatalla cdb = mock(CampoDeBatalla.class);
-        TerminalController.setComandos(new HashMap<>(){{
-            put(1, mock(Comando.class));
-        }});
+        TerminalController.setComandos(new ArrayList<>(List.of(mock(Comando.class))));
+        InputUsuario input = mock(InputUsuarioTerminal.class);
+        TerminalController.setInput(input);
 
-        when(TerminalController.getComandos().get(1).ejecutar(cdb)).thenReturn(true);
+        when(TerminalController.getComandos().get(0).ejecutar(cdb)).thenReturn(true);
+        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(1);
         when(cdb.getJugadores()).thenReturn(new Jugador[]{});
         when(cdb.getClima()).thenReturn(mock(Clima.class));
         when(cdb.getClima().getNombre()).thenReturn("Clima de prueba");
@@ -83,6 +86,6 @@ public class TerminalControllerTest {
 
         TerminalController.turno(cdb);
 
-        verify(TerminalController.getComandos().get(1), times(1)).ejecutar(cdb);
+        verify(TerminalController.getComandos().get(0), times(1)).ejecutar(cdb);
     }
 }

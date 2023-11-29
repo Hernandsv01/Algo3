@@ -2,6 +2,7 @@ package org.fiuba.algotres.views.terminal;
 
 import org.fiuba.algotres.comandos.Comando;
 
+import java.util.List;
 import java.util.Map;
 import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.OutputUsuario;
@@ -32,9 +33,9 @@ public class Tools {
         }
     }
     
-    public static int imprimirComandos(Map<Integer, Comando> map){
-        map.forEach((key, comando) -> output.mostrarLinea("\t" + key + ") " + comando.getNombre()));
-        return map.size();
+    public static int imprimirComandos(List<Comando> list){
+        list.forEach((comando) -> output.mostrarLinea("\t" + (list.indexOf(comando) + 1) + ") " + comando.getNombre()));
+        return list.size();
     }
     
     public static void imprimirMensajeConEspera(String mensaje){

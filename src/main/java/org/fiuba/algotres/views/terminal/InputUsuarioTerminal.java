@@ -21,12 +21,11 @@ public class InputUsuarioTerminal implements InputUsuario {
             inputLine = scanner.nextLine();
             try {
                 result = Integer.parseInt(inputLine);
-                if(result <= 0 || result > limite){
-                    result = 0;
-                    throw new RuntimeException();
-                }
             } catch (Exception e) {
                 System.out.println("Eso no es un numero valido, no intentes romper nuestro juego :(");
+            }
+            if(result <= 0 || result > limite){
+                result = 0;
             }
         }while(result == 0);
 
