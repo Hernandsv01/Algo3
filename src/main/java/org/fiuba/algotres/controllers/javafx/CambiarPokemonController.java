@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,11 +14,9 @@ import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
-import org.fiuba.algotres.utils.enums.DefaultImageType;
-import lombok.Setter;
 import org.fiuba.algotres.utils.enums.CambiarPokemonState;
+import org.fiuba.algotres.utils.enums.DefaultImageType;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
@@ -37,9 +34,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 6;
-    @Setter
     private CambiarPokemonState state;
-    @Setter
     public Jugador jugadorActual;
     @FXML
     public ProgressBar BarraActual;
@@ -132,8 +127,62 @@ public class CambiarPokemonController extends ItemPokemonController implements I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPokemonesJugadorActual();
         setSelectedSceneElement(0);
+        Barra1.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra1.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra1.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra1.progressProperty())
+        );
+        Barra2.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra2.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra2.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra2.progressProperty())
+        );
+        Barra3.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra3.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra3.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra3.progressProperty())
+        );
+        Barra4.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra4.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra4.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra4.progressProperty())
+        );
+        Barra5.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (Barra5.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (Barra5.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, Barra5.progressProperty())
+        );
     }
 
     @FXML
@@ -161,13 +210,13 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         return v1;
     }
 
-    private AnchorPane getSelectedSceneElement(){
+    private AnchorPane getSelectedSceneElement() {
         return getSceneElements().stream()
                 .filter(anchorPane -> anchorPane.getStyle().contains("-fx-border-color: #efb810"))
                 .findFirst().orElse(null);
     }
 
-    private void setSelectedSceneElement(int pos){
+    private void setSelectedSceneElement(int pos) {
         AnchorPane previousElement = getSelectedSceneElement();
 
         if (previousElement != null) {
@@ -176,9 +225,9 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         togglePane(getSceneElements().get(pos), ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR, DESACTIVATED_POKEMON_COLOR);
     }
 
-    private void moveSelector(String tecla){
+    private void moveSelector(String tecla) {
         AnchorPane currentElement = getSelectedSceneElement();
-        if(currentElement == null) return;
+        if (currentElement == null) return;
 
         int actualPos = coordenadas(currentElement);
         int newPos = 0;
@@ -187,14 +236,14 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             case DOWN_KEY -> newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
             case RIGHT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 2) {
-                newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
+                    newPos = verifyPosition(actualPos + 1, CANTIDAD_DE_OPCIONES);
                 }
             }
             case LEFT_KEY -> newPos = verifyPosition(actualPos, CANTIDAD_DE_OPCIONES);
             default -> newPos = -1;
-        };
+        }
 
-        if(newPos == -1){
+        if (newPos == -1) {
             return;
         }
         setSelectedSceneElement(newPos);
@@ -211,14 +260,18 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-                Pokemon pokemon = jugadorActual.getPokemons().get(selectedPos+1);
+                Pokemon pokemon = jugadorActual.getPokemons().get(selectedPos + 1);
                 if (pokemon.getVidaActual() <= 0) {
                     return;
                 }
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para ingresar a la batalla?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
-                        jugadorActual.cambiarPokemonActual(selectedPos+1);
+                        if(jugadorActual.getPokemonActual().estaVivo()) {
+                            jugadorActual.cambiarPokemonActual(selectedPos + 1);
+                        }else{
+                            jugadorActual.cambiarPokemonActual(selectedPos);
+                        }
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         JuegoJavafx.setScene(scene, true);
@@ -265,7 +318,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             ((Label) data.get(i).get(2)).setText("Nv. " + level); //Nivel
             ((Label) data.get(i).get(3)).setText("PS. " + lifeActual + "/" + lifeMax); //Vida
             ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
-            ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual/lifeMax); //BarraProgreso
+            ((ProgressBar) data.get(i).get(6)).setProgress((double) lifeActual / lifeMax); //BarraProgreso
 
 
             if (!pokemons.get(i).getEstados().isEmpty()) {
@@ -278,5 +331,14 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                 }
             }
         }
+    }
+
+    public void setState(CambiarPokemonState state) {
+        this.state = state;
+    }
+
+    public void setJugadorActual(Jugador jugadorActual) {
+        this.jugadorActual = jugadorActual;
+        loadPokemonesJugadorActual();
     }
 }

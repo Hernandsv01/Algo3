@@ -14,15 +14,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.CampoDeBatalla;
+import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Ataque;
@@ -31,6 +30,7 @@ import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.BattleState;
+import org.fiuba.algotres.utils.enums.CambiarPokemonState;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
@@ -47,15 +47,40 @@ public class BattleController implements Initializable{
     private static final String ACTIVATED_LABEL_COLOR = "red";
     private static final String DEACTIVATED_LABEL_COLOR = "white";
 
-    private final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
-    private final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\Megalovania.wav");
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
+    private static final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\MusicaBatalla.wav");
+    private static final Sound sonidaAtaque = new Sound("src\\main\\resources\\audios\\SonidoAtaque.wav");
 
     private final double DEFAULT_LABEL_WIDTH = 120;
 
     private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
 
     private static BattleState state = BattleState.NO_EMPEZADA;
+
+    @FXML
+    public ImageView pokebolaAtacanteSuplente1;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente2;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente3;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente4;
+    @FXML
+    public ImageView pokebolaAtacanteSuplente5;
+    @FXML
+    public ImageView pokebolaVictimaSuplente1;
+    @FXML
+    public ImageView pokebolaVictimaSuplente2;
+    @FXML
+    public ImageView pokebolaVictimaSuplente3;
+    @FXML
+    public ImageView pokebolaVictimaSuplente4;
+    @FXML
+    public ImageView pokebolaVictimaSuplente5;
+
+    private final List<ImageView> pokebolasAtacante = new ArrayList<>();
+    private final List<ImageView> pokebolasVictima = new ArrayList<>();
 
     private List<Habilidad> habilidades;
     private static List<String> colaDeMensajes;
@@ -167,7 +192,7 @@ public class BattleController implements Initializable{
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
                 callItemScene();
             } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
-                callPokemonScene();
+                callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION, JuegoJavafx.getCdb().getJugadorActual());
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 1) {
                 accionarRendicion();
             }
@@ -188,6 +213,11 @@ public class BattleController implements Initializable{
     }
 
     private void prepararSiguienteTurno() {
+        verificarVictoria();
+        if(state == BattleState.TERMINADA){
+            return;
+        }
+        verificarMuertePokemon();
         pantallaMensaje.setText("");
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
@@ -210,6 +240,21 @@ public class BattleController implements Initializable{
             pantallaMensaje.setText("Elija una opción");
             setSelectedGridElement(0, 0);
         });
+    }
+
+    public void verificarVictoria(){
+        if(JuegoJavafx.getCdb().getGanador() != -1){
+            state = BattleState.TERMINADA;
+            callVictoryScene();
+        }
+    }
+
+    public void verificarMuertePokemon(){
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadorActual());
+        }else if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().estaVivo()){
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()]);
+        }
     }
 
     private void activarHabilidadSeleccionada(){
@@ -316,6 +361,7 @@ public class BattleController implements Initializable{
         Pokemon victima = JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual();
 
         habilidad.accionarHabilidad(atacante, victima);
+        sonidaAtaque.playSound(false, 0);
         colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEfectoHabilidad(habilidad, atacante, victima));
     }
 
@@ -425,6 +471,26 @@ public class BattleController implements Initializable{
         timelineVictima.play();
     }
 
+//    public void renderPokebolas(){
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente1);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente2);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente3);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente4);
+//        pokebolasAtacante.add(pokebolaAtacanteSuplente5);
+//
+//        pokebolasVictima.add(pokebolaVictimaSuplente1);
+//        pokebolasVictima.add(pokebolaVictimaSuplente2);
+//        pokebolasVictima.add(pokebolaVictimaSuplente3);
+//        pokebolasVictima.add(pokebolaVictimaSuplente4);
+//        pokebolasVictima.add(pokebolaVictimaSuplente5);
+//
+//        for (int i = 1; i <= pokebolasAtacante.size(); i++) {
+//            if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(i).estaVivo()){
+//                pokebolasAtacante.get(i-1).setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+//            }
+//        }
+//    }
+
     private static String capitalizar(String string){
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
@@ -458,17 +524,49 @@ public class BattleController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(state == BattleState.NO_EMPEZADA){
             initializeData();
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.play();
         }
+//        renderPokebolas();
         renderImages();
         renderHealth(true);
         habilidades = new ArrayList<>();
-
+        barraVidaAtacante.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (barraVidaAtacante.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (barraVidaAtacante.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, barraVidaAtacante.progressProperty())
+        );
+        barraVidaVictima.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (barraVidaVictima.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (barraVidaVictima.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, barraVidaVictima.progressProperty())
+        );
+        blackScreen.setOpacity(0);
         System.out.println("Inicializado!");
     }
 
-    public void callPokemonScene(){
+    public void callPokemonScene(CambiarPokemonState state, Jugador jugador){
         try {
-            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml")).load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml"));
+            Pane pane = loader.load();
+            ((CambiarPokemonController)loader.getController()).setState(state);
+            ((CambiarPokemonController)loader.getController()).setJugadorActual(jugador);
+
+            Scene scene = new Scene(pane);
             JuegoJavafx.setScene(scene, true);
         }catch(IOException e){
             throw new RuntimeException("Algo anduvo mal con el archivo de cambiar pokemon");
@@ -483,13 +581,20 @@ public class BattleController implements Initializable{
         }
     }
     public void callVictoryScene(){
-        try {
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(0.0);
+        fadeOut.setToValue(1.0);
+        fadeOut.setOnFinished(actionEvent -> {
             backgroundMusic.stopSound();
-            Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/pantallaVictoria.fxml")).load());
-            JuegoJavafx.setScene(scene, true);
-        }catch(IOException e){
-            throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
-        }
+            try {
+                Scene scene = new Scene(new FXMLLoader(getClass().getResource("/fxml/pantallaVictoria.fxml")).load());
+                JuegoJavafx.setScene(scene, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
+            }
+        });
+        fadeOut.play();
     }
 
     public List<String> getColaDeMensajes(){

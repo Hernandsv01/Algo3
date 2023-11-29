@@ -1,5 +1,6 @@
 package org.fiuba.algotres.controllers.javafx;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,8 +15,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.Sound;
 
@@ -25,6 +28,8 @@ import java.util.Objects;
 
 public class PantallaMenuController {
 
+    @FXML
+    public Rectangle blackScreen;
     @FXML
     Button jugarButton;
 
@@ -47,6 +52,10 @@ public class PantallaMenuController {
     public void initialize() {
         menuSound.playSound(true, -25.0f);
         stackPane.setMouseTransparent(true);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.play();
 
         jugarButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -73,14 +82,21 @@ public class PantallaMenuController {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             try {
                 BotonSeleccionado.playSound(false, -20.0f);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonInicial.fxml"));
 
-                Pane anchorPane = loader.load();
-                Scene scene = new Scene(anchorPane);
-                Stage gameStage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
-                JuegoJavafx.setScene(scene, true);
-                gameStage.show();
+                FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+
+                fadeIn.setOnFinished(event -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonInicial.fxml"));
+                    try {
+                        JuegoJavafx.setScene(new Scene(loader.load()), true);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 menuSound.stopSound();
+                fadeIn.play();
             } catch (Exception e) {
                 e.printStackTrace();
             }

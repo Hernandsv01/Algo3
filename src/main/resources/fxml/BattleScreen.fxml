@@ -117,7 +117,37 @@
       </AnchorPane>
       <Polygon fill="DODGERBLUE" layoutX="318.0" layoutY="150.0" points="67.4263916015625, -57.43510055541992, 102.25090026855469, -40.160133361816406, 94.58076477050781, -54.7393798828125, 106.40510559082031, -65.7426986694336" rotate="-143.5" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: grey;" />
       <Polygon fill="DODGERBLUE" layoutX="216.0" layoutY="328.0" points="67.4263916015625, -57.43510055541992, 102.25090026855469, -40.160133361816406, 94.58076477050781, -54.7393798828125, 106.40510559082031, -65.7426986694336" rotate="-48.6" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: grey;" />
-      <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="640.0" />
+        <ImageView fx:id="pokebolaAtacanteSuplente1" fitHeight="30.0" fitWidth="23.0" layoutX="347.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaAtacanteSuplente2" fitHeight="30.0" fitWidth="23.0" layoutX="370.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaAtacanteSuplente3" fitHeight="30.0" fitWidth="23.0" layoutX="393.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaAtacanteSuplente4" fitHeight="30.0" fitWidth="23.0" layoutX="417.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaAtacanteSuplente5" fitHeight="30.0" fitWidth="23.0" layoutX="440.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaVictimaSuplente1" fitHeight="30.0" fitWidth="23.0" layoutX="274.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaVictimaSuplente2" fitHeight="30.0" fitWidth="23.0" layoutX="297.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaVictimaSuplente3" fitHeight="30.0" fitWidth="23.0" layoutX="321.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaVictimaSuplente4" fitHeight="30.0" fitWidth="23.0" layoutX="344.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+        <ImageView fx:id="pokebolaVictimaSuplente5" fitHeight="30.0" fitWidth="23.0" layoutX="367.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../imagenes/otros/pokeballVivo.png" />
+        </ImageView>
+      <Rectangle fx:id="blackScreen" arcHeight="5.0" arcWidth="5.0" height="481.0" layoutX="-1.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="641.0" />
     </children>
     <cursor>
         <Cursor fx:constant="NONE" />

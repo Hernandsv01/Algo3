@@ -1,5 +1,6 @@
 package org.fiuba.algotres.controllers.javafx;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,10 +11,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
@@ -90,9 +94,13 @@ public class ElegirPokemonInicialController implements Initializable {
     @FXML
     public Label Vida6;
     @FXML
+    public Rectangle blackScreen;
+    @FXML
     private VBox vBox1;
     @FXML
     private VBox vBox2;
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
 
     private static int idJugadorActual = 0;
 
@@ -101,6 +109,11 @@ public class ElegirPokemonInicialController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadPokemonesJugador(idJugadorActual);
         setSelectedSceneElement(0);
+
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.play();
     }
 
     @FXML
@@ -172,6 +185,7 @@ public class ElegirPokemonInicialController implements Initializable {
         if(newPos == -1){
             return;
         }
+        changedOption.playSound(false, 0);
         setSelectedSceneElement(newPos);
     }
 
@@ -190,18 +204,40 @@ public class ElegirPokemonInicialController implements Initializable {
         AnchorPane selectedElement = getSelectedSceneElement();
         int selectedPos = verifyPosition(coordenadas(selectedElement));
         if (selectedPos != -1) {
-            //codigo que selecciona el pokemon inicial
             JuegoJavafx.getCdb().getJugadores()[idJugadorActual].cambiarPokemonActual(selectedPos);
+            selectedOption.playSound(false, 0);
             if(idJugadorActual == 0){
-                loadPokemonesJugador(1);
-                idJugadorActual = 1;
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), blackScreen);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(300), blackScreen);
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+
+                fadeIn.setOnFinished(event -> {
+                    loadPokemonesJugador(1);
+                    idJugadorActual = 1;
+                    fadeOut.play();
+                });
+                fadeIn.play();
             }else{
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    JuegoJavafx.setScene(scene, true);
-                } catch (IOException e) {
-                    System.out.println("Error en la carga de BattleScreen.fxml");
+                    FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
+                    fadeIn.setFromValue(0.0);
+                    fadeIn.setToValue(1.0);
+
+                    fadeIn.setOnFinished(event -> {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        try {
+                            JuegoJavafx.setScene(new Scene(loader.load()), true);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+//                    menuSound.stopSound();
+                    fadeIn.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

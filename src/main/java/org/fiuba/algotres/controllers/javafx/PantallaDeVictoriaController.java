@@ -3,6 +3,9 @@ package org.fiuba.algotres.controllers.javafx;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.Sound;
@@ -26,6 +29,8 @@ public class PantallaDeVictoriaController implements Initializable {
 
     @FXML
     public Label mensajeVictoria;
+    @FXML
+    public Rectangle blackScreen;
 
     @FXML
     private AnchorPane rootPane;
@@ -43,8 +48,14 @@ public class PantallaDeVictoriaController implements Initializable {
             setearGifPokemon();
             setMensajeVictoria();
 
+
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.play();
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }

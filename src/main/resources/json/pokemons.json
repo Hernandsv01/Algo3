@@ -57,7 +57,7 @@
     "velocidad": 85,
     "defensa": 100,
     "ataque": 125,
-    "habilidades": [27, 12, 11]
+    "habilidades": [27, 12, 11, 45]
   },
   {
     "id": 6,
@@ -93,7 +93,7 @@
     "velocidad": 35,
     "defensa": 50,
     "ataque": 80,
-    "habilidades": [13, 14, 15]
+    "habilidades": [13, 14, 15, 46]
   },
   {
     "id": 9,
@@ -141,6 +141,6 @@
     "velocidad": 70,
     "defensa": 35,
     "ataque": 40,
-    "habilidades": [29, 30, 44]
+    "habilidades": [29, 30, 44, 47]
   }
 ]
