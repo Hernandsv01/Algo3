@@ -77,7 +77,7 @@ public class TerminalController {
         int opcionElegida = input.obtenerOpcionUsuario(opciones);
 
         Tools.imprimirDivisor(false);
-        return comandos.get(opcionElegida).ejecutar(cdb);
+        return comandos.get(opcionElegida - 1).ejecutar(cdb);
     }
 
     public static InputUsuario getInput() {

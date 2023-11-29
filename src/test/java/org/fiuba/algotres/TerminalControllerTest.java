@@ -73,8 +73,11 @@ public class TerminalControllerTest {
     void testTurno() {
         CampoDeBatalla cdb = mock(CampoDeBatalla.class);
         TerminalController.setComandos(new ArrayList<>(List.of(mock(Comando.class))));
+        InputUsuario input = mock(InputUsuarioTerminal.class);
+        TerminalController.setInput(input);
 
-        when(TerminalController.getComandos().get(1).ejecutar(cdb)).thenReturn(true);
+        when(TerminalController.getComandos().get(0).ejecutar(cdb)).thenReturn(true);
+        when(input.obtenerOpcionUsuario(anyInt())).thenReturn(1);
         when(cdb.getJugadores()).thenReturn(new Jugador[]{});
         when(cdb.getClima()).thenReturn(mock(Clima.class));
         when(cdb.getClima().getNombre()).thenReturn("Clima de prueba");
@@ -83,6 +86,6 @@ public class TerminalControllerTest {
 
         TerminalController.turno(cdb);
 
-        verify(TerminalController.getComandos().get(1), times(1)).ejecutar(cdb);
+        verify(TerminalController.getComandos().get(0), times(1)).ejecutar(cdb);
     }
 }
