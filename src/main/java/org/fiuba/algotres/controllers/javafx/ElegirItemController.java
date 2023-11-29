@@ -4,22 +4,27 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.utils.enums.BattleState;
+import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class SeleccionItemController implements Initializable {
+public class ElegirItemController implements Initializable {
     private static final String UP_KEY = "UP";
     private static final String DOWN_KEY = "DOWN";
     private static final String RIGHT_KEY = "RIGHT";
@@ -116,15 +121,13 @@ public class SeleccionItemController implements Initializable {
     private void setSelectedSceneElement(int pos){
         AnchorPane previousElement = getSelectedSceneElement();
 
-
         if (previousElement != null) {
             togglePane(previousElement);
         }
         int selectedPos = verifyPosition(pos);
         String itemElegidoNombre = "";
-        if (selectedPos > -1 && selectedPos < CANTIDAD_DE_OPCIONES - 2) {
+        if (selectedPos > -1 && selectedPos < CANTIDAD_DE_OPCIONES - 1) {
             itemElegidoNombre = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos).getNombre();
-            System.out.println(itemElegidoNombre);
         }
         loadMessage(itemElegidoNombre);
         togglePane(getSceneElements().get(pos));
@@ -168,7 +171,7 @@ public class SeleccionItemController implements Initializable {
         return getSceneElements().indexOf(element);
     }
 
-    private static int verifyPosition(int pos){
+    private int verifyPosition(int pos){
         if(pos >= 0 && pos < CANTIDAD_DE_OPCIONES){
             return pos;
         }
@@ -183,17 +186,36 @@ public class SeleccionItemController implements Initializable {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el item a usar
                 Item itemElegido = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos);
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonParaAplicarItem.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    JuegoJavafx.setScene(scene);
-                }catch (IOException e) {
-                    System.out.println("Error en la carga de ElegirPokemonParaAplicarItem.fxml");
+                OpcionesEmergentes result = confirmarDecision(itemElegido.getNombre());
+                if (result == OpcionesEmergentes.CONFIRMADA) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ElegirPokemonParaAplicarItem.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        JuegoJavafx.setScene(scene);
+                        ElegirPokemonParaAplicarItemController controller = loader.getController();
+                        controller.setItemElegido(itemElegido);
+                    } catch (IOException e) {
+                        System.out.println("Error en la carga de ElegirPokemonParaAplicarItem.fxml");
+                    }
                 }
             } else {
                 goBack();
             }
         }
+    }
+
+    private OpcionesEmergentes confirmarDecision(String nombreItem){
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage stage = (Stage) confirmation.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
+        confirmation.setTitle("Confirmacion");
+        confirmation.setHeaderText("Estas seguro que deseas elegir " + nombreItem + "?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            return OpcionesEmergentes.CONFIRMADA;
+        }
+        return OpcionesEmergentes.DENEGADA;
     }
 
     private void goBack() {
@@ -209,14 +231,14 @@ public class SeleccionItemController implements Initializable {
     private void loadMessage(String nombre) {
         String message = nombre;
         switch (nombre) {
-            case "Pocion" -> message += " cura 20 PS. de tu Pokemon";
-            case "Mega Pocion" -> message += " cura 50 PS. de tu Pokemon";
-            case "Hiper Pocion" -> message += " cura 100 PS. de tu Pokemon";
-            case "Pocion Molesta Alumnos" -> message += " cura 33% de la vida maxima de tu Pokemon";
-            case "Ataque X" -> message += " aumenta 10% el ataque de tu Pokemon";
-            case "Defensa X" -> message += " aumenta 10% el defensa de tu Pokemon";
-            case "Revivir" -> message += " trae de vuelta al combate a un Pokemon muerto";
-            case "Cura Todo" -> message += " elimina todos los efectos negativos de tu Pokemon";
+            case "Pocion" -> message += " cura 20 PS. de tu Pokemon.";
+            case "Mega Pocion" -> message += " cura 50 PS. de tu Pokemon.";
+            case "Hiper Pocion" -> message += " cura 100 PS. de tu Pokemon.";
+            case "Pocion Molesta Alumnos" -> message += " cura 33% de la vida maxima de tu Pokemon.";
+            case "Ataque X" -> message += " aumenta 10% el ataque de tu Pokemon.";
+            case "Defensa X" -> message += " aumenta 10% el defensa de tu Pokemon.";
+            case "Revivir" -> message += " trae de vuelta al combate a un Pokemon muerto.";
+            case "Cura Todo" -> message += " elimina todos los efectos negativos de tu Pokemon.";
             default -> message = "Desea volver atras?";
         }
         mensajeInferior.setText(message);

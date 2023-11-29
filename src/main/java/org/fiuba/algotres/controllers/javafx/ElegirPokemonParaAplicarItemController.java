@@ -4,15 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
+import javafx.stage.Stage;
+import lombok.Setter;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.item.Item;
+import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,10 +34,25 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     private static final String ESCAPE_KEY = "ESCAPE";
     private static final String ACTIVATED_PANE_COLOR = "#efb810";
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
-    private static final String DEACTIVATED_POKEMON_COLOR = "#0f2c64";
+    private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_OPCIONES = 7;
-    private static final int OPCIONES_POR_COLUMNA = 3;
+    @Setter
+    private Item itemElegido;
 
+    @FXML
+    public AnchorPane PokemonActual;
+    @FXML
+    public ImageView ImagenActual;
+    @FXML
+    public Label NombreActual;
+    @FXML
+    public Label TipoActual;
+    @FXML
+    public Label NivelActual;
+    @FXML
+    public Label VidaActual;
+    @FXML
+    public ProgressBar BarraActual;
     @FXML
     public ImageView Imagen1;
     @FXML
@@ -42,6 +64,8 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     @FXML
     public Label Vida1;
     @FXML
+    public ProgressBar Barra1;
+    @FXML
     public ImageView Imagen2;
     @FXML
     public Label Nombre2;
@@ -51,6 +75,8 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     public Label Nivel2;
     @FXML
     public Label Vida2;
+    @FXML
+    public ProgressBar Barra2;
     @FXML
     public ImageView Imagen3;
     @FXML
@@ -62,6 +88,8 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     @FXML
     public Label Vida3;
     @FXML
+    public ProgressBar Barra3;
+    @FXML
     public ImageView Imagen4;
     @FXML
     public Label Nombre4;
@@ -71,6 +99,8 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     public Label Nivel4;
     @FXML
     public Label Vida4;
+    @FXML
+    public ProgressBar Barra4;
     @FXML
     public ImageView Imagen5;
     @FXML
@@ -82,21 +112,14 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
     @FXML
     public Label Vida5;
     @FXML
-    public ImageView Imagen6;
-    @FXML
-    public Label Nombre6;
-    @FXML
-    public Label Tipo6;
-    @FXML
-    public Label Nivel6;
-    @FXML
-    public Label Vida6;
+    public ProgressBar Barra5;
     @FXML
     private VBox vBox1;
     @FXML
-    private VBox vBox2;
-    @FXML
     public AnchorPane botonVolver;
+
+    public ElegirPokemonParaAplicarItemController() {
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -121,30 +144,27 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         String nameAttribute = pane.getId();
         if(colorAttribute.contains(ACTIVATED_PANE_COLOR)){
             if (!Objects.equals(nameAttribute, "botonVolver")) {
-                pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DEACTIVATED_POKEMON_COLOR));
+                pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DESACTIVATED_POKEMON_COLOR));
             }
             pane.setStyle(pane.getStyle().replace(ACTIVATED_PANE_COLOR, DESACTIVATED_VOLVER_PANE_COLOR));
-        }else if(colorAttribute.contains(DEACTIVATED_POKEMON_COLOR)){
-            pane.setStyle(pane.getStyle().replace(DEACTIVATED_POKEMON_COLOR, ACTIVATED_PANE_COLOR));
+        }else if(colorAttribute.contains(DESACTIVATED_POKEMON_COLOR)){
+            pane.setStyle(pane.getStyle().replace(DESACTIVATED_POKEMON_COLOR, ACTIVATED_PANE_COLOR));
         }else if(colorAttribute.contains(DESACTIVATED_VOLVER_PANE_COLOR)) {
             pane.setStyle(pane.getStyle().replace(DESACTIVATED_VOLVER_PANE_COLOR, ACTIVATED_PANE_COLOR));
         }
     }
 
     private List<AnchorPane> getSceneElements() {
-        ArrayList<AnchorPane> v1  = new ArrayList<>(vBox1.getChildren().stream()
-                .filter(node -> node instanceof AnchorPane)
-                .map(node -> (AnchorPane) node)
-                .toList());
+        ArrayList<AnchorPane> scenes = new ArrayList<>();
+        scenes.add(PokemonActual);
 
-        ArrayList<AnchorPane> v2  = new ArrayList<>(vBox2.getChildren().stream()
+        scenes.addAll(vBox1.getChildren().stream()
                 .filter(node -> node instanceof AnchorPane)
                 .map(node -> (AnchorPane)node)
                 .toList());
 
-        v1.addAll(v2);
-        v1.add(botonVolver);
-        return v1;
+        scenes.add(botonVolver);
+        return scenes;
     }
 
     private AnchorPane getSelectedSceneElement(){
@@ -167,22 +187,22 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         if(currentElement == null) return;
 
         int actualPos = coordenadas(currentElement);
-        int newPos;
+        int newPos = -1;
         switch (tecla) {
             case UP_KEY -> newPos = verifyPosition(actualPos - 1);
             case DOWN_KEY -> newPos = verifyPosition(actualPos + 1);
             case RIGHT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 2) {
                     newPos = verifyPosition(actualPos + 1);
-                } else {
-                    newPos = verifyPosition(actualPos + OPCIONES_POR_COLUMNA);
+                } else if (actualPos == 0) {
+                    newPos = verifyPosition(actualPos + 1);
                 }
             }
             case LEFT_KEY -> {
                 if (actualPos == CANTIDAD_DE_OPCIONES - 1) {
                     newPos = verifyPosition(actualPos - 1);
-                } else {
-                    newPos = verifyPosition(actualPos - OPCIONES_POR_COLUMNA);
+                } else if (actualPos < CANTIDAD_DE_OPCIONES - 1 && actualPos > 0) {
+                    newPos = 0;
                 }
             }
             default -> newPos = -1;
@@ -197,7 +217,7 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         return getSceneElements().indexOf(element);
     }
 
-    private static int verifyPosition(int pos){
+    private int verifyPosition(int pos){
         if(pos >= 0 && pos < CANTIDAD_DE_OPCIONES){
             return pos;
         }
@@ -211,18 +231,36 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
-//                Item itemElegido = JavafxController.getCdb().getJugadorActual().getItems().get(selectedPos);
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    JuegoJavafx.setScene(scene);
-                } catch (IOException e) {
-                    System.out.println("Error en la carga de BattleScreen.fxml");
+                Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos);
+                OpcionesEmergentes result = confirmarDecision(pokemon.getNombre(), itemElegido.getNombre());
+                if (result == OpcionesEmergentes.CONFIRMADA) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        JuegoJavafx.setScene(scene);
+                        itemElegido.usar(pokemon);
+                    } catch (IOException e) {
+                        System.out.println("Error en la carga de BattleScreen.fxml");
+                    }
+                } else {
+                    goBack();
                 }
-            } else {
-                goBack();
             }
         }
+    }
+
+    private OpcionesEmergentes confirmarDecision(String nombrePokemon, String nombreItem){
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage stage = (Stage) confirmation.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
+        confirmation.setTitle("Confirmacion");
+        confirmation.setHeaderText("Estas seguro que deseas elegir a " + nombrePokemon + " para aplicar " +nombreItem + "?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            return OpcionesEmergentes.CONFIRMADA;
+        }
+        return OpcionesEmergentes.DENEGADA;
     }
 
     private void goBack() {
@@ -240,48 +278,59 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
 
         switch (tipo) {
             case "Nombre":
+                list.add(NombreActual);
                 list.add(Nombre1);
                 list.add(Nombre2);
                 list.add(Nombre3);
                 list.add(Nombre4);
                 list.add(Nombre5);
-                list.add(Nombre6);
 
             case "Tipo":
+                list.add(TipoActual);
                 list.add(Tipo1);
                 list.add(Tipo2);
                 list.add(Tipo3);
                 list.add(Tipo4);
                 list.add(Tipo5);
-                list.add(Tipo6);
 
             case "Nivel":
+                list.add(NivelActual);
                 list.add(Nivel1);
                 list.add(Nivel2);
                 list.add(Nivel3);
                 list.add(Nivel4);
                 list.add(Nivel5);
-                list.add(Nivel6);
 
             case "Vida":
+                list.add(VidaActual);
                 list.add(Vida1);
                 list.add(Vida2);
                 list.add(Vida3);
                 list.add(Vida4);
                 list.add(Vida5);
-                list.add(Vida6);
         }
+        return list;
+    }
+
+    private List<ProgressBar> getLifeBars() {
+        ArrayList<ProgressBar> list = new ArrayList<>();
+        list.add(BarraActual);
+        list.add(Barra1);
+        list.add(Barra2);
+        list.add(Barra3);
+        list.add(Barra4);
+        list.add(Barra5);
         return list;
     }
 
     private List<ImageView> getImages() {
         ArrayList<ImageView> list = new ArrayList<>();
+        list.add(ImagenActual);
         list.add(Imagen1);
         list.add(Imagen2);
         list.add(Imagen3);
         list.add(Imagen4);
         list.add(Imagen5);
-        list.add(Imagen6);
         return list;
     }
 
@@ -292,19 +341,22 @@ public class ElegirPokemonParaAplicarItemController implements Initializable {
         List<Label> labelsTipo = getLabel("Tipo");
         List<Label> labelsNivel = getLabel("Nivel");
         List<Label> labelsVida = getLabel("Vida");
+        List<ProgressBar> lifeBars = getLifeBars();
         List<ImageView> images = getImages();
 
-        for (int i = 0; i < CANTIDAD_DE_OPCIONES -1; i++) {
+        for (int i = 0; i < CANTIDAD_DE_OPCIONES - 1; i++) {
             String name = pokemons.get(i).getNombre();
             String type = pokemons.get(i).getTipos().toString();
             String level = pokemons.get(i).getNivel().toString();
-            String lifeActual = pokemons.get(i).getVidaActual().toString();
-            String lifeMax = pokemons.get(i).getVidaMaxima().toString();
+            int lifeActual = pokemons.get(i).getVidaActual();
+            int lifeMax = pokemons.get(i).getVidaMaxima();
+            ProgressBar bar = lifeBars.get(i);
 
             labelsNombre.get(i).setText(name);
             labelsNivel.get(i).setText("Nv. " + level);
             labelsTipo.get(i).setText(type.toUpperCase());
             labelsVida.get(i).setText("PS. " + lifeActual + "/" + lifeMax);
+            bar.setProgress((double) lifeActual/lifeMax);
 
             try {
                 images.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
