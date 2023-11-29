@@ -3,6 +3,7 @@ package org.fiuba.algotres.controllers.javafx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,10 +18,7 @@ import org.fiuba.algotres.utils.enums.DefaultImageType;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ElegirPokemonInicialController implements Initializable {
     private static final String UP_KEY = "UP";
@@ -209,64 +207,18 @@ public class ElegirPokemonInicialController implements Initializable {
         }
     }
 
-    private List<Label> getLabel(String tipo) {
-        ArrayList<Label> list = new ArrayList<>();
-
-        switch (tipo) {
-            case "Nombre":
-                list.add(Nombre1);
-                list.add(Nombre2);
-                list.add(Nombre3);
-                list.add(Nombre4);
-                list.add(Nombre5);
-                list.add(Nombre6);
-
-            case "Tipo":
-                list.add(Tipo1);
-                list.add(Tipo2);
-                list.add(Tipo3);
-                list.add(Tipo4);
-                list.add(Tipo5);
-                list.add(Tipo6);
-
-            case "Nivel":
-                list.add(Nivel1);
-                list.add(Nivel2);
-                list.add(Nivel3);
-                list.add(Nivel4);
-                list.add(Nivel5);
-                list.add(Nivel6);
-
-            case "Vida":
-                list.add(Vida1);
-                list.add(Vida2);
-                list.add(Vida3);
-                list.add(Vida4);
-                list.add(Vida5);
-                list.add(Vida6);
-        }
-        return list;
-    }
-
-    private List<ImageView> getImages() {
-        ArrayList<ImageView> list = new ArrayList<>();
-        list.add(Imagen1);
-        list.add(Imagen2);
-        list.add(Imagen3);
-        list.add(Imagen4);
-        list.add(Imagen5);
-        list.add(Imagen6);
-        return list;
-    }
+    HashMap<Integer, List<Node>> data = new HashMap<>() {{
+        put(0, List.of(Nombre1, Tipo1, Nivel1, Vida1, Imagen1));
+        put(1, List.of(Nombre2, Tipo2, Nivel2, Vida2, Imagen2));
+        put(2, List.of(Nombre3, Tipo3, Nivel3, Vida3, Imagen3));
+        put(3, List.of(Nombre4, Tipo4, Nivel4, Vida4, Imagen4));
+        put(4, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5));
+        put(5, List.of(Nombre5, Tipo5, Nivel5, Vida5, Imagen5));
+    }};
 
     private void loadPokemonesJugador(int id) {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadores()[id];
         List<Pokemon> pokemons = jugadorActual.getPokemons();
-        List<Label> labelsNombre = getLabel("Nombre");
-        List<Label> labelsTipo = getLabel("Tipo");
-        List<Label> labelsNivel = getLabel("Nivel");
-        List<Label> labelsVida = getLabel("Vida");
-        List<ImageView> images = getImages();
 
         for (int i = 0; i < CANTIDAD_DE_POKEMONS; i++) {
             String name = pokemons.get(i).getNombre();
@@ -275,16 +227,11 @@ public class ElegirPokemonInicialController implements Initializable {
             String lifeActual = pokemons.get(i).getVidaActual().toString();
             String lifeMax = pokemons.get(i).getVidaMaxima().toString();
 
-            labelsNombre.get(i).setText(name);
-            labelsNivel.get(i).setText("Nv. " + level);
-            labelsTipo.get(i).setText(type.toUpperCase());
-            labelsVida.get(i).setText("PS. " + lifeActual + "/" + lifeMax);
-
-            try {
-                images.get(i).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.OTRO));
-            } catch (Exception e) {
-              e.printStackTrace();
-            }
+            ((Label) data.get(i).get(0)).setText(name); //Nombre
+            ((Label) data.get(i).get(1)).setText(type.toUpperCase()); //Tipo
+            ((Label) data.get(i).get(2)).setText("Nv. " + level); //Nivel
+            ((Label) data.get(i).get(3)).setText("PS. " + lifeActual + "/" + lifeMax); //Vida
+            ((ImageView) data.get(i).get(4)).setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + name + "-portada.png", DefaultImageType.POKEMON));
         }
     }
 }
