@@ -182,44 +182,40 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         }
     }
 
-    HashMap<String, String> messages = new HashMap<>();
-
-    private void initializeMessages(){
-            messages.put("Pocion", "Pocion cura 20 PS. de tu Pokemon.");
-            messages.put("Mega Pocion", "Mega Pocion cura 50 PS. de tu Pokemon.");
-            messages.put("Hiper Pocion", "Hiper Pocion cura 100 PS. de tu Pokemon.");
-            messages.put("Pocion Molesta Alumnos", "Pocion Molesta Alumnos cura 33% de la vida maxima de tu Pokemon.");
-            messages.put("Ataque X", "Ataque X aumenta 10% el ataque de tu Pokemon.");
-            messages.put("Defensa X", "Defensa X aumenta 10% el defensa de tu Pokemon.");
-            messages.put("Revivir", "Revivir trae de vuelta al combate a un Pokemon muerto.");
-            messages.put("Cura Todo", "Cura Todo elimina todos los efectos negativos de tu Pokemon.");
+    private HashMap<String, String> getMessages() {
+        return new HashMap<>(){{
+            put("Pocion", "Pocion cura 20 PS. de tu Pokemon.");
+            put("Mega Pocion", "Mega Pocion cura 50 PS. de tu Pokemon.");
+            put("Hiper Pocion", "Hiper Pocion cura 100 PS. de tu Pokemon.");
+            put("Pocion Molesta Alumnos", "Pocion Molesta Alumnos cura 33% de la vida maxima de tu Pokemon.");
+            put("Ataque X", "Ataque X aumenta 10% el ataque de tu Pokemon.");
+            put("Defensa X", "Defensa X aumenta 10% el defensa de tu Pokemon.");
+            put("Revivir", "Revivir trae de vuelta al combate a un Pokemon muerto.");
+            put("Cura Todo", "Cura Todo elimina todos los efectos negativos de tu Pokemon.");
+        }};
     }
 
     private void loadMessage(String nombre) {
-        String message = nombre;
-        switch (nombre) {
-            case "Boton Volver" -> message = "Desea volver atras?";
-            default -> message = messages.get(nombre);
-        }
-        mensajeInferior.setText(message);
+        HashMap<String, String> messages = getMessages();
+        mensajeInferior.setText(messages.getOrDefault(nombre, "Desea volver atras?"));
     }
 
-    List<Label> dataCantidades = new ArrayList<>();
-    private void initializeDataCantidades(){
-        dataCantidades.add(cantidadPocion);
-        dataCantidades.add(cantidadHiperPocion);
-        dataCantidades.add(cantidadDefensaX);
-        dataCantidades.add(cantidadCuraTodo);
-        dataCantidades.add(cantidadMegaPocion);
-        dataCantidades.add(cantidadPocionMolestaAlumnos);
-        dataCantidades.add(cantidadAtaqueX);
-        dataCantidades.add(cantidadRevivir);
+    private List<Label> getData() {
+        return new ArrayList<>(List.of(
+                cantidadPocion,
+                cantidadHiperPocion,
+                cantidadDefensaX,
+                cantidadCuraTodo,
+                cantidadMegaPocion,
+                cantidadPocionMolestaAlumnos,
+                cantidadAtaqueX,
+                cantidadRevivir));
     }
-
 
     private void loadItemsJugadorActual() {
         Jugador jugadorActual = JuegoJavafx.getCdb().getJugadorActual();
         List<Item> items = jugadorActual.getItems();
+        List<Label> dataCantidades = getData();
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES - 1; i++) {
             int cant = items.get(i).getCantidad();
