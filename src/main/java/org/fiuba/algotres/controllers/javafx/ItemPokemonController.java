@@ -41,13 +41,13 @@ public abstract class ItemPokemonController {
     }
 
     public OpcionesEmergentes confirmarDecision(String text){
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        Stage stage = (Stage) confirmation.getDialogPane().getScene().getWindow();
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        Stage stage = (Stage) confirmacion.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(this.getClass().getResource("/imagenes/otros/app-logo.png").toString()));
-        confirmation.setTitle("Confirmacion");
-        confirmation.setHeaderText(text);
+        confirmacion.setTitle("Confirmacion");
+        confirmacion.setHeaderText(text);
 
-        Optional<ButtonType> result = confirmation.showAndWait();
+        Optional<ButtonType> result = confirmacion.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             return OpcionesEmergentes.CONFIRMADA;
         }
