@@ -477,16 +477,14 @@ public class BattleController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(state == BattleState.NO_EMPEZADA){
             initializeData();
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.play();
         }
         renderImages();
         renderHealth(true);
         habilidades = new ArrayList<>();
-
-
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        fadeOut.play();
 
         System.out.println("Inicializado!");
     }

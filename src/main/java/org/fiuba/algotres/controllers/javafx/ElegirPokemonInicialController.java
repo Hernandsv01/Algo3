@@ -202,8 +202,19 @@ public class ElegirPokemonInicialController implements Initializable {
         if (selectedPos != -1) {
             JuegoJavafx.getCdb().getJugadores()[idJugadorActual].cambiarPokemonActual(selectedPos);
             if(idJugadorActual == 0){
-                loadPokemonesJugador(1);
-                idJugadorActual = 1;
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), blackScreen);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(300), blackScreen);
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+
+                fadeIn.setOnFinished(event -> {
+                    loadPokemonesJugador(1);
+                    idJugadorActual = 1;
+                    fadeOut.play();
+                });
+                fadeIn.play();
             }else{
                 try {
 //                    BotonSeleccionado.playSound(false, -20.0f);
