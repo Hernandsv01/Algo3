@@ -33,6 +33,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     @FXML
     public ProgressBar BarraActual;
     @FXML
+    public ImageView EstadoActual;
+    @FXML
     public ImageView ImagenActual;
     @FXML
     public Label NombreActual;
@@ -42,6 +44,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     public Label NivelActual;
     @FXML
     public Label VidaActual;
+    @FXML
+    public ImageView Estado1;
     @FXML
     public ImageView Imagen1;
     @FXML
@@ -55,6 +59,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     @FXML
     public ProgressBar Barra1;
     @FXML
+    public ImageView Estado2;
+    @FXML
     public ImageView Imagen2;
     @FXML
     public Label Nombre2;
@@ -66,6 +72,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     public Label Vida2;
     @FXML
     public ProgressBar Barra2;
+    @FXML
+    public ImageView Estado3;
     @FXML
     public ImageView Imagen3;
     @FXML
@@ -79,6 +87,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     @FXML
     public ProgressBar Barra3;
     @FXML
+    public ImageView Estado4;
+    @FXML
     public ImageView Imagen4;
     @FXML
     public Label Nombre4;
@@ -90,6 +100,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     public Label Vida4;
     @FXML
     public ProgressBar Barra4;
+    @FXML
+    public ImageView Estado5;
     @FXML
     public ImageView Imagen5;
     @FXML
@@ -104,6 +116,9 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     public ProgressBar Barra5;
     @FXML
     public AnchorPane botonVolver;
+
+
+
     @FXML
     private VBox vBox1;
 
@@ -195,7 +210,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                         System.out.println("Error en la carga de BattleScreen.fxml");
                     }
                 } else {
-                    goBack("/fxml/ElegirItem.fxml");
+                    goBack("/fxml/BattleScreen.fxml");
                 }
             }
         }
@@ -251,14 +266,24 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         return list;
     }
 
-    private List<ImageView> getImages() {
+    private List<ImageView> getImages(String tipo) {
         ArrayList<ImageView> list = new ArrayList<>();
-        list.add(ImagenActual);
-        list.add(Imagen1);
-        list.add(Imagen2);
-        list.add(Imagen3);
-        list.add(Imagen4);
-        list.add(Imagen5);
+        switch (tipo) {
+            case "Portada":
+                list.add(ImagenActual);
+                list.add(Imagen1);
+                list.add(Imagen2);
+                list.add(Imagen3);
+                list.add(Imagen4);
+                list.add(Imagen5);
+            case "Estado":
+                list.add(EstadoActual);
+                list.add(Estado1);
+                list.add(Estado2);
+                list.add(Estado3);
+                list.add(Estado4);
+                list.add(Estado5);
+        }
         return list;
     }
 
@@ -270,7 +295,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         List<Label> labelsNivel = getLabel("Nivel");
         List<Label> labelsVida = getLabel("Vida");
         List<ProgressBar> lifeBars = getLifeBars();
-        List<ImageView> images = getImages();
+        List<ImageView> imagesPortadas = getImages("Portada");
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
             String name = pokemons.get(i).getNombre();
@@ -287,9 +312,44 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             bar.setProgress((double) lifeActual/lifeMax);
 
             try {
-                images.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
+                imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("/imagenes/pokemons/" + name + "-portada.png")));
             } catch (Exception e) {
               e.printStackTrace();
+            }
+
+            if (!pokemons.get(i).getEstados().isEmpty()) {
+                switch (pokemons.get(i).getEstados().get(0).getNombre()) {
+                    case "Paralizado":
+                        try {
+                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Paralizado.gif")));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    case "Envenenado":
+                        try {
+                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Envenenado.gif")));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    case "Dormido":
+                        try {
+                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Dormido.gif")));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    case "Confuso":
+                        try {
+                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/Confuso.gif")));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    default:
+                        try {
+                            imagesPortadas.get(i).setImage(new Image(getClass().getResourceAsStream("imagenes/estados/SinEstado.gif")));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                }
             }
         }
     }
