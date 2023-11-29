@@ -185,6 +185,7 @@ public class BattleController implements Initializable{
     }
 
     private void prepararSiguienteTurno() {
+        verificarVictoria();
         verificarMuertePokemon();
         pantallaMensaje.setText("");
 
@@ -208,6 +209,12 @@ public class BattleController implements Initializable{
             pantallaMensaje.setText("Elija una opción");
             setSelectedGridElement(0, 0);
         });
+    }
+
+    public void verificarVictoria(){
+        if(JuegoJavafx.getCdb().getGanador() != -1){
+            callVictoryScene();
+        }
     }
 
     public void verificarMuertePokemon(){
