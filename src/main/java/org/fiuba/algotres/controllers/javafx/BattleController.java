@@ -82,7 +82,6 @@ public class BattleController implements Initializable{
     public ImageView imagenAtacanteConfuso;
     @FXML
     private ImageView imagenAtacante;
-    private final List<ImageView> pokebolasAtacante = new ArrayList<>();
     @FXML
     public ImageView pokebolaAtacanteSuplente1;
     @FXML
@@ -111,7 +110,6 @@ public class BattleController implements Initializable{
     public ImageView imagenVictimaParalizado;
     @FXML
     private ImageView imagenVictima;
-    private final List<ImageView> pokebolasVictima = new ArrayList<>();
     @FXML
     public ImageView pokebolaVictimaSuplente1;
     @FXML
@@ -243,6 +241,7 @@ public class BattleController implements Initializable{
             JuegoJavafx.getCdb().setSiguienteTurno();
             renderImages();
             renderHealth(true);
+            renderPokebolas();
             fadeOut.play();
         });
         fadeIn.play();
@@ -517,25 +516,59 @@ public class BattleController implements Initializable{
         timelineVictima.play();
     }
 
-//    public void renderPokebolas(){
-//        pokebolasAtacante.add(pokebolaAtacanteSuplente1);
-//        pokebolasAtacante.add(pokebolaAtacanteSuplente2);
-//        pokebolasAtacante.add(pokebolaAtacanteSuplente3);
-//        pokebolasAtacante.add(pokebolaAtacanteSuplente4);
-//        pokebolasAtacante.add(pokebolaAtacanteSuplente5);
-//
-//        pokebolasVictima.add(pokebolaVictimaSuplente1);
-//        pokebolasVictima.add(pokebolaVictimaSuplente2);
-//        pokebolasVictima.add(pokebolaVictimaSuplente3);
-//        pokebolasVictima.add(pokebolaVictimaSuplente4);
-//        pokebolasVictima.add(pokebolaVictimaSuplente5);
-//
-//        for (int i = 1; i <= pokebolasAtacante.size(); i++) {
-//            if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(i).estaVivo()){
-//                pokebolasAtacante.get(i-1).setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-//            }
-//        }
-//    }
+    public void renderPokebolas(){
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(1).estaVivo()){
+            pokebolaAtacanteSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaAtacanteSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(2).estaVivo()){
+            pokebolaAtacanteSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaAtacanteSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(3).estaVivo()){
+            pokebolaAtacanteSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaAtacanteSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(4).estaVivo()){
+            pokebolaAtacanteSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaAtacanteSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(5).estaVivo()){
+            pokebolaAtacanteSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaAtacanteSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+
+        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(1).estaVivo()){
+            pokebolaVictimaSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaVictimaSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(2).estaVivo()){
+            pokebolaVictimaSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaVictimaSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(3).estaVivo()){
+            pokebolaVictimaSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaVictimaSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(4).estaVivo()){
+            pokebolaVictimaSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaVictimaSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(5).estaVivo()){
+            pokebolaVictimaSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        }else{
+            pokebolaVictimaSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+    }
 
     private static String capitalizar(String string){
         return string.substring(0, 1).toUpperCase() + string.substring(1);
@@ -575,9 +608,9 @@ public class BattleController implements Initializable{
             fadeOut.setToValue(0.0);
             fadeOut.play();
         }
-//        renderPokebolas();
         renderImages();
         renderHealth(true);
+        renderPokebolas();
         habilidades = new ArrayList<>();
         barraVidaAtacante.styleProperty().bind(
                 javafx.beans.binding.Bindings.createStringBinding(() -> {
