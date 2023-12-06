@@ -57,7 +57,32 @@ public class BattleController implements Initializable{
     private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
 
     private static BattleState state = BattleState.NO_EMPEZADA;
+    private List<Habilidad> habilidades;
+    private static List<String> colaDeMensajes;
 
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private ImageView imagenClima;
+
+    // Items atacante
+    @FXML
+    public Label nombreAtacante;
+    @FXML
+    public Label numeroVidaAtacante;
+    @FXML
+    public ProgressBar barraVidaAtacante;
+    @FXML
+    public ImageView imagenAtacanteParalizado;
+    @FXML
+    public ImageView imagenAtacanteDormido;
+    @FXML
+    public ImageView imagenAtacanteEnvenenado;
+    @FXML
+    public ImageView imagenAtacanteConfuso;
+    @FXML
+    private ImageView imagenAtacante;
+    private final List<ImageView> pokebolasAtacante = new ArrayList<>();
     @FXML
     public ImageView pokebolaAtacanteSuplente1;
     @FXML
@@ -68,6 +93,25 @@ public class BattleController implements Initializable{
     public ImageView pokebolaAtacanteSuplente4;
     @FXML
     public ImageView pokebolaAtacanteSuplente5;
+
+    // Items victima
+    @FXML
+    public Label nombreVictima;
+    @FXML
+    public Label numeroVidaVictima;
+    @FXML
+    public ProgressBar barraVidaVictima;
+    @FXML
+    public ImageView imagenVictimaConfuso;
+    @FXML
+    public ImageView imagenVictimaEnvenenado;
+    @FXML
+    public ImageView imagenVictimaDormido;
+    @FXML
+    public ImageView imagenVictimaParalizado;
+    @FXML
+    private ImageView imagenVictima;
+    private final List<ImageView> pokebolasVictima = new ArrayList<>();
     @FXML
     public ImageView pokebolaVictimaSuplente1;
     @FXML
@@ -79,39 +123,7 @@ public class BattleController implements Initializable{
     @FXML
     public ImageView pokebolaVictimaSuplente5;
 
-    private final List<ImageView> pokebolasAtacante = new ArrayList<>();
-    private final List<ImageView> pokebolasVictima = new ArrayList<>();
-
-    private List<Habilidad> habilidades;
-    private static List<String> colaDeMensajes;
-
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private ImageView imagenClima;
-
-    @FXML
-    public Label nombreAtacante;
-    @FXML
-    public Label numeroVidaAtacante;
-    @FXML
-    public ProgressBar barraVidaAtacante;
-    @FXML
-    public ImageView imagenEstadoAtacante;
-    @FXML
-    private ImageView imagenAtacante;
-
-    @FXML
-    public Label nombreVictima;
-    @FXML
-    public Label numeroVidaVictima;
-    @FXML
-    public ProgressBar barraVidaVictima;
-    @FXML
-    public ImageView imagenEstadoVictima;
-    @FXML
-    private ImageView imagenVictima;
-
+    // Interacción usuario
     @FXML
     public HBox informationBox;
     @FXML
@@ -413,27 +425,61 @@ public class BattleController implements Initializable{
         CampoDeBatalla cdb = JuegoJavafx.getCdb();
         imagenClima.setImage(ImageLoader.getJavafxImage("/imagenes/climas/" + capitalizar(cdb.getClima().getNombre()) + ".gif", DefaultImageType.CLIMA));
 
+        // IMAGENES ATACANTE
         numeroVidaAtacante.setText(
                 cdb.getJugadorActual().getPokemonActual().getVidaActual() + "/" +
                 cdb.getJugadorActual().getPokemonActual().getVidaMaxima()
         );
         barraVidaAtacante.setProgress((double) cdb.getJugadorActual().getPokemonActual().getVidaActual() /cdb.getJugadorActual().getPokemonActual().getVidaMaxima());
-        if(!cdb.getJugadorActual().getPokemonActual().getEstados().isEmpty()){
-            imagenEstadoAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/estados/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getEstados().get(0).getNombre()) + ".gif", DefaultImageType.ESTADO));
-        }else{
-            imagenEstadoAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        // Estados atacante
+        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("paralizado")).toList().isEmpty()) {
+            imagenAtacanteParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenAtacanteParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
+        }
+        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("envenenado")).toList().isEmpty()) {
+            imagenAtacanteEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenAtacanteEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
+        }
+        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("dormido")).toList().isEmpty()) {
+            imagenAtacanteDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenAtacanteDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
+        }
+        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("confuso")).toList().isEmpty()) {
+            imagenAtacanteConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenAtacanteConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
         }
         imagenAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getNombre()) + "-back.gif", DefaultImageType.POKEMON));
 
+        // IMAGENES VICTIMA
         numeroVidaVictima.setText(
                 cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() + "/" +
                 cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaMaxima()
         );
         barraVidaVictima.setProgress((double) cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() /cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaMaxima());
-        if(!cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().isEmpty()){
-            imagenEstadoVictima.setImage(ImageLoader.getJavafxImage("/imagenes/estados/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().get(0).getNombre()) + ".gif", DefaultImageType.ESTADO));
-        }else{
-            imagenEstadoVictima.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        // Estados victima
+        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("paralizado")).toList().isEmpty()) {
+            imagenVictimaParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenVictimaParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
+        }
+        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("envenenado")).toList().isEmpty()) {
+            imagenVictimaEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenVictimaEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
+        }
+        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("dormido")).toList().isEmpty()) {
+            imagenVictimaDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenVictimaDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
+        }
+        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("confuso")).toList().isEmpty()) {
+            imagenVictimaConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
+        } else {
+            imagenVictimaConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
         }
         imagenVictima.setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre()) + "-front.gif", DefaultImageType.POKEMON));
     }
