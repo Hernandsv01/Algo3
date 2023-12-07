@@ -19,6 +19,7 @@ import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
@@ -37,6 +38,8 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_OPCIONES = 7;
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
 
     @Setter
     private Item itemElegido;
@@ -201,10 +204,12 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
                 }
             }
             default -> newPos = -1;
-        };
+        }
         if(newPos == -1){
             return;
         }
+
+        changedOption.playSound(false, 2.0f);
         setSelectedSceneElement(newPos);
     }
 
@@ -219,6 +224,7 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
+                selectedOption.playSound(false, 2.0f);
                 Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos);
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para aplicar " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {

@@ -15,6 +15,7 @@ import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.CambiarPokemonState;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
@@ -37,6 +38,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private CambiarPokemonState state;
     private Pokemon pokemonUsado = null;
     public Jugador jugadorActual;
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
     @FXML
     public ProgressBar BarraActual;
     @FXML
@@ -247,6 +250,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         if (newPos == -1) {
             return;
         }
+
+        changedOption.playSound(false, 2.0f);
         setSelectedSceneElement(newPos);
     }
 
@@ -260,6 +265,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         int selectedPos = verifyPosition(coordenadas(selectedElement), CANTIDAD_DE_OPCIONES);
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
+                selectedOption.playSound(false, 2.0f);
 
                 List<Pokemon> pokemons = getPokemons();
                 Pokemon pokemon = pokemons.get(selectedPos + 1);

@@ -15,6 +15,7 @@ import lombok.Setter;
 import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.item.Item;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.BattleState;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
@@ -34,6 +35,8 @@ public class ElegirItemController extends ItemPokemonController implements Initi
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 9;
     private static final int OPCIONES_POR_COLUMNA = 4;
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
     @Getter @Setter
     private BattleState state;
     @FXML
@@ -147,6 +150,8 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         if(newPos == -1){
             return;
         }
+
+        changedOption.playSound(false, 2.0f);
         setSelectedSceneElement(newPos);
     }
 
@@ -161,6 +166,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que selecciona el item a usar
+                selectedOption.playSound(false, 2.0f);
                 Item itemElegido = JuegoJavafx.getCdb().getJugadorActual().getItems().get(selectedPos);
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
