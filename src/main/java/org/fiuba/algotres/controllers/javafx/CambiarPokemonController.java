@@ -35,6 +35,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 6;
     private CambiarPokemonState state;
+    private Pokemon pokemonUsado = null;
     public Jugador jugadorActual;
     @FXML
     public ProgressBar BarraActual;
@@ -259,8 +260,10 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         int selectedPos = verifyPosition(coordenadas(selectedElement), CANTIDAD_DE_OPCIONES);
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
-                //codigo que aplique item
-                Pokemon pokemon = jugadorActual.getPokemons().get(selectedPos + 1);
+
+                List<Pokemon> pokemons = getPokemons();
+                Pokemon pokemon = pokemons.get(selectedPos + 1);
+
                 if (pokemon.getVidaActual() <= 0) {
                     return;
                 }
@@ -302,8 +305,20 @@ public class CambiarPokemonController extends ItemPokemonController implements I
         }};
     }
 
+    private List<Pokemon> getPokemons() {
+        List<Pokemon> pokemons = new ArrayList<>(jugadorActual.getPokemonsVivos());
+        List<Pokemon> pokemonsRestantes = jugadorActual.getPokemonsMuertos();
+
+        if (pokemonUsado != null) {
+            pokemons.add(0, pokemonUsado);
+            pokemonsRestantes.remove(pokemonUsado);
+        }
+        pokemons.addAll(pokemonsRestantes);
+        return pokemons;
+    }
+
     private void loadPokemonesJugadorActual() {
-        List<Pokemon> pokemons = jugadorActual.getPokemons();
+        List<Pokemon> pokemons = getPokemons();
         HashMap<Integer, List<Node>> data = getData();
 
         for (int i = 0; i < CANTIDAD_DE_OPCIONES; i++) {
@@ -340,5 +355,9 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     public void setJugadorActual(Jugador jugadorActual) {
         this.jugadorActual = jugadorActual;
         loadPokemonesJugadorActual();
+    }
+
+    public void setPokemonUsado(Pokemon pokemonMuerto) {
+        this.pokemonUsado = pokemonMuerto;
     }
 }

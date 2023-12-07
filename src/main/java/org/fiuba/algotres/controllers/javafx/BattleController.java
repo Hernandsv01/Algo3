@@ -192,7 +192,7 @@ public class BattleController implements Initializable{
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
                 callItemScene();
             } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
-                callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION, JuegoJavafx.getCdb().getJugadorActual());
+                callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION, JuegoJavafx.getCdb().getJugadorActual(), null);
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 1) {
                 accionarRendicion();
             }
@@ -251,9 +251,9 @@ public class BattleController implements Initializable{
 
     public void verificarMuertePokemon(){
         if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadorActual());
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadorActual(), JuegoJavafx.getCdb().getJugadorActual().getPokemonActual());
         }else if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().estaVivo()){
-            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()]);
+            callPokemonScene(CambiarPokemonState.CAMBIO_POKEMON_MUERTO, JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()], JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual());
         }
     }
 
@@ -559,11 +559,12 @@ public class BattleController implements Initializable{
         System.out.println("Inicializado!");
     }
 
-    public void callPokemonScene(CambiarPokemonState state, Jugador jugador){
+    public void callPokemonScene(CambiarPokemonState state, Jugador jugador, Pokemon pokemonMuerto){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CambiarPokemonJugador.fxml"));
             Pane pane = loader.load();
             ((CambiarPokemonController)loader.getController()).setState(state);
+            ((CambiarPokemonController)loader.getController()).setPokemonUsado(pokemonMuerto);
             ((CambiarPokemonController)loader.getController()).setJugadorActual(jugador);
 
             Scene scene = new Scene(pane);
