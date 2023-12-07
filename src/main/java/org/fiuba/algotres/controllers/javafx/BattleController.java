@@ -26,6 +26,8 @@ import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Ataque;
 import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.persistencia.reportes.GeneradorReporte;
+import org.fiuba.algotres.persistencia.reportes.json.GeneradorReporteJSON;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
 import org.fiuba.algotres.utils.Sound;
@@ -51,6 +53,8 @@ public class BattleController implements Initializable{
     private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
     private static final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\MusicaBatalla.wav");
     private static final Sound sonidaAtaque = new Sound("src\\main\\resources\\audios\\SonidoAtaque.wav");
+
+    private static final GeneradorReporte reportadorJSON = new GeneradorReporteJSON();
 
     private final double DEFAULT_LABEL_WIDTH = 120;
 
@@ -674,6 +678,8 @@ public class BattleController implements Initializable{
                 throw new RuntimeException("Algo anduvo mal con el archivo de victoria");
             }
         });
+        
+        reportadorJSON.GenerarReporte(JuegoJavafx.getCdb());
         fadeOut.play();
     }
 
