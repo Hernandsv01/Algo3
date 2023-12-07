@@ -252,6 +252,7 @@ public class PantallaMenuController {
 
             Button buttonAceptar = (Button) dialogPane.lookupButton(botonAceptar);
             Button buttonCancelar = (Button) dialogPane.lookupButton(botonCancelar);
+            buttonCancelar.setDefaultButton(true);
 
             buttonAceptar.getStyleClass().add("button-window");
             buttonCancelar.getStyleClass().add("button-window");
