@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
+import org.fiuba.algotres.controllers.javafx.batalla.BattleController;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.utils.ImageLoader;
@@ -199,7 +200,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
             case ENTER_KEY -> select();
             case ESCAPE_KEY -> {
                 if (state == CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION) {
-                    goBack("/fxml/BattleScreen.fxml");
+                    goBack("/fxml/batalla/BattleScreen.fxml");
                 }
             }
         }
@@ -281,12 +282,12 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                         }else{
                             jugadorActual.cambiarPokemonActual(selectedPos);
                         }
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/batalla/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         JuegoJavafx.setScene(scene, true);
 
                         BattleController battleController = loader.getController();
-                        battleController.getColaDeMensajes().add(pokemon.getNombre() + " entra a la batalla!");
+                        battleController.agregarMensaje(pokemon.getNombre() + " entra a la batalla!");
                         battleController.accionar();
                     } catch (IOException e) {
                         System.out.println("Error en la carga de BattleScreen.fxml");
@@ -294,7 +295,7 @@ public class CambiarPokemonController extends ItemPokemonController implements I
                 }
             } else {
                 if (state == CambiarPokemonState.CAMBIO_POKEMON_POR_ELECCION) {
-                    goBack("/fxml/BattleScreen.fxml");
+                    goBack("/fxml/batalla/BattleScreen.fxml");
                 }
             }
         }

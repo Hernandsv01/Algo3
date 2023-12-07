@@ -7,13 +7,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.fiuba.algotres.JuegoJavafx;
 import lombok.Setter;
+import org.fiuba.algotres.controllers.javafx.batalla.BattleController;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;
@@ -229,7 +229,7 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para aplicar " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/batalla/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         boolean itemWorks = itemElegido.usar(pokemon);
                         if (itemWorks) {
@@ -237,7 +237,7 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
                         }
 
                         BattleController battleController = loader.getController();
-                        battleController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeItem(itemElegido.getNombre()));
+                        battleController.agregarMensaje(GeneradorDeMensajes.generarMensajeItem(itemElegido.getNombre()));
                         battleController.accionar();
 
                         JuegoJavafx.setScene(scene, true);

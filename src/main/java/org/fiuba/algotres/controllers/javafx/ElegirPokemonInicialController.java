@@ -229,7 +229,7 @@ public class ElegirPokemonInicialController implements Initializable {
                     fadeIn.setToValue(1.0);
 
                     fadeIn.setOnFinished(event -> {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/batalla/BattleScreen.fxml"));
                         try {
                             JuegoJavafx.setScene(new Scene(loader.load()), true);
                         } catch (IOException e) {

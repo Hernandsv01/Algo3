@@ -4,12 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.JuegoJavafx;
@@ -78,7 +76,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
         switch (tecla) {
             case UP_KEY, DOWN_KEY, RIGHT_KEY, LEFT_KEY -> moveSelector(tecla);
             case ENTER_KEY -> select();
-            case ESCAPE_KEY -> goBack("/fxml/BattleScreen.fxml");
+            case ESCAPE_KEY -> goBack("/fxml/batalla/BattleScreen.fxml");
         }
     }
 
@@ -181,7 +179,7 @@ public class ElegirItemController extends ItemPokemonController implements Initi
                     }
                 }
             } else {
-                goBack("/fxml/BattleScreen.fxml");
+                goBack("/fxml/batalla/BattleScreen.fxml");
             }
         }
     }

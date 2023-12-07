@@ -1,4 +1,4 @@
-package org.fiuba.algotres.controllers.javafx;
+package org.fiuba.algotres.controllers.javafx.batalla;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -19,7 +19,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lombok.Getter;
+import lombok.Setter;
 import org.fiuba.algotres.JuegoJavafx;
+import org.fiuba.algotres.controllers.javafx.CambiarPokemonController;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
@@ -39,6 +42,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+@Setter
 public class BattleController implements Initializable{
     private static final String UP_KEY = "UP";
     private static final String DOWN_KEY = "DOWN";
@@ -46,8 +50,7 @@ public class BattleController implements Initializable{
     private static final String LEFT_KEY = "LEFT";
     private static final String ENTER_KEY = "ENTER";
     private static final String ESCAPE_KEY = "ESCAPE";
-    private static final String ACTIVATED_LABEL_COLOR = "red";
-    private static final String DEACTIVATED_LABEL_COLOR = "white";
+    private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
 
     private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
     private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
@@ -56,16 +59,9 @@ public class BattleController implements Initializable{
 
     private static final GeneradorReporte reportadorJSON = new GeneradorReporteJSON();
 
-    private final double DEFAULT_LABEL_WIDTH = 120;
-
-    private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
-
+    @Getter
     private static BattleState state = BattleState.NO_EMPEZADA;
-    private List<Habilidad> habilidades;
-    private static List<String> colaDeMensajes;
 
-    @FXML
-    private AnchorPane rootPane;
     @FXML
     private ImageView imagenClima;
 
@@ -127,29 +123,9 @@ public class BattleController implements Initializable{
 
     // Interacción usuario
     @FXML
-    public HBox informationBox;
-    @FXML
-    private GridPane optionGrid;
-    @FXML
-    private TextArea pantallaMensaje;
+    public InformationPanelController informationPanelController;
     @FXML
     private Rectangle blackScreen;
-
-    public static void toggleLabel(Label label){
-        String colorAttribute = Arrays.stream(label.getStyle().split(";")).filter(s -> s.contains("-fx-border-color")).toList().get(0);
-        if(colorAttribute.contains(ACTIVATED_LABEL_COLOR)){
-            label.setStyle(label.getStyle().replace(ACTIVATED_LABEL_COLOR, DEACTIVATED_LABEL_COLOR));
-        }else if(colorAttribute.contains(DEACTIVATED_LABEL_COLOR)){
-            label.setStyle(label.getStyle().replace(DEACTIVATED_LABEL_COLOR, ACTIVATED_LABEL_COLOR));
-        }
-    }
-
-    private static Coordinate verifyPosition(int column, int row){
-        if((column >= 0 && column < 2) && (row >= 0 && row < 2)){
-            return new Coordinate(column, row);
-        }
-        return null;
-    }
 
     @FXML
     public void onKeyTyped(KeyEvent event){
@@ -162,11 +138,55 @@ public class BattleController implements Initializable{
             case ENTER_KEY -> select();
             case ESCAPE_KEY -> goBack();
         }
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(state == BattleState.NO_EMPEZADA){
+            initializeData();
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.play();
+        }
+        renderImages();
+        renderHealth(true);
+        renderPokebolas();
+        barraVidaAtacante.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (barraVidaAtacante.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (barraVidaAtacante.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, barraVidaAtacante.progressProperty())
+        );
+        barraVidaVictima.styleProperty().bind(
+                javafx.beans.binding.Bindings.createStringBinding(() -> {
+                    if (barraVidaVictima.getProgress() > 0.75) {
+                        return "-fx-accent: #00fc00;";
+                    } else if (barraVidaVictima.getProgress() > 0.25) {
+                        return "-fx-accent: yellow;";
+                    } else {
+                        return "-fx-accent: red;";
+                    }
+                }, barraVidaVictima.progressProperty())
+        );
+        blackScreen.setOpacity(0);
+        System.out.println("Inicializado!");
+    }
+
+    private static Coordinate verifyPosition(int column, int row){
+        if((column >= 0 && column < 2) && (row >= 0 && row < 2)){
+            return new Coordinate(column, row);
+        }
+        return null;
     }
 
     private void moveSelector(String tecla){
-        BorderPane currentElement = getSelectedGridElement();
+        BorderPane currentElement = informationPanelController.getSelectedGridElement();
         if(currentElement == null) return;
         Coordinate currentPos = new Coordinate(GridPane.getColumnIndex(currentElement), GridPane.getRowIndex(currentElement));
 
@@ -183,15 +203,15 @@ public class BattleController implements Initializable{
         }
 
         changedOption.playSound(false, 2.0f);
-        setSelectedGridElement(newPos.posCol(), newPos.posRow());
+        informationPanelController.setSelectedGridElement(newPos.posCol(), newPos.posRow());
 
         if(state == BattleState.SELECCION_HABILIDAD){
-            loadHabilidadInfo();
+            informationPanelController.loadHabilidadInfo();
         }
     }
 
     private void select() {
-        BorderPane selectedElement = getSelectedGridElement();
+        BorderPane selectedElement = informationPanelController.getSelectedGridElement();
         Coordinate selectedPos = null;
         if(selectedElement != null){
             selectedPos = new Coordinate(GridPane.getColumnIndex(selectedElement), GridPane.getRowIndex(selectedElement));
@@ -201,8 +221,8 @@ public class BattleController implements Initializable{
             selectedOption.playSound(false, 2.0f);
             if (selectedPos.posCol == 0 && selectedPos.posRow == 0) {
                 state = BattleState.SELECCION_HABILIDAD;
-                loadHabilidades();
-                loadHabilidadInfo();
+                informationPanelController.loadHabilidades();
+                informationPanelController.loadHabilidadInfo();
             } else if (selectedPos.posCol == 1 && selectedPos.posRow == 0) {
                 callItemScene();
             } else if (selectedPos.posCol == 0 && selectedPos.posRow == 1) {
@@ -215,8 +235,8 @@ public class BattleController implements Initializable{
                 activarHabilidadSeleccionada();
                 accionar();
             }else if(state == BattleState.ACCIONANDO){
-                if(!colaDeMensajes.isEmpty()){
-                    loadNextMessage();
+                if(!InformationPanelController.getColaDeMensajes().isEmpty()){
+                    informationPanelController.loadNextMessage();
                 }else{
                     state = BattleState.SELECCION_ACCION;
                     prepararSiguienteTurno();
@@ -232,7 +252,7 @@ public class BattleController implements Initializable{
             return;
         }
         verificarMuertePokemon();
-        pantallaMensaje.setText("");
+        informationPanelController.getPantallaMensaje().setText("");
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), blackScreen);
         fadeIn.setFromValue(0.0);
@@ -251,9 +271,9 @@ public class BattleController implements Initializable{
         fadeIn.play();
 
         fadeOut.setOnFinished(event -> {
-            loadAcciones();
-            pantallaMensaje.setText("Elija una opción");
-            setSelectedGridElement(0, 0);
+            informationPanelController.loadAcciones();
+            informationPanelController.getPantallaMensaje().setText("Elija una opción");
+            informationPanelController.setSelectedGridElement(0, 0);
         });
     }
 
@@ -284,7 +304,7 @@ public class BattleController implements Initializable{
             }
         }
         if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
+            InformationPanelController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
             return;
         }
 
@@ -292,10 +312,10 @@ public class BattleController implements Initializable{
         JuegoJavafx.getCdb().getClima().aplicarEfectos(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual());
         String mensajeClima = GeneradorDeMensajes.generarMensajeClima(JuegoJavafx.getCdb().getClima());
         if(mensajeClima != null){
-            colaDeMensajes.add(mensajeClima);
+            InformationPanelController.getColaDeMensajes().add(mensajeClima);
         }
         if(!JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().estaVivo()){
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
+            InformationPanelController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeMuertePrematura(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual()));
             return;
         }
 
@@ -303,11 +323,11 @@ public class BattleController implements Initializable{
         if(puedeAccionar){
             accionarHabilidad();
         }else{
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JuegoJavafx.getCdb().getJugadorActual().getPokemonActual(), true));
+            InformationPanelController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeEstado(estadoInhabilitante, JuegoJavafx.getCdb().getJugadorActual().getPokemonActual(), true));
         }
 
         if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().estaVivo()){
-            colaDeMensajes.add(GeneradorDeMensajes.generarMensajeMuerte(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual()));
+            InformationPanelController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeMuerte(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual()));
         }
     }
 
@@ -316,68 +336,22 @@ public class BattleController implements Initializable{
             accionarRendicion();
         }else if(state == BattleState.SELECCION_HABILIDAD){
             state = BattleState.SELECCION_ACCION;
-            loadAcciones();
-            setSelectedGridElement(0, 0);
-            pantallaMensaje.setText(MENSAJE_PANTALLA_DEFAULT);
+            informationPanelController.loadAcciones();
+            informationPanelController.setSelectedGridElement(0, 0);
+            informationPanelController.getPantallaMensaje().setText(MENSAJE_PANTALLA_DEFAULT);
         }
-    }
-
-    private void loadHabilidades(){
-        ObservableList<Node> elementos = informationBox.getChildren();
-        elementos.clear();
-        elementos.addAll(optionGrid, pantallaMensaje);
-        optionGrid.setPrefWidth(optionGrid.getPrefWidth() + 120);
-        pantallaMensaje.setPrefWidth(pantallaMensaje.getPrefWidth() - 120);
-        getGridElements().forEach(borderPane -> ((Label)borderPane.getCenter()).setPrefWidth(DEFAULT_LABEL_WIDTH + 20));
-
-        habilidades.clear();
-        for(int i = 0; i < getGridElements().size(); i++){
-            Habilidad habilidad = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getHabilidades().get(i);
-            ((Label)getGridElements().get(i).getCenter()).setText(habilidad.getNombre());
-            habilidades.add(habilidad);
-        }
-    }
-
-    private void loadAcciones(){
-        ObservableList<Node> elementos = informationBox.getChildren();
-        elementos.clear();
-        elementos.addAll(pantallaMensaje, optionGrid);
-
-        double totalWidth = optionGrid.getPrefWidth() + pantallaMensaje.getPrefWidth();
-        optionGrid.setPrefWidth(totalWidth / 2);
-        pantallaMensaje.setPrefWidth(totalWidth / 2);
-        getGridElements().forEach(borderPane -> ((Label)borderPane.getCenter()).setPrefWidth(DEFAULT_LABEL_WIDTH));
-
-        ((Label)getGridElements().get(0).getCenter()).setText("Habilidad");
-        ((Label)getGridElements().get(1).getCenter()).setText("Cambiar");
-        ((Label)getGridElements().get(2).getCenter()).setText("Items");
-        ((Label)getGridElements().get(3).getCenter()).setText("Rendirse");
-    }
-
-    private void loadNextMessage() {
-        pantallaMensaje.setText(colaDeMensajes.remove(0));
-    }
-
-    private void loadHabilidadInfo(){
-        int posicionHabilidad = getGridElements().indexOf(getSelectedGridElement());
-        Habilidad habilidad = habilidades.get(posicionHabilidad);
-        String mensaje = "Usos: " + habilidad.getUsos() + "\n";
-        if(habilidad instanceof Ataque){
-            mensaje += "Tipo: " + ((Ataque) habilidad).getTipo();
-        }
-        pantallaMensaje.setText(mensaje);
     }
 
     private void accionarHabilidad(){
-        int posicionHabilidad = getGridElements().indexOf(getSelectedGridElement());
+        int posicionHabilidad = informationPanelController.getGridElements().indexOf(informationPanelController.getSelectedGridElement());
         if(posicionHabilidad == -1) return;
-        Habilidad habilidad = habilidades.get(posicionHabilidad);
+        Habilidad habilidad = informationPanelController.getHabilidades().get(posicionHabilidad);
         Pokemon atacante = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual();
         Pokemon victima = JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual();
 
         habilidad.accionarHabilidad(atacante, victima);
         sonidaAtaque.playSound(false, 0);
-        colaDeMensajes.add(GeneradorDeMensajes.generarMensajeEfectoHabilidad(habilidad, atacante, victima));
+        InformationPanelController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeEfectoHabilidad(habilidad, atacante, victima));
     }
 
     private void accionarRendicion(){
@@ -393,35 +367,6 @@ public class BattleController implements Initializable{
                 callVictoryScene();
             }
         });
-    }
-
-    private List<BorderPane> getGridElements(){
-        return optionGrid.getChildren().stream()
-                        .filter(node -> node instanceof BorderPane)
-                        .map(node -> (BorderPane)node)
-                        .toList();
-    }
-
-    private BorderPane getSelectedGridElement(){
-        return getGridElements().stream()
-                .filter(borderPane -> borderPane.getCenter().getStyle().contains("-fx-border-color: red"))
-                .findFirst().orElse(null);
-    }
-
-    private void setSelectedGridElement(int col, int row){
-        BorderPane previousElement = getSelectedGridElement();
-        if(previousElement != null) {
-            toggleLabel((Label)previousElement.getCenter());
-        }
-
-        toggleLabel((Label)getGridElements().stream()
-                .filter(borderPane -> GridPane.getRowIndex(borderPane) == row && GridPane.getColumnIndex(borderPane) == col)
-                .toList().get(0).getCenter());
-    }
-
-    private void disableGrid(){
-        toggleLabel((Label)getSelectedGridElement().getCenter());
-        getGridElements().forEach(borderPane -> ((Label)borderPane.getCenter()).setText(""));
     }
 
     private void renderImages(){
@@ -583,10 +528,10 @@ public class BattleController implements Initializable{
 
     public void accionar() {
         state = BattleState.ACCIONANDO;
-        loadAcciones();
-        disableGrid();
-        if(!colaDeMensajes.isEmpty()){
-            loadNextMessage();
+        informationPanelController.loadAcciones();
+        informationPanelController.disableGrid();
+        if(!InformationPanelController.getColaDeMensajes().isEmpty()){
+            informationPanelController.loadNextMessage();
         }else{
             state = BattleState.SELECCION_ACCION;
             prepararSiguienteTurno();
@@ -600,46 +545,10 @@ public class BattleController implements Initializable{
             backgroundMusic.playSound(true, -14.0f);
         }
         state = BattleState.SELECCION_ACCION;
-        colaDeMensajes = new ArrayList<>();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(state == BattleState.NO_EMPEZADA){
-            initializeData();
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
-            fadeOut.setFromValue(1.0);
-            fadeOut.setToValue(0.0);
-            fadeOut.play();
-        }
-        renderImages();
-        renderHealth(true);
-        renderPokebolas();
-        habilidades = new ArrayList<>();
-        barraVidaAtacante.styleProperty().bind(
-                javafx.beans.binding.Bindings.createStringBinding(() -> {
-                    if (barraVidaAtacante.getProgress() > 0.75) {
-                        return "-fx-accent: #00fc00;";
-                    } else if (barraVidaAtacante.getProgress() > 0.25) {
-                        return "-fx-accent: yellow;";
-                    } else {
-                        return "-fx-accent: red;";
-                    }
-                }, barraVidaAtacante.progressProperty())
-        );
-        barraVidaVictima.styleProperty().bind(
-                javafx.beans.binding.Bindings.createStringBinding(() -> {
-                    if (barraVidaVictima.getProgress() > 0.75) {
-                        return "-fx-accent: #00fc00;";
-                    } else if (barraVidaVictima.getProgress() > 0.25) {
-                        return "-fx-accent: yellow;";
-                    } else {
-                        return "-fx-accent: red;";
-                    }
-                }, barraVidaVictima.progressProperty())
-        );
-        blackScreen.setOpacity(0);
-        System.out.println("Inicializado!");
+    public void agregarMensaje(String mensaje){
+        InformationPanelController.getColaDeMensajes().add(mensaje);
     }
 
     public void callPokemonScene(CambiarPokemonState state, Jugador jugador, Pokemon pokemonMuerto){
@@ -681,9 +590,5 @@ public class BattleController implements Initializable{
         
         reportadorJSON.GenerarReporte(JuegoJavafx.getCdb());
         fadeOut.play();
-    }
-
-    public List<String> getColaDeMensajes(){
-        return colaDeMensajes;
     }
 }
