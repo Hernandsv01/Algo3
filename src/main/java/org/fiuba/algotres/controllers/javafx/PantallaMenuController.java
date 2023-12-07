@@ -182,25 +182,28 @@ public class PantallaMenuController {
             StackPane.setAlignment(mensaje0, Pos.CENTER);
             mensaje0.setTranslateY(-120);
             mensaje0.getStyleClass().add("content-text");
-            mensaje0.setStyle("-fx-font-size: 20px;");
+            mensaje0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
             mensaje1.setWrapText(true);
             mensaje1.setMaxWidth(250);
             mensaje1.setTranslateY(-70);
             mensaje1.setTranslateX(-70);
             mensaje1.getStyleClass().add("content-text");
+            mensaje1.setStyle("-fx-font-weight: bold;");
 
             mensaje2.setWrapText(true);
             mensaje2.setMaxWidth(250);
             mensaje2.setTranslateY(-0);
             mensaje2.setTranslateX(-70);
             mensaje2.getStyleClass().add("content-text");
+            mensaje2.setStyle("-fx-font-weight: bold;");
 
             mensaje3.setWrapText(true);
             mensaje3.setMaxWidth(250);
             mensaje3.setTranslateY(55);
             mensaje3.setTranslateX(-70);
             mensaje3.getStyleClass().add("content-text");
+            mensaje3.setStyle("-fx-font-weight: bold;");
 
             stackPane.getChildren().addAll(
                     mensaje0,
