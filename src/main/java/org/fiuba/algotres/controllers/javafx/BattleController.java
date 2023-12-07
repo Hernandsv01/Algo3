@@ -593,7 +593,7 @@ public class BattleController implements Initializable{
 
     public void initializeData(){
         if(!backgroundMusic.isPlaying()){
-            backgroundMusic.playSound(true, -10.0f);
+            backgroundMusic.playSound(true, -14.0f);
         }
         state = BattleState.SELECCION_ACCION;
         colaDeMensajes = new ArrayList<>();

@@ -44,7 +44,7 @@ public class PantallaDeVictoriaController implements Initializable {
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle resource) {
         try {
-            backgroundMusic.playSound(false, -10.0f);
+            backgroundMusic.playSound(false, 0.0f);
             setearGifPokemon();
             setMensajeVictoria();
 

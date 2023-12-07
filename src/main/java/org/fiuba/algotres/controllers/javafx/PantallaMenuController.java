@@ -50,7 +50,7 @@ public class PantallaMenuController {
 
     @FXML
     public void initialize() {
-        menuSound.playSound(true, -25.0f);
+        menuSound.playSound(true, -14.0f);
         stackPane.setMouseTransparent(true);
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
         fadeOut.setFromValue(1.0);
@@ -59,19 +59,19 @@ public class PantallaMenuController {
 
         jugarButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                BotonMovido.playSound(false, -20.0f);
+                BotonMovido.playSound(false, 0.0f);
             }
         });
 
         ayudaButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                BotonMovido.playSound(false, -20.0f);
+                BotonMovido.playSound(false, 0.0f);
             }
         });
 
         salirButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                BotonMovido.playSound(false, -20.0f);
+                BotonMovido.playSound(false, 0.0f);
             }
         });
 

@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -33,6 +32,8 @@ public class ElegirPokemonInicialController implements Initializable {
     private static final String ACTIVATED_PANE_COLOR = "#efb810";
     private static final String DEACTIVATED_PANE_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_POKEMONS = 6;
+    private final Sound music = new Sound("src/main/resources/audios/MusicaSeleccionPokemonInicial.wav");
+
     @FXML
     public ImageView Imagen1;
     @FXML
@@ -107,6 +108,7 @@ public class ElegirPokemonInicialController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        music.playSound(true, -14.0f);
         loadPokemonesJugador(idJugadorActual);
         setSelectedSceneElement(0);
 
@@ -233,8 +235,8 @@ public class ElegirPokemonInicialController implements Initializable {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
+                        music.stopSound();
                     });
-//                    menuSound.stopSound();
                     fadeIn.play();
                 } catch (Exception e) {
                     e.printStackTrace();
