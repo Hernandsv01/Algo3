@@ -69,59 +69,59 @@ public class BattleController implements Initializable{
 
     // Items atacante
     @FXML
-    public Label nombreAtacante;
+    private Label nombreAtacante;
     @FXML
-    public Label numeroVidaAtacante;
+    private Label numeroVidaAtacante;
     @FXML
-    public ProgressBar barraVidaAtacante;
+    private ProgressBar barraVidaAtacante;
     @FXML
-    public ImageView imagenAtacanteParalizado;
+    private ImageView imagenAtacanteParalizado;
     @FXML
-    public ImageView imagenAtacanteDormido;
+    private ImageView imagenAtacanteDormido;
     @FXML
-    public ImageView imagenAtacanteEnvenenado;
+    private ImageView imagenAtacanteEnvenenado;
     @FXML
-    public ImageView imagenAtacanteConfuso;
+    private ImageView imagenAtacanteConfuso;
     @FXML
     private ImageView imagenAtacante;
     @FXML
-    public ImageView pokebolaAtacanteSuplente1;
+    private ImageView pokebolaAtacanteSuplente1;
     @FXML
-    public ImageView pokebolaAtacanteSuplente2;
+    private ImageView pokebolaAtacanteSuplente2;
     @FXML
-    public ImageView pokebolaAtacanteSuplente3;
+    private ImageView pokebolaAtacanteSuplente3;
     @FXML
-    public ImageView pokebolaAtacanteSuplente4;
+    private ImageView pokebolaAtacanteSuplente4;
     @FXML
-    public ImageView pokebolaAtacanteSuplente5;
+    private ImageView pokebolaAtacanteSuplente5;
 
     // Items victima
     @FXML
-    public Label nombreVictima;
+    private Label nombreVictima;
     @FXML
-    public Label numeroVidaVictima;
+    private Label numeroVidaVictima;
     @FXML
-    public ProgressBar barraVidaVictima;
+    private ProgressBar barraVidaVictima;
     @FXML
-    public ImageView imagenVictimaConfuso;
+    private ImageView imagenVictimaConfuso;
     @FXML
-    public ImageView imagenVictimaEnvenenado;
+    private ImageView imagenVictimaEnvenenado;
     @FXML
-    public ImageView imagenVictimaDormido;
+    private ImageView imagenVictimaDormido;
     @FXML
-    public ImageView imagenVictimaParalizado;
+    private ImageView imagenVictimaParalizado;
     @FXML
     private ImageView imagenVictima;
     @FXML
-    public ImageView pokebolaVictimaSuplente1;
+    private ImageView pokebolaVictimaSuplente1;
     @FXML
-    public ImageView pokebolaVictimaSuplente2;
+    private ImageView pokebolaVictimaSuplente2;
     @FXML
-    public ImageView pokebolaVictimaSuplente3;
+    private ImageView pokebolaVictimaSuplente3;
     @FXML
-    public ImageView pokebolaVictimaSuplente4;
+    private ImageView pokebolaVictimaSuplente4;
     @FXML
-    public ImageView pokebolaVictimaSuplente5;
+    private ImageView pokebolaVictimaSuplente5;
 
     // Interacción usuario
     @FXML

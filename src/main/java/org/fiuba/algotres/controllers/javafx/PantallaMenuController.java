@@ -26,18 +26,18 @@ import java.util.Objects;
 public class PantallaMenuController {
 
     @FXML
-    public Rectangle blackScreen;
+    private Rectangle blackScreen;
     @FXML
-    Button jugarButton;
+    private Button jugarButton;
 
     @FXML
-    Button ayudaButton;
+    private Button ayudaButton;
 
     @FXML
-    Button salirButton;
+    private Button salirButton;
 
     @FXML
-    StackPane stackPane;
+    private StackPane stackPane;
 
     private final Sound menuSound = new Sound("src/main/resources/audios/MenuSong.wav");
 

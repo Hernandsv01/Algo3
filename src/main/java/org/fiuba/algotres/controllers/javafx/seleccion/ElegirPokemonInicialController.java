@@ -36,67 +36,67 @@ public class ElegirPokemonInicialController implements Initializable {
     private final Sound music = new Sound("src/main/resources/audios/MusicaSeleccionPokemonInicial.wav");
 
     @FXML
-    public ImageView Imagen1;
+    private ImageView Imagen1;
     @FXML
-    public Label Nombre1;
+    private Label Nombre1;
     @FXML
-    public Label Tipo1;
+    private Label Tipo1;
     @FXML
-    public Label Nivel1;
+    private Label Nivel1;
     @FXML
-    public Label Vida1;
+    private Label Vida1;
     @FXML
-    public ImageView Imagen2;
+    private ImageView Imagen2;
     @FXML
-    public Label Nombre2;
+    private Label Nombre2;
     @FXML
-    public Label Tipo2;
+    private Label Tipo2;
     @FXML
-    public Label Nivel2;
+    private Label Nivel2;
     @FXML
-    public Label Vida2;
+    private Label Vida2;
     @FXML
-    public ImageView Imagen3;
+    private ImageView Imagen3;
     @FXML
-    public Label Nombre3;
+    private Label Nombre3;
     @FXML
-    public Label Tipo3;
+    private Label Tipo3;
     @FXML
-    public Label Nivel3;
+    private Label Nivel3;
     @FXML
-    public Label Vida3;
+    private Label Vida3;
     @FXML
-    public ImageView Imagen4;
+    private ImageView Imagen4;
     @FXML
-    public Label Nombre4;
+    private Label Nombre4;
     @FXML
-    public Label Tipo4;
+    private Label Tipo4;
     @FXML
-    public Label Nivel4;
+    private Label Nivel4;
     @FXML
-    public Label Vida4;
+    private Label Vida4;
     @FXML
-    public ImageView Imagen5;
+    private ImageView Imagen5;
     @FXML
-    public Label Nombre5;
+    private Label Nombre5;
     @FXML
-    public Label Tipo5;
+    private Label Tipo5;
     @FXML
-    public Label Nivel5;
+    private Label Nivel5;
     @FXML
-    public Label Vida5;
+    private Label Vida5;
     @FXML
-    public ImageView Imagen6;
+    private ImageView Imagen6;
     @FXML
-    public Label Nombre6;
+    private Label Nombre6;
     @FXML
-    public Label Tipo6;
+    private Label Tipo6;
     @FXML
-    public Label Nivel6;
+    private Label Nivel6;
     @FXML
-    public Label Vida6;
+    private Label Vida6;
     @FXML
-    public Rectangle blackScreen;
+    private Rectangle blackScreen;
     @FXML
     private VBox vBox1;
     @FXML

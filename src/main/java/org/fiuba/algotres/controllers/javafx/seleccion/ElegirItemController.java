@@ -38,29 +38,29 @@ public class ElegirItemController extends ItemPokemonController implements Initi
     @Getter @Setter
     private BattleState state;
     @FXML
-    public Label mensajeInferior;
+    private Label mensajeInferior;
     @FXML
-    public Label cantidadHiperPocion;
+    private Label cantidadHiperPocion;
     @FXML
-    public Label cantidadPocion;
+    private Label cantidadPocion;
     @FXML
-    public Label cantidadDefensaX;
+    private Label cantidadDefensaX;
     @FXML
-    public Label cantidadCuraTodo;
+    private Label cantidadCuraTodo;
     @FXML
-    public Label cantidadMegaPocion;
+    private Label cantidadMegaPocion;
     @FXML
-    public Label cantidadPocionMolestaAlumnos;
+    private Label cantidadPocionMolestaAlumnos;
     @FXML
-    public Label cantidadAtaqueX;
+    private Label cantidadAtaqueX;
     @FXML
-    public Label cantidadRevivir;
+    private Label cantidadRevivir;
     @FXML
     private VBox vBox1;
     @FXML
     private VBox vBox2;
     @FXML
-    public AnchorPane botonVolver;
+    private AnchorPane botonVolver;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

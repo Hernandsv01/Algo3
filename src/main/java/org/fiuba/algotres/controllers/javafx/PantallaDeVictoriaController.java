@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 public class PantallaDeVictoriaController implements Initializable {
 
     @FXML
-    public Label mensajeVictoria;
+    private Label mensajeVictoria;
     @FXML
     public Rectangle blackScreen;
 
