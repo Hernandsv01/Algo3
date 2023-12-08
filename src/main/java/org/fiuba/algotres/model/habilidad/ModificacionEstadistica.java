@@ -1,8 +1,5 @@
 package org.fiuba.algotres.model.habilidad;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.strategies.Strategy;
 

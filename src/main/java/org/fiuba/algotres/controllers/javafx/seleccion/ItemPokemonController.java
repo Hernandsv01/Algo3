@@ -11,7 +11,9 @@ import org.fiuba.algotres.JuegoJavafx;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 
 public abstract class ItemPokemonController {
 

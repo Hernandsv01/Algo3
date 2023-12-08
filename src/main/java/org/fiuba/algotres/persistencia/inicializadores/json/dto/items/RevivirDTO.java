@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.fiuba.algotres.model.item.FactoryItem;
 import org.fiuba.algotres.model.item.Item;
-import org.fiuba.algotres.model.item.Revivir;
 
 @JsonTypeName("revivir")
 public class RevivirDTO extends ItemDTO {

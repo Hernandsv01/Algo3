@@ -1,28 +1,23 @@
 package org.fiuba.algotres.controllers.javafx;
 
-import java.io.IOException;
-import java.util.ResourceBundle;
-
 import javafx.animation.FadeTransition;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import org.fiuba.algotres.JuegoJavafx;
-import org.fiuba.algotres.utils.ImageLoader;
-import org.fiuba.algotres.utils.Sound;
-
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import net.bytebuddy.dynamic.DynamicType.Builder.MethodDefinition.ParameterDefinition.Initial;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import org.fiuba.algotres.JuegoJavafx;
+import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
+
+import java.io.IOException;
+import java.util.ResourceBundle;
 
 
 public class PantallaDeVictoriaController implements Initializable {

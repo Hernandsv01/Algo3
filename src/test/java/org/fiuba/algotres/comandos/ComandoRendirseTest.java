@@ -1,12 +1,12 @@
 package org.fiuba.algotres.comandos;
 
-import org.fiuba.algotres.views.terminal.comandos.ComandoRendirse;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
+import org.fiuba.algotres.views.terminal.comandos.ComandoRendirse;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class ComandoRendirseTest {

@@ -1,12 +1,12 @@
 package org.fiuba.algotres.model.habilidad;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.clima.Niebla;
 import org.fiuba.algotres.model.clima.Soleado;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class CambiarClimaTest {
 

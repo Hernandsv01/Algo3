@@ -4,7 +4,6 @@ import org.fiuba.algotres.controllers.terminal.TerminalController;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 
-import static org.fiuba.algotres.persistencia.inicializadores.java.Inicializador.inicializarJuego;
 import static org.fiuba.algotres.persistencia.inicializadores.json.JSONInitializer.loadCampoDeBatalla;
 
 public class JuegoTerminal {

@@ -5,11 +5,10 @@ import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.Habilidad;
+import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.HabilidadView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
-
-import org.fiuba.algotres.views.InputUsuario;
 
 public class ComandoHabilidad extends Comando {
     public ComandoHabilidad(String nombre, InputUsuario input) {

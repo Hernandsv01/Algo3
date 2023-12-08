@@ -1,7 +1,5 @@
 package org.fiuba.algotres.comandos;
 
-import org.fiuba.algotres.views.terminal.comandos.Comando;
-import org.fiuba.algotres.views.terminal.comandos.ComandoHabilidad;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
@@ -11,13 +9,16 @@ import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
+import org.fiuba.algotres.views.terminal.comandos.Comando;
+import org.fiuba.algotres.views.terminal.comandos.ComandoHabilidad;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class ComandoHabilidadTest {

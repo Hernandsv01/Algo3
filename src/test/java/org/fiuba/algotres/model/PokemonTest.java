@@ -1,10 +1,11 @@
 package org.fiuba.algotres.model;
 
-import java.util.ArrayList;
 import org.fiuba.algotres.model.tipos.Tipos;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PokemonTest {

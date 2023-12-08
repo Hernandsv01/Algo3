@@ -7,7 +7,6 @@ import org.fiuba.algotres.model.clima.TormentaRayos;
 import org.fiuba.algotres.model.estado.Envenenado;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.habilidad.*;
-import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.model.strategies.AtaqueStrategy;
 import org.fiuba.algotres.model.strategies.DefensaStrategy;
 import org.fiuba.algotres.model.strategies.VidaStrategy;

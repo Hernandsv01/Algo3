@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-
-<HBox  xmlns="http://javafx.com/javafx"
-       xmlns:fx="http://javafx.com/fxml"
-       fx:controller="org.fiuba.algotres.controllers.javafx.batalla.InformationPanelController" fx:id="informationPanel" layoutY="299.0" prefWidth="640.0">
+<?import javafx.scene.text.*?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.fiuba.algotres.controllers.javafx.batalla.InformationPanelController" fx:id="informationPanel" layoutY="299.0" prefWidth="640.0">
     <TextArea fx:id="pantallaMensaje" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="181.0" prefWidth="320.0" style="-fx-border-color: #D3B38C; -fx-border-width: 10px; -fx-background-color: #F6E1CE; -fx-border-radius: 0;" text="Elija una opción." wrapText="true">
         <font>
             <Font size="24.0" />

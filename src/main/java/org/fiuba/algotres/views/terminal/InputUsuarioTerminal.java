@@ -1,7 +1,8 @@
 package org.fiuba.algotres.views.terminal;
 
-import java.util.Scanner;
 import org.fiuba.algotres.views.InputUsuario;
+
+import java.util.Scanner;
 
 public class InputUsuarioTerminal implements InputUsuario {
 

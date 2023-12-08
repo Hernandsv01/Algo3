@@ -3,7 +3,6 @@ package org.fiuba.algotres.utils;
 import javafx.scene.image.Image;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Objects;
 

@@ -1,15 +1,15 @@
 package org.fiuba.algotres.controllers.terminal;
 
-import org.fiuba.algotres.comandos.*;
 import org.fiuba.algotres.model.CampoDeBatalla;
+import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
-
-import java.util.*;
-
-import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.comandos.*;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class TerminalController {
 

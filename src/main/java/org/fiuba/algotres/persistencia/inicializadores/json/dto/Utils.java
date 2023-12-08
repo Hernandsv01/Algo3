@@ -1,7 +1,5 @@
 package org.fiuba.algotres.persistencia.inicializadores.json.dto;
 
-import lombok.Getter;
-import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.clima.*;
 import org.fiuba.algotres.model.estado.*;
 import org.fiuba.algotres.model.strategies.AtaqueStrategy;

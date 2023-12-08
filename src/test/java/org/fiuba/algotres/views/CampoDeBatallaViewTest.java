@@ -4,12 +4,8 @@ import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.clima.Clima;
-import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.views.terminal.CampoDeBatallaView;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 public class CampoDeBatallaViewTest {

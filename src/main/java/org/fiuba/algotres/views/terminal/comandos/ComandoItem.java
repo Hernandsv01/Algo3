@@ -5,12 +5,12 @@ import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.item.Item;
+import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.JugadorView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
 import java.util.List;
-import org.fiuba.algotres.views.InputUsuario;
 
 public class ComandoItem extends Comando {
     public ComandoItem(String nombre, InputUsuario input) {

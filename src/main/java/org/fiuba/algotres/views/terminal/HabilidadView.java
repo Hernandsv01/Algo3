@@ -1,10 +1,7 @@
 package org.fiuba.algotres.views.terminal;
 
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.habilidad.*;
-import org.fiuba.algotres.model.strategies.AtaqueStrategy;
-import org.fiuba.algotres.model.strategies.DefensaStrategy;
-import org.fiuba.algotres.model.strategies.VidaStrategy;
+import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.views.OutputUsuario;
 

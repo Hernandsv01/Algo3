@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.fiuba.algotres.model.habilidad.CambiarClima;
 import org.fiuba.algotres.model.habilidad.Habilidad;
-
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
 
 @JsonTypeName("cambiarclima")
