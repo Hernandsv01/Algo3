@@ -1,4 +1,4 @@
-package org.fiuba.algotres.controllers.javafx;
+package org.fiuba.algotres.controllers.javafx.seleccion;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,18 +7,19 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import org.fiuba.algotres.JuegoJavafx;
 import lombok.Setter;
+import org.fiuba.algotres.JuegoJavafx;
+import org.fiuba.algotres.controllers.javafx.batalla.BattleController;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.item.Item;
 import org.fiuba.algotres.utils.GeneradorDeMensajes;
 import org.fiuba.algotres.utils.ImageLoader;
+import org.fiuba.algotres.utils.Sound;
 import org.fiuba.algotres.utils.enums.DefaultImageType;
 import org.fiuba.algotres.utils.enums.OpcionesEmergentes;
 
@@ -37,99 +38,101 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_OPCIONES = 7;
+    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
 
     @Setter
     private Item itemElegido;
     @FXML
-    public AnchorPane PokemonActual;
+    private AnchorPane PokemonActual;
     @FXML
-    public ImageView EstadoActual;
+    private ImageView EstadoActual;
     @FXML
-    public ImageView ImagenActual;
+    private ImageView ImagenActual;
     @FXML
-    public Label NombreActual;
+    private Label NombreActual;
     @FXML
-    public Label TipoActual;
+    private Label TipoActual;
     @FXML
-    public Label NivelActual;
+    private Label NivelActual;
     @FXML
-    public Label VidaActual;
+    private Label VidaActual;
     @FXML
-    public ProgressBar BarraActual;
+    private ProgressBar BarraActual;
     @FXML
-    public ImageView Estado1;
+    private ImageView Estado1;
     @FXML
-    public ImageView Imagen1;
+    private ImageView Imagen1;
     @FXML
-    public Label Nombre1;
+    private Label Nombre1;
     @FXML
-    public Label Tipo1;
+    private Label Tipo1;
     @FXML
-    public Label Nivel1;
+    private Label Nivel1;
     @FXML
-    public Label Vida1;
+    private Label Vida1;
     @FXML
-    public ProgressBar Barra1;
+    private ProgressBar Barra1;
     @FXML
-    public ImageView Estado2;
+    private ImageView Estado2;
     @FXML
-    public ImageView Imagen2;
+    private ImageView Imagen2;
     @FXML
-    public Label Nombre2;
+    private Label Nombre2;
     @FXML
-    public Label Tipo2;
+    private Label Tipo2;
     @FXML
-    public Label Nivel2;
+    private Label Nivel2;
     @FXML
-    public Label Vida2;
+    private Label Vida2;
     @FXML
-    public ProgressBar Barra2;
+    private ProgressBar Barra2;
     @FXML
-    public ImageView Estado3;
+    private ImageView Estado3;
     @FXML
-    public ImageView Imagen3;
+    private ImageView Imagen3;
     @FXML
-    public Label Nombre3;
+    private Label Nombre3;
     @FXML
-    public Label Tipo3;
+    private Label Tipo3;
     @FXML
-    public Label Nivel3;
+    private Label Nivel3;
     @FXML
-    public Label Vida3;
+    private Label Vida3;
     @FXML
-    public ProgressBar Barra3;
+    private ProgressBar Barra3;
     @FXML
-    public ImageView Estado4;
+    private ImageView Estado4;
     @FXML
-    public ImageView Imagen4;
+    private ImageView Imagen4;
     @FXML
-    public Label Nombre4;
+    private Label Nombre4;
     @FXML
-    public Label Tipo4;
+    private Label Tipo4;
     @FXML
-    public Label Nivel4;
+    private Label Nivel4;
     @FXML
-    public Label Vida4;
+    private Label Vida4;
     @FXML
-    public ProgressBar Barra4;
+    private ProgressBar Barra4;
     @FXML
-    public ImageView Estado5;
+    private ImageView Estado5;
     @FXML
-    public ImageView Imagen5;
+    private ImageView Imagen5;
     @FXML
-    public Label Nombre5;
+    private Label Nombre5;
     @FXML
-    public Label Tipo5;
+    private Label Tipo5;
     @FXML
-    public Label Nivel5;
+    private Label Nivel5;
     @FXML
-    public Label Vida5;
+    private Label Vida5;
     @FXML
-    public ProgressBar Barra5;
+    private ProgressBar Barra5;
     @FXML
     private VBox vBox1;
     @FXML
-    public AnchorPane botonVolver;
+    private AnchorPane botonVolver;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -201,10 +204,12 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
                 }
             }
             default -> newPos = -1;
-        };
+        }
         if(newPos == -1){
             return;
         }
+
+        changedOption.playSound(false, 2.0f);
         setSelectedSceneElement(newPos);
     }
 
@@ -219,11 +224,12 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
         if (selectedPos != -1) {
             if (!Objects.equals(selectedElementId, "botonVolver")) {
                 //codigo que aplique item
+                selectedOption.playSound(false, 2.0f);
                 Pokemon pokemon = JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(selectedPos);
                 OpcionesEmergentes result = confirmarDecision("Estas seguro que deseas elegir a " + pokemon.getNombre() + " para aplicar " + itemElegido.getNombre() + "?");
                 if (result == OpcionesEmergentes.CONFIRMADA) {
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/batalla/BattleScreen.fxml"));
                         Scene scene = new Scene(loader.load());
                         boolean itemWorks = itemElegido.usar(pokemon);
                         if (itemWorks) {
@@ -231,7 +237,7 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
                         }
 
                         BattleController battleController = loader.getController();
-                        battleController.getColaDeMensajes().add(GeneradorDeMensajes.generarMensajeItem(itemElegido.getNombre()));
+                        battleController.agregarMensaje(GeneradorDeMensajes.generarMensajeItem(itemElegido.getNombre()));
                         battleController.accionar();
 
                         JuegoJavafx.setScene(scene, true);

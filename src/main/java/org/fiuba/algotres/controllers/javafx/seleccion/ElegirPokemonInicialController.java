@@ -1,4 +1,4 @@
-package org.fiuba.algotres.controllers.javafx;
+package org.fiuba.algotres.controllers.javafx.seleccion;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -7,10 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.fiuba.algotres.JuegoJavafx;
@@ -33,68 +33,70 @@ public class ElegirPokemonInicialController implements Initializable {
     private static final String ACTIVATED_PANE_COLOR = "#efb810";
     private static final String DEACTIVATED_PANE_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_POKEMONS = 6;
+    private final Sound music = new Sound("src/main/resources/audios/MusicaSeleccionPokemonInicial.wav");
+
     @FXML
-    public ImageView Imagen1;
+    private ImageView Imagen1;
     @FXML
-    public Label Nombre1;
+    private Label Nombre1;
     @FXML
-    public Label Tipo1;
+    private Label Tipo1;
     @FXML
-    public Label Nivel1;
+    private Label Nivel1;
     @FXML
-    public Label Vida1;
+    private Label Vida1;
     @FXML
-    public ImageView Imagen2;
+    private ImageView Imagen2;
     @FXML
-    public Label Nombre2;
+    private Label Nombre2;
     @FXML
-    public Label Tipo2;
+    private Label Tipo2;
     @FXML
-    public Label Nivel2;
+    private Label Nivel2;
     @FXML
-    public Label Vida2;
+    private Label Vida2;
     @FXML
-    public ImageView Imagen3;
+    private ImageView Imagen3;
     @FXML
-    public Label Nombre3;
+    private Label Nombre3;
     @FXML
-    public Label Tipo3;
+    private Label Tipo3;
     @FXML
-    public Label Nivel3;
+    private Label Nivel3;
     @FXML
-    public Label Vida3;
+    private Label Vida3;
     @FXML
-    public ImageView Imagen4;
+    private ImageView Imagen4;
     @FXML
-    public Label Nombre4;
+    private Label Nombre4;
     @FXML
-    public Label Tipo4;
+    private Label Tipo4;
     @FXML
-    public Label Nivel4;
+    private Label Nivel4;
     @FXML
-    public Label Vida4;
+    private Label Vida4;
     @FXML
-    public ImageView Imagen5;
+    private ImageView Imagen5;
     @FXML
-    public Label Nombre5;
+    private Label Nombre5;
     @FXML
-    public Label Tipo5;
+    private Label Tipo5;
     @FXML
-    public Label Nivel5;
+    private Label Nivel5;
     @FXML
-    public Label Vida5;
+    private Label Vida5;
     @FXML
-    public ImageView Imagen6;
+    private ImageView Imagen6;
     @FXML
-    public Label Nombre6;
+    private Label Nombre6;
     @FXML
-    public Label Tipo6;
+    private Label Tipo6;
     @FXML
-    public Label Nivel6;
+    private Label Nivel6;
     @FXML
-    public Label Vida6;
+    private Label Vida6;
     @FXML
-    public Rectangle blackScreen;
+    private Rectangle blackScreen;
     @FXML
     private VBox vBox1;
     @FXML
@@ -107,6 +109,7 @@ public class ElegirPokemonInicialController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        music.playSound(true, -14.0f);
         loadPokemonesJugador(idJugadorActual);
         setSelectedSceneElement(0);
 
@@ -227,14 +230,14 @@ public class ElegirPokemonInicialController implements Initializable {
                     fadeIn.setToValue(1.0);
 
                     fadeIn.setOnFinished(event -> {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BattleScreen.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/batalla/BattleScreen.fxml"));
                         try {
                             JuegoJavafx.setScene(new Scene(loader.load()), true);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
+                        music.stopSound();
                     });
-//                    menuSound.stopSound();
                     fadeIn.play();
                 } catch (Exception e) {
                     e.printStackTrace();

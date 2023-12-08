@@ -6,14 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -29,18 +26,18 @@ import java.util.Objects;
 public class PantallaMenuController {
 
     @FXML
-    public Rectangle blackScreen;
+    private Rectangle blackScreen;
     @FXML
-    Button jugarButton;
+    private Button jugarButton;
 
     @FXML
-    Button ayudaButton;
+    private Button ayudaButton;
 
     @FXML
-    Button salirButton;
+    private Button salirButton;
 
     @FXML
-    StackPane stackPane;
+    private StackPane stackPane;
 
     private final Sound menuSound = new Sound("src/main/resources/audios/MenuSong.wav");
 
@@ -50,7 +47,7 @@ public class PantallaMenuController {
 
     @FXML
     public void initialize() {
-        menuSound.playSound(true, -25.0f);
+        menuSound.playSound(true, -14.0f);
         stackPane.setMouseTransparent(true);
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), blackScreen);
         fadeOut.setFromValue(1.0);
@@ -59,19 +56,19 @@ public class PantallaMenuController {
 
         jugarButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                BotonMovido.playSound(false, -20.0f);
+                BotonMovido.playSound(false, 0.0f);
             }
         });
 
         ayudaButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                BotonMovido.playSound(false, -20.0f);
+                BotonMovido.playSound(false, 0.0f);
             }
         });
 
         salirButton.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                BotonMovido.playSound(false, -20.0f);
+                BotonMovido.playSound(false, 0.0f);
             }
         });
 
@@ -182,25 +179,28 @@ public class PantallaMenuController {
             StackPane.setAlignment(mensaje0, Pos.CENTER);
             mensaje0.setTranslateY(-120);
             mensaje0.getStyleClass().add("content-text");
-            mensaje0.setStyle("-fx-font-size: 20px;");
+            mensaje0.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
             mensaje1.setWrapText(true);
             mensaje1.setMaxWidth(250);
             mensaje1.setTranslateY(-70);
             mensaje1.setTranslateX(-70);
             mensaje1.getStyleClass().add("content-text");
+            mensaje1.setStyle("-fx-font-weight: bold;");
 
             mensaje2.setWrapText(true);
             mensaje2.setMaxWidth(250);
             mensaje2.setTranslateY(-0);
             mensaje2.setTranslateX(-70);
             mensaje2.getStyleClass().add("content-text");
+            mensaje2.setStyle("-fx-font-weight: bold;");
 
             mensaje3.setWrapText(true);
             mensaje3.setMaxWidth(250);
             mensaje3.setTranslateY(55);
             mensaje3.setTranslateX(-70);
             mensaje3.getStyleClass().add("content-text");
+            mensaje3.setStyle("-fx-font-weight: bold;");
 
             stackPane.getChildren().addAll(
                     mensaje0,
@@ -252,6 +252,7 @@ public class PantallaMenuController {
 
             Button buttonAceptar = (Button) dialogPane.lookupButton(botonAceptar);
             Button buttonCancelar = (Button) dialogPane.lookupButton(botonCancelar);
+            buttonCancelar.setDefaultButton(true);
 
             buttonAceptar.getStyleClass().add("button-window");
             buttonCancelar.getStyleClass().add("button-window");

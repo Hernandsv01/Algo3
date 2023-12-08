@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Pokemon;
-import org.fiuba.algotres.model.habilidad.Ataque;
 import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.tipos.Tipos;
 

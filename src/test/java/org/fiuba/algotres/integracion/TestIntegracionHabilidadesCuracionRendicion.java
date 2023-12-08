@@ -1,26 +1,33 @@
 package org.fiuba.algotres.integracion;
 
-import java.util.List;
-import static org.fiuba.algotres.controllers.terminal.TerminalController.inicializarConfiguracion;
-
 import org.fiuba.algotres.controllers.terminal.TerminalController;
-import org.fiuba.algotres.model.*;
+import org.fiuba.algotres.model.CampoDeBatalla;
+import org.fiuba.algotres.model.Jugador;
+import org.fiuba.algotres.model.Pokemon;
+import org.fiuba.algotres.model.clima.SinClima;
+import org.fiuba.algotres.model.clima.TormentaArena;
+import org.fiuba.algotres.model.estado.Confuso;
+import org.fiuba.algotres.model.estado.Dormido;
+import org.fiuba.algotres.model.estado.Envenenado;
+import org.fiuba.algotres.model.estado.Paralizado;
 import org.fiuba.algotres.model.habilidad.*;
 import org.fiuba.algotres.model.item.*;
-import org.fiuba.algotres.model.clima.*;
-import org.fiuba.algotres.model.estado.*;
-import org.fiuba.algotres.model.strategies.*;
-import org.fiuba.algotres.model.tipos.*;
+import org.fiuba.algotres.model.strategies.AtaqueStrategy;
+import org.fiuba.algotres.model.strategies.DefensaStrategy;
+import org.fiuba.algotres.model.strategies.VidaStrategy;
+import org.fiuba.algotres.model.tipos.Tipos;
 import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
+import java.util.List;
 
+import static org.fiuba.algotres.controllers.terminal.TerminalController.inicializarConfiguracion;
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.anyInt;
 
 public class TestIntegracionHabilidadesCuracionRendicion {
     private static CampoDeBatalla cdb;

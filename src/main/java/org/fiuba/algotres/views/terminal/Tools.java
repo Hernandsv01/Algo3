@@ -1,11 +1,10 @@
 package org.fiuba.algotres.views.terminal;
 
-import org.fiuba.algotres.comandos.Comando;
-
-import java.util.List;
-import java.util.Map;
 import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.OutputUsuario;
+import org.fiuba.algotres.views.terminal.comandos.Comando;
+
+import java.util.List;
 
 public class Tools {
 

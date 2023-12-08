@@ -1,11 +1,12 @@
 package org.fiuba.algotres.model.habilidad;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.tipos.Tipos;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 class AtaqueTest {
     @Test

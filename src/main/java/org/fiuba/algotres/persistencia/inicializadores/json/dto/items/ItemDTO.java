@@ -1,20 +1,18 @@
 package org.fiuba.algotres.persistencia.inicializadores.json.dto.items;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.Getter;
 import lombok.Setter;
-import org.fiuba.algotres.model.item.*;
+import org.fiuba.algotres.model.item.Item;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 @Getter @Setter
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "item")

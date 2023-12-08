@@ -3,7 +3,7 @@ package org.fiuba.algotres.model.strategies;
 import org.fiuba.algotres.model.Pokemon;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class AtaqueStrategyTest {

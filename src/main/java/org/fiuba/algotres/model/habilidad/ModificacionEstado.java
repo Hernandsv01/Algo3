@@ -1,11 +1,7 @@
 package org.fiuba.algotres.model.habilidad;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ModificacionEstado extends Habilidad {
     private final Estado estado;

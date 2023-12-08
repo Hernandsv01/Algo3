@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.fiuba.algotres.model.clima.Clima;
 
 import java.util.Comparator;
-import org.fiuba.algotres.model.clima.SinClima;
 
 @Getter @Setter
 public class CampoDeBatalla {
