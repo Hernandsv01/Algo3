@@ -126,6 +126,8 @@ public class BattleController implements Initializable{
     public InformationPanelController informationPanelController;
     @FXML
     private Rectangle blackScreen;
+    private List<ImageView> pokebolaAtacanteSuplenteImages;
+    private List<ImageView> pokebolaVictimaSuplenteImages;
 
     @FXML
     public void onKeyTyped(KeyEvent event){
@@ -149,6 +151,7 @@ public class BattleController implements Initializable{
             fadeOut.setToValue(0.0);
             fadeOut.play();
         }
+        loadPokebolas();
         renderImages();
         renderHealth(true);
         renderPokebolas();
@@ -243,7 +246,6 @@ public class BattleController implements Initializable{
                 }
             }
         }
-        renderHealth(false);
     }
 
     private void prepararSiguienteTurno() {
@@ -264,7 +266,6 @@ public class BattleController implements Initializable{
         fadeIn.setOnFinished(event -> {
             JuegoJavafx.getCdb().setSiguienteTurno();
             renderImages();
-            renderHealth(true);
             renderPokebolas();
             fadeOut.play();
         });
@@ -369,155 +370,91 @@ public class BattleController implements Initializable{
         });
     }
 
-    private void renderImages(){
-        CampoDeBatalla cdb = JuegoJavafx.getCdb();
-        imagenClima.setImage(ImageLoader.getJavafxImage("/imagenes/climas/" + capitalizar(cdb.getClima().getNombre()) + ".gif", DefaultImageType.CLIMA));
-
-        // IMAGENES ATACANTE
-        numeroVidaAtacante.setText(
-                cdb.getJugadorActual().getPokemonActual().getVidaActual() + "/" +
-                cdb.getJugadorActual().getPokemonActual().getVidaMaxima()
-        );
-        barraVidaAtacante.setProgress((double) cdb.getJugadorActual().getPokemonActual().getVidaActual() /cdb.getJugadorActual().getPokemonActual().getVidaMaxima());
-        // Estados atacante
-        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("paralizado")).toList().isEmpty()) {
-            imagenAtacanteParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenAtacanteParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
-        }
-        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("envenenado")).toList().isEmpty()) {
-            imagenAtacanteEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenAtacanteEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
-        }
-        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("dormido")).toList().isEmpty()) {
-            imagenAtacanteDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenAtacanteDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
-        }
-        if (cdb.getJugadorActual().getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("confuso")).toList().isEmpty()) {
-            imagenAtacanteConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenAtacanteConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
-        }
-        imagenAtacante.setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + capitalizar(cdb.getJugadorActual().getPokemonActual().getNombre()) + "-back.gif", DefaultImageType.POKEMON));
-
-        // IMAGENES VICTIMA
-        numeroVidaVictima.setText(
-                cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() + "/" +
-                cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaMaxima()
-        );
-        barraVidaVictima.setProgress((double) cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaActual() /cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getVidaMaxima());
-        // Estados victima
-        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("paralizado")).toList().isEmpty()) {
-            imagenVictimaParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenVictimaParalizado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Paralizado.gif", DefaultImageType.ESTADO));
-        }
-        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("envenenado")).toList().isEmpty()) {
-            imagenVictimaEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenVictimaEnvenenado.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Envenenado.gif", DefaultImageType.ESTADO));
-        }
-        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("dormido")).toList().isEmpty()) {
-            imagenVictimaDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenVictimaDormido.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Dormido.gif", DefaultImageType.ESTADO));
-        }
-        if (cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getEstados().stream().filter(estado -> estado.getNombre().equals("confuso")).toList().isEmpty()) {
-            imagenVictimaConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/SinEstado.gif", DefaultImageType.ESTADO));
-        } else {
-            imagenVictimaConfuso.setImage(ImageLoader.getJavafxImage("/imagenes/estados/Confuso.gif", DefaultImageType.ESTADO));
-        }
-        imagenVictima.setImage(ImageLoader.getJavafxImage("/imagenes/pokemons/" + capitalizar(cdb.getJugadores()[cdb.getSiguienteTurno()].getPokemonActual().getNombre()) + "-front.gif", DefaultImageType.POKEMON));
+    private void renderImages() {
+        imagenClima.setImage(ImageLoader.getJavafxImage("/imagenes/climas/" + capitalizar(JuegoJavafx.getCdb().getClima().getNombre()) + ".gif", DefaultImageType.CLIMA));
+        renderPokemonImages(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual(), true);
+        renderPokemonImages(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual(), false);
+        renderHealth(true);
+        renderPokebolas();
     }
 
-    private void renderHealth(boolean transicionRapida){
-        nombreAtacante.setText(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getNombre());
-        nombreVictima.setText(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getNombre());
+    private void renderPokemonImages(Pokemon pokemon, boolean isAttacker) {
+        String[] statuses = {"paralizado", "envenenado", "dormido", "confuso"};
 
-        numeroVidaAtacante.setText(
-                JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaActual() + "/" +
-                JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaMaxima()
-        );
-        numeroVidaVictima.setText(
-                JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaActual() + "/" +
-                JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaMaxima()
-        );
+        for (String status : statuses) {
+            ImageView imageView = getImageViewByCombination(status, isAttacker);
+            boolean hasStatus = pokemon.getEstados().stream().anyMatch(estado -> estado.getNombre().equals(status));
 
-        double vidaFinalAtacante = (double) JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaActual() / JuegoJavafx.getCdb().getJugadorActual().getPokemonActual().getVidaMaxima();
-        double vidaFinalVictima = (double) JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaActual() / JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual().getVidaMaxima();
-
-        if(transicionRapida){
-            barraVidaAtacante.setProgress(vidaFinalAtacante);
-            barraVidaVictima.setProgress(vidaFinalVictima);
+            String imagePath = hasStatus ? status.substring(0, 1).toUpperCase() + status.substring(1) + ".gif" : "SinEstado.gif";
+            String imageUrl = "/imagenes/estados/" + imagePath;
+            imageView.setImage(ImageLoader.getJavafxImage(imageUrl, DefaultImageType.ESTADO));
         }
 
-        Timeline timelineAtacante = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(barraVidaAtacante.progressProperty(), barraVidaAtacante.getProgress())),
-                new KeyFrame(Duration.seconds(1), new KeyValue(barraVidaAtacante.progressProperty(), vidaFinalAtacante))
-        );
-        Timeline timelineVictima = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(barraVidaVictima.progressProperty(), barraVidaVictima.getProgress())),
-                new KeyFrame(Duration.seconds(1), new KeyValue(barraVidaVictima.progressProperty(), vidaFinalVictima))
-        );
-        timelineAtacante.play();
-        timelineVictima.play();
+        String pokemonImage = "/imagenes/pokemons/" + capitalizar(pokemon.getNombre()) + (isAttacker ? "-back" : "-front") + ".gif";
+        ImageView pokemonImageView = isAttacker ? imagenAtacante : imagenVictima;
+        pokemonImageView.setImage(ImageLoader.getJavafxImage(pokemonImage, DefaultImageType.POKEMON));
     }
 
-    public void renderPokebolas(){
-        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(1).estaVivo()){
-            pokebolaAtacanteSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaAtacanteSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(2).estaVivo()){
-            pokebolaAtacanteSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaAtacanteSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(3).estaVivo()){
-            pokebolaAtacanteSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaAtacanteSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(4).estaVivo()){
-            pokebolaAtacanteSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaAtacanteSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadorActual().getPokemons().get(5).estaVivo()){
-            pokebolaAtacanteSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaAtacanteSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-
-        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(1).estaVivo()){
-            pokebolaVictimaSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaVictimaSuplente1.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(2).estaVivo()){
-            pokebolaVictimaSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaVictimaSuplente2.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(3).estaVivo()){
-            pokebolaVictimaSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaVictimaSuplente3.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(4).estaVivo()){
-            pokebolaVictimaSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaVictimaSuplente4.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
-        }
-        if(!JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons().get(5).estaVivo()){
-            pokebolaVictimaSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
-        }else{
-            pokebolaVictimaSuplente5.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+    private ImageView getImageViewByCombination(String status, boolean isAttacker) {
+        if (isAttacker) {
+            return switch (status) {
+                case "paralizado" -> imagenAtacanteParalizado;
+                case "envenenado" -> imagenAtacanteEnvenenado;
+                case "dormido" -> imagenAtacanteDormido;
+                case "confuso" -> imagenAtacanteConfuso;
+                default -> null;
+            };
+        } else {
+            return switch (status) {
+                case "paralizado" -> imagenVictimaParalizado;
+                case "envenenado" -> imagenVictimaEnvenenado;
+                case "dormido" -> imagenVictimaDormido;
+                case "confuso" -> imagenVictimaConfuso;
+                default -> null;
+            };
         }
     }
+
+    private void renderHealth(boolean transicionRapida) {
+        Pokemon attacker = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual();
+        Pokemon victim = JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual();
+
+        updateHealthBar(numeroVidaAtacante, barraVidaAtacante, attacker.getVidaActual(), attacker.getVidaMaxima(), transicionRapida);
+        updateHealthBar(numeroVidaVictima, barraVidaVictima, victim.getVidaActual(), victim.getVidaMaxima(), transicionRapida);
+    }
+
+    private void updateHealthBar(Label label, ProgressBar progressBar, int currentHealth, int maxHealth, boolean quickTransition) {
+        double healthFraction = (double) currentHealth / maxHealth;
+
+        if (quickTransition) {
+            progressBar.setProgress(healthFraction);
+            System.out.println("Barra de vida cambiada rapido! Progreso: " + progressBar.getProgress());
+        } else {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), progressBar.getProgress())),
+                    new KeyFrame(Duration.seconds(1), new KeyValue(progressBar.progressProperty(), healthFraction))
+            );
+            timeline.play();
+        }
+
+        label.setText(currentHealth + "/" + maxHealth);
+    }
+
+    private void renderPokebolas() {
+        for (int i = 0; i < 5; i++) {
+            renderPokebola(i, JuegoJavafx.getCdb().getJugadorActual().getPokemons(), pokebolaAtacanteSuplenteImages.get(i));
+            renderPokebola(i, JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemons(), pokebolaVictimaSuplenteImages.get(i));
+        }
+    }
+
+    private void renderPokebola(int index, List<Pokemon> pokemons, ImageView imageView) {
+        if (!pokemons.get(index).estaVivo()) {
+            imageView.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballMuerto.png", DefaultImageType.OTRO));
+        } else {
+            imageView.setImage(ImageLoader.getJavafxImage("/imagenes/otros/pokeballVivo.png", DefaultImageType.OTRO));
+        }
+    }
+
 
     private static String capitalizar(String string){
         return string.substring(0, 1).toUpperCase() + string.substring(1);
@@ -549,6 +486,22 @@ public class BattleController implements Initializable{
 
     public void agregarMensaje(String mensaje){
         InformationPanelController.getColaDeMensajes().add(mensaje);
+    }
+
+    public void loadPokebolas(){
+        pokebolaAtacanteSuplenteImages = new ArrayList<>();
+        pokebolaAtacanteSuplenteImages.add(pokebolaAtacanteSuplente1);
+        pokebolaAtacanteSuplenteImages.add(pokebolaAtacanteSuplente2);
+        pokebolaAtacanteSuplenteImages.add(pokebolaAtacanteSuplente3);
+        pokebolaAtacanteSuplenteImages.add(pokebolaAtacanteSuplente4);
+        pokebolaAtacanteSuplenteImages.add(pokebolaAtacanteSuplente5);
+
+        pokebolaVictimaSuplenteImages = new ArrayList<>();
+        pokebolaVictimaSuplenteImages.add(pokebolaVictimaSuplente1);
+        pokebolaVictimaSuplenteImages.add(pokebolaVictimaSuplente2);
+        pokebolaVictimaSuplenteImages.add(pokebolaVictimaSuplente3);
+        pokebolaVictimaSuplenteImages.add(pokebolaVictimaSuplente4);
+        pokebolaVictimaSuplenteImages.add(pokebolaVictimaSuplente5);
     }
 
     public void callPokemonScene(CambiarPokemonState state, Jugador jugador, Pokemon pokemonMuerto){
