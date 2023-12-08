@@ -154,7 +154,7 @@ public class BattleController implements Initializable{
             fadeOut.play();
         }
         loadPokebolas();
-        renderImages();
+        renderImagesAndNames();
         renderHealth(true);
         renderPokebolas();
         barraVidaAtacante.styleProperty().bind(
@@ -267,7 +267,7 @@ public class BattleController implements Initializable{
 
         fadeIn.setOnFinished(event -> {
             JuegoJavafx.getCdb().setSiguienteTurno();
-            renderImages();
+            renderImagesAndNames();
             renderPokebolas();
             fadeOut.play();
         });
@@ -373,12 +373,25 @@ public class BattleController implements Initializable{
         });
     }
 
-    private void renderImages() {
+    private void renderImagesAndNames() {
+        Pokemon attacker = JuegoJavafx.getCdb().getJugadorActual().getPokemonActual();
+        Pokemon victim = JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual();
+
         imagenClima.setImage(ImageLoader.getJavafxImage("/imagenes/climas/" + capitalizar(JuegoJavafx.getCdb().getClima().getNombre()) + ".gif", DefaultImageType.CLIMA));
-        renderPokemonImages(JuegoJavafx.getCdb().getJugadorActual().getPokemonActual(), true);
-        renderPokemonImages(JuegoJavafx.getCdb().getJugadores()[JuegoJavafx.getCdb().getSiguienteTurno()].getPokemonActual(), false);
+        renderPokemonImages(attacker, true);
+        renderPokemonImages(victim, false);
+        renderNames(attacker, true);
+        renderNames(victim, false);
         renderHealth(true);
         renderPokebolas();
+    }
+
+    private void renderNames(Pokemon pokemon, boolean isAttacker) {
+        if (isAttacker) {
+            nombreAtacante.setText(pokemon.getNombre());
+        } else {
+            nombreVictima.setText(pokemon.getNombre());
+        }
     }
 
     private void renderPokemonImages(Pokemon pokemon, boolean isAttacker) {
@@ -392,6 +405,7 @@ public class BattleController implements Initializable{
             String imageUrl = "/imagenes/estados/" + imagePath;
             imageView.setImage(ImageLoader.getJavafxImage(imageUrl, DefaultImageType.ESTADO));
         }
+
 
         String pokemonImage = "/imagenes/pokemons/" + capitalizar(pokemon.getNombre()) + (isAttacker ? "-back" : "-front") + ".gif";
         ImageView pokemonImageView = isAttacker ? imagenAtacante : imagenVictima;
