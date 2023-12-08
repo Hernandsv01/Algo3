@@ -38,7 +38,7 @@ public class Ataque extends Habilidad{
     public boolean accionarHabilidad(Pokemon atacante, Pokemon victima) {
         // cambiar dato guardado en randomizador por dato guardado acá, guardar daño completo.
         if (verificarUsos(usos)) {
-            int dano = calcularDano(victima, atacante);
+            int dano = calcularDano(atacante, victima);
             ultimoDanoRealizado = dano;
             victima.danarPorPuntos(dano);
             usos--;
@@ -48,8 +48,7 @@ public class Ataque extends Habilidad{
     }
 
     public int calcularDano(Pokemon atacante, Pokemon victima){
-        int res = (int) (calcularDanoSinRandom(atacante, victima) * (randomizador.getRandomValue(MINIMO_RANDOM, MAXIMO_RANDOM)/MAXIMO_RANDOM));
-        return res;
+        return (int) (calcularDanoSinRandom(atacante, victima) * (randomizador.getRandomValue(MINIMO_RANDOM, MAXIMO_RANDOM)/MAXIMO_RANDOM));
     }
 
     private int calcularDanoSinRandom(Pokemon atacante, Pokemon victima){
