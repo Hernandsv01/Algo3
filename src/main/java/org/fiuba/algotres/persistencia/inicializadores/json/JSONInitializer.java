@@ -1,6 +1,6 @@
 package org.fiuba.algotres.persistencia.inicializadores.json;
 
-import org.fiuba.algotres.RandomizadorCustom;
+import org.fiuba.algotres.utils.RandomizadorCustom;
 import org.fiuba.algotres.model.Randomizador;
 import org.fiuba.algotres.model.habilidad.CambiarClima;
 import org.fiuba.algotres.persistencia.inicializadores.json.dto.Utils;
@@ -16,7 +16,6 @@ import org.fiuba.algotres.model.habilidad.Habilidad;
 import org.fiuba.algotres.model.item.Item;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

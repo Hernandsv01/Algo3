@@ -6,7 +6,7 @@ import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.Randomizador;
 import org.fiuba.algotres.model.tipos.Tipos;
 
-import org.fiuba.algotres.RandomizadorCustom;
+import org.fiuba.algotres.utils.RandomizadorCustom;
 
 @Getter @Setter
 public class Ataque extends Habilidad{

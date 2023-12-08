@@ -1,7 +1,7 @@
 package org.fiuba.algotres.comandos;
 
-import org.fiuba.algotres.comandos.Comando;
-import org.fiuba.algotres.comandos.ComandoHabilidad;
+import org.fiuba.algotres.views.terminal.comandos.Comando;
+import org.fiuba.algotres.views.terminal.comandos.ComandoHabilidad;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;

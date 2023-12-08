@@ -1,11 +1,10 @@
-package org.fiuba.algotres.comandos;
+package org.fiuba.algotres.views.terminal.comandos;
 
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
 import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.estado.Estado;
 import org.fiuba.algotres.model.item.Item;
-import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
 import org.fiuba.algotres.views.terminal.JugadorView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;

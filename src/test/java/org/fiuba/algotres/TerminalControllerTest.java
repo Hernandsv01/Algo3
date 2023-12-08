@@ -1,6 +1,5 @@
 package org.fiuba.algotres;
 
-import org.fiuba.algotres.comandos.*;
 import org.fiuba.algotres.controllers.terminal.TerminalController;
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
@@ -8,10 +7,10 @@ import org.fiuba.algotres.model.Pokemon;
 import org.fiuba.algotres.model.clima.Clima;
 import org.fiuba.algotres.views.InputUsuario;
 import org.fiuba.algotres.views.terminal.InputUsuarioTerminal;
+import org.fiuba.algotres.views.terminal.comandos.Comando;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

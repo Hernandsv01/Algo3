@@ -9,6 +9,7 @@ import org.fiuba.algotres.views.terminal.Tools;
 import java.util.*;
 
 import org.fiuba.algotres.views.InputUsuario;
+import org.fiuba.algotres.views.terminal.comandos.*;
 
 public class TerminalController {
 

@@ -1,4 +1,4 @@
-package org.fiuba.algotres.comandos;
+package org.fiuba.algotres.views.terminal.comandos;
 
 import lombok.Setter;
 import org.fiuba.algotres.model.CampoDeBatalla;

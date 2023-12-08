@@ -1,4 +1,4 @@
-package org.fiuba.algotres.comandos;
+package org.fiuba.algotres.views.terminal.comandos;
 
 import org.fiuba.algotres.model.CampoDeBatalla;
 import org.fiuba.algotres.model.Jugador;
@@ -9,7 +9,6 @@ import org.fiuba.algotres.views.terminal.HabilidadView;
 import org.fiuba.algotres.views.terminal.PokemonView;
 import org.fiuba.algotres.views.terminal.Tools;
 
-import java.util.ArrayList;
 import org.fiuba.algotres.views.InputUsuario;
 
 public class ComandoHabilidad extends Comando {

@@ -1,4 +1,4 @@
-package org.fiuba.algotres.controllers.javafx;
+package org.fiuba.algotres.controllers.javafx.seleccion;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
