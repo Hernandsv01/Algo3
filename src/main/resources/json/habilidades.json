@@ -4,71 +4,71 @@
     "nombre": "Llamarada",
     "usos": 10,
     "habilidad": "ataque",
-    "poder": 120,
+    "poder": 100,
     "tipo": "FUEGO"
   },
   {
     "id": 2,
     "nombre": "Ascuas",
-    "usos": 25,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 40,
+    "poder": 100,
     "tipo": "FUEGO"
   },
   {
     "id": 3,
     "nombre": "Lanzallamas",
-    "usos": 5,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 95,
+    "poder": 100,
     "tipo": "FUEGO"
   },
   {
     "id": 4,
     "nombre": "Arañazo",
-    "usos": 30,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 40,
+    "poder": 100,
     "tipo": "NORMAL"
   },
   {
     "id": 5,
     "nombre": "Placaje",
-    "usos": 30,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 50,
+    "poder": 100,
     "tipo": "NORMAL"
   },
   {
     "id": 6,
     "nombre": "Burbuja",
-    "usos": 30,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 40,
+    "poder": 100,
     "tipo": "AGUA"
   },
   {
     "id": 7,
     "nombre": "Hidrobomba",
-    "usos": 5,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 110,
+    "poder": 100,
     "tipo": "AGUA"
   },
   {
     "id": 8,
     "nombre": "Rayo burbuja",
-    "usos": 30,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 65,
+    "poder": 100,
     "tipo": "AGUA"
   },
   {
     "id": 9,
     "nombre": "Rayo",
-    "usos": 15,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 95,
+    "poder": 100,
     "tipo": "ELECTRICO"
   },
   {
@@ -76,31 +76,31 @@
     "nombre": "Psiquico",
     "usos": 10,
     "habilidad": "ataque",
-    "poder": 90,
+    "poder": 100,
     "tipo": "PSIQUICO"
   },
   {
     "id": 11,
     "nombre": "Mega cuerno",
-    "usos": 5,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 120,
+    "poder": 100,
     "tipo": "BICHO"
   },
   {
     "id": 12,
     "nombre": "Pin misil",
-    "usos": 20,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 30,
+    "poder": 100,
     "tipo": "BICHO"
   },
   {
     "id": 13,
     "nombre": "Golpe karate",
-    "usos": 25,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 50,
+    "poder": 100,
     "tipo": "LUCHA"
   },
   {
@@ -108,23 +108,23 @@
     "nombre": "Sismico",
     "usos": 10,
     "habilidad": "ataque",
-    "poder": 80,
+    "poder": 100,
     "tipo": "LUCHA"
   },
   {
     "id": 15,
     "nombre": "Doble patada",
-    "usos": 30,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 30,
+    "poder": 100,
     "tipo": "LUCHA"
   },
   {
     "id": 16,
     "nombre": "Lanzarrocas",
-    "usos": 15,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 50,
+    "poder": 100,
     "tipo": "ROCA"
   },
   {
@@ -132,7 +132,7 @@
     "nombre": "Avalancha",
     "usos": 10,
     "habilidad": "ataque",
-    "poder": 60,
+    "poder": 100,
     "tipo": "ROCA"
   },
   {
@@ -146,41 +146,41 @@
   {
     "id": 19,
     "nombre": "Picotazo veneno",
-    "usos": 35,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 35,
+    "poder": 100,
     "tipo": "VENENO"
   },
   {
     "id": 20,
     "nombre": "Latigo cepa",
-    "usos": 25,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 45,
+    "poder": 100,
     "tipo": "PLANTA"
   },
   {
     "id": 21,
     "nombre": "Hoja afilada",
-    "usos": 15,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 70,
+    "poder": 100,
     "tipo": "PLANTA"
   },
   {
     "id": 22,
     "nombre": "Ataque ala",
-    "usos": 35,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 60,
+    "poder": 100,
     "tipo": "VOLADOR"
   },
   {
     "id": 23,
     "nombre": "Ataque aéreo",
-    "usos": 20,
+    "usos": 10,
     "habilidad": "ataque",
-    "poder": 75,
+    "poder": 100,
     "tipo": "VOLADOR"
   },
   {
