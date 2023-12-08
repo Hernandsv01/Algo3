@@ -367,6 +367,7 @@ public class BattleController implements Initializable{
         confirmacion.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 JuegoJavafx.getCdb().getJugadorActual().rendirse();
+                renderHealth(false);
                 callVictoryScene();
             }
         });
