@@ -1,6 +1,11 @@
 # Algo3
 Trabajos prácticos de la materia Algoritmos y Programación 3 de la Facultad de Ingeniería de la Universidad de Buenos Aires
 
+Notas:
+- Primera entrega: 8
+- Segunda entrega: 8
+- Tercera entrega: 10
+
 [Link a nuestro drive](https://drive.google.com/drive/folders/1HU6PrcDPuZ-awIRpnUNtXc-FN-g0Q1ba?usp=sharing)
 
 ## Requisitos previos
