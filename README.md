@@ -1,5 +1,5 @@
 # Algo3
-Trabajos prácticos de la materia Algoritmos y Programación 3 de la Facultad de Ingeniería de la Universidad de Buenos Aires
+Trabajos prácticos de la materia Algoritmos y Programación 3 de la Facultad de Ingeniería de la Universidad de Buenos Aires, Curso 02 - Cano
 
 Notas:
 - Primera entrega: 8
