@@ -24,10 +24,10 @@ import static org.fiuba.algotres.persistencia.inicializadores.json.dto.JugadorDT
 import static org.fiuba.algotres.persistencia.inicializadores.json.dto.items.ItemDTO.loadItemsJson;
 
 public class JSONInitializer {
-    private static final String JUGADORES_PATH = "src\\main\\resources\\json\\partida.json";
-    private static final String ITEMS_PATH = "src\\main\\resources\\json\\items.json";
-    private static final String HABILIDADES_PATH = "src\\main\\resources\\json\\habilidades.json";
-    private static final String POKEMONS_PATH = "src\\main\\resources\\json\\pokemons.json";
+    private static final String JUGADORES_PATH = "src/main/resources/json/partida.json";
+    private static final String ITEMS_PATH = "src/main/resources/json/items.json";
+    private static final String HABILIDADES_PATH = "src/main/resources/json/habilidades.json";
+    private static final String POKEMONS_PATH = "src/main/resources/json/pokemons.json";
 
     private static final Randomizador randomizador = new RandomizadorCustom();
 
