@@ -39,8 +39,8 @@ public class CambiarPokemonController extends ItemPokemonController implements I
     private CambiarPokemonState state;
     private Pokemon pokemonUsado = null;
     private Jugador jugadorActual;
-    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
+    private static final Sound changedOption = new Sound("src/main/resources/audios/OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src/main/resources/audios/OpcionSeleccionada.wav");
     @FXML
     private ProgressBar BarraActual;
     @FXML

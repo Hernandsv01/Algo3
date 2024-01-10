@@ -101,8 +101,8 @@ public class ElegirPokemonInicialController implements Initializable {
     private VBox vBox1;
     @FXML
     private VBox vBox2;
-    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
+    private static final Sound changedOption = new Sound("src/main/resources/audios/OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src/main/resources/audios/OpcionSeleccionada.wav");
 
     private static int idJugadorActual = 0;
 

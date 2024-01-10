@@ -38,8 +38,8 @@ public class ElegirPokemonParaAplicarItemController extends ItemPokemonControlle
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final String DESACTIVATED_POKEMON_COLOR = "#0f2c64";
     private static final int CANTIDAD_DE_OPCIONES = 7;
-    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
+    private static final Sound changedOption = new Sound("src/main/resources/audios/OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src/main/resources/audios/OpcionSeleccionada.wav");
 
     @Setter
     private Item itemElegido;

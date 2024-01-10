@@ -33,8 +33,8 @@ public class ElegirItemController extends ItemPokemonController implements Initi
     private static final String DESACTIVATED_VOLVER_PANE_COLOR = "#610000";
     private static final int CANTIDAD_DE_OPCIONES = 9;
     private static final int OPCIONES_POR_COLUMNA = 4;
-    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
+    private static final Sound changedOption = new Sound("src/main/resources/audios/OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src/main/resources/audios/OpcionSeleccionada.wav");
     @Getter @Setter
     private BattleState state;
     @FXML

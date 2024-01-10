@@ -54,10 +54,10 @@ public class BattleController implements Initializable{
     private static final String ESCAPE_KEY = "ESCAPE";
     private final String MENSAJE_PANTALLA_DEFAULT = "Elija una opción.";
 
-    private static final Sound changedOption = new Sound("src\\main\\resources\\audios\\OpcionMovida.wav");
-    private static final Sound selectedOption = new Sound("src\\main\\resources\\audios\\OpcionSeleccionada.wav");
-    private static final Sound backgroundMusic = new Sound("src\\main\\resources\\audios\\MusicaBatalla.wav");
-    private static final Sound sonidaAtaque = new Sound("src\\main\\resources\\audios\\SonidoAtaque.wav");
+    private static final Sound changedOption = new Sound("src/main/resources/audios/OpcionMovida.wav");
+    private static final Sound selectedOption = new Sound("src/main/resources/audios/OpcionSeleccionada.wav");
+    private static final Sound backgroundMusic = new Sound("src/main/resources/audios/MusicaBatalla.wav");
+    private static final Sound sonidaAtaque = new Sound("src/main/resources/audios/SonidoAtaque.wav");
 
     private static final GeneradorReporte reportadorJSON = new GeneradorReporteJSON();
 
