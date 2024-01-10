@@ -15,34 +15,6 @@
     </properties>
 
     <dependencies>
-    <dependency>
-            <groupId>com.vladsch.javafx-webview-debugger</groupId>
-            <artifactId>javafx-webview-debugger</artifactId>
-            <version>0.8.6</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.1</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>17.0.1</version>
-            <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-maven-plugin</artifactId>
-            <version>0.0.8</version>
-            <type>pom</type>
-        </dependency>
-
-        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -73,12 +45,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.6</version>
+            <version>21</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.6</version>
+            <version>21</version>
         </dependency>
     </dependencies>
 
@@ -94,6 +66,5 @@
             </plugin>
         </plugins>
     </build>
-
-
+    
 </project>
